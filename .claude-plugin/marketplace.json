@@ -1,0 +1,20 @@
+{
+  "name": "diagrammo",
+  "description": "Agent skills from Diagrammo.",
+  "owner": {
+    "name": "Diagrammo LLC",
+    "url": "https://diagrammo.app"
+  },
+  "plugins": [
+    {
+      "name": "diagrammo",
+      "source": ".",
+      "description": "Diagrammo's agent skills: diagrams of your codebase, written in DGMO.",
+      "author": {
+        "name": "Diagrammo LLC"
+      },
+      "homepage": "https://github.com/diagrammo/skills",
+      "license": "MIT"
+    }
+  ]
+}

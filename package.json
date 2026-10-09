@@ -1,0 +1,27 @@
+{
+  "name": "@diagrammo/skills",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Agent skills from Diagrammo — portable SKILL.md files plus a Claude Code plugin marketplace.",
+  "license": "MIT",
+  "author": "Diagrammo LLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diagrammo/skills.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
+  }
+}

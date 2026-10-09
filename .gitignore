@@ -1,0 +1,6 @@
+node_modules/
+coverage/
+.DS_Store
+
+# The pre-push gate's ownership marker, written inside its throwaway worktree.
+.gate-owner
