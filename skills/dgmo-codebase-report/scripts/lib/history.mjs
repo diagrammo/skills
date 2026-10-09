@@ -18,7 +18,11 @@ import { git, gitLines } from './git.mjs';
  * @returns {Commit[]}
  */
 export function readCommits(cwd) {
+  // quotePath off: otherwise `café.ts` reads `"caf\303\251.ts"` and never
+  // matches the name ls-files gave. What git still quotes, unquote() decodes.
   const out = git(cwd, [
+    '-c',
+    'core.quotePath=false',
     'log',
     '--no-merges',
     '--no-renames',
@@ -38,11 +42,40 @@ export function readCommits(cwd) {
       const [added, deleted, ...path] = line.split('\t');
       if (path.length === 0) continue;
       // Binary files report `-` for both counts.
-      files.push({ path: path.join('\t'), added: Number(added) || 0, deleted: Number(deleted) || 0 });
+      files.push({ path: unquote(path.join('\t')), added: Number(added) || 0, deleted: Number(deleted) || 0 });
     }
     commits.push({ sha, date, subject: subject.join('\t'), files });
   }
   return commits;
+}
+
+/**
+ * A path as git prints it when it holds a tab, newline, quote or backslash:
+ * in double quotes with C escapes, octal for raw bytes.
+ * @param {string} path
+ */
+export function unquote(path) {
+  if (!(path.length >= 2 && path.startsWith('"') && path.endsWith('"'))) return path;
+  /** @type {number[]} */
+  const bytes = [];
+  const body = path.slice(1, -1);
+  const named = /** @type {Record<string, number>} */ ({ a: 7, b: 8, f: 12, n: 10, r: 13, t: 9, v: 11 });
+  for (let i = 0; i < body.length; i++) {
+    const char = body[i] ?? '';
+    if (char !== '\\') {
+      bytes.push(...Buffer.from(char, 'utf8'));
+      continue;
+    }
+    const next = body[i + 1] ?? '';
+    if (/[0-7]/.test(next)) {
+      bytes.push(parseInt(body.slice(i + 1, i + 4), 8));
+      i += 3;
+    } else {
+      bytes.push(named[next] ?? next.charCodeAt(0));
+      i += 1;
+    }
+  }
+  return Buffer.from(bytes).toString('utf8');
 }
 
 /**

@@ -89,7 +89,8 @@ export function languageOf(path) {
  * @returns {FileInfo[]}
  */
 export function listFiles(root, hasGit) {
-  const paths = hasGit ? gitLines(root, ['ls-files', '-z'], '\0') : walk(root, root);
+  // A Set: mid-merge, ls-files lists a conflicted path once per stage.
+  const paths = new Set(hasGit ? gitLines(root, ['ls-files', '-z'], '\0') : walk(root, root));
   /** @type {FileInfo[]} */
   const files = [];
   for (const path of paths) {

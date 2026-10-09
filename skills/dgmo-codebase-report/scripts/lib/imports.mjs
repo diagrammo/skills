@@ -37,7 +37,7 @@ export function importLanguage(path) {
  */
 export function buildImportGraph(root, paths) {
   const files = new Set(paths);
-  const goModule = readGoModule(root, files);
+  const goModules = readGoModules(root, paths);
   const goDirs = new Set(paths.filter((path) => path.endsWith('.go')).map((path) => posix.dirname(path)));
   /** @type {Map<string, { from: string, to: string, toPackage: boolean }>} */
   const edges = new Map();
@@ -60,7 +60,7 @@ export function buildImportGraph(root, paths) {
         : language === 'python'
           ? pythonImports(path, source, files)
           : language === 'go'
-            ? goImports(source, goDirs, goModule)
+            ? goImports(source, goDirs, goModules)
             : rustImports(path, source, files);
     for (const to of found.internal) {
       if (to !== path) edges.set(`${path}\0${to}`, { from: path, to, toPackage: language === 'go' });
@@ -100,9 +100,16 @@ export function jsImports(path, source, files) {
   }
   for (const spec of specifiers) {
     // A regex reads strings too; anything that cannot be a module name is not one.
-    if (!/^[@\w./][\w@./:+~-]*$/.test(spec)) continue;
+    if (!/^[@~\w./][\w@./:+~-]*$/.test(spec)) continue;
     if (spec.startsWith('.') || spec.startsWith('/')) {
       const target = resolveJs(posix.join(posix.dirname(path), spec), files);
+      if (target) found.internal.push(target);
+      else found.unresolved++;
+    } else if (spec.startsWith('@/') || spec.startsWith('~/')) {
+      // The usual source-root alias (Next.js, Vite, shadcn): never a package.
+      // Tried against `src/`, then the root; tsconfig `paths` are not read.
+      const rest = spec.slice(2);
+      const target = resolveJs(posix.join('src', rest), files) ?? resolveJs(rest, files);
       if (target) found.internal.push(target);
       else found.unresolved++;
     } else if (!spec.startsWith('node:') && !builtinModules.includes(spec.split('/')[0] ?? spec)) {
@@ -238,24 +245,36 @@ function moduleFile(base, files) {
 // ---------------------------------------------------------------- Go
 
 /**
- * The module path from the repo's top-level go.mod, and where it lives.
+ * Every go.mod's module path and the directory it is rooted in, longest path
+ * first so a nested module wins over the one above it.
  * @param {string} root
- * @param {Set<string>} files
+ * @param {string[]} paths
+ * @returns {{ module: string, dir: string }[]}
  */
-function readGoModule(root, files) {
-  if (!files.has('go.mod')) return null;
-  const match = /^module\s+(\S+)/m.exec(readFileSync(join(root, 'go.mod'), 'utf8'));
-  return match?.[1] ?? null;
+function readGoModules(root, paths) {
+  const modules = [];
+  for (const path of paths) {
+    if (posix.basename(path) !== 'go.mod') continue;
+    let text;
+    try {
+      text = readFileSync(join(root, path), 'utf8');
+    } catch {
+      continue;
+    }
+    const match = /^module\s+(\S+)/m.exec(text);
+    if (match?.[1]) modules.push({ module: match[1], dir: posix.dirname(path) });
+  }
+  return modules.sort((a, b) => b.module.length - a.module.length);
 }
 
 /**
  * Go imports packages, not files, so an internal edge ends at the package's directory.
  * @param {string} source
  * @param {Set<string>} goDirs  every directory holding a .go file
- * @param {string | null} module
+ * @param {{ module: string, dir: string }[]} modules  from {@link readGoModules}
  * @returns {Found}
  */
-export function goImports(source, goDirs, module) {
+export function goImports(source, goDirs, modules) {
   /** @type {Found} */
   const found = { internal: [], external: [], unresolved: 0 };
   /** @type {string[]} */
@@ -266,8 +285,9 @@ export function goImports(source, goDirs, module) {
   for (const single of source.matchAll(/^import\s+(?:[\w.]+\s+)?"([^"]+)"/gm)) if (single[1]) specs.push(single[1]);
 
   for (const spec of specs) {
-    if (module && (spec === module || spec.startsWith(`${module}/`))) {
-      const dir = spec === module ? '.' : spec.slice(module.length + 1);
+    const owner = modules.find(({ module }) => spec === module || spec.startsWith(`${module}/`));
+    if (owner) {
+      const dir = posix.join(owner.dir, spec.slice(owner.module.length + 1));
       if (goDirs.has(dir)) found.internal.push(dir);
       else found.unresolved++;
     } else if (spec.includes('.') && spec.split('/')[0]?.includes('.')) {
