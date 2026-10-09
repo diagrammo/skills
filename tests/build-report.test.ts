@@ -1,4 +1,5 @@
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -101,6 +102,14 @@ describe('buildReport', () => {
     expect(html).not.toContain('at commit');
   });
 
+  it('says there are no commits yet in a repo that has none', () => {
+    const { repo } = reportRepo({ 'a.dgmo': 'pie\n' }, {}, 'no-git');
+    git(repo, 'init', '--quiet');
+    const html = readFileSync(buildReport(repo, { dgmo, now: NOW }), 'utf8');
+    expect(html).toContain('<time datetime="2026-10-09">2026-10-09</time> — no commits yet');
+    expect(html).not.toContain('not a git repository');
+  });
+
   it('carries the footer calls to action', () => {
     const { repo } = reportRepo({ 'a.dgmo': 'pie\n' });
     const html = readFileSync(buildReport(repo, { dgmo, now: NOW }), 'utf8');
@@ -147,6 +156,15 @@ describe('buildReport', () => {
     expect(html).toContain('<p class="summary">&#60;script&#62;alert(1)&#60;/script&#62;</p>');
     expect(html).toContain('alt="&#34;quoted&#34;"');
     expect(html).toContain('<p class="text">it&#39;s &#60;i&#62;</p>');
+  });
+
+  it('gives file names that clean up to the same id their own anchors', () => {
+    const { repo } = reportRepo({ 'a b.dgmo': 'pie\n', 'a-b.dgmo': 'pie\n', 'a.b.dgmo': 'pie\n', 'c.dgmo': 'pie\n' });
+    const html = readFileSync(buildReport(repo, { dgmo, now: NOW }), 'utf8');
+    const ids = [...html.matchAll(/<section id="([^"]+)">/g)].map((m) => m[1]);
+    expect(new Set(ids).size).toBe(4);
+    const hrefs = [...html.matchAll(/<li><a href="#([^"]+)">/g)].map((m) => m[1]);
+    expect(hrefs).toEqual(ids);
   });
 
   it('adds a table of contents only past three diagrams', () => {
@@ -209,6 +227,15 @@ describe('main', () => {
     expect(main([repo], { dgmo })).toBe(1);
     expect(err.mock.calls[0]?.[0]).toMatch(/^Error: a.dgmo did not render/);
     expect(existsSync(join(dir, 'report.html'))).toBe(false);
+  });
+
+  it('runs when started through a symlink, as an installed skill is', () => {
+    const link = join(mkdtempSync(join(tmpdir(), 'skills-link-')), 'skill');
+    symlinkSync(join(import.meta.dirname, '..', 'skills', 'dgmo-codebase-report'), link);
+    const empty = mkdtempSync(join(tmpdir(), 'skills-no-report-'));
+    const run = spawnSync(process.execPath, [join(link, 'scripts', 'build-report.mjs'), empty], { encoding: 'utf8' });
+    expect(run.status).toBe(1);
+    expect(run.stderr).toMatch(/report.json is missing/);
   });
 
   it('exits 2 on an unknown flag', () => {

@@ -15,6 +15,7 @@ import {
   mkdtempSync,
   readdirSync,
   readFileSync,
+  realpathSync,
   renameSync,
   rmSync,
   writeFileSync,
@@ -128,12 +129,15 @@ export function buildReport(repoDir, options = {}) {
     rmSync(scratch, { recursive: true, force: true });
   }
 
+  const ids = anchors(manifest.diagrams);
   const html = fillTemplate(readFileSync(TEMPLATE, 'utf8'), {
     title: escapeHtml(manifest.title),
     stamp: stamp(resolve(repoDir), now),
     summary: escapeHtml(manifest.summary),
-    toc: toc(manifest.diagrams),
-    sections: manifest.diagrams.map((d, i) => section(d, /** @type {Built} */ (built[i]))).join('\n'),
+    toc: toc(manifest.diagrams, ids),
+    sections: manifest.diagrams
+      .map((d, i) => section(d, /** @type {Built} */ (built[i]), /** @type {string} */ (ids[i])))
+      .join('\n'),
     appLink: escapeHtml(LINKS.app),
     cloudLink: escapeHtml(LINKS.cloud),
     homeLink: escapeHtml(LINKS.home),
@@ -203,25 +207,33 @@ function runDgmo(dgmo, args) {
  */
 function stamp(repoDir, now) {
   const date = [now.getFullYear(), now.getMonth() + 1, now.getDate()].map((n) => String(n).padStart(2, '0')).join('-');
-  const run = spawnSync('git', ['-C', repoDir, 'rev-parse', '--short', 'HEAD'], { encoding: 'utf8' });
-  const sha = run.status === 0 ? run.stdout.trim() : '';
-  return sha
-    ? `Built <time datetime="${date}">${date}</time> at commit <code>${escapeHtml(sha)}</code>`
-    : `Built <time datetime="${date}">${date}</time> — not a git repository, so no commit`;
+  const built = `Built <time datetime="${date}">${date}</time>`;
+  /** @param {string[]} args */
+  const git = (...args) => spawnSync('git', ['-C', repoDir, ...args], { encoding: 'utf8' });
+  const head = git('rev-parse', '--short', 'HEAD');
+  if (head.status === 0) return `${built} at commit <code>${escapeHtml(head.stdout.trim())}</code>`;
+  if (head.error) return `${built} — git is not installed, so no commit`;
+  // HEAD fails in a repository with no commits yet, as well as outside one.
+  if (git('rev-parse', '--is-inside-work-tree').stdout.trim() === 'true') return `${built} — no commits yet`;
+  return `${built} — not a git repository, so no commit`;
 }
 
-/** @param {DiagramEntry[]} diagrams */
-function toc(diagrams) {
+/**
+ * @param {DiagramEntry[]} diagrams
+ * @param {string[]} ids
+ */
+function toc(diagrams, ids) {
   if (diagrams.length < TOC_MIN) return '';
-  const items = diagrams.map((d) => `<li><a href="#${anchor(d.file)}">${escapeHtml(d.title)}</a></li>`).join('');
+  const items = diagrams.map((d, i) => `<li><a href="#${ids[i]}">${escapeHtml(d.title)}</a></li>`).join('');
   return `<nav class="toc" aria-label="Contents"><h2>Contents</h2><ol>${items}</ol></nav>`;
 }
 
 /**
  * @param {DiagramEntry} d
  * @param {Built} b
+ * @param {string} id
  */
-function section(d, b) {
+function section(d, b, id) {
   const title = escapeHtml(d.title);
   /** @param {string} svg @param {'light' | 'dark'} theme */
   const img = (svg, theme) =>
@@ -232,7 +244,7 @@ function section(d, b) {
   } else if (b.source !== null) {
     edit = `<details class="source"><summary>Source — too large for a link; paste it into Diagrammo</summary><pre><code>${escapeHtml(b.source)}</code></pre></details>`;
   }
-  return `<section id="${anchor(d.file)}">
+  return `<section id="${id}">
 <h2>${title}</h2>
 <p class="text">${escapeHtml(d.text)}</p>
 <figure class="diagram">${img(b.light, 'light')}${img(b.dark, 'dark')}</figure>
@@ -240,9 +252,20 @@ ${edit}
 </section>`;
 }
 
-/** @param {string} file */
-function anchor(file) {
-  return `d-${basename(file, '.dgmo').replace(/[^A-Za-z0-9_-]+/g, '-')}`;
+/**
+ * One id per diagram, from its file name. Names that clean up to the same id
+ * (`a b.dgmo` and `a-b.dgmo`) get -2, -3 so each link reaches its own section.
+ * @param {DiagramEntry[]} diagrams
+ */
+function anchors(diagrams) {
+  const taken = new Set();
+  return diagrams.map(({ file }) => {
+    const base = `d-${basename(file, '.dgmo').replace(/[^A-Za-z0-9_-]+/g, '-')}`;
+    let id = base;
+    for (let n = 2; taken.has(id); n++) id = `${base}-${n}`;
+    taken.add(id);
+    return id;
+  });
 }
 
 /**
@@ -321,6 +344,8 @@ export function main(argv, options = {}) {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+// realpath, because import.meta.url has symlinks resolved and argv[1] does not:
+// a skill installed as a symlink would otherwise run nothing and exit 0.
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   process.exitCode = main(process.argv.slice(2));
 }
