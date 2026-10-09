@@ -15,8 +15,11 @@ export const FIXTURES_DIR = join(import.meta.dirname, '..', 'fixtures', 'repos')
 // A nested .git cannot be committed, so history is made at test time. The
 // global and system git config are shut out: the owner's (signing, hooks,
 // default branch) must not change what a fixture looks like, here or in CI.
+// Every inherited GIT_* variable goes too: `git rebase -x 'pnpm test'` or a
+// hook exports GIT_DIR, and with it set `git init` and `commit` here would
+// write into the outer repository instead of the temp directory.
 const GIT_ENV = {
-  ...process.env,
+  ...Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_'))),
   GIT_CONFIG_GLOBAL: '/dev/null',
   GIT_CONFIG_NOSYSTEM: '1',
   GIT_AUTHOR_NAME: 'Fixture',

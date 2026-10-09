@@ -10,7 +10,9 @@ afterEach(() => {
 
 describe('the fixture repos', () => {
   it('are exactly one per measured language plus one without git', () => {
-    expect(readdirSync(FIXTURES_DIR).sort()).toEqual([...GIT_FIXTURES, NO_GIT_FIXTURE].sort());
+    // Dotfiles skipped: a Finder .DS_Store is not a fixture.
+    const fixtures = readdirSync(FIXTURES_DIR).filter((entry) => !entry.startsWith('.'));
+    expect(fixtures.sort()).toEqual([...GIT_FIXTURES, NO_GIT_FIXTURE].sort());
   });
 
   it.each(GIT_FIXTURES)('%s materializes as a git repo with a tagged commit on main', (name) => {
