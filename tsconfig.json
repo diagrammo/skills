@@ -18,9 +18,13 @@
     "verbatimModuleSyntax": true,
     "noEmit": true,
     "types": ["node"],
+    // The skill's scripts are plain JavaScript, so a user runs them with Node
+    // and no build; JSDoc types them, and this checks them.
+    "allowJs": true,
+    "checkJs": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["tests/**/*"],
+  "include": ["tests/**/*", "skills/*/scripts/**/*.mjs"],
   // The fixture repos are INPUT for the measuring scripts, written in four
   // languages; they are not part of this project's own build.
   "exclude": ["tests/fixtures"]
