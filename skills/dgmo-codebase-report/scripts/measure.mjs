@@ -9,7 +9,7 @@
 // Each section names the chart it feeds, the point past which that chart is
 // "too much", and whether this repo crossed it — so the report can say what it
 // rolled up rather than drawing an unreadable chart.
-import { mkdirSync, realpathSync, writeFileSync } from 'node:fs';
+import { mkdirSync, realpathSync, renameSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { listFiles } from './lib/files.mjs';
@@ -49,7 +49,7 @@ export const LIMITS = {
   imports: {
     maxNodes: 40,
     maxExternal: 20,
-    rule: 'Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If every depth exceeds it, the shallowest is used and its least connected directories are dropped. Only the maxExternal most used outside packages are listed.',
+    rule: 'Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If every depth exceeds it, the shallowest is used and its least connected directories join "other". Only the maxExternal most used outside packages are listed.',
   },
   coChange: {
     maxPairs: 30,
@@ -256,11 +256,13 @@ function imports(root, files) {
   if (nodes.length > limit.maxNodes) {
     // Not a fixed depth: two levels flatten a monorepo's `packages/<name>/src/...`
     // into one node per package, and every import inside a package vanishes.
-    const deepest = Math.max(
-      ...graph.edges.flatMap((edge) => [dirDepth(edge.from, false), dirDepth(edge.to, edge.toPackage)]),
-    );
+    // A loop, not Math.max(...): a big graph has more edges than V8 takes arguments.
+    let deepest = 2;
+    for (const edge of graph.edges) {
+      deepest = Math.max(deepest, dirDepth(edge.from, false), dirDepth(edge.to, edge.toPackage));
+    }
     const levels = [];
-    for (let depth = 2; depth <= Math.max(2, deepest); depth++) {
+    for (let depth = 2; depth <= deepest; depth++) {
       const rolled = rollUpEdges(graph.edges, depth);
       levels.push({ depth, edges: rolled, nodes: nodesOf(rolled).length });
     }
@@ -274,19 +276,30 @@ function imports(root, files) {
     nodes = nodesOf(edges);
     note = `${graph.edges.length} file imports rolled up to ${edges.length} links between ${nodes.length} directories, up to ${depth} levels deep.`;
     if (nodes.length > limit.maxNodes) {
+      // The least connected join one "other" node rather than vanish: dropping
+      // them would also drop every link a kept hub has to them.
       /** @type {Map<string, number>} */
       const degree = new Map();
       for (const edge of edges) {
         degree.set(edge.from, (degree.get(edge.from) ?? 0) + edge.count);
         degree.set(edge.to, (degree.get(edge.to) ?? 0) + edge.count);
       }
-      const keep = new Set(
-        [...degree].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, limit.maxNodes).map(([node]) => node),
-      );
-      const before = nodes.length;
-      edges = edges.filter((edge) => keep.has(edge.from) && keep.has(edge.to));
+      const ranked = [...degree].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([node]) => node);
+      const keep = new Set(ranked.slice(0, limit.maxNodes - 1));
+      /** @type {Map<string, { from: string, to: string, count: number }>} */
+      const merged = new Map();
+      for (const edge of edges) {
+        const from = keep.has(edge.from) ? edge.from : 'other';
+        const to = keep.has(edge.to) ? edge.to : 'other';
+        if (from === to) continue;
+        const key = `${from}\0${to}`;
+        const entry = merged.get(key) ?? { from, to, count: 0 };
+        entry.count += edge.count;
+        merged.set(key, entry);
+      }
+      edges = [...merged.values()];
       nodes = nodesOf(edges);
-      note += ` The ${before - keep.size} least connected directories are left out.`;
+      note += ` The ${ranked.length - keep.size} least connected are shown as "other".`;
     }
   }
   edges.sort((a, b) => b.count - a.count || (a.from + a.to < b.from + b.to ? -1 : 1));
@@ -365,7 +378,10 @@ export function writeMeasurements(dir) {
   const outDir = join(realpathSync(resolve(dir)), OUTPUT_DIR);
   mkdirSync(outDir, { recursive: true });
   const out = join(outDir, 'measurements.json');
-  writeFileSync(out, `${JSON.stringify(measurements, null, 2)}\n`);
+  // Temp file plus rename, so a reader never sees half a file.
+  const temp = `${out}.${process.pid}.tmp`;
+  writeFileSync(temp, `${JSON.stringify(measurements, null, 2)}\n`);
+  renameSync(temp, out);
   return out;
 }
 

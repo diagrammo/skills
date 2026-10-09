@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { coChange, editCounts, editWindow, type Commit } from '../skills/dgmo-codebase-report/scripts/lib/history.mjs';
+import { coChange, editCounts, editWindow, unquote, type Commit } from '../skills/dgmo-codebase-report/scripts/lib/history.mjs';
 import { LIMITS, OUTPUT_DIR, groupOf, measure } from '../skills/dgmo-codebase-report/scripts/measure.mjs';
 import { GIT_FIXTURES, NO_GIT_FIXTURE, git, materializeFixture, type FixtureName } from './helpers/fixture-repo.js';
 
@@ -27,6 +27,15 @@ function scratch(files: Record<string, string>): string {
     mkdirSync(dirname(join(dir, path)), { recursive: true });
     writeFileSync(join(dir, path), text);
   }
+  return dir;
+}
+
+/** A scratch tree made a git repo with one commit on `main`. */
+function scratchRepo(files: Record<string, string>): string {
+  const dir = scratch(files);
+  git(dir, 'init', '--quiet', '--initial-branch=main');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'Initial commit');
   return dir;
 }
 
@@ -105,6 +114,46 @@ describe('measure.mjs on the fixture repos', () => {
   });
 });
 
+describe('git edge cases', () => {
+  it('lists a file once when a merge stopped on a conflict in it', () => {
+    const dir = scratchRepo({ 'a.ts': "import _ from 'lodash';\nexport const v = 0;\n" });
+    git(dir, 'checkout', '--quiet', '-b', 'side');
+    writeFileSync(join(dir, 'a.ts'), "import _ from 'lodash';\nexport const v = 1;\n");
+    git(dir, 'commit', '--quiet', '-am', 'side');
+    git(dir, 'checkout', '--quiet', 'main');
+    writeFileSync(join(dir, 'a.ts'), "import _ from 'lodash';\nexport const v = 2;\n");
+    git(dir, 'commit', '--quiet', '-am', 'main');
+    expect(() => git(dir, 'merge', '--quiet', 'side')).toThrow();
+    expect(git(dir, 'ls-files').split('\n')).toEqual(['a.ts', 'a.ts', 'a.ts']);
+
+    const m = measure(dir);
+    expect(m.sizes.total.files).toBe(1);
+    expect(m.sizes.entries.map((entry) => entry.path)).toEqual(['a.ts']);
+    expect(m.imports.external).toEqual([{ name: 'lodash', files: 1 }]);
+  });
+
+  it('matches a non-ASCII file name between ls-files and the history', () => {
+    const dir = scratchRepo({ 'café.ts': 'x\n', 'main.ts': 'y\n' });
+    writeFileSync(join(dir, 'café.ts'), 'x2\n');
+    writeFileSync(join(dir, 'main.ts'), 'y2\n');
+    git(dir, 'commit', '--quiet', '-am', 'both');
+
+    const m = measure(dir);
+    if (!('files' in m.edits) || !('pairs' in m.coChange)) throw new Error('expected git history');
+    expect((m.edits.files ?? []).map((file) => [file.path, file.edits])).toEqual([
+      ['café.ts', 2],
+      ['main.ts', 2],
+    ]);
+    expect(m.coChange.pairs).toEqual([{ a: 'café.ts', b: 'main.ts', count: 2 }]);
+  });
+
+  it('decodes the paths git still quotes', () => {
+    expect(unquote('"tab\\there.ts"')).toBe('tab\there.ts');
+    expect(unquote('"caf\\303\\251 \\"q\\".ts"')).toBe('café "q".ts');
+    expect(unquote('plain.ts')).toBe('plain.ts');
+  });
+});
+
 describe('imports', () => {
   it('records outside packages by package name and leaves out node: and the Go standard library', () => {
     const dir = scratch({
@@ -123,6 +172,30 @@ describe('imports', () => {
       { name: 'serde', files: 1 },
     ]);
     expect(m.imports.edges).toEqual([{ from: 'a.ts', to: 'b.ts', count: 1 }]);
+  });
+
+  it('resolves the @/ and ~/ source-root aliases instead of calling them packages', () => {
+    const m = measure(
+      scratch({
+        'src/lib/utils.ts': '',
+        'src/app.ts': "import { cn } from '@/lib/utils';\nimport x from '~/missing';\n",
+      }),
+    );
+    expect(m.imports.edges).toEqual([{ from: 'src/app.ts', to: 'src/lib/utils.ts', count: 1 }]);
+    expect(m.imports.external).toEqual([]);
+    expect(m.imports.unresolved).toBe(1);
+  });
+
+  it('resolves a Go module whose go.mod is in a subdirectory', () => {
+    const m = measure(
+      scratch({
+        'backend/go.mod': 'module github.com/acme/app\n',
+        'backend/cmd/main.go': 'package main\n\nimport "github.com/acme/app/internal/greet"\n',
+        'backend/internal/greet/greet.go': 'package greet\n',
+      }),
+    );
+    expect(m.imports.edges).toEqual([{ from: 'backend/cmd/main.go', to: 'backend/internal/greet', count: 1 }]);
+    expect(m.imports.external).toEqual([]);
   });
 
   it('counts a relative import that names no file as unresolved', () => {
@@ -188,6 +261,31 @@ describe('roll-ups past each chart limit', () => {
     expect(m.imports.rolledUp).toBe(true);
     expect(m.imports.nodes).toEqual(['a/x', 'b/y']);
     expect(m.imports.edges).toEqual([{ from: 'a/x', to: 'b/y', count: LIMITS.imports.maxNodes }]);
+  });
+
+  it('keeps a hub whose importers are all cut, by linking it to "other"', () => {
+    const files: Record<string, string> = { 'h/hub/z.ts': '' };
+    for (let i = 0; i < 20; i++) {
+      for (let j = 0; j < 5; j++) files[`p${i}/a/f${j}.ts`] = "import '../b/g';\n";
+      files[`p${i}/b/g.ts`] = '';
+    }
+    for (let k = 0; k < 30; k++) files[`l${k}/x/f.ts`] = "import '../../h/hub/z';\n";
+    const m = measure(scratch(files));
+    // 71 directories: 40 in pairs (degree 5), the hub (30), 30 leaves (1).
+    expect(m.imports.nodes.length).toBeLessThanOrEqual(LIMITS.imports.maxNodes);
+    expect(m.imports.edges).toContainEqual({ from: 'other', to: 'h/hub', count: 30 });
+    expect(m.imports.rollUpNote).toContain(`The ${71 - (LIMITS.imports.maxNodes - 1)} least connected are shown as "other".`);
+  });
+
+  it('survives an import graph with more edges than a call takes arguments', () => {
+    const files: Record<string, string> = {};
+    const names = Array.from({ length: 320 }, (_, i) => `d${i % 8}/f${i}`);
+    for (const name of names) {
+      files[`${name}.ts`] = names.filter((other) => other !== name).map((other) => `import '../${other}';`).join('\n');
+    }
+    const m = measure(scratch(files));
+    expect(m.imports.rolledUp).toBe(true);
+    expect(m.imports.nodes).toHaveLength(8);
   });
 
   it('a monorepo rolls up deeper than two levels, where its imports are', () => {
