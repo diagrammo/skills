@@ -19,6 +19,9 @@ import { buildImportGraph } from './lib/imports.mjs';
 
 export const SCHEMA_VERSION = 1;
 
+/** The node a roll-up gathers what it cuts into; parenthesised, so no real directory is named it. */
+export const OTHER = '(other)';
+
 /** The report's own output; never measured, or a re-run would measure itself. */
 export const OUTPUT_DIR = 'docs/codebase-report';
 
@@ -30,7 +33,7 @@ export const LIMITS = {
   sizes: {
     maxFiles: 150,
     maxGroups: 40,
-    rule: 'Past maxFiles files, sizes roll up to the top two directory levels; past maxGroups groups, the smallest join "other".',
+    rule: 'Past maxFiles files, sizes roll up to the top two directory levels; past maxGroups groups, the smallest join "(other)".',
   },
   languages: {
     maxSlices: 8,
@@ -49,7 +52,7 @@ export const LIMITS = {
   imports: {
     maxNodes: 40,
     maxExternal: 20,
-    rule: 'Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If every depth exceeds it, the shallowest is used and its least connected directories join "other". Only the maxExternal most used outside packages are listed.',
+    rule: 'Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If none fits, the shallowest depth that has links is used (files, when every import stays inside one directory) and its least connected nodes join "(other)". Only the maxExternal most used outside packages are listed.',
   },
   coChange: {
     maxPairs: 30,
@@ -79,26 +82,34 @@ export function groupOf(path, isDir = false, depth = 2) {
 export function measure(dir) {
   const root = realpathSync(resolve(dir));
   const hasGit = hasHistory(root);
+  const shallow = hasGit && git(root, ['rev-parse', '--is-shallow-repository']).trim() === 'true';
   const files = listFiles(root, hasGit).filter((file) => !file.path.startsWith(`${OUTPUT_DIR}/`));
   const current = new Set(files.map((file) => file.path));
-  const noGit = { available: false, reason: 'not a git repository with commits' };
+  // A shallow clone's oldest commit reads as adding the whole tree: it would
+  // be the largest commit, an edit to every file and a pair of every two.
+  const noHistory = !hasGit
+    ? { available: false, reason: 'not a git repository with commits' }
+    : shallow
+      ? { available: false, reason: 'shallow clone: its history is cut off; run `git fetch --unshallow` and measure again' }
+      : null;
 
-  const commits = hasGit ? readCommits(root) : [];
+  const commits = noHistory ? [] : readCommits(root);
   return {
     schema: SCHEMA_VERSION,
     generatedAt: new Date().toISOString(),
     repo: {
       name: basename(root),
       git: hasGit,
+      shallow,
       commit: hasGit ? git(root, ['rev-parse', 'HEAD']).trim() : null,
     },
     limits: LIMITS,
     sizes: sizes(files),
     languages: languages(files),
-    history: hasGit ? history(root, commits) : { chart: 'event-line', ...noGit },
-    edits: hasGit ? edits(commits, files) : { chart: 'scatter', ...noGit },
+    history: noHistory ? { chart: 'event-line', ...noHistory } : history(root, commits),
+    edits: noHistory ? { chart: 'scatter', ...noHistory } : edits(commits, files),
     imports: imports(root, files),
-    coChange: hasGit ? coChangeSection(commits, current) : { chart: 'arc', ...noGit },
+    coChange: noHistory ? { chart: 'arc', ...noHistory } : coChangeSection(commits, current),
   };
 }
 
@@ -134,14 +145,14 @@ function sizes(files) {
   if (entries.length > limit.maxGroups) {
     const kept = entries.slice(0, limit.maxGroups - 1);
     const rest = entries.slice(limit.maxGroups - 1);
-    const other = { path: 'other', bytes: 0, lines: 0, files: 0 };
+    const other = { path: OTHER, bytes: 0, lines: 0, files: 0 };
     for (const entry of rest) {
       other.bytes += entry.bytes;
       other.lines += entry.lines;
       other.files += entry.files;
     }
     entries = [...kept, other];
-    note += ` The smallest ${rest.length} are shown as "other".`;
+    note += ` The smallest ${rest.length} are shown as "${OTHER}".`;
   }
   return { chart: 'treemap', total, rolledUp: true, rollUpNote: note, entries };
 }
@@ -261,20 +272,25 @@ function imports(root, files) {
     for (const edge of graph.edges) {
       deepest = Math.max(deepest, dirDepth(edge.from, false), dirDepth(edge.to, edge.toPackage));
     }
+    /** @type {{ depth: number | null, edges: { from: string, to: string, count: number }[], nodes: number }[]} */
     const levels = [];
     for (let depth = 2; depth <= deepest; depth++) {
       const rolled = rollUpEdges(graph.edges, depth);
       levels.push({ depth, edges: rolled, nodes: nodesOf(rolled).length });
     }
+    // Files themselves, last: when every import stays inside one directory,
+    // every directory level is empty and only the files have links to draw.
+    levels.push({ depth: null, edges, nodes: nodes.length });
     const fitting = levels.filter((level) => level.nodes > 0 && level.nodes <= limit.maxNodes);
     const chosen =
-      fitting.sort((a, b) => b.nodes - a.nodes || a.depth - b.depth)[0] ??
-      levels.find((level) => level.nodes > 0) ??
-      levels[0];
-    const depth = chosen?.depth ?? 2;
+      fitting.sort((a, b) => b.nodes - a.nodes || (a.depth ?? Infinity) - (b.depth ?? Infinity))[0] ??
+      levels.find((level) => level.nodes > 0);
     edges = chosen?.edges ?? [];
     nodes = nodesOf(edges);
-    note = `${graph.edges.length} file imports rolled up to ${edges.length} links between ${nodes.length} directories, up to ${depth} levels deep.`;
+    note =
+      chosen?.depth === null
+        ? `${graph.edges.length} file imports stay inside one directory each, so the graph stays at file level.`
+        : `${graph.edges.length} file imports rolled up to ${edges.length} links between ${nodes.length} directories, up to ${chosen?.depth} levels deep.`;
     if (nodes.length > limit.maxNodes) {
       // The least connected join one "other" node rather than vanish: dropping
       // them would also drop every link a kept hub has to them.
@@ -289,8 +305,8 @@ function imports(root, files) {
       /** @type {Map<string, { from: string, to: string, count: number }>} */
       const merged = new Map();
       for (const edge of edges) {
-        const from = keep.has(edge.from) ? edge.from : 'other';
-        const to = keep.has(edge.to) ? edge.to : 'other';
+        const from = keep.has(edge.from) ? edge.from : OTHER;
+        const to = keep.has(edge.to) ? edge.to : OTHER;
         if (from === to) continue;
         const key = `${from}\0${to}`;
         const entry = merged.get(key) ?? { from, to, count: 0 };
@@ -299,7 +315,7 @@ function imports(root, files) {
       }
       edges = [...merged.values()];
       nodes = nodesOf(edges);
-      note += ` The ${ranked.length - keep.size} least connected are shown as "other".`;
+      note += ` The ${ranked.length - keep.size} least connected are shown as "${OTHER}".`;
     }
   }
   edges.sort((a, b) => b.count - a.count || (a.from + a.to < b.from + b.to ? -1 : 1));
@@ -386,5 +402,10 @@ export function writeMeasurements(dir) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
-  console.log(writeMeasurements(process.argv[2] ?? '.'));
+  try {
+    console.log(writeMeasurements(process.argv[2] ?? '.'));
+  } catch (error) {
+    console.error(`measure.mjs: ${error instanceof Error ? error.message : String(error)}`);
+    process.exit(1);
+  }
 }

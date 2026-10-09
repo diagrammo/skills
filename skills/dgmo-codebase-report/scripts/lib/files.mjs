@@ -1,6 +1,6 @@
 // @ts-check
 // The repo's files: which ones count, how big each is, and what language it is in.
-import { closeSync, openSync, readdirSync, readFileSync, readSync, statSync } from 'node:fs';
+import { closeSync, openSync, readdirSync, readSync, statSync } from 'node:fs';
 import { extname, join, relative, sep } from 'node:path';
 import { gitLines } from './git.mjs';
 
@@ -127,22 +127,28 @@ function walk(root, dir) {
 }
 
 /**
- * Line count, or null when the first 8 KB hold a NUL byte (git's own binary test).
+ * Line count, or null when the first 8 KB hold a NUL byte (git's own binary
+ * test). Read in chunks, so a file bigger than a string can hold still counts.
  * @param {string} path
  */
 function countLines(path) {
-  const head = Buffer.alloc(8192);
+  const chunk = Buffer.alloc(1024 * 1024);
   const fd = openSync(path, 'r');
-  let read;
   try {
-    read = readSync(fd, head, 0, head.length, 0);
+    let lines = 0;
+    let last = -1;
+    let offset = 0;
+    for (;;) {
+      const read = readSync(fd, chunk, 0, chunk.length, offset);
+      if (read === 0) break;
+      const view = chunk.subarray(0, read);
+      if (offset === 0 && view.subarray(0, 8192).includes(0)) return null;
+      for (let i = view.indexOf(10); i !== -1; i = view.indexOf(10, i + 1)) lines++;
+      last = view[read - 1] ?? -1;
+      offset += read;
+    }
+    return offset === 0 || last === 10 ? lines : lines + 1;
   } finally {
     closeSync(fd);
   }
-  if (head.subarray(0, read).includes(0)) return null;
-  const text = readFileSync(path, 'utf8');
-  if (text.length === 0) return 0;
-  let lines = 0;
-  for (let i = 0; i < text.length; i++) if (text.charCodeAt(i) === 10) lines++;
-  return text.endsWith('\n') ? lines : lines + 1;
 }
