@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { coChange, editCounts, editWindow, unquote, type Commit } from '../skills/dgmo-codebase-report/scripts/lib/history.mjs';
-import { LIMITS, OUTPUT_DIR, groupOf, measure } from '../skills/dgmo-codebase-report/scripts/measure.mjs';
+import { LIMITS, OTHER, OUTPUT_DIR, groupOf, measure } from '../skills/dgmo-codebase-report/scripts/measure.mjs';
 import { GIT_FIXTURES, NO_GIT_FIXTURE, git, materializeFixture, type FixtureName } from './helpers/fixture-repo.js';
 
 const SCRIPT = resolve(import.meta.dirname, '..', 'skills', 'dgmo-codebase-report', 'scripts', 'measure.mjs');
@@ -60,7 +60,7 @@ describe('measure.mjs on the fixture repos', () => {
     const tracked = git(dir, 'ls-files').split('\n').sort();
 
     expect(m.schema).toBe(1);
-    expect(m.repo).toEqual({ name: expect.any(String), git: true, commit: git(dir, 'rev-parse', 'HEAD') });
+    expect(m.repo).toEqual({ name: expect.any(String), git: true, shallow: false, commit: git(dir, 'rev-parse', 'HEAD') });
     expect(m.limits).toEqual(LIMITS);
 
     expect(m.sizes.rolledUp).toBe(false);
@@ -147,6 +147,24 @@ describe('git edge cases', () => {
     expect(m.coChange.pairs).toEqual([{ a: 'café.ts', b: 'main.ts', count: 2 }]);
   });
 
+  it('says a shallow clone has no usable history rather than reading its cut-off as a commit', () => {
+    const full = scratchRepo({ 'a.ts': '1\n', 'b.ts': '1\n' });
+    for (let i = 2; i <= 3; i++) {
+      writeFileSync(join(full, 'a.ts'), `${i}\n`);
+      git(full, 'commit', '--quiet', '-am', `edit ${i}`);
+    }
+    const shallow = mkdtempSync(join(tmpdir(), 'skills-shallow-'));
+    made.push(shallow);
+    git(tmpdir(), 'clone', '--quiet', '--depth', '1', `file://${full}`, shallow);
+
+    const m = measure(shallow);
+    expect(m.repo).toMatchObject({ git: true, shallow: true });
+    for (const section of ['history', 'edits', 'coChange'] as const) {
+      expect(m[section]).toMatchObject({ available: false, reason: expect.stringMatching(/shallow/) });
+    }
+    expect(m.sizes.total.files).toBe(2);
+  });
+
   it('decodes the paths git still quotes', () => {
     expect(unquote('"tab\\there.ts"')).toBe('tab\there.ts');
     expect(unquote('"caf\\303\\251 \\"q\\".ts"')).toBe('café "q".ts');
@@ -198,6 +216,78 @@ describe('imports', () => {
     expect(m.imports.external).toEqual([]);
   });
 
+  it('records a Go dependency by the module go.mod requires, else by its host\'s depth', () => {
+    const m = measure(
+      scratch({
+        'go.mod': 'module example.com/m\n\nrequire (\n\tgithub.com/acme/kit/v2 v2.0.0\n\tgoogle.golang.org/grpc v1.60.0 // indirect\n)\n',
+        'a.go': 'package m\n\nimport (\n\t"google.golang.org/grpc"\n\t"google.golang.org/grpc/codes"\n\t"github.com/acme/kit/v2/log"\n)\n',
+        'b.go': 'package m\n\nimport (\n\t"go.uber.org/zap"\n\t"go.uber.org/zap/zapcore"\n\t"golang.org/x/net/http2"\n)\n',
+        'c.go': 'package m\n\nimport "go.uber.org/zap"\n',
+      }),
+    );
+    expect(m.imports.external).toEqual([
+      { name: 'go.uber.org/zap', files: 2 },
+      { name: 'github.com/acme/kit/v2', files: 1 },
+      { name: 'golang.org/x/net', files: 1 },
+      { name: 'google.golang.org/grpc', files: 1 },
+    ]);
+  });
+
+  it('expands Rust use braces and reads Python imports split over lines', () => {
+    const m = measure(
+      scratch({
+        'src/main.rs': 'mod a;\nmod b;\nuse crate::{a::f, b as bee, self};\n',
+        'src/a.rs': '',
+        'src/b.rs': 'use super::{a};\n',
+        'pkg/__init__.py': '',
+        'pkg/x.py': '',
+        'pkg/y.py': '',
+        'pkg/main.py': 'from . import (\n    x,  # first\n    y as why,\n)\n',
+      }),
+    );
+    expect(m.imports.edges.map((edge) => `${edge.from}>${edge.to}`).sort()).toEqual([
+      'pkg/main.py>pkg/x.py',
+      'pkg/main.py>pkg/y.py',
+      'src/b.rs>src/a.rs',
+      'src/main.rs>src/a.rs',
+      'src/main.rs>src/b.rs',
+    ]);
+  });
+
+  it('counts lines with or without a final newline, and none for a binary file', () => {
+    const m = measure(scratch({ 'a.txt': 'x\ny', 'b.txt': 'x\n', 'c.txt': '', 'd.bin': 'x\u0000y\n' }));
+    expect(m.sizes.entries.map((entry) => [entry.path, entry.lines])).toEqual([
+      ['a.txt', 2],
+      ['b.txt', 1],
+      ['c.txt', 0],
+      ['d.bin', 0],
+    ]);
+  });
+
+  it('reads a bare path that names a repo file as a baseUrl import, not a package', () => {
+    const m = measure(
+      scratch({
+        'src/utils/cn.ts': '',
+        'src/app.ts': "import { cn } from 'utils/cn';\nimport React from 'react';\n",
+      }),
+    );
+    expect(m.imports.edges.map((edge) => `${edge.from}>${edge.to}`).sort()).toEqual([
+      'src/app.ts>src/utils/cn.ts',
+    ]);
+    expect(m.imports.external).toEqual([{ name: 'react', files: 1 }]);
+  });
+
+  it('exits 1 with a one-line message when the directory does not exist', () => {
+    let failure: { status?: number; stderr?: string } = {};
+    try {
+      execFileSync('node', [SCRIPT, join(tmpdir(), 'skills-measure-no-such-dir')], { encoding: 'utf8', stdio: 'pipe' });
+    } catch (error) {
+      failure = error as typeof failure;
+    }
+    expect(failure.status).toBe(1);
+    expect(failure.stderr).toMatch(/^measure\.mjs: .*no such file/m);
+  });
+
   it('counts a relative import that names no file as unresolved', () => {
     const m = measure(scratch({ 'a.ts': "import { gone } from './gone';\n" }));
     expect(m.imports.unresolved).toBe(1);
@@ -235,7 +325,7 @@ describe('roll-ups past each chart limit', () => {
     expect(m.sizes.entries).toHaveLength(LIMITS.sizes.maxGroups);
     const top = LIMITS.sizes.maxGroups + 4; // the biggest package: 4 files of top + 1 lines each
     expect(m.sizes.entries[0]).toEqual({ path: `pkg${top}/deep`, bytes: 4 * 2 * (top + 1), lines: 4 * (top + 1), files: 4 });
-    expect(m.sizes.entries.at(-1)?.path).toBe('other');
+    expect(m.sizes.entries.at(-1)?.path).toBe(OTHER);
     const summed = m.sizes.entries.reduce((sum: number, entry: { files: number }) => sum + entry.files, 0);
     expect(summed).toBe(m.sizes.total.files);
     expect(m.sizes.rollUpNote).toMatch(/rolled up/);
@@ -263,7 +353,7 @@ describe('roll-ups past each chart limit', () => {
     expect(m.imports.edges).toEqual([{ from: 'a/x', to: 'b/y', count: LIMITS.imports.maxNodes }]);
   });
 
-  it('keeps a hub whose importers are all cut, by linking it to "other"', () => {
+  it('keeps a hub whose importers are all cut, by linking it to "(other)"', () => {
     const files: Record<string, string> = { 'h/hub/z.ts': '' };
     for (let i = 0; i < 20; i++) {
       for (let j = 0; j < 5; j++) files[`p${i}/a/f${j}.ts`] = "import '../b/g';\n";
@@ -273,8 +363,20 @@ describe('roll-ups past each chart limit', () => {
     const m = measure(scratch(files));
     // 71 directories: 40 in pairs (degree 5), the hub (30), 30 leaves (1).
     expect(m.imports.nodes.length).toBeLessThanOrEqual(LIMITS.imports.maxNodes);
-    expect(m.imports.edges).toContainEqual({ from: 'other', to: 'h/hub', count: 30 });
-    expect(m.imports.rollUpNote).toContain(`The ${71 - (LIMITS.imports.maxNodes - 1)} least connected are shown as "other".`);
+    expect(m.imports.edges).toContainEqual({ from: OTHER, to: 'h/hub', count: 30 });
+    expect(m.imports.rollUpNote).toContain(`The ${71 - (LIMITS.imports.maxNodes - 1)} least connected are shown as "${OTHER}".`);
+  });
+
+  it('a flat directory past the limit stays at file level instead of drawing nothing', () => {
+    const n = LIMITS.imports.maxNodes + 5;
+    const files: Record<string, string> = {};
+    for (let i = 0; i < n; i++) files[`src/f${i}.ts`] = i + 1 < n ? `import './f${i + 1}';\n` : '';
+    const m = measure(scratch(files));
+    expect(m.imports.rolledUp).toBe(true);
+    expect(m.imports.nodes).toHaveLength(LIMITS.imports.maxNodes);
+    expect(m.imports.nodes).toContain(OTHER);
+    expect(m.imports.edges.length).toBeGreaterThan(0);
+    expect(m.imports.rollUpNote).toMatch(/file level/);
   });
 
   it('survives an import graph with more edges than a call takes arguments', () => {

@@ -38,6 +38,7 @@ export function importLanguage(path) {
 export function buildImportGraph(root, paths) {
   const files = new Set(paths);
   const goModules = readGoModules(root, paths);
+  const goRequires = readGoRequires(root, paths);
   const goDirs = new Set(paths.filter((path) => path.endsWith('.go')).map((path) => posix.dirname(path)));
   /** @type {Map<string, { from: string, to: string, toPackage: boolean }>} */
   const edges = new Map();
@@ -60,7 +61,7 @@ export function buildImportGraph(root, paths) {
         : language === 'python'
           ? pythonImports(path, source, files)
           : language === 'go'
-            ? goImports(source, goDirs, goModules)
+            ? goImports(source, goDirs, goModules, goRequires)
             : rustImports(path, source, files);
     for (const to of found.internal) {
       if (to !== path) edges.set(`${path}\0${to}`, { from: path, to, toPackage: language === 'go' });
@@ -77,9 +78,11 @@ export function buildImportGraph(root, paths) {
 
 // ---------------------------------------------------------------- JS / TS
 
+// `[^'";]*?` and not a class with `\s` in it beside a `\s*`: two quantifiers
+// over the same spaces backtrack quadratically on a long run of them.
 const JS_SPECIFIERS = [
-  /\bimport\s+(?:type\s+)?[\w*${}\s,]*?\s*from\s*['"]([^'"]+)['"]/g,
-  /\bexport\s+(?:type\s+)?[\w*${}\s,]*?\s*from\s*['"]([^'"]+)['"]/g,
+  /\bimport\b[^'";]*?\bfrom\s*['"]([^'"]+)['"]/g,
+  /\bexport\b[^'";]*?\bfrom\s*['"]([^'"]+)['"]/g,
   /\bimport\s*['"]([^'"]+)['"]/g,
   /\bimport\s*\(\s*['"]([^'"]+)['"]\s*\)/g,
   /\brequire\s*\(\s*['"]([^'"]+)['"]\s*\)/g,
@@ -112,6 +115,9 @@ export function jsImports(path, source, files) {
       const target = resolveJs(posix.join('src', rest), files) ?? resolveJs(rest, files);
       if (target) found.internal.push(target);
       else found.unresolved++;
+    } else if (resolveJs(spec, files) ?? resolveJs(posix.join('src', spec), files)) {
+      // A bare path that names a repo file is a `baseUrl` import, not a package.
+      found.internal.push(resolveJs(spec, files) ?? resolveJs(posix.join('src', spec), files) ?? spec);
     } else if (!spec.startsWith('node:') && !builtinModules.includes(spec.split('/')[0] ?? spec)) {
       // `@scope/pkg/sub` → `@scope/pkg`; `pkg/sub` → `pkg`.
       const parts = spec.split('/');
@@ -156,10 +162,16 @@ export function pythonImports(path, source, files) {
   // and the directory above the file's top package.
   const roots = new Set(['.', 'src', topPackageParent(path, files)]);
 
-  for (const match of source.matchAll(/^\s*from\s+(\.*)([\w.]*)\s+import\s+\(?([^)\n]*)/gm)) {
+  for (const match of source.matchAll(/^[ \t]*from[ \t]+(\.*)([\w.]*)[ \t]+import[ \t]*(\([^)]*\)|[^\n]*)/gm)) {
     const dots = match[1]?.length ?? 0;
     const module = match[2] ?? '';
-    const names = (match[3] ?? '').split(',').map((name) => name.trim().split(/\s+/)[0] ?? '').filter(Boolean);
+    // `import (a,\n b)` spans lines; `# comments` and `as` aliases drop out.
+    const names = (match[3] ?? '')
+      .replace(/#[^\n]*/g, '')
+      .replace(/[()\\]/g, ' ')
+      .split(',')
+      .map((name) => name.trim().split(/\s+/)[0] ?? '')
+      .filter((name) => /^\w+$/.test(name));
     if (dots > 0) {
       let dir = packageDir;
       for (let i = 1; i < dots; i++) dir = posix.dirname(dir);
@@ -173,7 +185,7 @@ export function pythonImports(path, source, files) {
       else found.external.push(module.split('.')[0] ?? module);
     }
   }
-  for (const match of source.matchAll(/^\s*import\s+([\w.]+(?:\s+as\s+\w+)?(?:\s*,\s*[\w.]+(?:\s+as\s+\w+)?)*)/gm)) {
+  for (const match of source.matchAll(/^[ \t]*import[ \t]+([\w.]+(?:\s+as\s+\w+)?(?:\s*,\s*[\w.]+(?:\s+as\s+\w+)?)*)/gm)) {
     for (const part of (match[1] ?? '').split(',')) {
       const module = part.trim().split(/\s+/)[0] ?? '';
       const hit = resolvePythonAbsolute(module, [], roots, files);
@@ -272,9 +284,10 @@ function readGoModules(root, paths) {
  * @param {string} source
  * @param {Set<string>} goDirs  every directory holding a .go file
  * @param {{ module: string, dir: string }[]} modules  from {@link readGoModules}
+ * @param {string[]} [requires]  module paths the go.mod files require, longest first
  * @returns {Found}
  */
-export function goImports(source, goDirs, modules) {
+export function goImports(source, goDirs, modules, requires = []) {
   /** @type {Found} */
   const found = { internal: [], external: [], unresolved: 0 };
   /** @type {string[]} */
@@ -290,13 +303,55 @@ export function goImports(source, goDirs, modules) {
       const dir = posix.join(owner.dir, spec.slice(owner.module.length + 1));
       if (goDirs.has(dir)) found.internal.push(dir);
       else found.unresolved++;
-    } else if (spec.includes('.') && spec.split('/')[0]?.includes('.')) {
-      // A host-qualified path (github.com/x/y) is a dependency; record the module root.
-      found.external.push(spec.split('/').slice(0, 3).join('/'));
+    } else if (spec.split('/')[0]?.includes('.')) {
+      // A host-qualified path is a dependency; record its module, as go.mod
+      // requires it, else as deep as the usual hosts nest one.
+      found.external.push(
+        requires.find((module) => spec === module || spec.startsWith(`${module}/`)) ?? guessGoModule(spec),
+      );
     }
     // Anything else (fmt, net/http) is the standard library and is left out.
   }
   return found;
+}
+
+/**
+ * Every module path a go.mod `require`s, longest first.
+ * @param {string} root
+ * @param {string[]} paths
+ */
+function readGoRequires(root, paths) {
+  /** @type {Set<string>} */
+  const requires = new Set();
+  for (const path of paths) {
+    if (posix.basename(path) !== 'go.mod') continue;
+    let text;
+    try {
+      text = readFileSync(join(root, path), 'utf8');
+    } catch {
+      continue;
+    }
+    for (const block of text.matchAll(/^require\s*\(([\s\S]*?)^\)/gm)) {
+      for (const line of (block[1] ?? '').split('\n')) {
+        const module = line.trim().split(/\s+/)[0];
+        if (module && !module.startsWith('//')) requires.add(module);
+      }
+    }
+    for (const single of text.matchAll(/^require[ \t]+([^\s(]+)/gm)) if (single[1]) requires.add(single[1]);
+  }
+  return [...requires].sort((a, b) => b.length - a.length);
+}
+
+/**
+ * A dependency's module root without a go.mod to say: owner/repo on the
+ * code hosts and under golang.org/x, one path segment anywhere else
+ * (google.golang.org/grpc, go.uber.org/zap, gopkg.in/yaml.v3).
+ * @param {string} spec
+ */
+function guessGoModule(spec) {
+  const parts = spec.split('/');
+  const deep = ['github.com', 'gitlab.com', 'bitbucket.org'].includes(parts[0] ?? '') || spec.startsWith('golang.org/x/');
+  return parts.slice(0, deep ? 3 : 2).join('/');
 }
 
 // ---------------------------------------------------------------- Rust
@@ -320,8 +375,25 @@ export function rustImports(path, source, files) {
     if (target) found.internal.push(target);
     else found.unresolved++;
   }
-  for (const match of source.matchAll(/^\s*(?:pub(?:\([^)]*\))?\s+)?use\s+([\w:]+)/gm)) {
-    const segments = (match[1] ?? '').split('::').filter(Boolean);
+  /** @type {string[]} */
+  const usePaths = [];
+  for (const match of source.matchAll(/^[ \t]*(?:pub(?:\([^)]*\))?[ \t]+)?use[ \t]+([^;]+);/gm)) {
+    // One level of braces: `use crate::{a::b, c as d, self}` is three paths.
+    const text = (match[1] ?? '').replace(/\s+/g, '');
+    const brace = text.indexOf('{');
+    if (brace === -1) {
+      usePaths.push(text);
+      continue;
+    }
+    const prefix = text.slice(0, brace).replace(/::$/, '');
+    for (const item of text.slice(brace + 1).replace(/}$/, '').split(',')) {
+      const head = /^[\w:]*/.exec(item)?.[0]?.replace(/::$/, '') ?? '';
+      if (head === 'self' || head === '') usePaths.push(prefix);
+      else usePaths.push(prefix ? `${prefix}::${head}` : head);
+    }
+  }
+  for (const usePath of usePaths) {
+    const segments = /^[\w:]*/.exec(usePath)?.[0]?.split('::').filter(Boolean) ?? [];
     const head = segments.shift();
     let dir;
     if (head === 'crate') dir = crateRoot;
