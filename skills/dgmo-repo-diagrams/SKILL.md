@@ -42,7 +42,8 @@ Either door works, and the steps say what each one does:
 3. **Load the syntax for each type before you write it.** MCP: `get_language_reference` for the
    type. CLI: fetch `https://diagrammo.app/llms/<type>.txt`, for example
    `https://diagrammo.app/llms/sequence.txt`. DGMO is not Mermaid — write from the reference, never
-   from Mermaid habits.
+   from Mermaid habits. The habit that breaks most often: a sequence message's label goes inside the
+   arrow, `API -POST /login-> Auth`, never after a colon, `API -> Auth: POST /login`.
 
 4. **Write each diagram** to `docs/diagrams/<n>-<slug>.dgmo`. The number sets the order:
    `1-architecture.dgmo`, `2-checkout.dgmo`, `3-sign-in.dgmo`, `4-data-model.dgmo`.
@@ -54,15 +55,17 @@ Either door works, and the steps say what each one does:
      trust zone) where the type's reference allows one.
    - Sequence: one participant per part that sends or receives on that path; each message names the
      real call or route.
-   - ER: the tables and their keys from the schema; the relations from its foreign keys.
+   - ER: the tables and their keys from the schema; the relations from its foreign keys, or from
+     columns named `<table>_id` when the schema declares none.
    - Keep each diagram under about 40 elements. Split a bigger one, or leave out the minor parts.
 
    Done when every diagram in your list is a file in `docs/diagrams/`.
 
 5. **Check and link.**
    - **CLI:** run `node <this skill's directory>/scripts/check-diagrams.mjs <repo-dir>`. If any
-     diagram has an error, it prints every error as `docs/diagrams/<file>: Line <n>: <message>`,
-     writes nothing and exits 1. Fix those lines and run it again. When all of them parse, it gets a
+     diagram has an error, it prints the first error in each broken file as
+     `docs/diagrams/<file>: Line <n>: <message>`, writes nothing and exits 1. Fix that line and any
+     other line with the same mistake, and run it again. When all of them parse, it gets a
      share link for each, writes `docs/diagrams/README.md` and prints that path.
    - **MCP:** pass each file's source to `validate_diagram` and fix each error until all are clean.
      Then pass each to `share_diagram` and write `docs/diagrams/README.md` yourself: a table of
