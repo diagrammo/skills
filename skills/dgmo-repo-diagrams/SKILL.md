@@ -1,12 +1,12 @@
 ---
 name: dgmo-repo-diagrams
-description: Diagram this repository — read the code, then write up to five DGMO diagrams of it (an architecture overview, the key code paths as sequence diagrams, the data model) into docs/diagrams, each checked to parse and listed with a share link. Use when the user asks to diagram, map or visualize their repo, codebase or project, or asks how it fits together.
+description: Diagram this repository — read the code, then write up to five DGMO diagrams of it (an architecture overview, the key code paths as sequence diagrams, the data model) into docs/diagrams, each checked to parse and listed with a share link. Use when the user asks to diagram, map or visualize their repo, codebase or project, or asks how it fits together. When they want to choose the diagrams, it proposes candidates and draws the ones they pick.
 ---
 
 # Diagram this repo
 
-Write at most five `.dgmo` diagrams of the repository into `docs/diagrams/`, check that each one
-parses, and list them with share links in `docs/diagrams/README.md`.
+Write `.dgmo` diagrams of the repository into `docs/diagrams/` — at most five unless the user picks
+more — check that each one parses, and list them with share links in `docs/diagrams/README.md`.
 
 🔴 **Draw only what you read in the code.** Every box, participant, message and table names a real
 module, service, function, route or table, and you can point to the file it came from. A diagram of
@@ -18,6 +18,13 @@ Either door works, and the steps say what each one does:
   script runs it for you.
 - **MCP** — the dgmo MCP server's `get_language_reference`, `validate_diagram` and `share_diagram`
   tools.
+
+Two modes. Only step 2 differs between them:
+
+- **Default** — you choose the set and write it. Use it unless the user asks to choose.
+- **Interactive** — you propose candidate diagrams and the user picks which to draw. Use it when
+  the user asks to choose, to pick or to see the options first: "which diagrams could you draw?",
+  "let me pick", "interactive".
 
 ## Steps
 
@@ -38,6 +45,25 @@ Either door works, and the steps say what each one does:
    Five at most. A small repo gets fewer: skip any diagram the repo has nothing for, such as the
    data model of a library with no store. Done when you have the list, with the files each diagram
    comes from.
+
+   **Interactive mode — propose, then wait.** Propose 4 to 8 candidates as one numbered table:
+   number, title, type, what it shows in one line, and the files it comes from. Put the default set
+   first and mark each of its rows `(recommended)`. Fill the rest with other diagrams the code
+   supports, for example:
+
+   | Candidate | Type | When the code has |
+   |---|---|---|
+   | Another code path | `sequence` | A further route, job or command worth tracing |
+   | Deployment topology | `infra` | Dockerfiles, compose files, Terraform, or a cloud config |
+   | Lifecycle of a record | `state` | A status field with set transitions |
+   | Domain classes | `class` | Classes or types with inheritance or composition |
+   | A branching process | `flowchart` | One function or handler with several decision points |
+   | Routes or pages | `sitemap` | A router or a pages directory |
+
+   Then ask once: "Reply with the numbers to draw, for example `1 3 4`, or `recommended`." 🔴
+   **Write nothing until the user answers.** Draw exactly what they pick, in the order of their
+   numbers, and apply any change they ask for in the reply. Done when the user has picked and you
+   have the list.
 
 3. **Load the syntax for each type before you write it.** MCP: `get_language_reference` for the
    type. CLI: fetch `https://diagrammo.app/llms/<type>.txt`, for example
@@ -80,4 +106,4 @@ Either door works, and the steps say what each one does:
 
 6. **Report.** One line per diagram: its title, its file and its link. Then one line for each
    diagram of the default set you skipped, with the reason: `No data model — no schema or migrations
-   found`.
+   found`. In interactive mode, skip those lines: the user chose the set.

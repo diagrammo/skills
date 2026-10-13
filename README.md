@@ -18,7 +18,7 @@ agent's skills directory.
 
 | Skill | Status |
 |---|---|
-| `dgmo-repo-diagrams` | Diagrams of your repo — architecture, key code paths, data model — checked, with share links |
+| `dgmo-repo-diagrams` | Diagrams of your repo — architecture, key code paths, data model, or the ones you pick from its proposals — checked, with share links |
 | `dgmo-codebase-report` | Under construction — does nothing yet |
 
 ## Layout
