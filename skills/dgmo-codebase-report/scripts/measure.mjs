@@ -33,7 +33,7 @@ export const LIMITS = {
   sizes: {
     maxFiles: 150,
     maxGroups: 40,
-    rule: 'Past maxFiles files, sizes roll up to the level — two or more directory levels deep, or the files themselves — that shows the most boxes, up to maxGroups; past maxGroups, the smallest join "(other)".',
+    rule: 'Past maxFiles files, sizes roll up to the top two directory levels, except that a directory holding more than maxFiles files of its own shows them as files; past maxGroups groups, the smallest join "(other)".',
   },
   languages: {
     maxSlices: 8,
@@ -130,23 +130,31 @@ function sizes(files) {
       entries: files.map(({ path, bytes, lines }) => ({ path, bytes, lines: lines ?? 0, files: 1 })),
     };
   }
-  // Not a fixed depth: two levels hold a flat `src/` of 200 files as one box
-  // beside the root's, a treemap that says nothing. Each directory level, then
-  // the files themselves; the most boxes wins, counting past maxGroups as
-  // maxGroups (they become "(other)"), ties to the shallowest.
-  let deepest = 2;
-  for (const file of files) deepest = Math.max(deepest, dirDepth(file.path, false));
-  /** @type {{ depth: number | null, entries: { path: string, bytes: number, lines: number, files: number }[] }[]} */
-  const levels = [];
-  for (let depth = 2; depth <= deepest; depth++) levels.push({ depth, entries: groupSizes(files, depth) });
-  levels.push({ depth: null, entries: groupSizes(files, null) });
-  const shown = (/** @type {{ entries: unknown[] }} */ level) => Math.min(level.entries.length, limit.maxGroups);
-  const chosen = levels.reduce((best, level) => (shown(level) > shown(best) ? level : best));
-  let entries = chosen.entries.sort((a, b) => b.lines - a.lines || b.bytes - a.bytes);
-  let note =
-    chosen.depth === null
-      ? `${files.length} files stay at file level: no directory level splits them into more than ${Math.max(...levels.slice(0, -1).map((level) => level.entries.length))} boxes.`
-      : `${files.length} files rolled up to ${entries.length} directories, up to ${chosen.depth} levels deep.`;
+  // A directory holding more than maxFiles files of its own (a flat `src/`,
+  // a Go package at the root) is one box however deep the roll-up goes, and
+  // beside a README it is a two-box treemap that says nothing: show its files.
+  /** @type {Map<string, number>} */
+  const ownFiles = new Map();
+  for (const file of files) {
+    const dir = groupOf(file.path, false, Infinity);
+    ownFiles.set(dir, (ownFiles.get(dir) ?? 0) + 1);
+  }
+  const flat = new Set([...ownFiles].filter(([, count]) => count > limit.maxFiles).map(([dir]) => dir));
+  /** @type {Map<string, { path: string, bytes: number, lines: number, files: number }>} */
+  const groups = new Map();
+  for (const file of files) {
+    const key = flat.has(groupOf(file.path, false, Infinity)) ? file.path : groupOf(file.path);
+    const group = groups.get(key) ?? { path: key, bytes: 0, lines: 0, files: 0 };
+    group.bytes += file.bytes;
+    group.lines += file.lines ?? 0;
+    group.files += 1;
+    groups.set(key, group);
+  }
+  let entries = [...groups.values()].sort((a, b) => b.lines - a.lines || b.bytes - a.bytes);
+  let note = `${files.length} files rolled up to ${entries.length} directories, two levels deep.`;
+  if (flat.size > 0) {
+    note = `${files.length} files rolled up to ${entries.length} boxes, two directory levels deep; ${[...flat].sort().join(', ')} ${flat.size === 1 ? 'holds' : 'hold'} more than ${limit.maxFiles} files of ${flat.size === 1 ? 'its' : 'their'} own, shown as files.`;
+  }
   if (entries.length > limit.maxGroups) {
     const kept = entries.slice(0, limit.maxGroups - 1);
     const rest = entries.slice(limit.maxGroups - 1);
@@ -160,25 +168,6 @@ function sizes(files) {
     note += ` The smallest ${rest.length} are shown as "${OTHER}".`;
   }
   return { chart: 'treemap', total, rolledUp: true, rollUpNote: note, entries };
-}
-
-/**
- * Files summed per directory `depth` levels deep, or one entry per file when `depth` is null.
- * @param {import('./lib/files.mjs').FileInfo[]} files
- * @param {number | null} depth
- */
-function groupSizes(files, depth) {
-  /** @type {Map<string, { path: string, bytes: number, lines: number, files: number }>} */
-  const groups = new Map();
-  for (const file of files) {
-    const key = depth === null ? file.path : groupOf(file.path, false, depth);
-    const group = groups.get(key) ?? { path: key, bytes: 0, lines: 0, files: 0 };
-    group.bytes += file.bytes;
-    group.lines += file.lines ?? 0;
-    group.files += 1;
-    groups.set(key, group);
-  }
-  return [...groups.values()];
 }
 
 /** @param {import('./lib/files.mjs').FileInfo[]} files */

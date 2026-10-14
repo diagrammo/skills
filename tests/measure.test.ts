@@ -331,7 +331,7 @@ describe('imports', () => {
       scratch({
         'src/main.rs': 'mod net;\nmod util;\nuse crate::{net::{http, tcp}, util};\n',
         'src/net/mod.rs': 'pub mod http;\npub mod tcp;\n',
-        'src/net/http.rs': '',
+        'src/net/http.rs': 'use crate::net::{\n    tcp,\n};\n',
         'src/net/tcp.rs': '',
         'src/util.rs': '',
         'src/tcp.rs': '',
@@ -340,6 +340,8 @@ describe('imports', () => {
     const fromMain = m.imports.edges.filter((edge) => edge.from === 'src/main.rs').map((edge) => edge.to).sort();
     // `mod` gives net/mod.rs and util.rs; the use tree adds the two inside net/, never src/tcp.rs.
     expect(fromMain).toEqual(['src/net/http.rs', 'src/net/mod.rs', 'src/net/tcp.rs', 'src/util.rs']);
+    // rustfmt's trailing comma adds no edge to the module itself.
+    expect(m.imports.edges.filter((edge) => edge.from === 'src/net/http.rs').map((edge) => edge.to)).toEqual(['src/net/tcp.rs']);
   });
 
   it('resolves Rust super:: and nested mod.rs modules', () => {
@@ -388,7 +390,17 @@ describe('roll-ups past each chart limit', () => {
     expect(m.sizes.entries[0]).toMatchObject({ path: `src/f${LIMITS.sizes.maxFiles + 49}.ts`, files: 1 });
     expect(m.sizes.entries.at(-1)?.path).toBe(OTHER);
     expect(m.sizes.entries.reduce((sum: number, entry: { files: number }) => sum + entry.files, 0)).toBe(m.sizes.total.files);
-    expect(m.sizes.rollUpNote).toMatch(/file level/);
+    expect(m.sizes.rollUpNote).toMatch(/src holds more than/);
+  });
+
+  it('sizes of directories that each fit stay rolled up, never split into files', () => {
+    const files: Record<string, string> = {};
+    for (let i = 0; i < 10; i++) for (let j = 0; j < 16; j++) files[`d${i}/f${j}.ts`] = 'x\n';
+    const m = measure(scratch(files));
+    expect(m.sizes.rolledUp).toBe(true);
+    expect(m.sizes.entries.map((entry: { path: string }) => entry.path).sort()).toEqual(
+      Array.from({ length: 10 }, (_, i) => `d${i}`).sort(),
+    );
   });
 
   it('languages past the slice limit join "Other"', () => {

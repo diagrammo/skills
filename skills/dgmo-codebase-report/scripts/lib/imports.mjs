@@ -478,6 +478,8 @@ function useTreePaths(text) {
   /** @type {string[]} */
   const paths = [];
   for (const item of items) {
+    // The empty item after rustfmt's trailing comma names nothing.
+    if (item === '') continue;
     for (const path of useTreePaths(item)) {
       const head = /^[\w:]*/.exec(path)?.[0]?.replace(/::$/, '') ?? '';
       if (head === 'self' || head === '') paths.push(prefix);
