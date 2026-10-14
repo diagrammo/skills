@@ -33,7 +33,7 @@ export const LIMITS = {
   sizes: {
     maxFiles: 150,
     maxGroups: 40,
-    rule: 'Past maxFiles files, sizes roll up to the top two directory levels; past maxGroups groups, the smallest join "(other)".',
+    rule: 'Past maxFiles files, sizes roll up to the level — two or more directory levels deep, or the files themselves — that shows the most boxes, up to maxGroups; past maxGroups, the smallest join "(other)".',
   },
   languages: {
     maxSlices: 8,
@@ -88,7 +88,7 @@ export function measure(dir) {
   // A shallow clone's oldest commit reads as adding the whole tree: it would
   // be the largest commit, an edit to every file and a pair of every two.
   const noHistory = !hasGit
-    ? { available: false, reason: 'not a git repository with commits' }
+    ? { available: false, reason: 'not a git repository with commits, or none of its files are tracked' }
     : shallow
       ? { available: false, reason: 'shallow clone: its history is cut off; run `git fetch --unshallow` and measure again' }
       : null;
@@ -130,18 +130,23 @@ function sizes(files) {
       entries: files.map(({ path, bytes, lines }) => ({ path, bytes, lines: lines ?? 0, files: 1 })),
     };
   }
-  /** @type {Map<string, { path: string, bytes: number, lines: number, files: number }>} */
-  const groups = new Map();
-  for (const file of files) {
-    const key = groupOf(file.path);
-    const group = groups.get(key) ?? { path: key, bytes: 0, lines: 0, files: 0 };
-    group.bytes += file.bytes;
-    group.lines += file.lines ?? 0;
-    group.files += 1;
-    groups.set(key, group);
-  }
-  let entries = [...groups.values()].sort((a, b) => b.lines - a.lines || b.bytes - a.bytes);
-  let note = `${files.length} files rolled up to ${entries.length} directories, two levels deep.`;
+  // Not a fixed depth: two levels hold a flat `src/` of 200 files as one box
+  // beside the root's, a treemap that says nothing. Each directory level, then
+  // the files themselves; the most boxes wins, counting past maxGroups as
+  // maxGroups (they become "(other)"), ties to the shallowest.
+  let deepest = 2;
+  for (const file of files) deepest = Math.max(deepest, dirDepth(file.path, false));
+  /** @type {{ depth: number | null, entries: { path: string, bytes: number, lines: number, files: number }[] }[]} */
+  const levels = [];
+  for (let depth = 2; depth <= deepest; depth++) levels.push({ depth, entries: groupSizes(files, depth) });
+  levels.push({ depth: null, entries: groupSizes(files, null) });
+  const shown = (/** @type {{ entries: unknown[] }} */ level) => Math.min(level.entries.length, limit.maxGroups);
+  const chosen = levels.reduce((best, level) => (shown(level) > shown(best) ? level : best));
+  let entries = chosen.entries.sort((a, b) => b.lines - a.lines || b.bytes - a.bytes);
+  let note =
+    chosen.depth === null
+      ? `${files.length} files stay at file level: no directory level splits them into more than ${Math.max(...levels.slice(0, -1).map((level) => level.entries.length))} boxes.`
+      : `${files.length} files rolled up to ${entries.length} directories, up to ${chosen.depth} levels deep.`;
   if (entries.length > limit.maxGroups) {
     const kept = entries.slice(0, limit.maxGroups - 1);
     const rest = entries.slice(limit.maxGroups - 1);
@@ -155,6 +160,25 @@ function sizes(files) {
     note += ` The smallest ${rest.length} are shown as "${OTHER}".`;
   }
   return { chart: 'treemap', total, rolledUp: true, rollUpNote: note, entries };
+}
+
+/**
+ * Files summed per directory `depth` levels deep, or one entry per file when `depth` is null.
+ * @param {import('./lib/files.mjs').FileInfo[]} files
+ * @param {number | null} depth
+ */
+function groupSizes(files, depth) {
+  /** @type {Map<string, { path: string, bytes: number, lines: number, files: number }>} */
+  const groups = new Map();
+  for (const file of files) {
+    const key = depth === null ? file.path : groupOf(file.path, false, depth);
+    const group = groups.get(key) ?? { path: key, bytes: 0, lines: 0, files: 0 };
+    group.bytes += file.bytes;
+    group.lines += file.lines ?? 0;
+    group.files += 1;
+    groups.set(key, group);
+  }
+  return [...groups.values()];
 }
 
 /** @param {import('./lib/files.mjs').FileInfo[]} files */

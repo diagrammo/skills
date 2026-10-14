@@ -165,6 +165,21 @@ describe('git edge cases', () => {
     expect(m.sizes.total.files).toBe(2);
   });
 
+  it('measures a project no file of which a parent repo tracks as no git, not as the parent', () => {
+    const parent = scratchRepo({ 'dotfile.txt': '1\n' });
+    git(parent, 'tag', 'v1');
+    const project = join(parent, 'newproj');
+    mkdirSync(join(project, 'src'), { recursive: true });
+    writeFileSync(join(project, 'src', 'a.ts'), "import { b } from './b';\n");
+    writeFileSync(join(project, 'src', 'b.ts'), 'export const b = 1;\n');
+
+    const m = measure(project);
+    expect(m.repo).toMatchObject({ git: false, commit: null });
+    expect(m.sizes.total.files).toBe(2);
+    expect(m.imports.edges.map((edge) => `${edge.from}>${edge.to}`)).toEqual(['src/a.ts>src/b.ts']);
+    expect(m.history).toMatchObject({ available: false });
+  });
+
   it('decodes the paths git still quotes', () => {
     expect(unquote('"tab\\there.ts"')).toBe('tab\there.ts');
     expect(unquote('"caf\\303\\251 \\"q\\".ts"')).toBe('café "q".ts');
@@ -277,6 +292,23 @@ describe('imports', () => {
     expect(m.imports.external).toEqual([{ name: 'react', files: 1 }]);
   });
 
+  it('never resolves a built-in, or a package package.json declares, to a repo file of that name', () => {
+    const m = measure(
+      scratch({
+        'package.json': JSON.stringify({ name: 'lib', peerDependencies: { react: '*' } }),
+        'src/util.ts': '',
+        'src/events.ts': '',
+        'src/react.ts': '',
+        'src/server.ts': "import { promisify } from 'util';\nimport { EventEmitter } from 'events';\n",
+        'src/hooks.ts': "import { useState } from 'react';\n",
+        'src/index.ts': "import React from 'react';\nimport { cn } from 'utils/cn';\n",
+        'src/utils/cn.ts': '',
+      }),
+    );
+    expect(m.imports.edges.map((edge) => `${edge.from}>${edge.to}`).sort()).toEqual(['src/index.ts>src/utils/cn.ts']);
+    expect(m.imports.external).toEqual([{ name: 'react', files: 2 }]);
+  });
+
   it('exits 1 with a one-line message when the directory does not exist', () => {
     let failure: { status?: number; stderr?: string } = {};
     try {
@@ -292,6 +324,22 @@ describe('imports', () => {
     const m = measure(scratch({ 'a.ts': "import { gone } from './gone';\n" }));
     expect(m.imports.unresolved).toBe(1);
     expect(m.imports.edges).toEqual([]);
+  });
+
+  it('expands Rust use braces nested inside braces', () => {
+    const m = measure(
+      scratch({
+        'src/main.rs': 'mod net;\nmod util;\nuse crate::{net::{http, tcp}, util};\n',
+        'src/net/mod.rs': 'pub mod http;\npub mod tcp;\n',
+        'src/net/http.rs': '',
+        'src/net/tcp.rs': '',
+        'src/util.rs': '',
+        'src/tcp.rs': '',
+      }),
+    );
+    const fromMain = m.imports.edges.filter((edge) => edge.from === 'src/main.rs').map((edge) => edge.to).sort();
+    // `mod` gives net/mod.rs and util.rs; the use tree adds the two inside net/, never src/tcp.rs.
+    expect(fromMain).toEqual(['src/net/http.rs', 'src/net/mod.rs', 'src/net/tcp.rs', 'src/util.rs']);
   });
 
   it('resolves Rust super:: and nested mod.rs modules', () => {
@@ -329,6 +377,18 @@ describe('roll-ups past each chart limit', () => {
     const summed = m.sizes.entries.reduce((sum: number, entry: { files: number }) => sum + entry.files, 0);
     expect(summed).toBe(m.sizes.total.files);
     expect(m.sizes.rollUpNote).toMatch(/rolled up/);
+  });
+
+  it('sizes of a flat directory past the limit stay at file level instead of two boxes', () => {
+    const files: Record<string, string> = { 'README.md': 'x\n' };
+    for (let i = 0; i < LIMITS.sizes.maxFiles + 50; i++) files[`src/f${i}.ts`] = 'x\n'.repeat(i + 1);
+    const m = measure(scratch(files));
+    expect(m.sizes.rolledUp).toBe(true);
+    expect(m.sizes.entries).toHaveLength(LIMITS.sizes.maxGroups);
+    expect(m.sizes.entries[0]).toMatchObject({ path: `src/f${LIMITS.sizes.maxFiles + 49}.ts`, files: 1 });
+    expect(m.sizes.entries.at(-1)?.path).toBe(OTHER);
+    expect(m.sizes.entries.reduce((sum: number, entry: { files: number }) => sum + entry.files, 0)).toBe(m.sizes.total.files);
+    expect(m.sizes.rollUpNote).toMatch(/file level/);
   });
 
   it('languages past the slice limit join "Other"', () => {

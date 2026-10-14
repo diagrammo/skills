@@ -39,6 +39,7 @@ export function buildImportGraph(root, paths) {
   const files = new Set(paths);
   const goModules = readGoModules(root, paths);
   const goRequires = readGoRequires(root, paths);
+  const jsPackages = readJsPackages(root, paths);
   const goDirs = new Set(paths.filter((path) => path.endsWith('.go')).map((path) => posix.dirname(path)));
   /** @type {Map<string, { from: string, to: string, toPackage: boolean }>} */
   const edges = new Map();
@@ -57,7 +58,7 @@ export function buildImportGraph(root, paths) {
     }
     const found =
       language === 'js'
-        ? jsImports(path, source, files)
+        ? jsImports(path, source, files, jsPackages)
         : language === 'python'
           ? pythonImports(path, source, files)
           : language === 'go'
@@ -92,9 +93,10 @@ const JS_SPECIFIERS = [
  * @param {string} path
  * @param {string} source
  * @param {Set<string>} files
+ * @param {Set<string>} [packages]  package names the package.json files declare
  * @returns {Found}
  */
-export function jsImports(path, source, files) {
+export function jsImports(path, source, files, packages = new Set()) {
   /** @type {Found} */
   const found = { internal: [], external: [], unresolved: 0 };
   const specifiers = new Set();
@@ -115,16 +117,45 @@ export function jsImports(path, source, files) {
       const target = resolveJs(posix.join('src', rest), files) ?? resolveJs(rest, files);
       if (target) found.internal.push(target);
       else found.unresolved++;
-    } else if (resolveJs(spec, files) ?? resolveJs(posix.join('src', spec), files)) {
-      // A bare path that names a repo file is a `baseUrl` import, not a package.
-      found.internal.push(resolveJs(spec, files) ?? resolveJs(posix.join('src', spec), files) ?? spec);
-    } else if (!spec.startsWith('node:') && !builtinModules.includes(spec.split('/')[0] ?? spec)) {
+    } else if (spec.startsWith('node:') || builtinModules.includes(spec.split('/')[0] ?? spec)) {
+      // A built-in, even where a repo file shares its name (`src/util.ts`, `src/events.ts`).
+      continue;
+    } else {
       // `@scope/pkg/sub` → `@scope/pkg`; `pkg/sub` → `pkg`.
       const parts = spec.split('/');
-      found.external.push(spec.startsWith('@') ? parts.slice(0, 2).join('/') : (parts[0] ?? spec));
+      const name = spec.startsWith('@') ? parts.slice(0, 2).join('/') : (parts[0] ?? spec);
+      // A bare path that names a repo file is a `baseUrl` import — unless a
+      // package.json declares it, as `react` beside an adapter `src/react.ts`.
+      const target = packages.has(name) ? null : (resolveJs(spec, files) ?? resolveJs(posix.join('src', spec), files));
+      if (target) found.internal.push(target);
+      else found.external.push(name);
     }
   }
   return found;
+}
+
+/**
+ * Every package name any package.json in the repo depends on, of any kind.
+ * @param {string} root
+ * @param {string[]} paths
+ */
+function readJsPackages(root, paths) {
+  /** @type {Set<string>} */
+  const packages = new Set();
+  for (const path of paths) {
+    if (posix.basename(path) !== 'package.json') continue;
+    let manifest;
+    try {
+      manifest = JSON.parse(readFileSync(join(root, path), 'utf8'));
+    } catch {
+      continue;
+    }
+    for (const field of ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies']) {
+      const deps = manifest?.[field];
+      if (deps && typeof deps === 'object') for (const name of Object.keys(deps)) packages.add(name);
+    }
+  }
+  return packages;
 }
 
 /**
@@ -378,19 +409,8 @@ export function rustImports(path, source, files) {
   /** @type {string[]} */
   const usePaths = [];
   for (const match of source.matchAll(/^[ \t]*(?:pub(?:\([^)]*\))?[ \t]+)?use[ \t]+([^;]+);/gm)) {
-    // One level of braces: `use crate::{a::b, c as d, self}` is three paths.
-    const text = (match[1] ?? '').replace(/\s+/g, '');
-    const brace = text.indexOf('{');
-    if (brace === -1) {
-      usePaths.push(text);
-      continue;
-    }
-    const prefix = text.slice(0, brace).replace(/::$/, '');
-    for (const item of text.slice(brace + 1).replace(/}$/, '').split(',')) {
-      const head = /^[\w:]*/.exec(item)?.[0]?.replace(/::$/, '') ?? '';
-      if (head === 'self' || head === '') usePaths.push(prefix);
-      else usePaths.push(prefix ? `${prefix}::${head}` : head);
-    }
+    // `x as y` names `x`; the alias goes before the spaces do.
+    usePaths.push(...useTreePaths((match[1] ?? '').replace(/\s+as\s+\w+/g, '').replace(/\s+/g, '')));
   }
   for (const usePath of usePaths) {
     const segments = /^[\w:]*/.exec(usePath)?.[0]?.split('::').filter(Boolean) ?? [];
@@ -424,6 +444,47 @@ export function rustImports(path, source, files) {
     if (target) found.internal.push(target);
   }
   return found;
+}
+
+/**
+ * A `use` tree as the paths it names, braces at any depth:
+ * `crate::{net::{http, tcp}, util, self}` → `crate::net::http`,
+ * `crate::net::tcp`, `crate::util`, `crate`.
+ * @param {string} text  the tree, with no whitespace
+ * @returns {string[]}
+ */
+function useTreePaths(text) {
+  const brace = text.indexOf('{');
+  if (brace === -1) return [text];
+  const prefix = text.slice(0, brace).replace(/::$/, '');
+  /** @type {string[]} */
+  const items = [];
+  let depth = 0;
+  let start = brace + 1;
+  let end = text.length;
+  for (let i = brace + 1; i < text.length; i++) {
+    const char = text[i];
+    if (char === '{') depth++;
+    else if (char === '}' && depth === 0) {
+      end = i;
+      break;
+    } else if (char === '}') depth--;
+    else if (char === ',' && depth === 0) {
+      items.push(text.slice(start, i));
+      start = i + 1;
+    }
+  }
+  items.push(text.slice(start, end));
+  /** @type {string[]} */
+  const paths = [];
+  for (const item of items) {
+    for (const path of useTreePaths(item)) {
+      const head = /^[\w:]*/.exec(path)?.[0]?.replace(/::$/, '') ?? '';
+      if (head === 'self' || head === '') paths.push(prefix);
+      else paths.push(prefix ? `${prefix}::${head}` : head);
+    }
+  }
+  return paths;
 }
 
 /**

@@ -32,13 +32,16 @@ export function gitLines(cwd, args, separator = '\n') {
 }
 
 /**
- * True when `cwd` is inside a git work tree that has at least one commit.
+ * True when `cwd` is inside a git work tree that has at least one commit and
+ * tracks a file under `cwd`. A new project not yet added to a parent repo (a
+ * home directory kept as a dotfiles repo) is not that repo: its files are not
+ * tracked, and the parent's HEAD and tags are not its history.
  * @param {string} cwd
  */
 export function hasHistory(cwd) {
   try {
     git(cwd, ['rev-parse', '--verify', '--quiet', 'HEAD']);
-    return true;
+    return git(cwd, ['ls-files', '-z']).length > 0;
   } catch {
     return false;
   }
