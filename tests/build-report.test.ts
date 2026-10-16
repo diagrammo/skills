@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { tempDir } from './helpers/tmp.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   LINK_NOTICE,
@@ -20,7 +20,7 @@ let calls: string;
 let dgmo: string[];
 
 beforeEach(() => {
-  calls = join(mkdtempSync(join(tmpdir(), 'skills-fake-dgmo-')), 'calls.log');
+  calls = join(tempDir('skills-fake-dgmo-'), 'calls.log');
   writeFileSync(calls, '');
   dgmo = [process.execPath, FAKE_DGMO, calls];
 });
@@ -197,7 +197,7 @@ describe('the manifest', () => {
   });
 
   it('must exist', () => {
-    const repo = mkdtempSync(join(tmpdir(), 'skills-no-report-'));
+    const repo = tempDir('skills-no-report-');
     expect(() => buildReport(repo, { dgmo })).toThrow(/docs\/codebase-report\/report.json is missing/);
   });
 });
@@ -230,9 +230,9 @@ describe('main', () => {
   });
 
   it('runs when started through a symlink, as an installed skill is', () => {
-    const link = join(mkdtempSync(join(tmpdir(), 'skills-link-')), 'skill');
+    const link = join(tempDir('skills-link-'), 'skill');
     symlinkSync(join(import.meta.dirname, '..', 'skills', 'dgmo-codebase-report'), link);
-    const empty = mkdtempSync(join(tmpdir(), 'skills-no-report-'));
+    const empty = tempDir('skills-no-report-');
     const run = spawnSync(process.execPath, [join(link, 'scripts', 'build-report.mjs'), empty], { encoding: 'utf8' });
     expect(run.status).toBe(1);
     expect(run.stderr).toMatch(/report.json is missing/);

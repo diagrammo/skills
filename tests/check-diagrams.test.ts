@@ -1,6 +1,6 @@
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { tempDir } from './helpers/tmp.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   INDEX_FILE,
@@ -17,7 +17,7 @@ let calls: string;
 let dgmo: string[];
 
 beforeEach(() => {
-  calls = join(mkdtempSync(join(tmpdir(), 'skills-fake-dgmo-')), 'calls.log');
+  calls = join(tempDir('skills-fake-dgmo-'), 'calls.log');
   writeFileSync(calls, '');
   dgmo = [process.execPath, FAKE_DGMO, calls];
 });
@@ -28,7 +28,7 @@ afterEach(() => {
 
 /** A repo whose docs/diagrams holds these files. */
 function repoWith(files: Record<string, string>): { repo: string; dir: string } {
-  const repo = mkdtempSync(join(tmpdir(), 'skills-repo-diagrams-'));
+  const repo = tempDir('skills-repo-diagrams-');
   const dir = join(repo, OUTPUT_DIR);
   mkdirSync(dir, { recursive: true });
   for (const [file, source] of Object.entries(files)) writeFileSync(join(dir, file), source);
@@ -117,7 +117,7 @@ describe('checkDiagrams', () => {
   });
 
   it('says where to write the diagrams when there are none', () => {
-    const repo = mkdtempSync(join(tmpdir(), 'skills-repo-diagrams-'));
+    const repo = tempDir('skills-repo-diagrams-');
     expect(() => checkDiagrams(repo, { dgmo })).toThrow(/No docs\/diagrams directory/);
     mkdirSync(join(repo, OUTPUT_DIR), { recursive: true });
     expect(() => checkDiagrams(repo, { dgmo })).toThrow(/No \.dgmo files/);

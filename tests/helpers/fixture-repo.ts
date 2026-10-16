@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdtempSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { cpSync } from 'node:fs';
 import { join } from 'node:path';
+import { tempDir } from './tmp.js';
 
 /** Fixture repos with git history: one per language the measuring scripts read. */
 export const GIT_FIXTURES = ['typescript', 'python', 'go', 'rust'] as const;
@@ -39,7 +39,7 @@ export function git(dir: string, ...args: string[]): string {
  * fixture but `no-git` gets a git repo: one commit on `main`, tagged `v0.1.0`.
  */
 export function materializeFixture(name: FixtureName): string {
-  const dir = mkdtempSync(join(tmpdir(), `skills-fixture-${name}-`));
+  const dir = tempDir(`skills-fixture-${name}-`);
   cpSync(join(FIXTURES_DIR, name), dir, { recursive: true });
   if (name !== NO_GIT_FIXTURE) {
     git(dir, 'init', '--quiet', '--initial-branch=main');

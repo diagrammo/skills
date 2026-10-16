@@ -1,11 +1,12 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { coChange, editCounts, editWindow, unquote, type Commit } from '../skills/dgmo-codebase-report/scripts/lib/history.mjs';
 import { LIMITS, OTHER, OUTPUT_DIR, groupOf, measure } from '../skills/dgmo-codebase-report/scripts/measure.mjs';
 import { GIT_FIXTURES, NO_GIT_FIXTURE, git, materializeFixture, type FixtureName } from './helpers/fixture-repo.js';
+import { tempDir } from './helpers/tmp.js';
 
 const SCRIPT = resolve(import.meta.dirname, '..', 'skills', 'dgmo-codebase-report', 'scripts', 'measure.mjs');
 
@@ -21,7 +22,7 @@ function fixture(name: FixtureName): string {
 }
 
 function scratch(files: Record<string, string>): string {
-  const dir = mkdtempSync(join(tmpdir(), 'skills-measure-'));
+  const dir = tempDir('skills-measure-');
   made.push(dir);
   for (const [path, text] of Object.entries(files)) {
     mkdirSync(dirname(join(dir, path)), { recursive: true });
@@ -153,7 +154,7 @@ describe('git edge cases', () => {
       writeFileSync(join(full, 'a.ts'), `${i}\n`);
       git(full, 'commit', '--quiet', '-am', `edit ${i}`);
     }
-    const shallow = mkdtempSync(join(tmpdir(), 'skills-shallow-'));
+    const shallow = tempDir('skills-shallow-');
     made.push(shallow);
     git(tmpdir(), 'clone', '--quiet', '--depth', '1', `file://${full}`, shallow);
 
