@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dgmo": {
+      "command": "npx",
+      "args": ["-y", "@diagrammo/dgmo-mcp"]
+    }
+  }
+}
