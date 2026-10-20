@@ -83,12 +83,38 @@ describe('the skill folders', () => {
 // Plugin components load from the standard layout at the plugin root
 // (https://code.claude.com/docs/en/plugins/manifest-reference, fetched 2026-10-19):
 // `.mcp.json` for MCP servers, `commands/<file>.md` as `/<plugin>:<file>`.
+// The claude.ai directory blocks a plugin folder with no manifest, no license, or a name with
+// characters outside [a-z0-9-] (https://claude.com/docs/plugins/pre-submission-checklist, fetched 2026-10-20).
+describe('the plugin manifest', () => {
+  const manifest = JSON.parse(readFileSync(join(ROOT, '.claude-plugin', 'plugin.json'), 'utf8')) as Record<
+    string,
+    unknown
+  >;
+
+  it('names the plugin the marketplace lists, in lowercase kebab case', () => {
+    expect(manifest['name']).toMatch(/^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$/);
+    expect(readMarketplace().plugins?.map((plugin) => plugin.name)).toEqual([manifest['name']]);
+  });
+
+  it('sets the fields the directory listing shows', () => {
+    expect(manifest['version']).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(manifest['description']).toEqual(expect.any(String));
+    expect(manifest['license']).toBe('MIT');
+    expect((manifest['author'] as { name?: unknown } | undefined)?.name).toEqual(expect.any(String));
+  });
+});
+
 describe('the plugin components', () => {
-  it('starts the dgmo MCP server from npm with no prompt, so installing the plugin is the one step', () => {
+  // The claude.ai directory blocks an npx launcher not pinned to an exact version
+  // (https://claude.com/docs/plugins/pre-submission-checklist, fetched 2026-10-20).
+  it('starts the dgmo MCP server from npm, pinned to an exact version, with no prompt', () => {
     const config = JSON.parse(readFileSync(join(ROOT, '.mcp.json'), 'utf8')) as {
       mcpServers?: Record<string, { command?: unknown; args?: unknown }>;
     };
-    expect(config.mcpServers?.['dgmo']).toEqual({ command: 'npx', args: ['-y', '@diagrammo/dgmo-mcp'] });
+    expect(config.mcpServers?.['dgmo']).toEqual({
+      command: 'npx',
+      args: ['-y', expect.stringMatching(/^@diagrammo\/dgmo-mcp@\d+\.\d+\.\d+$/)],
+    });
   });
 
   it('has a /diagram-this-repo command that runs a skill this plugin carries', () => {

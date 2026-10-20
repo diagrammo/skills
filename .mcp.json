@@ -2,7 +2,7 @@
   "mcpServers": {
     "dgmo": {
       "command": "npx",
-      "args": ["-y", "@diagrammo/dgmo-mcp"]
+      "args": ["-y", "@diagrammo/dgmo-mcp@0.29.10"]
     }
   }
 }

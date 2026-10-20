@@ -1,0 +1,14 @@
+{
+  "name": "diagrammo",
+  "displayName": "Diagrammo",
+  "version": "0.1.0",
+  "description": "Diagrams of your codebase, written in DGMO: the dgmo MCP server to check, render and share them, the skills that write them, and /diagrammo:diagram-this-repo.",
+  "author": {
+    "name": "Diagrammo LLC",
+    "url": "https://diagrammo.app"
+  },
+  "homepage": "https://diagrammo.app",
+  "repository": "https://github.com/diagrammo/skills",
+  "license": "MIT",
+  "keywords": ["diagrams", "dgmo", "architecture", "documentation"]
+}
