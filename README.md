@@ -32,6 +32,7 @@ agent's skills directory.
 skills/<name>/SKILL.md          one folder per skill, agent-agnostic; scripts it bundles live beside it
 .claude-plugin/marketplace.json the Claude Code marketplace; its one plugin is this repo's root
 .claude-plugin/plugin.json      that plugin's manifest; raise `version` with every release
+.claude-plugin/icon.png        the directory listing icon, the app's 512px icon; the portal takes it once, on first save
 .mcp.json                       the plugin's MCP server: dgmo-mcp from npm
 commands/<name>.md              the plugin's slash commands, run as /diagrammo:<name>
 tests/                          vitest suite; tests/fixtures/repos/ holds small repos to run skills against
