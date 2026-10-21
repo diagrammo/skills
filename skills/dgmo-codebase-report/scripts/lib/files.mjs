@@ -99,6 +99,11 @@ const LANGUAGES = new Map([
   ['.dgmo', 'DGMO'],
 ]);
 
+/** @param {string} path  repo-relative, `/`-separated */
+export function isLockfile(path) {
+  return LOCKFILES.has(path.slice(path.lastIndexOf('/') + 1));
+}
+
 /** @param {string} path */
 export function languageOf(path) {
   return LANGUAGES.get(extname(path).toLowerCase()) ?? null;
@@ -125,7 +130,7 @@ export function listFiles(root, hasGit) {
   /** @type {FileInfo[]} */
   const files = [];
   for (const path of paths) {
-    if (LOCKFILES.has(path.slice(path.lastIndexOf('/') + 1))) continue;
+    if (isLockfile(path)) continue;
     const full = join(root, path);
     let stat;
     try {

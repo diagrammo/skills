@@ -193,6 +193,11 @@ describe('git edge cases', () => {
     expect(m.languages.slices.map((slice) => slice.language)).toEqual(['TypeScript']);
     expect((m.edits.files ?? []).map((file) => file.path)).toEqual(['src/a.ts']);
     expect(m.coChange.pairs).toEqual([]);
+    if (!('largestCommits' in m.history)) throw new Error('expected git history');
+    expect(m.history.largestCommits.map((commit) => [commit.subject, commit.files, commit.linesChanged])).toEqual([
+      ['bump', 1, 2],
+      ['Initial commit', 1, 1],
+    ]);
   });
 
   it('strips colour codes and control characters from commit subjects', () => {

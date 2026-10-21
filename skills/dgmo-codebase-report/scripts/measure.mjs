@@ -12,7 +12,7 @@
 import { mkdirSync, realpathSync, renameSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { listFiles } from './lib/files.mjs';
+import { isLockfile, listFiles } from './lib/files.mjs';
 import { git, hasHistory } from './lib/git.mjs';
 import { coChange, editCounts, editWindow, readCommits, readTags } from './lib/history.mjs';
 import { buildImportGraph } from './lib/imports.mjs';
@@ -212,13 +212,15 @@ function history(root, commits) {
   const limit = LIMITS.history;
   const allTags = readTags(root);
   const tags = allTags.slice(-limit.maxTags);
+  // A lockfile refresh is thousands of generated lines; it is not a large change.
   const largestCommits = commits
-    .map((commit) => ({
+    .map((commit) => ({ commit, files: commit.files.filter((file) => !isLockfile(file.path)) }))
+    .map(({ commit, files }) => ({
       sha: commit.sha,
       date: commit.date,
       subject: commit.subject,
-      files: commit.files.length,
-      linesChanged: commit.files.reduce((sum, file) => sum + file.added + file.deleted, 0),
+      files: files.length,
+      linesChanged: files.reduce((sum, file) => sum + file.added + file.deleted, 0),
     }))
     .sort((a, b) => b.linesChanged - a.linesChanged || (a.date < b.date ? 1 : -1))
     .slice(0, limit.largestCommits);
