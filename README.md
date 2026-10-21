@@ -33,7 +33,7 @@ agent's skills directory.
 - **Share links:** the share tool compresses the diagram's source into a link to `online.diagrammo.app`. Nothing is uploaded when the link is made. Whoever opens the link sends the diagram, in the URL, to that site, which draws it in their browser and does not store it. The [privacy policy](https://diagrammo.app/privacy) covers that site.
 - **Open in app:** if the Diagrammo desktop app is installed, the server can open a diagram in it.
 - **Skill scripts** read the repo you run them in and write their output inside it. They send nothing.
-- **Codebase report publishing:** only when you say yes at the end of a run. A Cloud space sends each diagram's source to `api.diagrammo.app` after you sign in; GitHub Pages pushes `report.html` to a `gh-pages` branch of your repo, where it is public.
+- **Codebase report publishing:** only when you say yes at the end of a run. A Cloud space sends each diagram's source to `api.diagrammo.app` after you sign in, and keeps the sign-in session, labelled with your machine's host name, in `~/.config/diagrammo/session.json`; GitHub Pages pushes `report.html` to a `gh-pages` branch of your repo, where it is public.
 - No personal data, credentials or telemetry.
 
 ## Layout

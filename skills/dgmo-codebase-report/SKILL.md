@@ -7,7 +7,8 @@ description: Codebase report — measure this repo, then write 10 to 15 DGMO dia
 
 Turn the repository into `docs/codebase-report/report.html`: a short summary, then 10 to 15
 diagrams, each with 2 to 4 sentences, rendered for light and dark. A developer new to the repo reads
-it top to bottom on their first day. A re-run overwrites the whole folder.
+it top to bottom on their first day. A re-run replaces the report: step 5 clears the old diagrams
+first.
 
 🔴 **Every number comes from `measurements.json`, and every box, participant or table names
 something you read in the code.** Never estimate a size, a count or a date, and never draw an
@@ -63,8 +64,9 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
    `https://diagrammo.app/llms/treemap.txt`. DGMO is not Mermaid — write from the reference, never
    from Mermaid habits. Done when you have read the reference for every type you will write.
 
-5. **Write each diagram** to `docs/codebase-report/<nn>-<slug>.dgmo`. The two-digit number sets the
-   order: `01-stack.dgmo`, `02-sizes.dgmo`, `03-languages.dgmo`.
+5. **Write each diagram** to `docs/codebase-report/<nn>-<slug>.dgmo`. On a re-run, first delete the
+   `.dgmo` files an earlier run left there. The two-digit number sets the order: `01-stack.dgmo`,
+   `02-sizes.dgmo`, `03-languages.dgmo`.
    - The first line is the type and a short title, as the type's reference shows.
    - Then a `//` comment naming the source: `// From: measurements.json sizes` or
      `// From: src/server.ts, src/routes/checkout.ts`.
@@ -137,7 +139,8 @@ The API is `https://api.diagrammo.app`; send JSON with `content-type: applicatio
    `{"title":"<its report title>","source":"<the .dgmo file's text>","chartType":"<its type>"}`,
    the same `authorization` header, and a new UUID `idempotency-key` per diagram.
 4. A 401 at any step: delete the session file, sign in again, and retry that step with the same
-   `idempotency-key`. Done when every diagram is in the space. Tell the user the space's name, and
+   `idempotency-key`. Any other error: stop, show the user the API's error message, and say which
+   diagrams are already in the space. Done when every diagram is in the space. Tell the user the space's name, and
    that it is in the spaces menu at `https://online.diagrammo.app`.
 
 ## Publish to the user's own GitHub Pages
@@ -151,10 +154,16 @@ Puts `report.html` on the user's GitHub Pages site as `index.html` on a `gh-page
 2. 🔴 **Never overwrite a site that exists.** If `git ls-remote --heads origin gh-pages` prints a
    line, or `gh api repos/<owner>/<repo>/pages` answers anything but 404, stop and tell the user:
    they already have a Pages site, and publishing over it is their call, not yours.
-3. Build the branch in a temporary worktree, so the user's working tree is not touched:
-   `git worktree add --detach <tmp>`, then in `<tmp>`: `git checkout --orphan gh-pages`,
-   `git rm -rfq .`, copy `report.html` in as `index.html`, add an empty `.nojekyll`, commit both,
-   and `git push origin gh-pages`. Remove the worktree after the push.
+3. Build the branch in a temporary worktree, so the user's working tree is not touched. 🔴 **Run
+   every command after the first with `git -C <tmp>`, never bare** — `checkout --orphan` and `rm`
+   in the user's own repo would switch their branch and delete their files.
+   - `git worktree add --detach <tmp>`
+   - `git -C <tmp> checkout --orphan gh-pages`, then `git -C <tmp> rm -rfq .`
+   - Copy `report.html` to `<tmp>/index.html`, and create an empty `<tmp>/.nojekyll`.
+   - `git -C <tmp> add index.html .nojekyll`, `git -C <tmp> commit -m "Codebase report"`, and
+     `git -C <tmp> push origin gh-pages`.
+   - Remove the worktree with `git worktree remove <tmp>`. If the push failed, also delete the local
+     branch this run made, `git branch -D gh-pages`, before you try again.
 4. Turn Pages on: `echo '{"source":{"branch":"gh-pages","path":"/"}}' | gh api -X POST
    repos/<owner>/<repo>/pages --input -`. Its reply's `html_url` is the address. Done when you have
    told the user that address; the first build can take a few minutes to appear.
