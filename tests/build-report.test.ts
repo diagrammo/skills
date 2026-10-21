@@ -196,6 +196,14 @@ describe('the manifest', () => {
     expect(() => buildReport(repo, { dgmo })).toThrow(/"diagrams\[0\].text" must be a non-empty string/);
   });
 
+  it('must give every diagram its own title', () => {
+    const { repo } = reportRepo(
+      { 'a.dgmo': 'pie\n', 'b.dgmo': 'pie\n' },
+      { diagrams: [{ file: 'a.dgmo', title: 'Checkout', text: 'A.' }, { file: 'b.dgmo', title: 'checkout ', text: 'B.' }] },
+    );
+    expect(() => buildReport(repo, { dgmo })).toThrow(/the title "checkout" is used twice/);
+  });
+
   it('must exist', () => {
     const repo = tempDir('skills-no-report-');
     expect(() => buildReport(repo, { dgmo })).toThrow(/docs\/codebase-report\/report.json is missing/);

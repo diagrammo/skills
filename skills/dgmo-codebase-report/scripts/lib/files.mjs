@@ -24,6 +24,37 @@ const SKIP_DIRS = new Set([
   '.cache',
 ]);
 
+/**
+ * Dependency lockfiles, by file name. Never measured: they are generated, and in
+ * a real repo they top the sizes, languages, edits and co-change charts (dgmo-mcp's
+ * pnpm-lock.yaml was its second language and half its most-changed pair) while
+ * telling a newcomer nothing.
+ */
+const LOCKFILES = new Set([
+  'pnpm-lock.yaml',
+  'package-lock.json',
+  'npm-shrinkwrap.json',
+  'yarn.lock',
+  'bun.lock',
+  'bun.lockb',
+  'deno.lock',
+  'Cargo.lock',
+  'go.sum',
+  'poetry.lock',
+  'Pipfile.lock',
+  'uv.lock',
+  'pdm.lock',
+  'Gemfile.lock',
+  'composer.lock',
+  'mix.lock',
+  'Podfile.lock',
+  'pubspec.lock',
+  'Package.resolved',
+  'packages.lock.json',
+  'gradle.lockfile',
+  'flake.lock',
+]);
+
 /** Extension → language. Files whose extension is not here are counted as unclassified. */
 const LANGUAGES = new Map([
   ['.ts', 'TypeScript'],
@@ -83,7 +114,7 @@ export function languageOf(path) {
 
 /**
  * Every file the report measures, sorted by path. With git, the tracked files;
- * without it, a walk that skips {@link SKIP_DIRS}.
+ * without it, a walk that skips {@link SKIP_DIRS}. Lockfiles ({@link LOCKFILES}) never count.
  * @param {string} root
  * @param {boolean} hasGit
  * @returns {FileInfo[]}
@@ -94,6 +125,7 @@ export function listFiles(root, hasGit) {
   /** @type {FileInfo[]} */
   const files = [];
   for (const path of paths) {
+    if (LOCKFILES.has(path.slice(path.lastIndexOf('/') + 1))) continue;
     const full = join(root, path);
     let stat;
     try {

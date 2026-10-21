@@ -26,8 +26,9 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
    `docs/codebase-report/measurements.json` and prints its path. Each section names the chart it
    feeds (`chart`), and says whether it was rolled up (`rolledUp`, `rollUpNote`). In a repo with no
    git history or a shallow clone, `history`, `edits` and `coChange` carry `available: false` and a
-   `reason` — skip those charts and say why in the summary. Done when the file exists and you know
-   which sections are available.
+   `reason` — skip those charts and say why in the summary. Dependency lockfiles (`pnpm-lock.yaml`,
+   `Cargo.lock`, `go.sum`, …) are never measured. Done when the file exists and you know which
+   sections are available.
 
 2. **Read the repo.** Read the README, the manifests (`package.json`, `pyproject.toml`, `go.mod`,
    `Cargo.toml`, …), the entry points, the routes or handlers, the config that names outside
@@ -92,6 +93,7 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
 
    - List every `.dgmo` file in the folder once, in reading order. The build refuses a file that is
      missing from the list, and a listed file that does not exist.
+   - Give each diagram its own title. The build refuses a title used twice, as a Cloud space would.
    - Each `text` is plain text, 2 to 4 sentences: what the chart shows, then what a newcomer should
      take from it. When the section was rolled up, say so in the chart's own words — its
      `rollUpNote`.
@@ -122,8 +124,9 @@ The API is `https://api.diagrammo.app`; send JSON with `content-type: applicatio
 
 1. **Sign in.** Reuse `~/.config/diagrammo/session.json` if it exists and its `expiresAt` (epoch
    seconds) is in the future. Otherwise:
-   - `POST /auth/desktop/start` with `{"client":"cli","label":"Codebase report on <hostname>"}`. It
-     answers `deviceCode`, `userCode` and `expiresIn` (seconds).
+   - `POST /auth/desktop/start` with `{"client":"cli","label":"Codebase report on <hostname>"}`. Cut
+     the label to 80 characters; a longer one is refused. It answers `deviceCode`, `userCode` and
+     `expiresIn` (seconds).
    - Tell the user: open `https://online.diagrammo.app/connect?client=cli` and type `<userCode>`.
      🔴 Never put the code in the URL. Never show `deviceCode`.
    - `POST /auth/desktop/poll` with `{"deviceCode":"<deviceCode>"}` every 3 seconds. `status:
@@ -166,4 +169,8 @@ Puts `report.html` on the user's GitHub Pages site as `index.html` on a `gh-page
      branch this run made, `git branch -D gh-pages`, before you try again.
 4. Turn Pages on: `echo '{"source":{"branch":"gh-pages","path":"/"}}' | gh api -X POST
    repos/<owner>/<repo>/pages --input -`. Its reply's `html_url` is the address. Done when you have
-   told the user that address; the first build can take a few minutes to appear.
+   told the user that address; the first build can take a few minutes to appear. If the call fails
+   (a private repo on a plan without Pages, for one), show its error and say that the `gh-pages`
+   branch is pushed but no site is on. Whether to turn Pages on in the repo's settings, or delete
+   the branch with `git push origin --delete gh-pages`, is their call. Until they do, a re-run stops
+   at step 2.

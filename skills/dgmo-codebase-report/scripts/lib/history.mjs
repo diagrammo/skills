@@ -44,9 +44,19 @@ export function readCommits(cwd) {
       // Binary files report `-` for both counts.
       files.push({ path: unquote(path.join('\t')), added: Number(added) || 0, deleted: Number(deleted) || 0 });
     }
-    commits.push({ sha, date, subject: subject.join('\t'), files });
+    commits.push({ sha, date, subject: plain(subject.join('\t')), files });
   }
   return commits;
+}
+
+/**
+ * A subject as plain text. A message written through a colouring pager (`bat`
+ * standing in for `cat`) carries its ANSI colour codes into the commit: 43 of
+ * dgmo-mcp's 344 subjects did, and they reached the history chart's labels.
+ * @param {string} subject
+ */
+function plain(subject) {
+  return subject.replace(/\x1b\[[0-?]*[ -/]*[@-~]/g, '').replace(/[\x00-\x1f\x7f]/g, ' ').trim();
 }
 
 /**

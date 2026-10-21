@@ -181,6 +181,30 @@ describe('git edge cases', () => {
     expect(m.history).toMatchObject({ available: false });
   });
 
+  it('never measures a dependency lockfile, in any chart', () => {
+    const dir = scratchRepo({ 'src/a.ts': 'a\n', 'pnpm-lock.yaml': 'lock: 1\n'.repeat(50), 'web/yarn.lock': 'x\n', 'Cargo.lock': 'y\n' });
+    writeFileSync(join(dir, 'src/a.ts'), 'a2\n');
+    writeFileSync(join(dir, 'pnpm-lock.yaml'), 'lock: 2\n');
+    git(dir, 'commit', '--quiet', '-am', 'bump');
+
+    const m = measure(dir);
+    if (!('files' in m.edits) || !('pairs' in m.coChange)) throw new Error('expected git history');
+    expect(m.sizes.entries.map((entry) => entry.path)).toEqual(['src/a.ts']);
+    expect(m.languages.slices.map((slice) => slice.language)).toEqual(['TypeScript']);
+    expect((m.edits.files ?? []).map((file) => file.path)).toEqual(['src/a.ts']);
+    expect(m.coChange.pairs).toEqual([]);
+  });
+
+  it('strips colour codes and control characters from commit subjects', () => {
+    const dir = scratchRepo({ 'a.ts': 'x\n' });
+    writeFileSync(join(dir, 'a.ts'), 'x'.repeat(500));
+    git(dir, 'commit', '--quiet', '-am', '\x1b[38;2;227;234;242mAdd the server\x1b[0m');
+
+    const m = measure(dir);
+    if (!('largestCommits' in m.history)) throw new Error('expected git history');
+    expect(m.history.largestCommits.map((commit) => commit.subject)).toEqual(['Add the server', 'Initial commit']);
+  });
+
   it('decodes the paths git still quotes', () => {
     expect(unquote('"tab\\there.ts"')).toBe('tab\there.ts');
     expect(unquote('"caf\\303\\251 \\"q\\".ts"')).toBe('café "q".ts');

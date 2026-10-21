@@ -90,4 +90,9 @@ describe('dgmo-codebase-report SKILL.md', () => {
     expect(SKILL).toMatch(/Never overwrite a site that exists/);
     expect(SKILL).toMatch(/Never put the code in the URL/);
   });
+
+  it('keeps the sign-in label inside the 80 characters the API takes, and says what a failed Pages switch leaves', () => {
+    expect(SKILL).toMatch(/Cut\s+the label to 80 characters/);
+    expect(SKILL).toMatch(/`gh-pages`\s+branch is pushed but no site is on/);
+  });
 });

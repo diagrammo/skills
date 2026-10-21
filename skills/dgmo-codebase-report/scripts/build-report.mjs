@@ -97,9 +97,15 @@ export function readManifest(dir) {
   });
 
   const listed = new Set();
-  for (const { file } of diagrams) {
+  // Titles name the diagrams in a Cloud space too, and a second one with the
+  // same title is refused there (409) after the first ones are already in.
+  const titles = new Set();
+  for (const { file, title } of diagrams) {
     if (listed.has(file)) throw new ReportError(`${MANIFEST}: "${file}" is listed twice.`);
     listed.add(file);
+    const key = title.trim().toLowerCase();
+    if (titles.has(key)) throw new ReportError(`${MANIFEST}: the title "${title}" is used twice — give each diagram its own.`);
+    titles.add(key);
   }
   const unlisted = readdirSync(dir).filter((f) => f.endsWith('.dgmo') && !listed.has(f));
   if (unlisted.length > 0) {
