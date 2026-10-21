@@ -438,7 +438,8 @@ describe('roll-ups past each chart limit', () => {
     const files = Object.fromEntries(exts.map((ext, i) => [`f.${ext}`, 'x\n'.repeat(exts.length - i)]));
     const m = measure(scratch(files));
     expect(m.languages.slices).toHaveLength(LIMITS.languages.maxSlices);
-    expect(m.languages.slices.at(-1)).toMatchObject({ language: 'Other', files: 3, lines: 3 + 2 + 1 });
+    const joined = exts.length - (LIMITS.languages.maxSlices - 1); // the smallest, of 1..joined lines each
+    expect(m.languages.slices.at(-1)).toMatchObject({ language: 'Other', files: joined, lines: (joined * (joined + 1)) / 2 });
     expect(m.languages.rolledUp).toBe(true);
   });
 

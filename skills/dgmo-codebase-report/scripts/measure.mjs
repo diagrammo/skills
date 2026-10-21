@@ -26,22 +26,24 @@ export const OTHER = '(other)';
 export const OUTPUT_DIR = 'docs/codebase-report';
 
 /**
- * Every chart's "too much" threshold and what happens past it. First guesses,
- * set generously — tune them against real repos, not in defence of these.
+ * Every chart's "too much" threshold and what happens past it. Tune them against
+ * real repos, not in defence of these. The first run (dgmo-mcp, 2026-10-20) cut
+ * sizes, languages and history to what one diagram holds: SKILL.md's "about 40
+ * elements", the pie reference's 6 slices and the event-line reference's 25 events.
  */
 export const LIMITS = {
   sizes: {
-    maxFiles: 150,
+    maxFiles: 40,
     maxGroups: 40,
     rule: 'Past maxFiles files, sizes roll up to the top two directory levels, except that a directory holding more than maxFiles files of its own shows them as files; past maxGroups groups, the smallest join "(other)".',
   },
   languages: {
-    maxSlices: 8,
+    maxSlices: 6,
     rule: 'Past maxSlices languages, the smallest join "Other".',
   },
   history: {
-    maxTags: 30,
-    largestCommits: 10,
+    maxTags: 15,
+    largestCommits: 5,
     rule: 'History is the tags plus the largestCommits biggest commits by lines changed; past maxTags tags, only the newest maxTags are kept.',
   },
   edits: {

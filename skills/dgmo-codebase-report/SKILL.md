@@ -42,8 +42,8 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
    | Chart | Type | Data | When |
    |---|---|---|---|
    | The stack | `boxes-and-lines` | What you read in step 2 | Always |
-   | Size by directory | `treemap` | `sizes.entries` | Always |
-   | Languages | `pie` | `languages.slices` | Always |
+   | Size by directory | `treemap` | `sizes.entries`, each box sized by its `lines` | Always |
+   | Languages | `pie` | `languages.slices`, each slice sized by its `lines` | Always |
    | History | `event-line` | `history.tags` and `history.largestCommits` | When `history.available` |
    | Primary use cases — 2 or 3 | `sequence` | Each traced call by call through the code | Always, for an app or a service; for a library, its main entry calls |
    | Data model | `er` | The schema, migrations or ORM models | A schema is present |
@@ -52,7 +52,7 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
    | A real lifecycle | `state` | A status field with set transitions, such as an order | The code has one |
    | A user's journey | `journey-map` | The product's main flow, from the routes and the UI | An app with a user-facing flow |
    | Who does what | `swimlane` | A process that crosses several parts or roles | The code has one |
-   | Hot files | `scatter` with a size column (a bubble chart) | `edits.files`: lines × edits, bubble size from bytes | When `edits.available` |
+   | Hot files | `scatter` with a size column (a bubble chart) | `edits.files`: lines × edits, bubble size from bytes, one colour per top directory | When `edits.available` |
    | Module dependencies | `arc` | `imports.nodes` and `imports.edges` | The import graph has edges |
    | Files that change together | `arc` | `coChange.pairs` | When `coChange.available` and it has pairs |
 
@@ -71,8 +71,9 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
    - The first line is the type and a short title, as the type's reference shows.
    - Then a `//` comment naming the source: `// From: measurements.json sizes` or
      `// From: src/server.ts, src/routes/checkout.ts`.
-   - A measured chart copies its values from its section exactly. When the section is rolled up,
-     draw the rolled-up data as it is, `(other)` included.
+   - A measured chart copies its values from its section exactly. Write it with a throwaway script
+     outside the repo that reads `measurements.json`, never by typing the numbers. When the section
+     is rolled up, draw the rolled-up data as it is, `(other)` included.
    - Use the names the code uses, shortened to a few words. Keep each diagram under about 40
      elements; leave out the minor parts rather than crowding it.
 
@@ -107,6 +108,9 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
    path. If a diagram does not render, it writes nothing and prints `Error: <file> did not render
    (<theme>):` and the CLI's error. Fix that diagram, and any other with the same mistake, then run
    it again. Fix the diagram, never the script. Done when it exits 0 and prints the path.
+
+   Exit 0 means every diagram rendered, not that each says what you meant: a line in the wrong form
+   can render with no error and draw nothing. Check each diagram's lines against its reference.
 
    Each link carries the diagram's full source in the URL; the script prints a notice saying so.
    Pass it on to the user. If the user asked for no links, run it with `--no-links`. A diagram too
