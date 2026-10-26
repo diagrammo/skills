@@ -107,14 +107,25 @@ describe('the plugin manifest', () => {
 describe('the plugin components', () => {
   // The claude.ai directory blocks an npx launcher not pinned to an exact version
   // (https://claude.com/docs/plugins/pre-submission-checklist, fetched 2026-10-20).
+  // A credential the server reads from the user's machine is held for review;
+  // the directory wants it asked for through userConfig with sensitive: true.
   it('starts the dgmo MCP server from npm, pinned to an exact version, with no prompt', () => {
     const config = JSON.parse(readFileSync(join(ROOT, '.mcp.json'), 'utf8')) as {
-      mcpServers?: Record<string, { command?: unknown; args?: unknown }>;
+      mcpServers?: Record<string, { command?: unknown; args?: unknown; env?: unknown }>;
     };
     expect(config.mcpServers?.['dgmo']).toEqual({
       command: 'npx',
       args: ['-y', expect.stringMatching(/^@diagrammo\/dgmo-mcp@\d+\.\d+\.\d+$/)],
+      env: { DGMO_API_KEY: '${user_config.dgmo_api_key}' },
     });
+  });
+
+  it('asks for the space API key as an optional, sensitive setting', () => {
+    const manifest = JSON.parse(readFileSync(join(ROOT, '.claude-plugin', 'plugin.json'), 'utf8')) as {
+      userConfig?: Record<string, Record<string, unknown>>;
+    };
+    expect(manifest.userConfig?.['dgmo_api_key']).toMatchObject({ type: 'string', sensitive: true });
+    expect(manifest.userConfig?.['dgmo_api_key']?.['required']).not.toBe(true);
   });
 
   it('has a /diagram-this-repo command that runs a skill this plugin carries', () => {

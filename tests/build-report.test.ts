@@ -27,6 +27,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
 });
 
 interface Entry {
@@ -128,6 +129,14 @@ describe('buildReport', () => {
   it('stops on a share failure that is not the size limit', () => {
     const { repo } = reportRepo({ 'a.dgmo': 'pie\n// SHARE-CRASH\n' });
     expect(() => buildReport(repo, { dgmo, now: NOW })).toThrow(/dgmo share failed for a.dgmo:\nError: something else went wrong/);
+  });
+
+  it('keeps the space API key from the dgmo it runs, share included', () => {
+    vi.stubEnv('DGMO_API_KEY', 'dgmo_test_key');
+    const { repo } = reportRepo({ 'a.dgmo': 'pie\n' });
+    buildReport(repo, { dgmo, now: NOW });
+    expect(callLog().some((c) => c.startsWith('share'))).toBe(true);
+    expect(callLog().filter((c) => c.includes('[DGMO_API_KEY]'))).toEqual([]);
   });
 
   it('with links off, never calls share and shows neither a link nor the source', () => {

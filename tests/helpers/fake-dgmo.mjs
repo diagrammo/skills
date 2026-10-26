@@ -6,7 +6,8 @@
 //   node fake-dgmo.mjs <call-log> <file> -o <out.svg> --theme <light|dark> [--json]
 //   node fake-dgmo.mjs <call-log> share <file> --no-copy --json
 //
-// Each call is appended to <call-log>. A source containing RENDER-ERROR has
+// Each call is appended to <call-log>, marked `[DGMO_API_KEY]` when that
+// variable reached the process. A source containing RENDER-ERROR has
 // errors; one containing TOO-LARGE is refused by share, as the real CLI
 // refuses a diagram past its URL limit.
 import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
@@ -14,7 +15,7 @@ import { basename } from 'node:path';
 
 const [log, ...args] = process.argv.slice(2);
 if (!log) process.exit(2);
-appendFileSync(log, `${args.join(' ')}\n`);
+appendFileSync(log, `${args.join(' ')}${process.env['DGMO_API_KEY'] ? ' [DGMO_API_KEY]' : ''}\n`);
 
 if (args[0] === 'share') {
   const file = args[1] ?? '';

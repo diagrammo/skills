@@ -29,10 +29,11 @@ agent's skills directory.
 ## What it runs and sends
 
 - **Install:** `npx` downloads `@diagrammo/dgmo-mcp` at the version pinned in `.mcp.json` from the npm registry.
-- **The MCP server** runs on your machine and makes no network requests. It checks and renders diagrams locally.
+- **The MCP server** runs on your machine and checks and renders diagrams locally.
+- **Cloud space tools:** only if you set the plugin's optional **Diagrammo space API key** setting, which Claude Code keeps in your system's secure credential store. The server then sends that key, and the diagrams you ask it to read or write, to `api.diagrammo.app`. With the setting empty, the server makes no network requests.
 - **Share links:** the share tool compresses the diagram's source into a link to `online.diagrammo.app`. Nothing is uploaded when the link is made. Whoever opens the link sends the diagram, in the URL, to that site, which draws it in their browser and does not store it. The [privacy policy](https://diagrammo.app/privacy) covers that site.
 - **Open in app:** if the Diagrammo desktop app is installed, the server can open a diagram in it.
-- **Skill scripts** read the repo you run them in and write their output inside it. They send nothing.
+- **Skill scripts** read the repo you run them in and write their output inside it. They send nothing, and they keep the space API key out of the `dgmo` command they run.
 - **Codebase report publishing:** only when you say yes at the end of a run. A Cloud space sends each diagram's source to `api.diagrammo.app` after you sign in, and keeps the sign-in session, labelled with your machine's host name, in `~/.config/diagrammo/session.json`; GitHub Pages pushes `report.html` to a `gh-pages` branch of your repo, where it is public.
 - No personal data, credentials or telemetry.
 

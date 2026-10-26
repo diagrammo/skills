@@ -1,7 +1,7 @@
 {
   "name": "diagrammo",
   "displayName": "Diagrammo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Diagrams of your codebase, written in DGMO: the dgmo MCP server to check, render and share them, the skills that write them, and /diagrammo:diagram-this-repo.",
   "author": {
     "name": "Diagrammo LLC",
@@ -14,5 +14,13 @@
   "privacyPolicyUrl": "https://diagrammo.app/privacy",
   "termsOfServiceUrl": "https://diagrammo.app/terms",
   "license": "MIT",
-  "keywords": ["diagrams", "dgmo", "architecture", "documentation"]
+  "keywords": ["diagrams", "dgmo", "architecture", "documentation"],
+  "userConfig": {
+    "dgmo_api_key": {
+      "type": "string",
+      "title": "Diagrammo space API key",
+      "description": "Optional. Lets the dgmo MCP server read and write diagrams in one Diagrammo Cloud space. Mint it on the Diagrammo account page. Leave it empty to work only on files.",
+      "sensitive": true
+    }
+  }
 }

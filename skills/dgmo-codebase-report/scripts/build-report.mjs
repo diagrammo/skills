@@ -24,6 +24,10 @@ import { tmpdir } from 'node:os';
 import { basename, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+// Render and share need no credential, so the space API key is not passed on:
+// share sends a diagram to Diagrammo, and nothing here should travel with it.
+const DGMO_ENV = Object.fromEntries(Object.entries(process.env).filter(([key]) => key !== 'DGMO_API_KEY'));
+
 /** The report's own directory, relative to the repo. */
 export const OUTPUT_DIR = 'docs/codebase-report';
 
@@ -201,7 +205,7 @@ function buildDiagram(dgmo, file, scratch, links) {
 function runDgmo(dgmo, args) {
   const [cmd, ...pre] = dgmo;
   if (!cmd) throw new ReportError('No dgmo command given.');
-  const run = spawnSync(cmd, [...pre, ...args], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  const run = spawnSync(cmd, [...pre, ...args], { encoding: 'utf8', env: DGMO_ENV, maxBuffer: 64 * 1024 * 1024 });
   if (run.error) throw new ReportError(`Could not run ${dgmo.join(' ')}: ${run.error.message}`);
   return { status: run.status, stdout: run.stdout ?? '', stderr: run.stderr ?? '' };
 }
