@@ -1,0 +1,50 @@
+treemap Lines of code by directory
+// From: measurements.json sizes
+fixture 308671
+test
+  plausible_web 83604
+  plausible 46812
+  workers 5340
+  support 3457
+  e2e 363
+priv
+  ua_inspector 67720
+  ref_inspector 4211
+  (files in this directory) 3667
+  repo 3178
+  data_migrations 645
+  json-schemas 533
+  ingest_repo 366
+assets
+  js 34167
+  data 1006
+  css 851
+lib
+  plausible_web 33971
+  plausible 32896
+  workers 2176
+  mix 996
+  plausible/exports.ex 715
+  (files in this directory) 687
+  plausible/sites.ex 558
+  plausible/teams.ex 516
+  plausible/application.ex 435
+  plausible/oauth.ex 421
+  plausible/team_deletion_schedules.ex 388
+  plausible/goal.ex 330
+tracker
+  test 15190
+  compiler 11916
+  src 985
+  (files in this directory) 580
+  installation_support 575
+  npm_package 378
+extra
+  lib 14832
+e2e
+  tests 9402
+(repo root files) 2650
+config 1593
+.github
+  workflows 1146
+(other) 11956

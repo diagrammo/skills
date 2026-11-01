@@ -1,0 +1,44 @@
+sequence Handling one HTTP request
+// From: fastapi/applications.py:1032-1083,1175-1205, fastapi/middleware/asyncexitstack.py:15, fastapi/routing.py:129-166,1304-1332,397-526,745-798, fastapi/dependencies/utils.py:643
+ASGI server -scope, receive, send-> FastAPI
+note right of FastAPI
+  FastAPI.__call__ at applications.py:1175. Lifespan scopes and disabled telemetry take other paths (1178-1194).
+FastAPI -build_middleware_stack on first call-> FastAPI
+note right of FastAPI
+  applications.py:1196-1197. Order: ServerErrorMiddleware, ExceptionTelemetryMiddleware, user middleware, ExceptionMiddleware, AsyncExitStackMiddleware (applications.py:1045-1076).
+FastAPI -ASGI call through the stack-> AsyncExitStackMiddleware
+AsyncExitStackMiddleware -stores scope fastapi_middleware_astack-> APIRouter
+note right of AsyncExitStackMiddleware
+  middleware/asyncexitstack.py:15-18. It closes uploaded files after the request.
+APIRouter -matches scope, then handle-> APIRoute
+note right of APIRoute
+  APIRoute.matches routing.py:1304; handle routing.py:1314.
+APIRoute -app(scope, receive, send)-> request_response
+note right of request_response
+  routing.py:129-166. Opens two AsyncExitStacks (request and function) around the call.
+request_response -await f(request)-> request handler
+note right of request handler
+  The coroutine built by get_request_handler (routing.py:397, inner app at 428).
+request handler -read body-> request handler
+note right of request handler
+  Form, bytes or JSON. See the body parsing flowchart (routing.py:453-476).
+request handler -solve_dependencies-> solve_dependencies
+note right of solve_dependencies
+  dependencies/utils.py:643, called at routing.py:511. Returns values and errors.
+if errors are empty
+  request handler -run_endpoint_function-> Path operation function
+  note right of Path operation function
+    routing.py:363. Async functions are awaited; sync ones go to run_in_threadpool.
+  Path operation function -returns a value-> request handler
+  request handler -serialize_response-> ModelField
+  note right of ModelField
+    routing.py:320 calls field.validate (_compat/v2.py:173), then serialize_json (_compat/v2.py:215).
+  ModelField -JSON bytes-> request handler
+  request handler -build Response-> request_response
+else
+  request handler -raise RequestValidationError-> ExceptionMiddleware
+  note right of ExceptionMiddleware
+    routing.py:791-798. Handled by request_validation_exception_handler, status 422 (exception_handlers.py:20-24).
+request_response -await response(scope, receive, send)-> ASGI server
+note right of ASGI server
+  routing.py:153.

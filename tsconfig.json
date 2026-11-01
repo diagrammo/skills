@@ -24,7 +24,7 @@
     "checkJs": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["tests/**/*", "skills/*/scripts/**/*.mjs"],
+  "include": ["tests/**/*", "skills/*/scripts/**/*.mjs", "scripts/**/*.mjs"],
   // The fixture repos are INPUT for the measuring scripts, written in four
   // languages; they are not part of this project's own build.
   "exclude": ["tests/fixtures"]

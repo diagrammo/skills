@@ -1,0 +1,31 @@
+sequence Registering a path operation
+// From: fastapi/applications.py:2035, fastapi/routing.py:3044-3076, 1246-1276, 908-924, 1014-1175
+Developer -@app.get on a function-> FastAPI
+note right of FastAPI
+  FastAPI.get returns self.router.get(...) (applications.py:2035).
+FastAPI -router.get-> APIRouter
+APIRouter -api_route returns a decorator-> APIRouter
+APIRouter -decorator calls add_api_route-> APIRouter
+note right of APIRouter
+  decorator at routing.py:3108 calls add_api_route at 3109.
+  Prefix, tags, dependencies and callbacks are merged first (routing.py:3030-3043).
+APIRouter -route_class(prefix + path, endpoint, ...)-> APIRoute
+APIRoute -_populate_api_route_state-> APIRoute
+note right of APIRoute
+  Called from APIRoute.__init__ at routing.py:1246.
+APIRoute -_build_dependant_with_parameterless_dependencies-> Dependant
+Dependant -get_dependant reads the endpoint signature-> Dependant
+note right of Dependant
+  get_dependant: dependencies/utils.py:300.
+  Parameterless dependencies are inserted at routing.py:915-919.
+APIRoute -_get_body_field for body params-> Dependant
+APIRoute -create_model_field for the return type-> ModelField
+note right of ModelField
+  response_field built at routing.py:1161; uses ModelField (_compat/v2.py:114).
+APIRoute -request_response(get_route_handler())-> APIRoute
+note right of APIRoute
+  routing.py:1276. get_route_handler returns get_request_handler(...) (routing.py:1285).
+APIRoute -returns route-> APIRouter
+APIRouter -routes.append(route) then _mark_routes_changed-> APIRouter
+note right of APIRouter
+  routing.py:3075-3076. The version counter lets app.openapi() notice new routes (applications.py:1099).

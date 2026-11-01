@@ -1,0 +1,46 @@
+event-line Largest commits and newest releases
+// From: measurements.json history
+tag Kind as k
+  Release blue
+  Large commit orange
+
+2021-11-23 City level location data  k: Large commit
+  Changed 224,985 lines across 36 files (commit 05bf43c).
+2021-12-13 [Draft] Improve location translations  k: Large commit
+  Changed 224,939 lines across 14 files (commit 1dba113).
+2023-10-24 Upgrade Erlang/Elixir stack  k: Large commit
+  Changed 843,728 lines across 49 files (commit 117eef0).
+2024-04-04 Populate new columns in imports and exports  k: Large commit
+  Changed 331,944 lines across 21 files (commit e6d83e9).
+2024-07-05 Remove Universal Analytics import logic  k: Large commit
+  Changed 865,919 lines across 33 files (commit 35596e8).
+2025-04-08 v3.0.0-rc.0  k: Release
+  Release commit de1bde4.
+2025-04-08 v3.0.0-rc.1  k: Release
+  Release commit 54c1737.
+2025-04-08 v3.0.0-rc.2  k: Release
+  Release commit d00298f.
+2025-04-08 v3.0.0-rc.3  k: Release
+  Release commit 80cbcc4.
+2025-04-09 v3.0.0-rc.4  k: Release
+  Release commit 743e0c1.
+2025-04-10 v3.0.0-rc.5  k: Release
+  Release commit c524748.
+2025-04-10 v3.0.0-rc.6  k: Release
+  Release commit cca6e0a.
+2025-04-11 v3.0.0  k: Release
+  Release commit 96ebd01.
+2025-04-11 v3.0.1  k: Release
+  Release commit cdf27e6.
+2025-11-03 v3.1.0-rc.0  k: Release
+  Release commit 64aa243.
+2025-11-03 v3.1.0-rc.1  k: Release
+  Release commit a44ce24.
+2025-11-13 v3.1.0  k: Release
+  Release commit b624f39.
+2025-12-23 v3.2.0-rc.0  k: Release
+  Release commit c11d47a.
+2026-01-16 v3.2.0  k: Release
+  Release commit 5a7c3ca.
+2026-05-15 v3.2.1  k: Release
+  Release commit e4f5a87.

@@ -1,0 +1,47 @@
+boxes-and-lines ripgrep workspace crates
+// From: Cargo.toml:29-32,38-49,55-64; the [dependencies] table of each crates/*/Cargo.toml; crates/grep/src/lib.rs:15-21
+tag Kind as k
+  Binary red
+  Search library blue
+  Walking library green
+
+[Binary]
+  rg k: Binary
+[Search stack]
+  grep k: Search library
+  grep-cli k: Search library
+  grep-matcher k: Search library
+  grep-regex k: Search library
+  grep-pcre2 k: Search library
+  grep-searcher k: Search library
+  grep-printer k: Search library
+[Walking]
+  ignore k: Walking library
+  globset k: Walking library
+
+rg -> grep
+rg -> ignore
+grep -> grep-cli
+grep -> grep-matcher
+grep -> grep-regex
+grep -> grep-searcher
+grep -> grep-printer
+grep -optional-> grep-pcre2
+grep-regex -> grep-matcher
+grep-pcre2 -> grep-matcher
+grep-searcher -> grep-matcher
+grep-printer -> grep-matcher
+grep-printer -> grep-searcher
+grep-cli -> globset
+ignore -> globset
+
+note "rg" crates/core/main.rs:43; Cargo.toml:29-32
+note "grep" facade re-exporting six crates, crates/grep/src/lib.rs:15-21
+note "grep-cli" shared CLI helpers (decompression, escaping, tty checks), crates/cli/src/lib.rs
+note "grep-matcher" the Matcher trait, crates/matcher/src/lib.rs:546
+note "grep-regex" Rust regex engine, crates/regex/src/matcher.rs:367
+note "grep-pcre2" optional engine, crates/grep/Cargo.toml:19
+note "grep-searcher" line-oriented search, crates/searcher/src/searcher/mod.rs:597
+note "grep-printer" output formats, crates/printer/src/standard.rs:480
+note "ignore" gitignore-aware walker, crates/ignore/src/walk.rs:488
+note "globset" glob sets, crates/globset/src/lib.rs

@@ -1,0 +1,34 @@
+arc Files that change together
+// From: measurements.json coChange
+order appearance
+
+site_controller.ex -> site_controller_test.exs 84
+api/stats_controller.ex -> controllers/stats_controller.ex 65
+CHANGELOG.md -> api/stats_controller.ex 64
+site_controller.ex -> router.ex 63
+controllers/stats_controller.ex -> stats_controller_test.exs 62
+external_controller.ex -> external_controller_test.exs 59
+runtime.exs -> mix.exs 58
+query.ex -> api/stats_controller.ex 58
+billing.ex -> billing_test.exs 55
+auth_controller.ex -> auth_controller_test.exs 55
+CHANGELOG.md -> router.ex 51
+router.ex -> site_controller_test.exs 50
+api/stats_controller.ex -> main_graph_test.exs 44
+clickhouse.ex -> api/stats_controller.ex 41
+api/stats_controller.ex -> router.ex 41
+api/stats_controller.ex -> pages_test.exs 41
+auth_controller.ex -> site_controller.ex 41
+application.ex -> mix.exs 40
+sites.ex -> site_controller.ex 40
+CHANGELOG.md -> runtime.exs 38
+runtime.exs -> application.ex 38
+sites.ex -> site_controller_test.exs 38
+controllers/stats_controller.ex -> router.ex 38
+base.ex -> query.ex 37
+auth_controller.ex -> router.ex 36
+CHANGELOG.md -> controllers/stats_controller.ex 35
+external_stats_controller.ex -> api/stats_controller.ex 35
+api/stats_controller.ex -> top_stats_test.exs 34
+base.ex -> api/stats_controller.ex 33
+browsers_test.exs -> operating_systems_test.exs 33

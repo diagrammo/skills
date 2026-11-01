@@ -1,0 +1,24 @@
+sequence The parallel directory walk
+// From: crates/ignore/src/walk.rs:1428-1452,1649-1720,1761-1767,1769-1870,1874-1935,1942-2000
+autonumber
+
+Caller -WalkParallel::run-> WalkParallel
+note right of WalkParallel crates/ignore/src/walk.rs:1428
+WalkParallel -one Stack per thread with seed roots-> Stack
+note right of Stack `new_for_each_thread` wraps the crossbeam-deque crate, walk.rs:1662
+parallel each worker thread
+  Worker -get_work-> Stack
+  Stack -pop or steal_batch_and_pop-> Stack
+  Stack -Work-> Worker
+  Worker -run_one-> Worker
+  note right of Worker walk.rs:1769
+  Worker -read_dir, then load the ignore files of that directory-> Ignore
+  Worker -visit the directory entry-> Caller
+  Caller -WalkState::Continue, Skip or Quit-> Worker
+  Worker -generate_work for each entry-> Worker
+  Worker -should_skip_entry-> Ignore
+  note right of Ignore `matched_dir_entry`, crates/ignore/src/dir.rs:515, answers for walk.rs:2085
+  Worker -send Work for kept entries-> Stack
+if no work is left in any deque
+  Worker -deactivate_worker, then send_quit-> Stack
+  note right of Stack idle workers poll recv every 1 ms, walk.rs:1986

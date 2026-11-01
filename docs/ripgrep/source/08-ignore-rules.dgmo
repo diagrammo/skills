@@ -1,0 +1,32 @@
+flowchart How a path is ignored
+// From: crates/ignore/src/walk.rs:2085-2096, crates/ignore/src/dir.rs:515-576
+direction-tb
+
+(Walker asks about an entry) -> [should_skip_entry]
+[should_skip_entry] -> [matched_dir_entry]
+[matched_dir_entry] -> <Overrides given?>
+<Overrides given?> -yes-> <Override matches the path?>
+<Overrides given?> -no-> <Any ignore rules loaded?>
+<Override matches the path?> -yes-> (Override decides)
+<Override matches the path?> -no-> <Any ignore rules loaded?>
+<Any ignore rules loaded?> -yes-> [matched_ignore]
+<Any ignore rules loaded?> -no-> <File types selected?>
+[matched_ignore] -> <Ignore match found?>
+<Ignore match found?> -yes-> (Skip the entry)
+<Ignore match found?> -no-> <File types selected?>
+<File types selected?> -yes-> <Type match ignores it?>
+<File types selected?> -no-> <No match yet and hidden filter on?>
+<Type match ignores it?> -yes-> (Skip the entry)
+<Type match ignores it?> -no-> <No match yet and hidden filter on?>
+<No match yet and hidden filter on?> -yes-> <Name starts with a dot?>
+<No match yet and hidden filter on?> -no-> (Keep the entry)
+<Name starts with a dot?> -yes-> (Skip the entry)
+<Name starts with a dot?> -no-> (Keep the entry)
+
+note should_skip_entry walk.rs:2085 logs and returns true for an ignore match
+note matched_dir_entry dir.rs:515 adds the hidden check after matched
+note matched_ignore dir.rs:578 tries custom ignore, .ignore, .gitignore and git exclude in turn
+note "Overrides given?" dir.rs:545 checks the --glob overrides first
+note "Any ignore rules loaded?" `has_any_ignore_rules`, dir.rs:556
+note "File types selected?" dir.rs:564 the -t and -T filters
+note "Name starts with a dot?" `is_hidden_entry`, dir.rs:520

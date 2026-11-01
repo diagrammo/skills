@@ -1,0 +1,38 @@
+sequence Recording a pageview
+// From: lib/plausible_web/controllers/api/external_controller.ex:13, lib/plausible/ingestion/request.ex:79, lib/plausible/ingestion/event.ex:56,137,
+// lib/plausible/site/gate_keeper.ex:31, lib/plausible/ingestion/persistor/embedded.ex:8, lib/plausible/session/cache_store.ex:16,
+// lib/plausible/ingestion/write_buffer.ex:12,89, lib/plausible/clickhouse_event_v2.ex:10
+tag Role as r
+  Client blue
+  Service green
+  Datastore purple
+
+Browser r: Client
+ExternalController r: Service
+Ingestion.Request r: Service
+Ingestion.Event r: Service
+GateKeeper r: Service
+Persistor.Embedded r: Service
+Session.CacheStore r: Service
+Session.Balancer r: Service
+Event.WriteBuffer r: Service
+ClickHouse r: Datastore
+
+Browser -POST /api/event-> ExternalController
+ExternalController -build(conn)-> Ingestion.Request
+Ingestion.Request -> ExternalController
+ExternalController -build_and_buffer-> Ingestion.Event
+Ingestion.Event -check(domain)-> GateKeeper
+GateKeeper -allow or deny-> Ingestion.Event
+note right of Ingestion.Event
+  Runs the pipeline of steps in order:
+  shield rules, geolocation, user agent,
+  source info, salts, user id, validate.
+  The first step to drop the event halts it.
+Ingestion.Event -persist_event-> Persistor.Embedded
+Persistor.Embedded -on_event-> Session.CacheStore
+Session.CacheStore -dispatch by user_id-> Session.Balancer
+Session.Balancer -find or create session-> Session.CacheStore
+Persistor.Embedded -insert(event)-> Event.WriteBuffer
+Event.WriteBuffer ~flush on tick or full~> ClickHouse
+ExternalController -202 ok-> Browser

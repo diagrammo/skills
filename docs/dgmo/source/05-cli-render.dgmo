@@ -1,0 +1,20 @@
+sequence Render a file with the CLI
+// From: src/cli.ts:986,1025,1046,1128,1150,1171,1225; src/render.ts:185,259,275,415; src/svg-to-png.ts:25
+autonumber
+
+User -dgmo diagram.dgmo-> main
+main -read file and parse flags-> main
+main -parseDgmo-> Parse router
+Parse router -diagnostics-> main
+main -render-> render
+render -choosePalette-> Palettes
+render -parseDgmo and category-> Parse router
+render -renderForExport or renderDataChartD3-> Chart engine
+Chart engine -SVG string-> render
+render -SVG and diagnostics-> main
+note right of main
+  On any error diagnostic main swaps
+  the SVG for renderErrorCard.
+main -svgToPng-> resvg
+resvg -PNG bytes-> main
+main -write file-> Disk

@@ -1,0 +1,31 @@
+swimlane Importing Google Analytics 4 data
+// From: lib/plausible_web/controllers/google_analytics_controller.ex:245-285, lib/plausible/imported/importer.ex:141-190,233-250,
+// lib/workers/import_analytics.ex:20-95, lib/plausible/imported/google_analytics4.ex:76-100, lib/plausible/imported/buffer.ex
+direction-lr
+
+lane Importing user gray
+  Choose property and dates -> Clamp dates
+  Read result email
+lane GA controller blue
+  Clamp dates -> <Dates left to import?>
+  <Dates left to import?>
+    -no-> (!Rejected)
+    -yes-> Create pending SiteImport
+  Create pending SiteImport -> <Another import running?>
+  <Another import running?>
+    -yes-> (!Rejected)
+    -no-> Enqueue job
+  Enqueue job -> Mark importing
+lane ImportAnalytics worker green
+  Mark importing -> Fetch GA4 reports
+  Fetch GA4 reports -> Write imported rows
+  <Import succeeded?>
+    -ok-> Mark completed
+    -error-> Purge imported rows
+  Mark completed -> Send success email
+  Purge imported rows -> Mark failed
+  Mark failed -> Send failure email
+  Send success email -> Read result email
+  Send failure email -> Read result email
+lane ClickHouse purple
+  Write imported rows -> <Import succeeded?>

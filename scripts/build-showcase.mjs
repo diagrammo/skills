@@ -1,0 +1,89 @@
+#!/usr/bin/env node
+// Writes the showcase's index page from docs/showcase.json, so a refresh edits
+// the list and never the HTML. Each report's own page comes from the skill's
+// build script, run in a clone of that repo at the pinned commit; it and its
+// source are then copied to docs/<slug>/index.html and docs/<slug>/source/.
+//
+// Run: node scripts/build-showcase.mjs
+
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { escapeHtml, readManifest } from '../skills/dgmo-codebase-report/scripts/build-report.mjs';
+
+const DOCS = join(resolve(dirname(fileURLToPath(import.meta.url)), '..'), 'docs');
+
+/** @typedef {{ slug: string, name: string, repo: string, commit: string, date: string, about: string }} Entry */
+
+/** @type {{ reports: Entry[] }} */
+const { reports } = JSON.parse(readFileSync(join(DOCS, 'showcase.json'), 'utf8'));
+
+/** @param {Entry} e */
+function card(e) {
+  const count = readManifest(join(DOCS, e.slug, 'source')).diagrams.length;
+  const name = escapeHtml(e.name);
+  const repo = escapeHtml(e.repo);
+  const commit = escapeHtml(e.commit);
+  return `<li>
+  <h3><a href="${escapeHtml(e.slug)}/">${name}</a></h3>
+  <p>${escapeHtml(e.about)}</p>
+  <p class="meta">${count} diagrams. <a href="${repo}">Source repository</a>, at commit <a href="${repo}/tree/${commit}"><code>${commit.slice(0, 7)}</code></a>. Built ${escapeHtml(e.date)}.</p>
+</li>`;
+}
+
+const page = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Codebase reports — Diagrammo skills</title>
+<style>
+  :root { --bg: #ffffff; --surface: #f3f5f8; --border: #d4dae1; --text: #1f2933; --text-muted: #5b6672; --primary: #3b6ea5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161b22; --surface: #202833; --border: #38424f; --text: #e6eaef; --text-muted: #9aa5b1; --primary: #5b9bd5; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: var(--primary); }
+  main { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+  h3 { font-size: 1.05rem; }
+  p { margin-bottom: 0.5rem; }
+  ul { list-style: none; }
+  li { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin-bottom: 0.75rem; }
+  .meta, footer { color: var(--text-muted); font-size: 0.875rem; }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; overflow-x: auto; margin-bottom: 0.5rem; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.875em; }
+  footer { margin-top: 2rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Codebase reports</h1>
+<p>The <code>dgmo-codebase-report</code> skill reads a repository and builds one page of diagrams for a developer's first day. Each report below is that skill's output on a public repository, pinned to one commit.</p>
+
+<h2>Reports</h2>
+<ul>
+${reports.map(card).join('\n')}
+</ul>
+
+<h2>Make one of your own</h2>
+<p>In Claude Code, install the plugin:</p>
+<pre><code>/plugin marketplace add diagrammo/skills
+/plugin install diagrammo@diagrammo</code></pre>
+<p>Then ask for a codebase report in your repository. The report goes to <code>docs/codebase-report/report.html</code>.</p>
+<p>Any other agent that reads <code>SKILL.md</code> folders: copy <a href="https://github.com/diagrammo/skills/tree/main/skills/dgmo-codebase-report">the skill's folder</a> into that agent's skills directory.</p>
+
+<footer>
+<p>The projects shown here did not make or review these reports. Each project's own documentation is the authority on how it works.</p>
+<p><a href="https://github.com/diagrammo/skills">diagrammo/skills</a> · <a href="https://diagrammo.app">diagrammo.app</a></p>
+</footer>
+</main>
+</body>
+</html>
+`;
+
+writeFileSync(join(DOCS, 'index.html'), page);
+console.log(join(DOCS, 'index.html'));

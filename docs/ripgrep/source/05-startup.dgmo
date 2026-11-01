@@ -1,0 +1,24 @@
+sequence Startup: argv to a run mode
+// From: crates/core/main.rs:43-105, crates/core/flags/parse.rs:49-110, crates/core/flags/config.rs:16, crates/core/flags/hiargs.rs:113
+autonumber
+
+User -rg PATTERN PATH-> main
+note right of main fn main, crates/core/main.rs:43
+main -flags::parse-> flags
+note right of flags `parse_low` reads argv and config, crates/core/flags/parse.rs:64
+flags -Logger::init-> Logger
+flags -parse argv into LowArgs-> flags
+if special mode such as --help or --version
+  flags -ParseResult::Special-> main
+  main -special prints and exits-> User
+else if --no-config is absent
+  flags -config::args-> Config
+  note right of Config `RIPGREP_CONFIG_PATH` names the config file, crates/core/flags/config.rs:16
+  Config -extra arguments-> flags
+  flags -parse config args then CLI args again-> flags
+flags -HiArgs::from_low_args-> HiArgs
+note right of HiArgs validates and derives the high level view, crates/core/flags/hiargs.rs:113
+HiArgs -HiArgs-> flags
+flags -ParseResult::Ok-> main
+main -run matches args.mode-> main
+note right of main Search, Files, Types or Generate, crates/core/main.rs:77-93

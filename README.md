@@ -18,6 +18,8 @@ runs `dgmo-repo-diagrams` on the repo you are in.
 Any other agent that reads `SKILL.md` folders: copy the folder you want from `skills/` into that
 agent's skills directory.
 
+Reports the codebase report skill made from public repositories: <https://diagrammo.github.io/skills/>
+
 ## Skills
 
 | Skill | Status |
@@ -45,6 +47,7 @@ skills/<name>/SKILL.md          one folder per skill, agent-agnostic; scripts it
 .claude-plugin/plugin.json      that plugin's manifest; raise `version` with every release
 .mcp.json                       the plugin's MCP server: dgmo-mcp from npm
 commands/<name>.md              the plugin's slash commands, run as /diagrammo:<name>
+docs/                           the GitHub Pages showcase; docs/showcase.json lists its reports, scripts/build-showcase.mjs writes its index
 tests/                          vitest suite; tests/fixtures/repos/ holds small repos to run skills against
 ```
 

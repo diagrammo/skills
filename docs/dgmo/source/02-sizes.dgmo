@@ -1,0 +1,48 @@
+treemap Lines of code by directory
+// From: measurements.json sizes (rolled up; (other) kept as measured)
+
+src
+  "map" 13358
+  "(files here)" 12816
+  "pert" 9087
+  "boxes-and-lines" 8957
+  "gantt" 7261
+  "infra" 7201
+  "sequence" 6958
+  "c4" 6194
+  "sketch" 5194
+  "charts-d3" 4940
+  "graph" 4335
+  "org" 4065
+  "countdown" 3765
+  "timeline" 3764
+  "event-line" 3550
+  "body" 3539
+  "raci" 3536
+  "whiteboard" 3528
+  "tech-radar" 3292
+  "clock" 3081
+  "wireframe" 3026
+  "sitemap" 2950
+  "kanban" 2820
+  "journey-map" 2805
+  "treemap" 2772
+  "family" 2612
+  "er" 2576
+  "swimlane" 2498
+  "bracket" 2275
+  "mindmap" 2267
+  "cycle" 2229
+  "palettes" 2103
+scripts
+  "(files here)" 12399
+api-baseline
+  "(files here)" 9496
+"(repo root files)" 7930
+docs
+  "(files here)" 5719
+tests
+  "map-layout.test.ts" 2394
+  "__snapshots__" 2321
+  "infra-compute.test.ts" 2120
+"(other)" 154454

@@ -1,0 +1,48 @@
+boxes-and-lines Plausible stack
+// From: lib/plausible/application.ex:43-47 (five repos), lib/plausible_web/router.ex:305,414,433, tracker/src/config.js:15, assets/js/dashboard/api.ts:168,
+// lib/plausible/ingestion/event.ex:137, lib/plausible/session/cache_store.ex:16, lib/plausible/stats/query_runner.ex:37, config/runtime.exs:918-933
+tag Layer as l
+  Client blue
+  Phoenix web teal
+  Elixir core green
+  Storage purple
+  Third party gray
+active-tag Layer
+
+[Browser]
+  Tracker script l: Client
+  Dashboard React l: Client
+[Phoenix web]
+  ExternalController l: Phoenix web
+  StatsController l: Phoenix web
+  PaddleClassicController l: Phoenix web
+  LiveViews l: Phoenix web
+[Elixir core]
+  Ingestion pipeline l: Elixir core
+  Session CacheStore l: Elixir core
+  Write buffers l: Elixir core
+  QueryRunner l: Elixir core
+  Oban workers l: Elixir core
+[Storage]
+  Postgres l: Storage
+  ClickHouse l: Storage
+[Third parties]
+  Paddle l: Third party
+  Google GA4 l: Third party
+  Mail provider l: Third party
+
+Tracker script -POST /api/event-> ExternalController
+ExternalController -> Ingestion pipeline
+Ingestion pipeline -> Session CacheStore
+Session CacheStore -> Write buffers
+Write buffers -batched insert-> ClickHouse
+Dashboard React -POST /api/stats/:domain/query-> StatsController
+StatsController -> QueryRunner
+QueryRunner -SQL-> ClickHouse
+LiveViews -Ecto-> Postgres
+Paddle -webhook-> PaddleClassicController
+PaddleClassicController -> Postgres
+Oban workers -job queue-> Postgres
+Oban workers -import rows-> ClickHouse
+Oban workers -fetch reports-> Google GA4
+Oban workers -send email-> Mail provider

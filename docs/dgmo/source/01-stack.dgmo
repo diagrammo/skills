@@ -1,0 +1,59 @@
+boxes-and-lines Diagrammo (dgmo) Stack
+// From: package.json:2,135-152; cli/package.json:2,24,39-43; standalone/package.json:2; tsup.config.ts:380-387,422,448;
+//   src/index.ts:123; src/render.ts:185; src/dgmo-router.ts:109; src/chart-type-registry.ts:197; src/d3.ts:99,180;
+//   src/charts-d3/index.ts:115; src/sharing.ts:2,6,113; src/cli.ts:986,580; src/cli-cloud.ts; src/cloud-space.ts:12; src/svg-to-png.ts:13
+direction-lr
+tag Kind as k
+  Package blue
+  Core module green
+  Dependency gray
+  Outside service orange
+active-tag Kind
+
+[Published packages]
+  Library k: Package
+  CLI k: Package
+  Standalone drop-ins k: Package
+
+[Library core]
+  Public API k: Core module
+  Render entry k: Core module
+  Parse router k: Core module
+  Chart-type registry k: Core module
+  Data-chart engine k: Core module
+  Export handlers k: Core module
+  Per-chart parser and renderer k: Core module
+  Palettes k: Core module
+  Share links k: Core module
+
+[Dependencies]
+  jsdom k: Dependency
+  d3 k: Dependency
+  dagre k: Dependency
+  lz-string k: Dependency
+  resvg k: Dependency
+
+[Outside services]
+  Online editor k: Outside service
+  Cloud API k: Outside service
+  MCP server k: Outside service
+
+Library -exports-> Public API
+CLI -inlines-> Public API
+Standalone drop-ins -bundles-> Render entry
+Public API -calls-> Render entry
+Render entry -parses with-> Parse router
+Parse router -looks up-> Chart-type registry
+Render entry -data charts-> Data-chart engine
+Render entry -other charts-> Export handlers
+Export handlers -dispatch-> Per-chart parser and renderer
+Per-chart parser and renderer -colors from-> Palettes
+Render entry -needs DOM-> jsdom
+Data-chart engine -draws with-> d3
+Per-chart parser and renderer -lays out with-> dagre
+Share links -compresses with-> lz-string
+CLI -rasterizes with-> resvg
+CLI -encodes links-> Share links
+Share links -opens-> Online editor
+CLI -put get ls-> Cloud API
+CLI -mcp-> MCP server

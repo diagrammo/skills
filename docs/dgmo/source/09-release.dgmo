@@ -1,0 +1,20 @@
+swimlane Library release
+// From: release.sh:53,72-75,93,104-109,132,141-148; .github/workflows/release.yml:98,109-122,142,153,158
+direction-lr
+lane Maintainer gray
+  (Start) -> Run release.sh
+  Run release.sh -> Build and check
+lane Release script blue
+  Build and check -> <On npm already?>
+  <On npm already?>
+    -yes-> (Already published) success
+    -no-> Tag and push
+  Tag and push -> Dispatch release workflow
+  Dispatch release workflow -> Verify tag matches package.json
+  Check npm serves version -> (Released) success
+lane GitHub Actions green
+  Verify tag matches package.json -> Typecheck lint test build
+  Typecheck lint test build -> Publish library
+  Publish library -> Publish standalone
+  Publish standalone -> Create GitHub release
+  Create GitHub release -> Check npm serves version

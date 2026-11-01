@@ -1,0 +1,56 @@
+boxes-and-lines FastAPI stack
+// From: pyproject.toml:44-50, fastapi/applications.py:52, fastapi/routing.py:1179,2327, fastapi/dependencies/utils.py:643, fastapi/openapi/utils.py:577, fastapi/_compat/v2.py:114, fastapi/telemetry/_api.py:35, scripts/docs.py, scripts/translate.py, .github/workflows/test.yml
+direction-tb
+
+tag Role as r
+  Your code blue
+  FastAPI core green
+  Built on purple
+  Repo tooling gray
+
+active-tag Role
+
+[Your application]
+  Path operation functions r: Your code, description: Endpoint functions you decorate; examples in docs_src/first_steps/tutorial001_py310.py
+
+[fastapi package]
+  FastAPI r: FastAPI core, description: fastapi/applications.py:52; subclass of Starlette
+  APIRouter r: FastAPI core, description: fastapi/routing.py:2327; collects APIRoute objects
+  APIRoute r: FastAPI core, description: fastapi/routing.py:1179; one route per path operation
+  get_request_handler r: FastAPI core, description: fastapi/routing.py:397; builds the per-request coroutine
+  solve_dependencies r: FastAPI core, description: fastapi/dependencies/utils.py:643
+  ModelField r: FastAPI core, description: fastapi/_compat/v2.py:114; wraps a Pydantic TypeAdapter
+  get_openapi r: FastAPI core, description: fastapi/openapi/utils.py:577; builds the schema
+  Swagger UI and ReDoc pages r: FastAPI core, description: fastapi/openapi/docs.py; loads Swagger UI from a CDN
+  Security schemes r: FastAPI core, description: fastapi/security/oauth2.py; http.py; api_key.py
+  Telemetry r: FastAPI core, description: fastapi/telemetry/_api.py:35; OpenTelemetry spans
+
+[Runtime dependencies]
+  Starlette r: Built on, description: ASGI routing; requests; responses; middleware; pyproject.toml:45
+  Pydantic r: Built on, description: Validation and serialization; pyproject.toml:46
+  OpenTelemetry API r: Built on, description: pyproject.toml:50
+  Uvicorn and fastapi-cli r: Built on, description: Optional standard extra; pyproject.toml:68;80
+
+[Repo tooling]
+  scripts/docs.py r: Repo tooling, description: Builds the docs site in many languages
+  scripts/translate.py r: Repo tooling, description: LLM translation of the English docs
+  tests with pytest r: Repo tooling, description: tests/ run by .github/workflows/test.yml
+
+Path operation functions -decorated with get or post-> APIRouter
+FastAPI -owns self.router-> APIRouter
+APIRouter -creates one per path-> APIRoute
+APIRoute -calls-> get_request_handler
+get_request_handler -runs-> solve_dependencies
+solve_dependencies -validates via-> ModelField
+get_request_handler -serializes via-> ModelField
+ModelField -delegates to-> Pydantic
+FastAPI -subclasses-> Starlette
+FastAPI -builds schema with-> get_openapi
+FastAPI -serves-> Swagger UI and ReDoc pages
+get_openapi -reads-> APIRoute
+solve_dependencies -calls-> Security schemes
+get_request_handler -records request data in-> Telemetry
+Telemetry -uses-> OpenTelemetry API
+Uvicorn and fastapi-cli -serve-> FastAPI
+scripts/docs.py -embeds docs_src examples of-> Path operation functions
+tests with pytest -exercise-> FastAPI

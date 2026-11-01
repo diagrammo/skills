@@ -1,0 +1,66 @@
+event-line History: newest tags and largest commits
+// From: measurements.json history (Only the newest 15 of 274 tags are shown.)
+tag Kind as k
+  ripgrep release blue
+  crate release teal
+  largest commit orange
+
+2016-06-22 progress  k: largest commit
+  3 files, 13336 lines changed (a3f6092).
+
+2018-08-15 grep: remove senseless test  k: largest commit
+  2 files, 13091 lines changed (94be3bd).
+
+2018-08-20 libripgrep: initial commit introducing libripgrep  k: largest commit
+  67 files, 17808 lines changed (d9ca529).
+
+2020-02-17 repo: move all source code in crates directory  k: largest commit
+  226 files, 72924 lines changed (fdd8510).
+
+2023-11-20 cli: replace clap with lexopt and supporting code  k: largest commit
+  50 files, 20699 lines changed (082245d).
+
+2026-07-01 ignore-0.4.27  k: crate release
+  Points at commit 48b0c79.
+
+2026-07-09 ignore-0.4.28  k: crate release
+  Points at commit 324f7ef.
+
+2026-07-15 globset-0.4.19  k: crate release
+  Points at commit 28c687d.
+
+2026-07-15 ignore-0.4.29  k: crate release
+  Points at commit 40ffc6e.
+
+2026-07-15 grep-matcher-0.1.9  k: crate release
+  Points at commit 41e0ae7.
+
+2026-07-15 grep-pcre2-0.1.10  k: crate release
+  Points at commit 432976d.
+
+2026-07-15 grep-searcher-0.1.17  k: crate release
+  Points at commit 576005b.
+
+2026-07-15 15.2.0  k: ripgrep release
+  Points at commit e89fff8.
+
+2026-07-17 ignore-0.4.30  k: crate release
+  Points at commit 227381d.
+
+2026-07-20 ignore-0.4.31  k: crate release
+  Points at commit 59e318f.
+
+2026-08-03 ignore-0.4.32  k: crate release
+  Points at commit 5ed408e.
+
+2026-08-04 globset-0.4.20  k: crate release
+  Points at commit 5055264.
+
+2026-08-04 ignore-0.4.33  k: crate release
+  Points at commit 3fce3b5.
+
+2026-10-27 globset-0.4.21  k: crate release
+  Points at commit 55f2f69.
+
+2026-10-27 ignore-0.4.34  k: crate release
+  Points at commit 91f5d22.

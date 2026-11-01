@@ -1,0 +1,18 @@
+sequence Make a share link
+// From: src/cli.ts:477-574; src/sharing.ts:6-7,113-170; src/chart-type-detect.ts:87
+autonumber
+
+User -dgmo share diagram.dgmo-> runShareCommand
+runShareCommand -read file-> runShareCommand
+runShareCommand -parseDgmoChartType-> Chart type detect
+Chart type detect -chart type-> runShareCommand
+runShareCommand -encodeDiagramUrl-> sharing
+sharing -compressToEncodedURIComponent-> lzString
+lzString -payload-> sharing
+if payload over 8192 bytes
+  sharing -error too-large-> runShareCommand
+  runShareCommand -exit 1-> User
+else
+  sharing -online editor URL-> runShareCommand
+  runShareCommand -copy URL-> Clipboard
+  runShareCommand -print URL-> User

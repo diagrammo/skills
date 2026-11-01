@@ -1,0 +1,28 @@
+sequence Render from the library
+// From: src/index.ts:118-190; src/render.ts:185-455 (getRenderCategory is from src/dgmo-router.ts:46); src/d3.ts:180-256; src/utils/export-fit.ts (fitSvgToContent)
+autonumber
+
+Host app -render text-> index
+index -palette id and options-> render
+render -extractPaletteDirective-> Palettes
+render -parseDgmo-> Parse router
+render -getRenderCategory-> Parse router
+Parse router -category-> render
+if category is data-chart
+  render -acquireDom-> jsdom
+  render -renderDataChartD3-> Data chart engine
+  Data chart engine -SVG-> render
+  render -fitSvgToContent-> render
+  render -releaseDom-> jsdom
+else
+  render -acquireDom-> jsdom
+  render -renderForExport-> d3
+  d3 -handler for chart type-> Chart handler
+  Chart handler -SVG-> d3
+  d3 -fitSvgToContent-> d3
+  d3 -SVG-> render
+  render -releaseDom-> jsdom
+render -svg and diagnostics-> index
+if any error diagnostic
+  index -renderErrorCard-> index
+index -svg and diagnostics-> Host app

@@ -1,0 +1,34 @@
+treemap Lines of code by directory
+// From: measurements.json sizes (each box sized by lines; 223 files rolled up to 25 directories, two levels deep.)
+no-percent
+(repo root files) 4897
+crates
+  core 14431
+  ignore 10195
+  printer 9436
+  searcher 6637
+  globset 3772
+  regex 2876
+  matcher 2140
+  cli 1968
+  pcre2 665
+  grep 205
+benchsuite
+  (files directly here) 1313
+  runs 7794
+tests
+  (files directly here) 5774
+  data 2135
+.github
+  (files directly here) 1
+  workflows 677
+  ISSUE_TEMPLATE 127
+ci 234
+fuzz
+  (files directly here) 81
+  fuzz_targets 22
+pkg
+  windows 43
+  brew 23
+scripts 33
+.cargo 21
