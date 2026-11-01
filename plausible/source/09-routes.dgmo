@@ -1,0 +1,51 @@
+sitemap Plausible routes
+// From: lib/plausible_web/router.ex:443-500 (auth), :514-528 (shared links), :529-585 (/settings), :600-780 (sites, billing, stats), :289-440 (APIs)
+tag Access as a
+  Public green
+  Member blue
+  API orange
+
+Landing a: Public
+  description: PageController index at the root path
+  -register-> Register
+  -login-> Login
+  -view shared link-> Shared dashboard
+
+[Public]
+  Register a: Public
+    description: live "/register"
+  Login a: Public
+    description: get "/login"
+  Shared dashboard a: Public
+    description: get "/share/:domain/*path"
+
+[Account]
+  Sites a: Member
+    description: live "/sites"
+    -open site-> Site dashboard
+    -add site-> New site
+  New site a: Member
+    description: get "/sites/new"
+    -then-> Installation
+  Installation a: Member
+    description: live "/:domain/installation"
+  Site dashboard a: Member
+    description: get "/:domain" and "/:domain/*path"
+  Site settings a: Member
+    description: "/:domain/settings/*" general, goals, funnels, shields, imports-exports
+  User settings a: Member
+    description: "/settings/*" preferences, security, api-keys, team
+  Billing a: Member
+    description: "/billing/choose-plan" and "/settings/billing/subscription"
+
+[HTTP APIs]
+  Events API a: API
+    description: POST "/api/event"
+  Internal stats API a: API
+    description: POST "/api/stats/:domain/query"
+  Stats API a: API
+    description: GET "/api/v1/stats/aggregate", "/breakdown", "/timeseries"; POST "/api/v2/query"
+  Sites API a: API
+    description: "/api/v1/sites", enterprise build only (inside on_ee)
+  Plugins API a: API
+    description: "/api/plugins/v1"

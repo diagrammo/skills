@@ -1,0 +1,2199 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-31T03:14:36.252Z",
+  "repo": {
+    "name": "dgmo",
+    "git": true,
+    "shallow": false,
+    "commit": "3c25eb52c563757f5d29751c89ff94fd32d23e34"
+  },
+  "limits": {
+    "sizes": {
+      "maxFiles": 40,
+      "maxGroups": 40,
+      "rule": "Past maxFiles files, sizes roll up to the top two directory levels, except that a directory holding more than maxFiles files of its own shows them as files; past maxGroups groups, the smallest join \"(other)\"."
+    },
+    "languages": {
+      "maxSlices": 6,
+      "rule": "Past maxSlices languages, the smallest join \"Other\"."
+    },
+    "history": {
+      "maxTags": 15,
+      "largestCommits": 5,
+      "rule": "History is the tags plus the largestCommits biggest commits by lines changed; past maxTags tags, only the newest maxTags are kept."
+    },
+    "edits": {
+      "months": 12,
+      "maxFiles": 40,
+      "rule": "Edits count commits in the months up to the newest commit; past maxFiles files, only the most edited maxFiles are kept."
+    },
+    "imports": {
+      "maxNodes": 40,
+      "maxExternal": 20,
+      "rule": "Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If none fits, the shallowest depth that has links is used (files, when every import stays inside one directory) and its least connected nodes join \"(other)\". Only the maxExternal most used outside packages are listed."
+    },
+    "coChange": {
+      "maxPairs": 30,
+      "bulkCommitFiles": 50,
+      "rule": "Commits touching more than bulkCommitFiles files are skipped; past maxPairs pairs, only the most frequent maxPairs are kept."
+    }
+  },
+  "sizes": {
+    "chart": "treemap",
+    "total": {
+      "files": 1400,
+      "bytes": 23406535,
+      "lines": 346187
+    },
+    "rolledUp": true,
+    "rollUpNote": "1400 files rolled up to 823 boxes, two directory levels deep; gallery/fixtures, gallery/snapshots, src/utils, tests, tests/fixtures/conformance, tests/fixtures/highlight-conformance hold more than 40 files of their own, shown as files. The smallest 784 are shown as \"(other)\".",
+    "entries": [
+      {
+        "path": "src/map",
+        "bytes": 1340606,
+        "lines": 13358,
+        "files": 43
+      },
+      {
+        "path": "src",
+        "bytes": 471523,
+        "lines": 12816,
+        "files": 36
+      },
+      {
+        "path": "scripts",
+        "bytes": 610233,
+        "lines": 12399,
+        "files": 37
+      },
+      {
+        "path": "api-baseline",
+        "bytes": 419292,
+        "lines": 9496,
+        "files": 9
+      },
+      {
+        "path": "src/pert",
+        "bytes": 322384,
+        "lines": 9087,
+        "files": 11
+      },
+      {
+        "path": "src/boxes-and-lines",
+        "bytes": 331393,
+        "lines": 8957,
+        "files": 14
+      },
+      {
+        "path": ".",
+        "bytes": 435267,
+        "lines": 7930,
+        "files": 31
+      },
+      {
+        "path": "src/gantt",
+        "bytes": 243739,
+        "lines": 7261,
+        "files": 6
+      },
+      {
+        "path": "src/infra",
+        "bytes": 256844,
+        "lines": 7201,
+        "files": 8
+      },
+      {
+        "path": "src/sequence",
+        "bytes": 255341,
+        "lines": 6958,
+        "files": 7
+      },
+      {
+        "path": "src/c4",
+        "bytes": 195186,
+        "lines": 6194,
+        "files": 5
+      },
+      {
+        "path": "docs",
+        "bytes": 298881,
+        "lines": 5719,
+        "files": 4
+      },
+      {
+        "path": "src/sketch",
+        "bytes": 196939,
+        "lines": 5194,
+        "files": 12
+      },
+      {
+        "path": "src/charts-d3",
+        "bytes": 166843,
+        "lines": 4940,
+        "files": 16
+      },
+      {
+        "path": "src/graph",
+        "bytes": 138719,
+        "lines": 4335,
+        "files": 11
+      },
+      {
+        "path": "src/org",
+        "bytes": 136669,
+        "lines": 4065,
+        "files": 6
+      },
+      {
+        "path": "src/countdown",
+        "bytes": 132527,
+        "lines": 3765,
+        "files": 7
+      },
+      {
+        "path": "src/timeline",
+        "bytes": 116373,
+        "lines": 3764,
+        "files": 5
+      },
+      {
+        "path": "src/event-line",
+        "bytes": 134473,
+        "lines": 3550,
+        "files": 6
+      },
+      {
+        "path": "src/body",
+        "bytes": 344649,
+        "lines": 3539,
+        "files": 8
+      },
+      {
+        "path": "src/raci",
+        "bytes": 124606,
+        "lines": 3536,
+        "files": 8
+      },
+      {
+        "path": "src/whiteboard",
+        "bytes": 121336,
+        "lines": 3528,
+        "files": 9
+      },
+      {
+        "path": "src/tech-radar",
+        "bytes": 103015,
+        "lines": 3292,
+        "files": 7
+      },
+      {
+        "path": "src/clock",
+        "bytes": 113321,
+        "lines": 3081,
+        "files": 9
+      },
+      {
+        "path": "src/wireframe",
+        "bytes": 88105,
+        "lines": 3026,
+        "files": 5
+      },
+      {
+        "path": "src/sitemap",
+        "bytes": 94512,
+        "lines": 2950,
+        "files": 6
+      },
+      {
+        "path": "src/kanban",
+        "bytes": 93857,
+        "lines": 2820,
+        "files": 5
+      },
+      {
+        "path": "src/journey-map",
+        "bytes": 91192,
+        "lines": 2805,
+        "files": 5
+      },
+      {
+        "path": "src/treemap",
+        "bytes": 97174,
+        "lines": 2772,
+        "files": 9
+      },
+      {
+        "path": "src/family",
+        "bytes": 94858,
+        "lines": 2612,
+        "files": 8
+      },
+      {
+        "path": "src/er",
+        "bytes": 84238,
+        "lines": 2576,
+        "files": 6
+      },
+      {
+        "path": "src/swimlane",
+        "bytes": 89923,
+        "lines": 2498,
+        "files": 6
+      },
+      {
+        "path": "tests/map-layout.test.ts",
+        "bytes": 103907,
+        "lines": 2394,
+        "files": 1
+      },
+      {
+        "path": "tests/__snapshots__",
+        "bytes": 1556589,
+        "lines": 2321,
+        "files": 14
+      },
+      {
+        "path": "src/bracket",
+        "bytes": 74895,
+        "lines": 2275,
+        "files": 5
+      },
+      {
+        "path": "src/mindmap",
+        "bytes": 71494,
+        "lines": 2267,
+        "files": 7
+      },
+      {
+        "path": "src/cycle",
+        "bytes": 74248,
+        "lines": 2229,
+        "files": 5
+      },
+      {
+        "path": "tests/infra-compute.test.ts",
+        "bytes": 44113,
+        "lines": 2120,
+        "files": 1
+      },
+      {
+        "path": "src/palettes",
+        "bytes": 75356,
+        "lines": 2103,
+        "files": 14
+      },
+      {
+        "path": "(other)",
+        "bytes": 13661915,
+        "lines": 154454,
+        "files": 988
+      }
+    ]
+  },
+  "languages": {
+    "chart": "pie",
+    "rolledUp": true,
+    "rollUpNote": "3 smaller languages are shown as \"Other\": YAML, Shell, HTML.",
+    "slices": [
+      {
+        "language": "TypeScript",
+        "files": 914,
+        "lines": 309036,
+        "bytes": 11134492
+      },
+      {
+        "language": "Markdown",
+        "files": 35,
+        "lines": 12694,
+        "bytes": 724285
+      },
+      {
+        "language": "JavaScript",
+        "files": 38,
+        "lines": 8302,
+        "bytes": 305441
+      },
+      {
+        "language": "DGMO",
+        "files": 224,
+        "lines": 4325,
+        "bytes": 90650
+      },
+      {
+        "language": "JSON",
+        "files": 26,
+        "lines": 1152,
+        "bytes": 798462
+      },
+      {
+        "language": "Other",
+        "files": 18,
+        "lines": 1821,
+        "bytes": 77972
+      }
+    ],
+    "unclassified": {
+      "files": 145,
+      "bytes": 10275233
+    }
+  },
+  "history": {
+    "chart": "event-line",
+    "available": true,
+    "commits": 2614,
+    "firstCommit": "2026-02-07T10:30:55-07:00",
+    "lastCommit": "2026-10-30T20:30:58-06:00",
+    "tagCount": 166,
+    "rolledUp": true,
+    "rollUpNote": "Only the newest 15 of 166 tags are shown.",
+    "tags": [
+      {
+        "name": "cli-v0.89.0",
+        "date": "2026-10-08T08:45:13-06:00",
+        "sha": "6ecfb89c4d95d137f64282d350014bd629c69e75"
+      },
+      {
+        "name": "v0.90.0",
+        "date": "2026-10-10T13:59:13-06:00",
+        "sha": "17d4fe5558019e486b95d5f28af0a202890b7e4c"
+      },
+      {
+        "name": "cli-v0.90.0",
+        "date": "2026-10-10T14:12:15-06:00",
+        "sha": "0b6733bc0afc183d7701aa72bf1a8e7daec181c9"
+      },
+      {
+        "name": "v0.91.0",
+        "date": "2026-10-14T07:55:11-06:00",
+        "sha": "5cb87bfbf637791b2586f8258db3b013934bc1ba"
+      },
+      {
+        "name": "cli-v0.91.0",
+        "date": "2026-10-14T08:10:26-06:00",
+        "sha": "9f74aa7707616bc78afc1ab60f030403519f2de4"
+      },
+      {
+        "name": "v0.91.1",
+        "date": "2026-10-14T18:16:36-06:00",
+        "sha": "5fefa031bdee0586cc1a943d11361247d01bcf1f"
+      },
+      {
+        "name": "v0.92.0",
+        "date": "2026-10-20T05:32:52-06:00",
+        "sha": "4cbb7057c4d1294a731378f44cba3b00a9bc8cd1"
+      },
+      {
+        "name": "v0.92.1",
+        "date": "2026-10-20T07:17:59-06:00",
+        "sha": "7bd2aa20ef3cb8b4549aa3c05979ae079e52ae05"
+      },
+      {
+        "name": "cli-v0.92.1",
+        "date": "2026-10-20T08:29:10-06:00",
+        "sha": "25c14ae911c395f8d963c75cae9c21ac01c65d4d"
+      },
+      {
+        "name": "v0.93.0",
+        "date": "2026-10-26T07:16:43-06:00",
+        "sha": "c0883d149652450467646e2ce01d2ccae9875b0e"
+      },
+      {
+        "name": "cli-v0.93.0",
+        "date": "2026-10-26T07:33:18-06:00",
+        "sha": "c0434bb4d9ae966b1c9e27b328f4e166842cc536"
+      },
+      {
+        "name": "v0.94.0",
+        "date": "2026-10-28T06:46:18-06:00",
+        "sha": "c3470fc776d21eeece761e88fa515748ae63d017"
+      },
+      {
+        "name": "cli-v0.94.0",
+        "date": "2026-10-28T07:00:58-06:00",
+        "sha": "64ac0a20a0d39bce4241a69def312c3211cad73b"
+      },
+      {
+        "name": "v0.95.0",
+        "date": "2026-10-29T08:20:12-06:00",
+        "sha": "968c652843db91cc512697c8181744c7d6b2abbe"
+      },
+      {
+        "name": "cli-v0.95.0",
+        "date": "2026-10-29T08:35:45-06:00",
+        "sha": "80abbdd8819ec8cce45a8fb47a8609a302aaee4d"
+      }
+    ],
+    "largestCommits": [
+      {
+        "sha": "f542a96753ebbd1b86fe2247100adb8b8424bf13",
+        "date": "2026-03-31T10:35:52-06:00",
+        "subject": "Remove initiative-status from docs, AI files, and language reference",
+        "files": 300,
+        "linesChanged": 45302
+      },
+      {
+        "sha": "5c56bb0092e407bca5448b9f140addca3cbdf614",
+        "date": "2026-04-26T07:56:35-06:00",
+        "subject": "Remove redundant _bmad/ install — canonical install lives at workspace root",
+        "files": 230,
+        "linesChanged": 36840
+      },
+      {
+        "sha": "c3980175bfe0bb18909fba023e056cd376df510e",
+        "date": "2026-05-21T05:44:27-06:00",
+        "subject": "chore(ci): add public API surface diff tool (api-baseline)",
+        "files": 18,
+        "linesChanged": 23419
+      },
+      {
+        "sha": "2731f68aec758dc74469edd980384a48496f2112",
+        "date": "2026-06-10T06:52:55-06:00",
+        "subject": "chore(release): prep dgmo 0.28.0 — changelog, api-baseline, cspell, cycle guard",
+        "files": 11,
+        "linesChanged": 15890
+      },
+      {
+        "sha": "f1fb20baf5ba26499c23287b3998a5f13528d98e",
+        "date": "2026-06-15T06:05:07-06:00",
+        "subject": "feat(api)!: remove the deprecated /internal subpath alias (1.0 API lock)",
+        "files": 15,
+        "linesChanged": 14920
+      }
+    ]
+  },
+  "edits": {
+    "chart": "scatter",
+    "available": true,
+    "window": {
+      "since": "2025-10-31T02:30:58.000Z",
+      "until": "2026-10-31T02:30:58.000Z"
+    },
+    "editedFiles": 1400,
+    "rolledUp": true,
+    "rollUpNote": "Only the 40 most edited of 1400 edited files are shown.",
+    "files": [
+      {
+        "path": "package.json",
+        "edits": 315,
+        "bytes": 8082,
+        "lines": 222
+      },
+      {
+        "path": "src/d3.ts",
+        "edits": 217,
+        "bytes": 10771,
+        "lines": 265
+      },
+      {
+        "path": "docs/language-reference.md",
+        "edits": 214,
+        "bytes": 253820,
+        "lines": 4895
+      },
+      {
+        "path": "src/map/layout.ts",
+        "edits": 166,
+        "bytes": 179845,
+        "lines": 3871
+      },
+      {
+        "path": "src/sequence/renderer.ts",
+        "edits": 140,
+        "bytes": 167423,
+        "lines": 4546
+      },
+      {
+        "path": "CHANGELOG.md",
+        "edits": 126,
+        "bytes": 207979,
+        "lines": 3018
+      },
+      {
+        "path": "src/index.ts",
+        "edits": 120,
+        "bytes": 14415,
+        "lines": 379
+      },
+      {
+        "path": "api-baseline/advanced.d.ts",
+        "edits": 115,
+        "bytes": 353077,
+        "lines": 8011
+      },
+      {
+        "path": "src/advanced.ts",
+        "edits": 91,
+        "bytes": 36874,
+        "lines": 1242
+      },
+      {
+        "path": "src/cli.ts",
+        "edits": 90,
+        "bytes": 44815,
+        "lines": 1265
+      },
+      {
+        "path": "src/sequence/parser.ts",
+        "edits": 84,
+        "bytes": 64081,
+        "lines": 1755
+      },
+      {
+        "path": "src/gantt/renderer.ts",
+        "edits": 83,
+        "bytes": 131292,
+        "lines": 3986
+      },
+      {
+        "path": "src/boxes-and-lines/renderer.ts",
+        "edits": 81,
+        "bytes": 59424,
+        "lines": 1603
+      },
+      {
+        "path": "src/org/renderer.ts",
+        "edits": 75,
+        "bytes": 31880,
+        "lines": 909
+      },
+      {
+        "path": "src/pert/renderer.ts",
+        "edits": 74,
+        "bytes": 135294,
+        "lines": 3778
+      },
+      {
+        "path": "tests/map-layout.test.ts",
+        "edits": 73,
+        "bytes": 103907,
+        "lines": 2394
+      },
+      {
+        "path": "src/map/renderer.ts",
+        "edits": 72,
+        "bytes": 61830,
+        "lines": 1512
+      },
+      {
+        "path": "src/utils/parsing.ts",
+        "edits": 69,
+        "bytes": 40964,
+        "lines": 1133
+      },
+      {
+        "path": "src/infra/renderer.ts",
+        "edits": 67,
+        "bytes": 97921,
+        "lines": 2825
+      },
+      {
+        "path": "tests/cli-render.test.ts",
+        "edits": 64,
+        "bytes": 10201,
+        "lines": 552
+      },
+      {
+        "path": "src/sketch/renderer.ts",
+        "edits": 62,
+        "bytes": 73505,
+        "lines": 1902
+      },
+      {
+        "path": "cspell.json",
+        "edits": 60,
+        "bytes": 9790,
+        "lines": 582
+      },
+      {
+        "path": "src/c4/parser.ts",
+        "edits": 60,
+        "bytes": 44558,
+        "lines": 1285
+      },
+      {
+        "path": "src/org/layout.ts",
+        "edits": 59,
+        "bytes": 48808,
+        "lines": 1456
+      },
+      {
+        "path": "api-baseline/index.d.ts",
+        "edits": 58,
+        "bytes": 15808,
+        "lines": 335
+      },
+      {
+        "path": "src/editor/keywords.ts",
+        "edits": 58,
+        "bytes": 2594,
+        "lines": 89
+      },
+      {
+        "path": "src/infra/parser.ts",
+        "edits": 58,
+        "bytes": 57628,
+        "lines": 1475
+      },
+      {
+        "path": "src/gantt/parser.ts",
+        "edits": 57,
+        "bytes": 63634,
+        "lines": 1844
+      },
+      {
+        "path": "src/dgmo-router.ts",
+        "edits": 56,
+        "bytes": 10893,
+        "lines": 292
+      },
+      {
+        "path": "cli/package.json",
+        "edits": 55,
+        "bytes": 1211,
+        "lines": 51
+      },
+      {
+        "path": "src/chart.ts",
+        "edits": 55,
+        "bytes": 29562,
+        "lines": 875
+      },
+      {
+        "path": ".github/copilot-instructions.md",
+        "edits": 54,
+        "bytes": 29498,
+        "lines": 593
+      },
+      {
+        "path": "docs/ai-integration.md",
+        "edits": 53,
+        "bytes": 32759,
+        "lines": 554
+      },
+      {
+        "path": "src/org/parser.ts",
+        "edits": 53,
+        "bytes": 22724,
+        "lines": 661
+      },
+      {
+        "path": "README.md",
+        "edits": 52,
+        "bytes": 7356,
+        "lines": 180
+      },
+      {
+        "path": "src/event-line/renderer.ts",
+        "edits": 52,
+        "bytes": 50249,
+        "lines": 1292
+      },
+      {
+        "path": "src/kanban/renderer.ts",
+        "edits": 52,
+        "bytes": 65637,
+        "lines": 1989
+      },
+      {
+        "path": "src/render.ts",
+        "edits": 51,
+        "bytes": 19117,
+        "lines": 474
+      },
+      {
+        "path": "SKILL.md",
+        "edits": 50,
+        "bytes": 30638,
+        "lines": 593
+      },
+      {
+        "path": "src/kanban/parser.ts",
+        "edits": 50,
+        "bytes": 18612,
+        "lines": 562
+      }
+    ]
+  },
+  "imports": {
+    "chart": "arc",
+    "rolledUp": true,
+    "rollUpNote": "3894 file imports rolled up to 319 links between 61 directories, up to 2 levels deep. The 22 least connected are shown as \"(other)\".",
+    "nodes": [
+      "(other)",
+      "src",
+      "src/block",
+      "src/body",
+      "src/boxes-and-lines",
+      "src/bracket",
+      "src/c4",
+      "src/charts-d3",
+      "src/class",
+      "src/clock",
+      "src/countdown",
+      "src/cycle",
+      "src/er",
+      "src/event-line",
+      "src/family",
+      "src/gantt",
+      "src/graph",
+      "src/infra",
+      "src/journey-map",
+      "src/kanban",
+      "src/map",
+      "src/mindmap",
+      "src/org",
+      "src/palettes",
+      "src/pert",
+      "src/pyramid",
+      "src/raci",
+      "src/sequence",
+      "src/sitemap",
+      "src/sketch",
+      "src/swimlane",
+      "src/tech-radar",
+      "src/timeline",
+      "src/treemap",
+      "src/utils",
+      "src/visualizations",
+      "src/whiteboard",
+      "src/wireframe",
+      "tests",
+      "tests/fixtures"
+    ],
+    "edges": [
+      {
+        "from": "tests",
+        "to": "src",
+        "count": 216
+      },
+      {
+        "from": "tests",
+        "to": "src/palettes",
+        "count": 188
+      },
+      {
+        "from": "tests",
+        "to": "src/utils",
+        "count": 128
+      },
+      {
+        "from": "tests",
+        "to": "src/boxes-and-lines",
+        "count": 87
+      },
+      {
+        "from": "(other)",
+        "to": "src/utils",
+        "count": 69
+      },
+      {
+        "from": "tests",
+        "to": "src/map",
+        "count": 69
+      },
+      {
+        "from": "tests",
+        "to": "src/infra",
+        "count": 58
+      },
+      {
+        "from": "tests",
+        "to": "src/sequence",
+        "count": 51
+      },
+      {
+        "from": "tests",
+        "to": "(other)",
+        "count": 48
+      },
+      {
+        "from": "tests",
+        "to": "src/graph",
+        "count": 46
+      },
+      {
+        "from": "src/graph",
+        "to": "src/utils",
+        "count": 43
+      },
+      {
+        "from": "src",
+        "to": "src/utils",
+        "count": 40
+      },
+      {
+        "from": "tests",
+        "to": "tests/fixtures",
+        "count": 40
+      },
+      {
+        "from": "(other)",
+        "to": "src",
+        "count": 38
+      },
+      {
+        "from": "src",
+        "to": "(other)",
+        "count": 38
+      },
+      {
+        "from": "tests",
+        "to": "src/org",
+        "count": 38
+      },
+      {
+        "from": "src/sitemap",
+        "to": "src/utils",
+        "count": 34
+      },
+      {
+        "from": "(other)",
+        "to": "src/palettes",
+        "count": 31
+      },
+      {
+        "from": "src/boxes-and-lines",
+        "to": "src/utils",
+        "count": 31
+      },
+      {
+        "from": "src/charts-d3",
+        "to": "src",
+        "count": 31
+      },
+      {
+        "from": "tests",
+        "to": "src/kanban",
+        "count": 31
+      },
+      {
+        "from": "src/map",
+        "to": "src/utils",
+        "count": 30
+      },
+      {
+        "from": "src/mindmap",
+        "to": "src/utils",
+        "count": 30
+      },
+      {
+        "from": "src/org",
+        "to": "src/utils",
+        "count": 30
+      },
+      {
+        "from": "tests",
+        "to": "src/c4",
+        "count": 30
+      },
+      {
+        "from": "tests",
+        "to": "src/er",
+        "count": 30
+      },
+      {
+        "from": "src/c4",
+        "to": "src/utils",
+        "count": 29
+      },
+      {
+        "from": "src/gantt",
+        "to": "src/utils",
+        "count": 29
+      },
+      {
+        "from": "tests",
+        "to": "src/pert",
+        "count": 29
+      },
+      {
+        "from": "tests",
+        "to": "src/whiteboard",
+        "count": 29
+      },
+      {
+        "from": "src/er",
+        "to": "src/utils",
+        "count": 28
+      },
+      {
+        "from": "src/infra",
+        "to": "src/utils",
+        "count": 27
+      },
+      {
+        "from": "src/charts-d3",
+        "to": "src/palettes",
+        "count": 26
+      },
+      {
+        "from": "tests",
+        "to": "src/sitemap",
+        "count": 26
+      },
+      {
+        "from": "src/treemap",
+        "to": "src/utils",
+        "count": 25
+      },
+      {
+        "from": "tests",
+        "to": "src/mindmap",
+        "count": 25
+      },
+      {
+        "from": "src/class",
+        "to": "src/utils",
+        "count": 24
+      },
+      {
+        "from": "src/event-line",
+        "to": "src/utils",
+        "count": 24
+      },
+      {
+        "from": "src/sketch",
+        "to": "src/utils",
+        "count": 24
+      },
+      {
+        "from": "src/utils",
+        "to": "src",
+        "count": 24
+      },
+      {
+        "from": "tests",
+        "to": "src/charts-d3",
+        "count": 24
+      },
+      {
+        "from": "src/sequence",
+        "to": "src/utils",
+        "count": 23
+      },
+      {
+        "from": "src",
+        "to": "src/map",
+        "count": 23
+      },
+      {
+        "from": "tests",
+        "to": "src/gantt",
+        "count": 23
+      },
+      {
+        "from": "src/family",
+        "to": "src/utils",
+        "count": 22
+      },
+      {
+        "from": "src/kanban",
+        "to": "src/utils",
+        "count": 22
+      },
+      {
+        "from": "src/pert",
+        "to": "src/utils",
+        "count": 22
+      },
+      {
+        "from": "src/bracket",
+        "to": "src/utils",
+        "count": 21
+      },
+      {
+        "from": "tests",
+        "to": "src/sketch",
+        "count": 21
+      },
+      {
+        "from": "src/journey-map",
+        "to": "src/utils",
+        "count": 20
+      },
+      {
+        "from": "src/tech-radar",
+        "to": "src/utils",
+        "count": 20
+      },
+      {
+        "from": "src/cycle",
+        "to": "src/utils",
+        "count": 19
+      },
+      {
+        "from": "src/charts-d3",
+        "to": "src/utils",
+        "count": 18
+      },
+      {
+        "from": "src",
+        "to": "src/palettes",
+        "count": 18
+      },
+      {
+        "from": "src/block",
+        "to": "src/utils",
+        "count": 17
+      },
+      {
+        "from": "src/map",
+        "to": "src",
+        "count": 17
+      },
+      {
+        "from": "src/timeline",
+        "to": "src/utils",
+        "count": 17
+      },
+      {
+        "from": "(other)",
+        "to": "src/visualizations",
+        "count": 15
+      },
+      {
+        "from": "tests",
+        "to": "src/class",
+        "count": 15
+      },
+      {
+        "from": "src/countdown",
+        "to": "src/utils",
+        "count": 14
+      },
+      {
+        "from": "src/map",
+        "to": "src/palettes",
+        "count": 14
+      },
+      {
+        "from": "src",
+        "to": "src/graph",
+        "count": 14
+      },
+      {
+        "from": "src",
+        "to": "src/pert",
+        "count": 14
+      },
+      {
+        "from": "tests",
+        "to": "src/raci",
+        "count": 14
+      },
+      {
+        "from": "src/raci",
+        "to": "src/utils",
+        "count": 13
+      },
+      {
+        "from": "src/whiteboard",
+        "to": "src/utils",
+        "count": 13
+      },
+      {
+        "from": "src/body",
+        "to": "src/utils",
+        "count": 12
+      },
+      {
+        "from": "src/pyramid",
+        "to": "src/utils",
+        "count": 12
+      },
+      {
+        "from": "src/swimlane",
+        "to": "src/utils",
+        "count": 12
+      },
+      {
+        "from": "src",
+        "to": "src/sketch",
+        "count": 12
+      },
+      {
+        "from": "tests",
+        "to": "src/journey-map",
+        "count": 12
+      },
+      {
+        "from": "src/utils",
+        "to": "src/palettes",
+        "count": 11
+      },
+      {
+        "from": "src/wireframe",
+        "to": "src/utils",
+        "count": 11
+      },
+      {
+        "from": "src",
+        "to": "src/org",
+        "count": 11
+      },
+      {
+        "from": "src",
+        "to": "src/whiteboard",
+        "count": 10
+      },
+      {
+        "from": "tests",
+        "to": "src/family",
+        "count": 10
+      },
+      {
+        "from": "src/clock",
+        "to": "src/utils",
+        "count": 9
+      },
+      {
+        "from": "src/utils",
+        "to": "(other)",
+        "count": 9
+      },
+      {
+        "from": "src",
+        "to": "src/infra",
+        "count": 9
+      },
+      {
+        "from": "src",
+        "to": "src/treemap",
+        "count": 9
+      },
+      {
+        "from": "tests",
+        "to": "src/clock",
+        "count": 9
+      },
+      {
+        "from": "tests",
+        "to": "src/treemap",
+        "count": 9
+      },
+      {
+        "from": "src/graph",
+        "to": "src",
+        "count": 8
+      },
+      {
+        "from": "src/infra",
+        "to": "src",
+        "count": 8
+      },
+      {
+        "from": "src",
+        "to": "src/boxes-and-lines",
+        "count": 8
+      },
+      {
+        "from": "src",
+        "to": "src/clock",
+        "count": 8
+      },
+      {
+        "from": "src",
+        "to": "src/sequence",
+        "count": 8
+      },
+      {
+        "from": "src",
+        "to": "src/sitemap",
+        "count": 8
+      },
+      {
+        "from": "src/treemap",
+        "to": "src/palettes",
+        "count": 7
+      },
+      {
+        "from": "src/visualizations",
+        "to": "src/utils",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/class",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/countdown",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/er",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/family",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/gantt",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/mindmap",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/swimlane",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/tech-radar",
+        "count": 7
+      },
+      {
+        "from": "src",
+        "to": "src/wireframe",
+        "count": 7
+      },
+      {
+        "from": "tests",
+        "to": "src/event-line",
+        "count": 7
+      },
+      {
+        "from": "tests",
+        "to": "src/swimlane",
+        "count": 7
+      },
+      {
+        "from": "src/clock",
+        "to": "src/palettes",
+        "count": 6
+      },
+      {
+        "from": "src/event-line",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/family",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/graph",
+        "to": "src/palettes",
+        "count": 6
+      },
+      {
+        "from": "src/journey-map",
+        "to": "src/palettes",
+        "count": 6
+      },
+      {
+        "from": "src/pert",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/pert",
+        "to": "src/gantt",
+        "count": 6
+      },
+      {
+        "from": "src/raci",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/tech-radar",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/treemap",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/whiteboard",
+        "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/block",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/body",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/bracket",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/c4",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/cycle",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/event-line",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/journey-map",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/kanban",
+        "count": 6
+      },
+      {
+        "from": "src",
+        "to": "src/raci",
+        "count": 6
+      },
+      {
+        "from": "tests",
+        "to": "src/cycle",
+        "count": 6
+      },
+      {
+        "from": "tests",
+        "to": "src/pyramid",
+        "count": 6
+      },
+      {
+        "from": "tests",
+        "to": "src/wireframe",
+        "count": 6
+      },
+      {
+        "from": "src/body",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/bracket",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/c4",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/class",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/clock",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/cycle",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/er",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/event-line",
+        "to": "src/palettes",
+        "count": 5
+      },
+      {
+        "from": "src/gantt",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/sketch",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/swimlane",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/tech-radar",
+        "to": "src/palettes",
+        "count": 5
+      },
+      {
+        "from": "src",
+        "to": "src/charts-d3",
+        "count": 5
+      },
+      {
+        "from": "src",
+        "to": "src/pyramid",
+        "count": 5
+      },
+      {
+        "from": "tests",
+        "to": "src/block",
+        "count": 5
+      },
+      {
+        "from": "tests",
+        "to": "src/countdown",
+        "count": 5
+      },
+      {
+        "from": "tests",
+        "to": "src/tech-radar",
+        "count": 5
+      },
+      {
+        "from": "src/boxes-and-lines",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/countdown",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/countdown",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/er",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/event-line",
+        "to": "src/timeline",
+        "count": 4
+      },
+      {
+        "from": "src/journey-map",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/kanban",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/map",
+        "to": "src/clock",
+        "count": 4
+      },
+      {
+        "from": "src/mindmap",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/pyramid",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/raci",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/sequence",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/sketch",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/visualizations",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/whiteboard",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src",
+        "to": "src/timeline",
+        "count": 4
+      },
+      {
+        "from": "tests",
+        "to": "src/body",
+        "count": 4
+      },
+      {
+        "from": "(other)",
+        "to": "src/countdown",
+        "count": 3
+      },
+      {
+        "from": "src/block",
+        "to": "src",
+        "count": 3
+      },
+      {
+        "from": "src/block",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/body",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/boxes-and-lines",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/bracket",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/c4",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/class",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/cycle",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/family",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/gantt",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/infra",
+        "to": "src/boxes-and-lines",
+        "count": 3
+      },
+      {
+        "from": "src/infra",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/kanban",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/mindmap",
+        "to": "src",
+        "count": 3
+      },
+      {
+        "from": "src/org",
+        "to": "src",
+        "count": 3
+      },
+      {
+        "from": "src/org",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/pert",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/pyramid",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/sequence",
+        "to": "src",
+        "count": 3
+      },
+      {
+        "from": "src/sitemap",
+        "to": "src",
+        "count": 3
+      },
+      {
+        "from": "src/sitemap",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/swimlane",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/timeline",
+        "to": "src/palettes",
+        "count": 3
+      },
+      {
+        "from": "src/timeline",
+        "to": "src/visualizations",
+        "count": 3
+      },
+      {
+        "from": "src/utils",
+        "to": "src/boxes-and-lines",
+        "count": 3
+      },
+      {
+        "from": "src/utils",
+        "to": "src/gantt",
+        "count": 3
+      },
+      {
+        "from": "src/utils",
+        "to": "src/map",
+        "count": 3
+      },
+      {
+        "from": "src/wireframe",
+        "to": "src",
+        "count": 3
+      },
+      {
+        "from": "src",
+        "to": "src/visualizations",
+        "count": 3
+      },
+      {
+        "from": "tests",
+        "to": "src/bracket",
+        "count": 3
+      },
+      {
+        "from": "tests",
+        "to": "src/visualizations",
+        "count": 3
+      },
+      {
+        "from": "(other)",
+        "to": "src/clock",
+        "count": 2
+      },
+      {
+        "from": "(other)",
+        "to": "src/er",
+        "count": 2
+      },
+      {
+        "from": "(other)",
+        "to": "src/map",
+        "count": 2
+      },
+      {
+        "from": "src/palettes",
+        "to": "src",
+        "count": 2
+      },
+      {
+        "from": "src/sitemap",
+        "to": "src/boxes-and-lines",
+        "count": 2
+      },
+      {
+        "from": "src/timeline",
+        "to": "src",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/block",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/bracket",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/c4",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/countdown",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/graph",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/mindmap",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/sitemap",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/timeline",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
+        "to": "src/treemap",
+        "count": 2
+      },
+      {
+        "from": "src/visualizations",
+        "to": "src/timeline",
+        "count": 2
+      },
+      {
+        "from": "src/wireframe",
+        "to": "src/palettes",
+        "count": 2
+      },
+      {
+        "from": "tests",
+        "to": "src/timeline",
+        "count": 2
+      },
+      {
+        "from": "(other)",
+        "to": "src/body",
+        "count": 1
+      },
+      {
+        "from": "(other)",
+        "to": "src/treemap",
+        "count": 1
+      },
+      {
+        "from": "(other)",
+        "to": "src/whiteboard",
+        "count": 1
+      },
+      {
+        "from": "src/c4",
+        "to": "src/sequence",
+        "count": 1
+      },
+      {
+        "from": "src/infra",
+        "to": "src/graph",
+        "count": 1
+      },
+      {
+        "from": "src/sequence",
+        "to": "src/visualizations",
+        "count": 1
+      },
+      {
+        "from": "src/swimlane",
+        "to": "src/boxes-and-lines",
+        "count": 1
+      },
+      {
+        "from": "src/timeline",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/body",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/class",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/clock",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/cycle",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/er",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/event-line",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/family",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/infra",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/journey-map",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/kanban",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/org",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/pert",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/pyramid",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/raci",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/sequence",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/sketch",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/swimlane",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/tech-radar",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/whiteboard",
+        "count": 1
+      },
+      {
+        "from": "src/utils",
+        "to": "src/wireframe",
+        "count": 1
+      },
+      {
+        "from": "src/visualizations",
+        "to": "src/palettes",
+        "count": 1
+      },
+      {
+        "from": "src/whiteboard",
+        "to": "src/c4",
+        "count": 1
+      }
+    ],
+    "external": [
+      {
+        "name": "vitest",
+        "files": 378
+      },
+      {
+        "name": "jsdom",
+        "files": 73
+      },
+      {
+        "name": "d3-selection",
+        "files": 59
+      },
+      {
+        "name": "d3-shape",
+        "files": 19
+      },
+      {
+        "name": "d3-scale",
+        "files": 14
+      },
+      {
+        "name": "@dagrejs/dagre",
+        "files": 10
+      },
+      {
+        "name": "@diagrammo/dgmo",
+        "files": 10
+      },
+      {
+        "name": "d3-geo",
+        "files": 9
+      },
+      {
+        "name": "@resvg/resvg-js",
+        "files": 8
+      },
+      {
+        "name": "@codemirror/language",
+        "files": 3
+      },
+      {
+        "name": "d3-array",
+        "files": 3
+      },
+      {
+        "name": "d3-hierarchy",
+        "files": 3
+      },
+      {
+        "name": "@lezer/common",
+        "files": 2
+      },
+      {
+        "name": "@lezer/highlight",
+        "files": 2
+      },
+      {
+        "name": "@lezer/lr",
+        "files": 2
+      },
+      {
+        "name": "fast-check",
+        "files": 2
+      },
+      {
+        "name": "fflate",
+        "files": 2
+      },
+      {
+        "name": "topojson-client",
+        "files": 2
+      },
+      {
+        "name": "@eslint/js",
+        "files": 1
+      },
+      {
+        "name": "d3-cloud",
+        "files": 1
+      }
+    ],
+    "unresolved": 29
+  },
+  "coChange": {
+    "chart": "arc",
+    "available": true,
+    "pairCount": 32945,
+    "bulkCommitsSkipped": 24,
+    "rolledUp": true,
+    "rollUpNote": "Only the 30 most frequent of 32945 file pairs are shown.",
+    "pairs": [
+      {
+        "a": "src/map/layout.ts",
+        "b": "tests/map-layout.test.ts",
+        "count": 65
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "package.json",
+        "count": 54
+      },
+      {
+        "a": "api-baseline/advanced.d.ts",
+        "b": "api-baseline/index.d.ts",
+        "count": 52
+      },
+      {
+        "a": ".cursorrules",
+        "b": ".windsurfrules",
+        "count": 48
+      },
+      {
+        "a": "src/d3.ts",
+        "b": "src/index.ts",
+        "count": 48
+      },
+      {
+        "a": "src/map/layout.ts",
+        "b": "src/map/renderer.ts",
+        "count": 48
+      },
+      {
+        "a": ".cursorrules",
+        "b": ".github/copilot-instructions.md",
+        "count": 47
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": ".windsurfrules",
+        "count": 47
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": "docs/ai-integration.md",
+        "count": 45
+      },
+      {
+        "a": ".cursorrules",
+        "b": "docs/ai-integration.md",
+        "count": 43
+      },
+      {
+        "a": ".windsurfrules",
+        "b": "docs/ai-integration.md",
+        "count": 43
+      },
+      {
+        "a": "src/d3.ts",
+        "b": "tests/cli-render.test.ts",
+        "count": 42
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": "SKILL.md",
+        "count": 41
+      },
+      {
+        "a": "SKILL.md",
+        "b": "docs/ai-integration.md",
+        "count": 40
+      },
+      {
+        "a": ".cursorrules",
+        "b": "SKILL.md",
+        "count": 39
+      },
+      {
+        "a": ".windsurfrules",
+        "b": "SKILL.md",
+        "count": 39
+      },
+      {
+        "a": "package.json",
+        "b": "standalone/package.json",
+        "count": 37
+      },
+      {
+        "a": "SKILL.md",
+        "b": "docs/language-reference.md",
+        "count": 36
+      },
+      {
+        "a": "tests/cli-render.test.ts",
+        "b": "tests/flowchart-integration.test.ts",
+        "count": 35
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": "docs/language-reference.md",
+        "count": 34
+      },
+      {
+        "a": ".cursorrules",
+        "b": "docs/language-reference.md",
+        "count": 33
+      },
+      {
+        "a": ".windsurfrules",
+        "b": "docs/language-reference.md",
+        "count": 33
+      },
+      {
+        "a": "src/d3.ts",
+        "b": "src/utils/parsing.ts",
+        "count": 33
+      },
+      {
+        "a": "api-baseline/advanced.d.ts",
+        "b": "api-baseline/block.d.ts",
+        "count": 32
+      },
+      {
+        "a": "api-baseline/block.d.ts",
+        "b": "api-baseline/index.d.ts",
+        "count": 32
+      },
+      {
+        "a": "docs/ai-integration.md",
+        "b": "docs/language-reference.md",
+        "count": 32
+      },
+      {
+        "a": "package.json",
+        "b": "tsup.config.ts",
+        "count": 32
+      },
+      {
+        "a": "src/d3.ts",
+        "b": "src/dgmo-router.ts",
+        "count": 32
+      },
+      {
+        "a": "src/map/layout.ts",
+        "b": "tests/map-renderer.test.ts",
+        "count": 31
+      },
+      {
+        "a": "src/org/layout.ts",
+        "b": "src/org/renderer.ts",
+        "count": 31
+      }
+    ]
+  }
+}

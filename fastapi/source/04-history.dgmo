@@ -1,0 +1,48 @@
+event-line Releases and largest commits
+// From: measurements.json history (Only the newest 15 of 347 tags are shown.)
+no-scale
+
+tag Kind as k
+  Release blue
+  Largest commit orange
+
+2020-03-26 Add support for docs translations (#1168)  k: Largest commit
+  Commit 620593532 changed 764 files and 38448 lines.
+2023-05-08 Refactor OpenAPI tests, prepare for Pydantic v2 (#9503)  k: Largest commit
+  Commit 50c1a928f changed 280 files and 68216 lines.
+2024-08-05 Update docs setup with latest configs and plugins (#11953)  k: Largest commit
+  Commit 0cd844d38 changed 643 files and 58887 lines.
+2024-11-18 Update includes format in docs with an automated script (#12950)  k: Largest commit
+  Commit 1c711e714 changed 440 files and 27116 lines.
+2026-02-08 Add inline snapshot tests for OpenAPI before changes from Pydantic v2 (#14864)  k: Largest commit
+  Commit 9f4ecf562 changed 248 files and 56276 lines.
+2026-10-21 Release 0.156.4  k: Release
+  Points at commit b2ce629ac.
+2026-10-21 Release 0.156.5  k: Release
+  Points at commit 43f46fb14.
+2026-10-21 Release 0.156.6  k: Release
+  Points at commit 3b39c91cd.
+2026-10-21 Release 0.156.7  k: Release
+  Points at commit 7417100c8.
+2026-10-21 Release 0.156.8  k: Release
+  Points at commit de3e9af16.
+2026-10-21 Release 0.157.0  k: Release
+  Points at commit 386a28af2.
+2026-10-21 Release 0.158.0  k: Release
+  Points at commit 3c0103a83.
+2026-10-21 Release 0.158.1  k: Release
+  Points at commit ed39e8b19.
+2026-10-21 Release 0.158.2  k: Release
+  Points at commit e4c5d0293.
+2026-10-21 Release 0.159.0  k: Release
+  Points at commit 68cc4cbb2.
+2026-10-21 Release 0.159.1  k: Release
+  Points at commit 4bdfbe451.
+2026-10-22 Release 0.160.0  k: Release
+  Points at commit addd0778e.
+2026-10-22 Release 0.161.0  k: Release
+  Points at commit 80c8742d1.
+2026-10-22 Release 0.161.1  k: Release
+  Points at commit 69ddc2bad.
+2026-10-23 Release 0.162.0  k: Release
+  Points at commit 7a0a3f0b2.

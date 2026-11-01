@@ -1,0 +1,27 @@
+journey-map Adding a first site
+// From: lib/plausible_web/router.ex:443-500 (/register, /activate, /login), :603-690 (/sites, /sites/new, /:domain/installation, /:domain), lib/plausible/site.ex:13 (onboarding statuses),
+// tracker/ARCHITECTURE.md (installation support), lib/plausible_web/router.ex:758-767 (/:domain, settings/goals)
+persona Ines blue
+  Site owner who wants stats for her blog
+
+[Sign up]
+  Register an account score: 4
+    description: Fills the live form at /register
+  Activate by email score: 3, emotion: Waiting
+    description: Enters the code at /activate before she can continue
+    pain: Cannot see a site until the email code is entered
+[Install]
+  Add the site domain score: 4
+    description: Creates the site at /sites/new
+    thought: One field, that is quick
+  Paste the tracker script score: 2, emotion: Unsure
+    description: Follows the /:domain/installation page
+    pain: Has to add the script to her own site
+    opportunity: Installation support verifies the script in a headless browser
+  First pageview arrives score: 5, emotion: Relieved
+    description: onboarding_status moves from new_site through verification_succeeded and first_pageview to completed
+[Explore]
+  Read the dashboard score: 5, emotion: Delighted
+    description: One page at /:domain with the report panels
+  Define a goal score: 4
+    description: Adds a conversion goal under /:domain/settings/goals

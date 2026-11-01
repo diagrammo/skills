@@ -1,0 +1,91 @@
+arc Imports between directories
+// From: measurements.json imports (1807 file imports rolled up to 157 links between 95 directories, up to 2 levels deep. The 56 least connected are shown as (other).)
+
+[(other)] blue
+  (other) -> fastapi 153
+  (other) -> fastapi/openapi 3
+  (other) -> fastapi/security 1
+[docs_src] green
+  docs_src/dependencies -> fastapi 31
+  docs_src/query_params_str_validations -> fastapi 30
+  docs_src/custom_response -> fastapi 29
+  docs_src/response_model -> fastapi 16
+  docs_src/app_testing -> fastapi 15
+  docs_src/handling_errors -> fastapi 14
+  docs_src/request_files -> fastapi 14
+  docs_src/request_form_models -> fastapi 14
+  docs_src/security -> fastapi 14
+  docs_src/security -> fastapi/security 14
+  docs_src/custom_request_and_route -> fastapi 12
+  docs_src/path_params_numeric_validations -> fastapi 12
+  docs_src/server_sent_events -> fastapi 10
+  docs_src/body_multiple_params -> fastapi 9
+  docs_src/body_nested_models -> fastapi 9
+  docs_src/additional_responses -> fastapi 8
+  docs_src/header_param_models -> fastapi 8
+  docs_src/path_operation_advanced_configuration -> fastapi 8
+  docs_src/query_param_models -> fastapi 8
+  docs_src/schema_extra_example -> fastapi 8
+  docs_src/templates -> fastapi 8
+  docs_src/websockets_ -> fastapi 8
+  docs_src/path_operation_configuration -> fastapi 7
+  docs_src/path_params -> fastapi 6
+  docs_src/behind_a_proxy -> fastapi 5
+  docs_src/metadata -> fastapi 5
+  docs_src/advanced_middleware -> (other) 3
+  docs_src/advanced_middleware -> fastapi 3
+[(root)] orange
+  tests -> fastapi 475
+  tests -> fastapi/security 43
+  tests -> fastapi/_compat 10
+  fastapi -> fastapi/_compat 7
+  fastapi -> fastapi/telemetry 5
+  fastapi -> fastapi/openapi 4
+  tests -> fastapi/dependencies 4
+  tests -> fastapi/openapi 4
+  fastapi -> fastapi/dependencies 3
+  tests -> scripts 2
+  fastapi -> (other) 1
+  fastapi -> fastapi/security 1
+  tests -> (other) 1
+[fastapi] purple
+  fastapi/openapi -> fastapi 11
+  fastapi/dependencies -> fastapi 8
+  fastapi/security -> fastapi 6
+  fastapi/security -> fastapi/openapi 5
+  fastapi/telemetry -> fastapi 4
+  fastapi/_compat -> fastapi 3
+  fastapi/dependencies -> fastapi/_compat 2
+  fastapi/dependencies -> fastapi/security 2
+  fastapi/openapi -> fastapi/_compat 2
+  fastapi/openapi -> fastapi/dependencies 2
+  fastapi/_compat -> fastapi/openapi 1
+[scripts] teal
+  scripts/tests -> scripts 10
+[tests] red
+  tests/test_tutorial -> fastapi 256
+  tests/test_tutorial -> tests 107
+  tests/test_request_params -> fastapi 65
+  tests/test_tutorial -> (other) 32
+  tests/test_telemetry -> fastapi 30
+  tests/test_tutorial -> docs_src/custom_response 10
+  tests/test_telemetry -> fastapi/telemetry 8
+  tests/test_tutorial -> docs_src/python_types 8
+  tests/test_tutorial -> docs_src/handling_errors 6
+  tests/test_tutorial -> docs_src/path_params 6
+  tests/test_tutorial -> docs_src/app_testing 5
+  tests/test_tutorial -> docs_src/behind_a_proxy 5
+  tests/test_tutorial -> docs_src/metadata 5
+  tests/test_tutorial -> docs_src/path_operation_advanced_configuration 5
+  tests/test_tutorial -> docs_src/advanced_middleware 3
+  tests/test_request_params -> fastapi/_compat 2
+  tests/test_tutorial -> docs_src/additional_responses 2
+  tests/test_tutorial -> docs_src/dependencies 2
+  tests/test_tutorial -> docs_src/path_operation_configuration 2
+  tests/test_tutorial -> docs_src/response_model 2
+  tests/test_tutorial -> docs_src/templates 2
+  tests/test_tutorial -> docs_src/websockets_ 1
+  tests/test_tutorial -> fastapi/_compat 1
+  tests/test_tutorial -> tests/test_telemetry 1
+
+order group

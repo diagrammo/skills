@@ -1,0 +1,1964 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-31T03:25:17.541Z",
+  "repo": {
+    "name": "analytics",
+    "git": true,
+    "shallow": false,
+    "commit": "02cfac1517e1fef8178afe134a9b42f309f1aa77"
+  },
+  "limits": {
+    "sizes": {
+      "maxFiles": 40,
+      "maxGroups": 40,
+      "rule": "Past maxFiles files, sizes roll up to the top two directory levels, except that a directory holding more than maxFiles files of its own shows them as files; past maxGroups groups, the smallest join \"(other)\"."
+    },
+    "languages": {
+      "maxSlices": 6,
+      "rule": "Past maxSlices languages, the smallest join \"Other\"."
+    },
+    "history": {
+      "maxTags": 15,
+      "largestCommits": 5,
+      "rule": "History is the tags plus the largestCommits biggest commits by lines changed; past maxTags tags, only the newest maxTags are kept."
+    },
+    "edits": {
+      "months": 12,
+      "maxFiles": 40,
+      "rule": "Edits count commits in the months up to the newest commit; past maxFiles files, only the most edited maxFiles are kept."
+    },
+    "imports": {
+      "maxNodes": 40,
+      "maxExternal": 20,
+      "rule": "Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If none fits, the shallowest depth that has links is used (files, when every import stays inside one directory) and its least connected nodes join \"(other)\". Only the maxExternal most used outside packages are listed."
+    },
+    "coChange": {
+      "maxPairs": 30,
+      "bulkCommitFiles": 50,
+      "rule": "Commits touching more than bulkCommitFiles files are skipped; past maxPairs pairs, only the most frequent maxPairs are kept."
+    }
+  },
+  "sizes": {
+    "chart": "treemap",
+    "total": {
+      "files": 2129,
+      "bytes": 20075429,
+      "lines": 709883
+    },
+    "rolledUp": true,
+    "rollUpNote": "2129 files rolled up to 444 boxes, two directory levels deep; lib/plausible, lib/plausible_web/templates/email, priv/ingest_repo/migrations, priv/repo/migrations hold more than 40 files of their own, shown as files. The smallest 405 are shown as \"(other)\".",
+    "entries": [
+      {
+        "path": "fixture",
+        "bytes": 6977461,
+        "lines": 308671,
+        "files": 18
+      },
+      {
+        "path": "test/plausible_web",
+        "bytes": 2693104,
+        "lines": 83604,
+        "files": 230
+      },
+      {
+        "path": "priv/ua_inspector",
+        "bytes": 1814694,
+        "lines": 67720,
+        "files": 32
+      },
+      {
+        "path": "test/plausible",
+        "bytes": 1589781,
+        "lines": 46812,
+        "files": 172
+      },
+      {
+        "path": "assets/js",
+        "bytes": 996859,
+        "lines": 34167,
+        "files": 221
+      },
+      {
+        "path": "lib/plausible_web",
+        "bytes": 1076762,
+        "lines": 33971,
+        "files": 268
+      },
+      {
+        "path": "lib/plausible",
+        "bytes": 995189,
+        "lines": 32896,
+        "files": 239
+      },
+      {
+        "path": "tracker/test",
+        "bytes": 680475,
+        "lines": 15190,
+        "files": 55
+      },
+      {
+        "path": "extra/lib",
+        "bytes": 444642,
+        "lines": 14832,
+        "files": 109
+      },
+      {
+        "path": "tracker/compiler",
+        "bytes": 373996,
+        "lines": 11916,
+        "files": 6
+      },
+      {
+        "path": "e2e/tests",
+        "bytes": 265057,
+        "lines": 9402,
+        "files": 16
+      },
+      {
+        "path": "test/workers",
+        "bytes": 173705,
+        "lines": 5340,
+        "files": 26
+      },
+      {
+        "path": "priv/ref_inspector",
+        "bytes": 82119,
+        "lines": 4211,
+        "files": 2
+      },
+      {
+        "path": "priv",
+        "bytes": 120398,
+        "lines": 3667,
+        "files": 24
+      },
+      {
+        "path": "test/support",
+        "bytes": 97139,
+        "lines": 3457,
+        "files": 27
+      },
+      {
+        "path": "priv/repo",
+        "bytes": 91455,
+        "lines": 3178,
+        "files": 2
+      },
+      {
+        "path": ".",
+        "bytes": 134856,
+        "lines": 2650,
+        "files": 18
+      },
+      {
+        "path": "lib/workers",
+        "bytes": 61537,
+        "lines": 2176,
+        "files": 27
+      },
+      {
+        "path": "config",
+        "bytes": 50093,
+        "lines": 1593,
+        "files": 16
+      },
+      {
+        "path": ".github/workflows",
+        "bytes": 40492,
+        "lines": 1146,
+        "files": 14
+      },
+      {
+        "path": "assets/data",
+        "bytes": 10291,
+        "lines": 1006,
+        "files": 1
+      },
+      {
+        "path": "lib/mix",
+        "bytes": 31338,
+        "lines": 996,
+        "files": 12
+      },
+      {
+        "path": "tracker/src",
+        "bytes": 27271,
+        "lines": 985,
+        "files": 8
+      },
+      {
+        "path": "assets/css",
+        "bytes": 22841,
+        "lines": 851,
+        "files": 5
+      },
+      {
+        "path": "lib/plausible/exports.ex",
+        "bytes": 21595,
+        "lines": 715,
+        "files": 1
+      },
+      {
+        "path": "lib",
+        "bytes": 18228,
+        "lines": 687,
+        "files": 5
+      },
+      {
+        "path": "priv/data_migrations",
+        "bytes": 24775,
+        "lines": 645,
+        "files": 45
+      },
+      {
+        "path": "tracker",
+        "bytes": 19388,
+        "lines": 580,
+        "files": 12
+      },
+      {
+        "path": "tracker/installation_support",
+        "bytes": 16029,
+        "lines": 575,
+        "files": 10
+      },
+      {
+        "path": "lib/plausible/sites.ex",
+        "bytes": 16016,
+        "lines": 558,
+        "files": 1
+      },
+      {
+        "path": "priv/json-schemas",
+        "bytes": 15180,
+        "lines": 533,
+        "files": 1
+      },
+      {
+        "path": "lib/plausible/teams.ex",
+        "bytes": 13780,
+        "lines": 516,
+        "files": 1
+      },
+      {
+        "path": "lib/plausible/application.ex",
+        "bytes": 14108,
+        "lines": 435,
+        "files": 1
+      },
+      {
+        "path": "lib/plausible/oauth.ex",
+        "bytes": 15217,
+        "lines": 421,
+        "files": 1
+      },
+      {
+        "path": "lib/plausible/team_deletion_schedules.ex",
+        "bytes": 12189,
+        "lines": 388,
+        "files": 1
+      },
+      {
+        "path": "tracker/npm_package",
+        "bytes": 16553,
+        "lines": 378,
+        "files": 5
+      },
+      {
+        "path": "priv/ingest_repo",
+        "bytes": 11962,
+        "lines": 366,
+        "files": 1
+      },
+      {
+        "path": "test/e2e",
+        "bytes": 8012,
+        "lines": 363,
+        "files": 1
+      },
+      {
+        "path": "lib/plausible/goal.ex",
+        "bytes": 9260,
+        "lines": 330,
+        "files": 1
+      },
+      {
+        "path": "(other)",
+        "bytes": 991582,
+        "lines": 11956,
+        "files": 494
+      }
+    ]
+  },
+  "languages": {
+    "chart": "pie",
+    "rolledUp": true,
+    "rollUpNote": "7 smaller languages are shown as \"Other\": JavaScript, SQL, Markdown, CSS, Shell, TOML, PHP.",
+    "slices": [
+      {
+        "language": "JSON",
+        "files": 50,
+        "lines": 323370,
+        "bytes": 6519590
+      },
+      {
+        "language": "Elixir",
+        "files": 1315,
+        "lines": 235913,
+        "bytes": 7484569
+      },
+      {
+        "language": "YAML",
+        "files": 50,
+        "lines": 73215,
+        "bytes": 1941692
+      },
+      {
+        "language": "TypeScript",
+        "files": 238,
+        "lines": 47982,
+        "bytes": 1381249
+      },
+      {
+        "language": "HTML",
+        "files": 22,
+        "lines": 8111,
+        "bytes": 464803
+      },
+      {
+        "language": "Other",
+        "files": 103,
+        "lines": 12076,
+        "bytes": 427250
+      }
+    ],
+    "unclassified": {
+      "files": 351,
+      "bytes": 1856276
+    }
+  },
+  "history": {
+    "chart": "event-line",
+    "available": true,
+    "commits": 4446,
+    "firstCommit": "2019-09-02T12:29:19+01:00",
+    "lastCommit": "2026-10-29T22:20:45Z",
+    "tagCount": 671,
+    "rolledUp": true,
+    "rollUpNote": "Only the newest 15 of 671 tags are shown.",
+    "tags": [
+      {
+        "name": "v3.0.0-rc.0",
+        "date": "2025-04-08T08:23:43Z",
+        "sha": "de1bde4529eb06e9420cc2257bf42d7d1f9ce859"
+      },
+      {
+        "name": "v3.0.0-rc.1",
+        "date": "2025-04-08T11:11:41+02:00",
+        "sha": "54c173790194f4aa858bb4144a143ac091deeaf2"
+      },
+      {
+        "name": "v3.0.0-rc.2",
+        "date": "2025-04-08T11:30:51+02:00",
+        "sha": "d00298f4af491c65cab3719b8d2e34c3e57637a5"
+      },
+      {
+        "name": "v3.0.0-rc.3",
+        "date": "2025-04-08T16:43:01+02:00",
+        "sha": "80cbcc41bc125e0ade149dd17b021b2d3329a2ba"
+      },
+      {
+        "name": "v3.0.0-rc.4",
+        "date": "2025-04-09T13:08:48+02:00",
+        "sha": "743e0c1243b161481b171516466b6913b92b8c50"
+      },
+      {
+        "name": "v3.0.0-rc.5",
+        "date": "2025-04-10T09:53:09+02:00",
+        "sha": "c52474800291cbfd8ceef0793e14aac37c5ce522"
+      },
+      {
+        "name": "v3.0.0-rc.6",
+        "date": "2025-04-10T09:58:54+02:00",
+        "sha": "cca6e0a6143c9b64fb28e42496198269e9d15169"
+      },
+      {
+        "name": "v3.0.0",
+        "date": "2025-04-11T08:07:57Z",
+        "sha": "96ebd01f008fd114744bc13a7fa2616fb6d5a310"
+      },
+      {
+        "name": "v3.0.1",
+        "date": "2025-04-11T09:46:07Z",
+        "sha": "cdf27e63c64c9c8257dbb7bbf78e4deb1330f7d4"
+      },
+      {
+        "name": "v3.1.0-rc.0",
+        "date": "2025-11-03T10:22:34Z",
+        "sha": "64aa2434e9b0e5836f5a47a9ec31bf57cd9da4d4"
+      },
+      {
+        "name": "v3.1.0-rc.1",
+        "date": "2025-11-03T13:31:25Z",
+        "sha": "a44ce24867db2961c1523f6b5ff0bfb20bdf25b4"
+      },
+      {
+        "name": "v3.1.0",
+        "date": "2025-11-13T07:02:48Z",
+        "sha": "b624f39d17bd41d0e8b653b71a3f0a8a7b9f2c81"
+      },
+      {
+        "name": "v3.2.0-rc.0",
+        "date": "2025-12-23T12:55:37Z",
+        "sha": "c11d47a11f634ea8e4466672696bc986240d5d6e"
+      },
+      {
+        "name": "v3.2.0",
+        "date": "2026-01-16T10:50:54+02:00",
+        "sha": "5a7c3ca9f86c73c6e549d0f08cb724eef66863a6"
+      },
+      {
+        "name": "v3.2.1",
+        "date": "2026-05-15T10:14:39+01:00",
+        "sha": "e4f5a87a5570bd61605217e7ceb376636db8eddb"
+      }
+    ],
+    "largestCommits": [
+      {
+        "sha": "35596e8692e3c39e387ba1a6e89e0701cb61fe76",
+        "date": "2024-07-05T13:58:42+02:00",
+        "subject": "Remove Universal Analytics import logic (#4312)",
+        "files": 33,
+        "linesChanged": 865919
+      },
+      {
+        "sha": "117eef000d5b971f484d01ecea63a805f5f5763b",
+        "date": "2023-10-24T10:33:48+02:00",
+        "subject": "Upgrade Erlang/Elixir stack (#3454)",
+        "files": 49,
+        "linesChanged": 843728
+      },
+      {
+        "sha": "e6d83e946f57220f49343338acbd099990a101d0",
+        "date": "2024-04-04T10:33:19+02:00",
+        "subject": "Populate new columns in imports and exports (#3969)",
+        "files": 21,
+        "linesChanged": 331944
+      },
+      {
+        "sha": "05bf43c1bea05632f56268127bed9821bdd892a3",
+        "date": "2021-11-23T11:39:09+02:00",
+        "subject": "City level location data (#1449)",
+        "files": 36,
+        "linesChanged": 224985
+      },
+      {
+        "sha": "1dba113e2fe5fb3593c56fa6994f6d088d3fec80",
+        "date": "2021-12-13T12:03:27+02:00",
+        "subject": "[Draft] Improve location translations (#1526)",
+        "files": 14,
+        "linesChanged": 224939
+      }
+    ]
+  },
+  "edits": {
+    "chart": "scatter",
+    "available": true,
+    "window": {
+      "since": "2025-10-29T22:20:45.000Z",
+      "until": "2026-10-29T22:20:45.000Z"
+    },
+    "editedFiles": 1249,
+    "rolledUp": true,
+    "rollUpNote": "Only the 40 most edited of 1249 edited files are shown.",
+    "files": [
+      {
+        "path": "CHANGELOG.md",
+        "edits": 63,
+        "bytes": 44947,
+        "lines": 712
+      },
+      {
+        "path": "lib/plausible_web/router.ex",
+        "edits": 54,
+        "bytes": 27064,
+        "lines": 770
+      },
+      {
+        "path": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "edits": 36,
+        "bytes": 12898,
+        "lines": 431
+      },
+      {
+        "path": "lib/plausible_web/components/generic.ex",
+        "edits": 33,
+        "bytes": 36726,
+        "lines": 1286
+      },
+      {
+        "path": "mix.exs",
+        "edits": 33,
+        "bytes": 8727,
+        "lines": 253
+      },
+      {
+        "path": ".github/workflows/elixir.yml",
+        "edits": 32,
+        "bytes": 11036,
+        "lines": 296
+      },
+      {
+        "path": "test/plausible/stats/exploration_test.exs",
+        "edits": 27,
+        "bytes": 53345,
+        "lines": 1606
+      },
+      {
+        "path": "lib/plausible_web/live/sites.ex",
+        "edits": 26,
+        "bytes": 39489,
+        "lines": 1153
+      },
+      {
+        "path": "config/runtime.exs",
+        "edits": 21,
+        "bytes": 36202,
+        "lines": 1138
+      },
+      {
+        "path": "lib/plausible/stats/query_builder.ex",
+        "edits": 21,
+        "bytes": 16808,
+        "lines": 550
+      },
+      {
+        "path": "test/plausible_web/controllers/site_controller_test.exs",
+        "edits": 21,
+        "bytes": 65261,
+        "lines": 1983
+      },
+      {
+        "path": "extra/lib/plausible/stats/exploration.ex",
+        "edits": 20,
+        "bytes": 18789,
+        "lines": 613
+      },
+      {
+        "path": "lib/plausible_web/controllers/stats_controller.ex",
+        "edits": 19,
+        "bytes": 17239,
+        "lines": 480
+      },
+      {
+        "path": "test/plausible_web/live/sites_test.exs",
+        "edits": 18,
+        "bytes": 36116,
+        "lines": 1091
+      },
+      {
+        "path": "e2e/tests/fixtures.ts",
+        "edits": 16,
+        "bytes": 14219,
+        "lines": 595
+      },
+      {
+        "path": "test/plausible/goals_test.exs",
+        "edits": 16,
+        "bytes": 28494,
+        "lines": 893
+      },
+      {
+        "path": "test/plausible_web/controllers/settings_controller_test.exs",
+        "edits": 16,
+        "bytes": 70000,
+        "lines": 2275
+      },
+      {
+        "path": "test/plausible_web/controllers/stats_controller_test.exs",
+        "edits": 16,
+        "bytes": 41836,
+        "lines": 1144
+      },
+      {
+        "path": "assets/css/app.css",
+        "edits": 15,
+        "bytes": 12908,
+        "lines": 452
+      },
+      {
+        "path": "lib/plausible/stats/query.ex",
+        "edits": 15,
+        "bytes": 6389,
+        "lines": 232
+      },
+      {
+        "path": "lib/plausible_web/components/billing/billing.ex",
+        "edits": 15,
+        "bytes": 15112,
+        "lines": 451
+      },
+      {
+        "path": "test/plausible_web/live/customer_support/teams_test.exs",
+        "edits": 15,
+        "bytes": 47001,
+        "lines": 1405
+      },
+      {
+        "path": ".github/workflows/build-private-images-ghcr.yml",
+        "edits": 14,
+        "bytes": 3652,
+        "lines": 98
+      },
+      {
+        "path": ".github/workflows/tracker.yml",
+        "edits": 14,
+        "bytes": 2313,
+        "lines": 68
+      },
+      {
+        "path": "assets/js/liveview/live_socket.js",
+        "edits": 14,
+        "bytes": 3034,
+        "lines": 99
+      },
+      {
+        "path": "lib/plausible_web/templates/stats/stats.html.heex",
+        "edits": 14,
+        "bytes": 4590,
+        "lines": 94
+      },
+      {
+        "path": "lib/plausible/sites.ex",
+        "edits": 13,
+        "bytes": 16016,
+        "lines": 558
+      },
+      {
+        "path": "lib/plausible_web/controllers/auth_controller.ex",
+        "edits": 13,
+        "bytes": 23541,
+        "lines": 749
+      },
+      {
+        "path": "test/plausible_web/controllers/api/stats_controller/exploration_test.exs",
+        "edits": 13,
+        "bytes": 16621,
+        "lines": 508
+      },
+      {
+        "path": "test/plausible_web/controllers/auth_controller_test.exs",
+        "edits": 13,
+        "bytes": 70855,
+        "lines": 2193
+      },
+      {
+        "path": ".github/workflows/build-public-images-ghcr.yml",
+        "edits": 12,
+        "bytes": 4144,
+        "lines": 125
+      },
+      {
+        "path": ".github/workflows/tracker-script-npm-release.yml",
+        "edits": 12,
+        "bytes": 3426,
+        "lines": 82
+      },
+      {
+        "path": "assets/js/dashboard/stats/reports/index-breakdown.tsx",
+        "edits": 12,
+        "bytes": 16911,
+        "lines": 594
+      },
+      {
+        "path": "config/config.exs",
+        "edits": 12,
+        "bytes": 2927,
+        "lines": 96
+      },
+      {
+        "path": "e2e/tests/dashboard/behaviours.spec.ts",
+        "edits": 12,
+        "bytes": 31675,
+        "lines": 1182
+      },
+      {
+        "path": "e2e/tests/dashboard/breakdowns.spec.ts",
+        "edits": 12,
+        "bytes": 51721,
+        "lines": 1951
+      },
+      {
+        "path": "lib/plausible/goals/goals.ex",
+        "edits": 12,
+        "bytes": 13943,
+        "lines": 490
+      },
+      {
+        "path": "lib/plausible/stats/api_query_parser.ex",
+        "edits": 12,
+        "bytes": 12661,
+        "lines": 391
+      },
+      {
+        "path": "lib/plausible/stats/legacy/legacy_query_builder.ex",
+        "edits": 12,
+        "bytes": 10786,
+        "lines": 351
+      },
+      {
+        "path": "lib/plausible/stats/sql/expression.ex",
+        "edits": 12,
+        "bytes": 16127,
+        "lines": 512
+      }
+    ]
+  },
+  "imports": {
+    "chart": "arc",
+    "rolledUp": true,
+    "rollUpNote": "1082 file imports rolled up to 191 links between 40 directories, up to 5 levels deep.",
+    "nodes": [
+      "assets/data",
+      "assets/js",
+      "assets/js/dashboard",
+      "assets/js/dashboard/annotations",
+      "assets/js/dashboard/components",
+      "assets/js/dashboard/error",
+      "assets/js/dashboard/extra/exploration",
+      "assets/js/dashboard/extra/funnel",
+      "assets/js/dashboard/filtering",
+      "assets/js/dashboard/hooks",
+      "assets/js/dashboard/nav-menu",
+      "assets/js/dashboard/nav-menu/query-periods",
+      "assets/js/dashboard/nav-menu/segments",
+      "assets/js/dashboard/navigation",
+      "assets/js/dashboard/segments",
+      "assets/js/dashboard/stats",
+      "assets/js/dashboard/stats/behaviours",
+      "assets/js/dashboard/stats/csv-export",
+      "assets/js/dashboard/stats/devices",
+      "assets/js/dashboard/stats/graph",
+      "assets/js/dashboard/stats/locations",
+      "assets/js/dashboard/stats/modals",
+      "assets/js/dashboard/stats/pages",
+      "assets/js/dashboard/stats/reports",
+      "assets/js/dashboard/stats/sources",
+      "assets/js/dashboard/util",
+      "assets/js/dashboard/verification",
+      "assets/js/liveview",
+      "assets/js/polyfills",
+      "assets/test-utils",
+      "e2e/tests",
+      "e2e/tests/dashboard",
+      "e2e/tests/site-settings",
+      "tracker",
+      "tracker/compiler",
+      "tracker/installation_support",
+      "tracker/installation_support/autoconsent-rules/autoconsent",
+      "tracker/test",
+      "tracker/test/installation_support",
+      "tracker/test/support"
+    ],
+    "edges": [
+      {
+        "from": "tracker/test",
+        "to": "tracker/test/support",
+        "count": 65
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard",
+        "count": 33
+      },
+      {
+        "from": "e2e/tests/dashboard",
+        "to": "e2e/tests",
+        "count": 24
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard",
+        "count": 23
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard",
+        "count": 19
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/query-periods",
+        "to": "assets/js/dashboard",
+        "count": 18
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard",
+        "count": 17
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/components",
+        "count": 15
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/util",
+        "count": 15
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/util",
+        "count": 13
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard",
+        "count": 13
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard",
+        "count": 13
+      },
+      {
+        "from": "assets/js/dashboard/util",
+        "to": "assets/js/dashboard",
+        "count": 12
+      },
+      {
+        "from": "assets/js/dashboard/annotations",
+        "to": "assets/js/dashboard",
+        "count": 11
+      },
+      {
+        "from": "assets/js/dashboard/filtering",
+        "to": "assets/js/dashboard",
+        "count": 11
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/filtering",
+        "count": 11
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/util",
+        "count": 11
+      },
+      {
+        "from": "assets/js/dashboard/hooks",
+        "to": "assets/js/dashboard",
+        "count": 10
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard",
+        "count": 9
+      },
+      {
+        "from": "assets/js/dashboard/segments",
+        "to": "assets/js/dashboard",
+        "count": 9
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 9
+      },
+      {
+        "from": "assets/js/dashboard/extra/exploration",
+        "to": "assets/js/dashboard",
+        "count": 8
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/js/dashboard",
+        "count": 8
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 8
+      },
+      {
+        "from": "assets/js/dashboard/segments",
+        "to": "assets/js/dashboard/filtering",
+        "count": 7
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/util",
+        "count": 7
+      },
+      {
+        "from": "assets/js/dashboard/stats/devices",
+        "to": "assets/js/dashboard",
+        "count": 7
+      },
+      {
+        "from": "assets/js/dashboard/stats/pages",
+        "to": "assets/js/dashboard",
+        "count": 7
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/navigation",
+        "count": 7
+      },
+      {
+        "from": "tracker/test/installation_support",
+        "to": "tracker/test/support",
+        "count": 7
+      },
+      {
+        "from": "assets/js/dashboard/annotations",
+        "to": "assets/js/dashboard/components",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/extra/exploration",
+        "to": "assets/js/dashboard/util",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/extra/funnel",
+        "to": "assets/js/dashboard",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/filtering",
+        "to": "assets/js/dashboard/util",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/components",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/segments",
+        "to": "assets/js/dashboard/components",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/util",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/stats/pages",
+        "to": "assets/js/dashboard/stats",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/stats",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/util",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard",
+        "count": 6
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard/util",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/extra/exploration",
+        "to": "assets/js/dashboard/components",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/extra/funnel",
+        "to": "assets/js/dashboard/util",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/navigation",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/test-utils",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/components",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/devices",
+        "to": "assets/js/dashboard/stats",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/devices",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/components",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/stats",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/components",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/util",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/pages",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/pages",
+        "to": "assets/js/dashboard/util",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/reports",
+        "to": "assets/js/dashboard",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/reports",
+        "to": "assets/js/dashboard/stats",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/stats/reports",
+        "to": "assets/js/dashboard/util",
+        "count": 5
+      },
+      {
+        "from": "assets/js",
+        "to": "assets/js/dashboard",
+        "count": 5
+      },
+      {
+        "from": "assets/test-utils",
+        "to": "assets/js/dashboard",
+        "count": 5
+      },
+      {
+        "from": "assets/js/dashboard/hooks",
+        "to": "assets/js/dashboard/util",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/filtering",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/stats",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/js/dashboard/util",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/annotations",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/stats",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/test-utils",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard/util",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/components",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/graph",
+        "count": 4
+      },
+      {
+        "from": "assets/js",
+        "to": "assets/js/liveview",
+        "count": 4
+      },
+      {
+        "from": "tracker/test/support",
+        "to": "tracker/compiler",
+        "count": 4
+      },
+      {
+        "from": "assets/js/dashboard/annotations",
+        "to": "assets/js/dashboard/util",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/hooks",
+        "to": "assets/js/dashboard/stats",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/query-periods",
+        "to": "assets/js/dashboard/components",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/query-periods",
+        "to": "assets/js/dashboard/navigation",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/query-periods",
+        "to": "assets/js/dashboard/util",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/nav-menu/segments",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/navigation",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/stats/graph",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/segments",
+        "to": "assets/js/dashboard/navigation",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/stats/devices",
+        "to": "assets/js/dashboard/util",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/hooks",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/components",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/stats",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/hooks",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/sources",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/test-utils",
+        "count": 3
+      },
+      {
+        "from": "tracker/test/installation_support",
+        "to": "tracker/installation_support",
+        "count": 3
+      },
+      {
+        "from": "assets/js/dashboard/annotations",
+        "to": "assets/js/dashboard/navigation",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/annotations",
+        "to": "assets/js/dashboard/stats/graph",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard/hooks",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/error",
+        "to": "assets/js/dashboard",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/filtering",
+        "to": "assets/js/dashboard/navigation",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/hooks",
+        "to": "assets/js/dashboard/stats/graph",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/query-periods",
+        "to": "assets/js/dashboard/nav-menu",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/nav-menu",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/navigation",
+        "to": "assets/js/dashboard/filtering",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/segments",
+        "to": "assets/js/dashboard/util",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/segments",
+        "to": "assets/test-utils",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/js/dashboard/components",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/js/dashboard/stats",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/js/dashboard/stats/graph",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/devices",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/graph",
+        "to": "assets/js/dashboard/navigation",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/navigation",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/pages",
+        "to": "assets/js/dashboard/components",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/pages",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/reports",
+        "to": "assets/js/dashboard/components",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/components",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/hooks",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats/sources",
+        "to": "assets/js/dashboard/stats/pages",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard/components",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard/navigation",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/util",
+        "to": "assets/js/dashboard/filtering",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/filtering",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/nav-menu",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/devices",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/locations",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/pages",
+        "count": 2
+      },
+      {
+        "from": "assets/js",
+        "to": "assets/js/dashboard/error",
+        "count": 2
+      },
+      {
+        "from": "assets/js",
+        "to": "assets/js/dashboard/util",
+        "count": 2
+      },
+      {
+        "from": "assets/test-utils",
+        "to": "assets/js/dashboard/filtering",
+        "count": 2
+      },
+      {
+        "from": "assets/test-utils",
+        "to": "assets/js/dashboard/stats/graph",
+        "count": 2
+      },
+      {
+        "from": "e2e/tests/site-settings",
+        "to": "e2e/tests",
+        "count": 2
+      },
+      {
+        "from": "tracker",
+        "to": "tracker/compiler",
+        "count": 2
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard/navigation",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard/stats",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard/stats/behaviours",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/components",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/error",
+        "to": "assets/js/dashboard/navigation",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/error",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/extra/funnel",
+        "to": "assets/js/dashboard/components",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/extra/funnel",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/extra/funnel",
+        "to": "assets/js/dashboard/stats",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/extra/funnel",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/filtering",
+        "to": "assets/test-utils",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/query-periods",
+        "to": "assets/test-utils",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/segments",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu/segments",
+        "to": "assets/js/dashboard/util",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/nav-menu/query-periods",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/stats",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/nav-menu",
+        "to": "assets/js/dashboard/stats/csv-export",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/navigation",
+        "to": "assets/js/dashboard/annotations",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/navigation",
+        "to": "assets/js/dashboard/segments",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/navigation",
+        "to": "assets/js/dashboard/util",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/extra/exploration",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/extra/funnel",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/stats/modals",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/behaviours",
+        "to": "assets/js/dashboard/stats/pages",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/csv-export",
+        "to": "assets/test-utils",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/devices",
+        "to": "assets/js/dashboard/components",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/data",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/locations",
+        "to": "assets/js/dashboard/navigation",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/stats/behaviours",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/stats/pages",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/modals",
+        "to": "assets/js/dashboard/stats/sources",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats/reports",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/stats",
+        "to": "assets/js/dashboard/stats/sources",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/verification",
+        "to": "assets/js/dashboard/navigation",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard/verification",
+        "to": "assets/test-utils",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/annotations",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/error",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/hooks",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/nav-menu/segments",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/segments",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/behaviours",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/csv-export",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/stats/reports",
+        "count": 1
+      },
+      {
+        "from": "assets/js/dashboard",
+        "to": "assets/js/dashboard/verification",
+        "count": 1
+      },
+      {
+        "from": "assets/js",
+        "to": "assets/js/dashboard/filtering",
+        "count": 1
+      },
+      {
+        "from": "assets/js",
+        "to": "assets/js/polyfills",
+        "count": 1
+      },
+      {
+        "from": "assets/test-utils",
+        "to": "assets/js/dashboard/navigation",
+        "count": 1
+      },
+      {
+        "from": "tracker/compiler",
+        "to": "tracker",
+        "count": 1
+      },
+      {
+        "from": "tracker/installation_support",
+        "to": "tracker/installation_support/autoconsent-rules/autoconsent",
+        "count": 1
+      },
+      {
+        "from": "tracker/installation_support",
+        "to": "tracker/test/support",
+        "count": 1
+      },
+      {
+        "from": "tracker/test/support",
+        "to": "tracker",
+        "count": 1
+      }
+    ],
+    "external": [
+      {
+        "name": "react",
+        "files": 156
+      },
+      {
+        "name": "classnames",
+        "files": 57
+      },
+      {
+        "name": "@playwright/test",
+        "files": 46
+      },
+      {
+        "name": "@heroicons/react",
+        "files": 23
+      },
+      {
+        "name": "@testing-library/react",
+        "files": 19
+      },
+      {
+        "name": "@tanstack/react-query",
+        "files": 15
+      },
+      {
+        "name": "react-router-dom",
+        "files": 15
+      },
+      {
+        "name": "@headlessui/react",
+        "files": 13
+      },
+      {
+        "name": "@testing-library/user-event",
+        "files": 9
+      },
+      {
+        "name": "dayjs",
+        "files": 6
+      },
+      {
+        "name": "react-dom",
+        "files": 5
+      },
+      {
+        "name": "jsdom-testing-mocks",
+        "files": 4
+      },
+      {
+        "name": "react-popper",
+        "files": 4
+      },
+      {
+        "name": "@eslint/js",
+        "files": 3
+      },
+      {
+        "name": "d3",
+        "files": 3
+      },
+      {
+        "name": "eslint-config-prettier",
+        "files": 3
+      },
+      {
+        "name": "typescript-eslint",
+        "files": 3
+      },
+      {
+        "name": "@js-joda/core",
+        "files": 2
+      },
+      {
+        "name": "@jsonurl/jsonurl",
+        "files": 2
+      },
+      {
+        "name": "alpinejs",
+        "files": 2
+      }
+    ],
+    "unresolved": 27
+  },
+  "coChange": {
+    "chart": "arc",
+    "available": true,
+    "pairCount": 55475,
+    "bulkCommitsSkipped": 23,
+    "rolledUp": true,
+    "rollUpNote": "Only the 30 most frequent of 55475 file pairs are shown.",
+    "pairs": [
+      {
+        "a": "lib/plausible_web/controllers/site_controller.ex",
+        "b": "test/plausible_web/controllers/site_controller_test.exs",
+        "count": 84
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "b": "lib/plausible_web/controllers/stats_controller.ex",
+        "count": 65
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "count": 64
+      },
+      {
+        "a": "lib/plausible_web/controllers/site_controller.ex",
+        "b": "lib/plausible_web/router.ex",
+        "count": 63
+      },
+      {
+        "a": "lib/plausible_web/controllers/stats_controller.ex",
+        "b": "test/plausible_web/controllers/stats_controller_test.exs",
+        "count": 62
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/external_controller.ex",
+        "b": "test/plausible_web/controllers/api/external_controller_test.exs",
+        "count": 59
+      },
+      {
+        "a": "config/runtime.exs",
+        "b": "mix.exs",
+        "count": 58
+      },
+      {
+        "a": "lib/plausible/stats/query.ex",
+        "b": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "count": 58
+      },
+      {
+        "a": "lib/plausible/billing/billing.ex",
+        "b": "test/plausible/billing/billing_test.exs",
+        "count": 55
+      },
+      {
+        "a": "lib/plausible_web/controllers/auth_controller.ex",
+        "b": "test/plausible_web/controllers/auth_controller_test.exs",
+        "count": 55
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "lib/plausible_web/router.ex",
+        "count": 51
+      },
+      {
+        "a": "lib/plausible_web/router.ex",
+        "b": "test/plausible_web/controllers/site_controller_test.exs",
+        "count": 50
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "b": "test/plausible_web/controllers/api/stats_controller/main_graph_test.exs",
+        "count": 44
+      },
+      {
+        "a": "lib/plausible/stats/clickhouse.ex",
+        "b": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "count": 41
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "b": "lib/plausible_web/router.ex",
+        "count": 41
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "b": "test/plausible_web/controllers/api/stats_controller/pages_test.exs",
+        "count": 41
+      },
+      {
+        "a": "lib/plausible_web/controllers/auth_controller.ex",
+        "b": "lib/plausible_web/controllers/site_controller.ex",
+        "count": 41
+      },
+      {
+        "a": "lib/plausible/application.ex",
+        "b": "mix.exs",
+        "count": 40
+      },
+      {
+        "a": "lib/plausible/sites.ex",
+        "b": "lib/plausible_web/controllers/site_controller.ex",
+        "count": 40
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "config/runtime.exs",
+        "count": 38
+      },
+      {
+        "a": "config/runtime.exs",
+        "b": "lib/plausible/application.ex",
+        "count": 38
+      },
+      {
+        "a": "lib/plausible/sites.ex",
+        "b": "test/plausible_web/controllers/site_controller_test.exs",
+        "count": 38
+      },
+      {
+        "a": "lib/plausible_web/controllers/stats_controller.ex",
+        "b": "lib/plausible_web/router.ex",
+        "count": 38
+      },
+      {
+        "a": "lib/plausible/stats/base.ex",
+        "b": "lib/plausible/stats/query.ex",
+        "count": 37
+      },
+      {
+        "a": "lib/plausible_web/controllers/auth_controller.ex",
+        "b": "lib/plausible_web/router.ex",
+        "count": 36
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "lib/plausible_web/controllers/stats_controller.ex",
+        "count": 35
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/external_stats_controller.ex",
+        "b": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "count": 35
+      },
+      {
+        "a": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "b": "test/plausible_web/controllers/api/stats_controller/top_stats_test.exs",
+        "count": 34
+      },
+      {
+        "a": "lib/plausible/stats/base.ex",
+        "b": "lib/plausible_web/controllers/api/stats_controller.ex",
+        "count": 33
+      },
+      {
+        "a": "test/plausible_web/controllers/api/stats_controller/browsers_test.exs",
+        "b": "test/plausible_web/controllers/api/stats_controller/operating_systems_test.exs",
+        "count": 33
+      }
+    ]
+  }
+}

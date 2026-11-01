@@ -1,0 +1,71 @@
+{
+  "title": "ripgrep — codebase report",
+  "summary": "ripgrep (rg) is a line-oriented recursive search tool written in Rust: it walks a directory tree, skips what .gitignore, hidden-file and file-type rules exclude, and prints lines that match a regex. The repo is a Cargo workspace of one binary (crates/core, built as rg) and a set of library crates that the binary uses through the grep facade crate (search) and the ignore crate (directory walk); the measured tree holds 223 files and 75500 lines, of which 55477 are Rust. Start at crates/core/main.rs (main, run, search_parallel), then follow one file through the searcher and printer crates, and read the ignore crate when you need to know why a path was or was not searched. History is available (2239 commits since 2016). No ER diagram, sitemap, state, journey or swimlane chart: there is no database, no site, no status lifecycle and no multi-role process in the code. All four core charts are drawn.",
+  "diagrams": [
+    {
+      "file": "01-stack.dgmo",
+      "title": "The stack",
+      "text": "The binary crate (rg) depends on two things: the grep facade, which re-exports the cli, matcher, regex, searcher and printer crates (and pcre2 when the feature is on), and the ignore crate, which does the directory walk. Every engine and printer is written against the Matcher trait in grep-matcher, so the Rust regex engine and PCRE2 are interchangeable. Read this first: it tells you which crate to open for which question. Third-party crates are left out to keep the picture readable."
+    },
+    {
+      "file": "02-sizes.dgmo",
+      "title": "Size by directory",
+      "text": "Lines of code by directory, 223 files rolled up to 25 directories, two levels deep. The crates directory dominates, and crates/core (the binary, mostly flag definitions) is the largest single crate at 14431 lines, ahead of crates/ignore at 10195. Two big boxes are not source: benchsuite/runs (7794 lines of recorded benchmark output) and tests/data. Where a directory also holds files of its own, they appear as \"(files directly here)\"."
+    },
+    {
+      "file": "03-languages.dgmo",
+      "title": "Languages",
+      "text": "Rust is 55477 of the measured lines, and Markdown (5285) is a distant second because the guide, FAQ and changelog live in the repo. YAML, TOML, Shell and Ruby are CI, manifests, scripts and the Homebrew formula. The chart does not show 77 files (1070847 bytes) that no language rule classified, mostly the benchmark run data (csv and summary files), compressed test fixtures and the zsh completion file."
+    },
+    {
+      "file": "04-history.dgmo",
+      "title": "History",
+      "text": "The repo has 2239 commits and 274 tags, too many to draw. Only the newest 15 of 274 tags are shown, plus the 5 largest commits by lines changed. The largest commit is the move of all source into the crates directory (226 files, 72924 lines, 2020-02-17); the clap-to-lexopt flag parser change (20699 lines, 2023-11-20) is next. Tags are per crate (ignore, globset, grep-*) as well as for ripgrep itself, so crate releases dominate the recent timeline."
+    },
+    {
+      "file": "05-startup.dgmo",
+      "title": "Startup: argv to a run mode",
+      "text": "main calls flags::parse, which parses argv into a low-level LowArgs struct, optionally prepends arguments from the file named by RIPGREP_CONFIG_PATH and parses again, then converts the result into HiArgs. Help and version requests short-circuit before the config is read. run then matches on the mode: search (single or multi-threaded), file listing, type listing or generating completions and man pages. Everything later in the report starts from a HiArgs."
+    },
+    {
+      "file": "06-search-file.dgmo",
+      "title": "One file through the search pipeline",
+      "text": "search_parallel asks HiArgs for a matcher, a searcher and a printer, wraps them in a SearchWorker, and runs the directory walk with one closure per thread. For each file the worker picks a path (stdin, preprocessor, decompression or plain), and the searcher, here the memory-mapped slice path, scans line by line, asks the matcher for a candidate line and hands each match to the printer's sink. The sink writes into a per-file buffer that main prints in one locked write, which keeps output from different threads from interleaving."
+    },
+    {
+      "file": "07-parallel-walk.dgmo",
+      "title": "The parallel directory walk",
+      "text": "WalkParallel gives each thread a work-stealing deque (crossbeam_deque) seeded with the root paths. A worker pops or steals an entry; for a directory it reads it, visits it, asks the Ignore matcher about each child and pushes the kept children back as new work. The caller's closure is run for every entry the walk visits. When a worker has nothing to pop or steal it marks itself idle and polls; when every worker is idle, the walk ends."
+    },
+    {
+      "file": "08-ignore-rules.dgmo",
+      "title": "How a path is ignored",
+      "text": "Ignore::matched answers in a fixed order: explicit overrides (the --glob flag) win, then the ignore files (.ignore, .gitignore, git exclude), then file-type filters, and only if nothing matched does the hidden-file check apply. A whitelist match from an ignore file or a type is remembered and returned if nothing later ignores the path. The same function serves the single-threaded Walk and the parallel Worker, so both walks skip the same paths."
+    },
+    {
+      "file": "09-search-strategy.dgmo",
+      "title": "How the searcher reads a file",
+      "text": "Searcher::search_path ends in one of three line-search strategies. If a memory map is allowed and opens, it searches the mapped slice (SliceByLine); ripgrep only allows maps when at most 10 explicit paths are given and all are files. Otherwise it reads the whole file onto the heap for multi-line search (MultiLine), or streams it through a decoder and a rolling line buffer (ReadByLine). Knowing which of these runs explains most performance differences between invocations."
+    },
+    {
+      "file": "10-engine-choice.dgmo",
+      "title": "Which regex engine builds the matcher",
+      "text": "HiArgs::matcher looks at the engine flag. The default builds the Rust regex matcher and, on failure, returns an error that suggests PCRE2; the pcre2 choice builds only PCRE2; auto tries Rust first and falls back to PCRE2, printing both errors if both fail. PCRE2 exists only when ripgrep is built with the pcre2 feature."
+    },
+    {
+      "file": "11-hot-files.dgmo",
+      "title": "Hot files",
+      "text": "Each bubble is a file edited between 2025-10-27 and 2026-10-27: lines on the x axis, commits on the y axis, bytes as bubble size. Only the 40 most edited of 59 edited files are shown. The most edited file is crates/ignore/Cargo.toml (13 commits), but it is a 44-line manifest; the file that stands out by size is crates/core/flags/defs.rs (7779 lines, 5 commits), the table of every flag. Point labels are off because the names overlap; the source file lists each file with its numbers."
+    },
+    {
+      "file": "12-imports.dgmo",
+      "title": "Module imports",
+      "text": "169 file imports rolled up to 10 links between 8 directories, up to 4 levels deep. Imports between crates are not drawn, because they go through crate names such as grep_searcher and count as external, so this chart shows only how modules inside crates/core (flags, its complete and doc submodules), crates/printer and crates/searcher refer to their own parents and children. Read the stack chart for the crate-level dependencies."
+    },
+    {
+      "file": "13-co-change.dgmo",
+      "title": "Files that change together",
+      "text": "Pairs of files that were edited in the same commit most often. Only the 30 most frequent of 3301 file pairs are shown. 1 bulk commit touching more than 50 files was skipped. The strongest pair is CHANGELOG.md with tests/regression.rs (48 commits): regression fixes get a changelog entry. The Cargo.toml files of the crates move together too, because a version bump in one crate ripples through the others."
+    }
+  ]
+}

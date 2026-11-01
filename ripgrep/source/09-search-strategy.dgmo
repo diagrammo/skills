@@ -1,0 +1,29 @@
+flowchart How the searcher reads a file
+// From: crates/searcher/src/searcher/mod.rs:643-720,727-767,769-790; crates/searcher/src/searcher/glue.rs:11-52,97-131; crates/core/flags/hiargs.rs:222-248
+direction-tb
+
+(search_path) -> [Open the file]
+[Open the file] -> <Memory map enabled and opens?>
+<Memory map enabled and opens?> -yes-> [[search_slice]]
+<Memory map enabled and opens?> -no-> <File needs multi-line search?>
+<File needs multi-line search?> -yes-> [Read the whole file onto the heap]
+<File needs multi-line search?> -no-> [[search_reader]]
+[Read the whole file onto the heap] -> [[MultiLine run]]
+[[search_reader]] -> [Decode with encoding_rs]
+[Decode with encoding_rs] -> <Reader needs multi-line search?>
+<Reader needs multi-line search?> -yes-> [Read everything onto the heap]
+<Reader needs multi-line search?> -no-> [[ReadByLine run]]
+[Read everything onto the heap] -> [[MultiLine run]]
+[[search_slice]] -> <Slice needs transcoding?>
+<Slice needs transcoding?> -yes-> [[search_reader]]
+<Slice needs transcoding?> -no-> <Slice needs multi-line search?>
+<Slice needs multi-line search?> -yes-> [[MultiLine run]]
+<Slice needs multi-line search?> -no-> [[SliceByLine run]]
+
+note "Open the file" mod.rs:655 File::open
+note "Memory map enabled and opens?" mod.rs:689 mmap.open, enabled only for 10 file paths or fewer unless asked, hiargs.rs:236
+note search_slice mod.rs:769
+note search_reader mod.rs:727
+note "MultiLine run" glue.rs:166
+note "ReadByLine run" glue.rs:38 rolls a line buffer
+note "SliceByLine run" glue.rs:117 the fastest path

@@ -1,0 +1,1409 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-31T03:14:20.450Z",
+  "repo": {
+    "name": "fastapi",
+    "git": true,
+    "shallow": false,
+    "commit": "79cab5bed28b24d92c185d236feb33f5783dfeb3"
+  },
+  "limits": {
+    "sizes": {
+      "maxFiles": 40,
+      "maxGroups": 40,
+      "rule": "Past maxFiles files, sizes roll up to the top two directory levels, except that a directory holding more than maxFiles files of its own shows them as files; past maxGroups groups, the smallest join \"(other)\"."
+    },
+    "languages": {
+      "maxSlices": 6,
+      "rule": "Past maxSlices languages, the smallest join \"Other\"."
+    },
+    "history": {
+      "maxTags": 15,
+      "largestCommits": 5,
+      "rule": "History is the tags plus the largestCommits biggest commits by lines changed; past maxTags tags, only the newest maxTags are kept."
+    },
+    "edits": {
+      "months": 12,
+      "maxFiles": 40,
+      "rule": "Edits count commits in the months up to the newest commit; past maxFiles files, only the most edited maxFiles are kept."
+    },
+    "imports": {
+      "maxNodes": 40,
+      "maxExternal": 20,
+      "rule": "Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If none fits, the shallowest depth that has links is used (files, when every import stays inside one directory) and its least connected nodes join \"(other)\". Only the maxExternal most used outside packages are listed."
+    },
+    "coChange": {
+      "maxPairs": 30,
+      "bulkCommitFiles": 50,
+      "rule": "Commits touching more than bulkCommitFiles files are skipped; past maxPairs pairs, only the most frequent maxPairs are kept."
+    }
+  },
+  "sizes": {
+    "chart": "treemap",
+    "total": {
+      "files": 3232,
+      "bytes": 34592801,
+      "lines": 403689
+    },
+    "rolledUp": true,
+    "rollUpNote": "3232 files rolled up to 443 boxes, two directory levels deep; docs/en/docs/img/sponsors, tests hold more than 40 files of their own, shown as files. The smallest 404 are shown as \"(other)\".",
+    "entries": [
+      {
+        "path": "docs/en",
+        "bytes": 15381673,
+        "lines": 39658,
+        "files": 320
+      },
+      {
+        "path": "tests/test_tutorial",
+        "bytes": 1095422,
+        "lines": 29871,
+        "files": 341
+      },
+      {
+        "path": "docs/de",
+        "bytes": 875767,
+        "lines": 18504,
+        "files": 126
+      },
+      {
+        "path": "docs/fr",
+        "bytes": 866009,
+        "lines": 18345,
+        "files": 126
+      },
+      {
+        "path": "docs/uk",
+        "bytes": 1163702,
+        "lines": 18297,
+        "files": 126
+      },
+      {
+        "path": "docs/es",
+        "bytes": 808973,
+        "lines": 18279,
+        "files": 126
+      },
+      {
+        "path": "docs/ru",
+        "bytes": 1201853,
+        "lines": 18265,
+        "files": 126
+      },
+      {
+        "path": "docs/pt",
+        "bytes": 817480,
+        "lines": 18265,
+        "files": 126
+      },
+      {
+        "path": "docs/tr",
+        "bytes": 815250,
+        "lines": 18255,
+        "files": 126
+      },
+      {
+        "path": "docs/ko",
+        "bytes": 869286,
+        "lines": 18246,
+        "files": 126
+      },
+      {
+        "path": "docs/ja",
+        "bytes": 938692,
+        "lines": 18236,
+        "files": 126
+      },
+      {
+        "path": "docs/zh-hant",
+        "bytes": 709201,
+        "lines": 18236,
+        "files": 126
+      },
+      {
+        "path": "docs/hi",
+        "bytes": 1269572,
+        "lines": 18235,
+        "files": 127
+      },
+      {
+        "path": "docs/zh",
+        "bytes": 712411,
+        "lines": 18214,
+        "files": 126
+      },
+      {
+        "path": "fastapi",
+        "bytes": 596806,
+        "lines": 16224,
+        "files": 24
+      },
+      {
+        "path": "tests/test_request_params",
+        "bytes": 402514,
+        "lines": 13643,
+        "files": 47
+      },
+      {
+        "path": "tests/test_include_router_defaults_overrides.py",
+        "bytes": 394863,
+        "lines": 7304,
+        "files": 1
+      },
+      {
+        "path": "tests/test_telemetry",
+        "bytes": 144854,
+        "lines": 4040,
+        "files": 16
+      },
+      {
+        "path": "scripts",
+        "bytes": 115198,
+        "lines": 3580,
+        "files": 16
+      },
+      {
+        "path": "scripts/tests",
+        "bytes": 65437,
+        "lines": 2027,
+        "files": 38
+      },
+      {
+        "path": "docs/en/docs/img/sponsors/jina.svg",
+        "bytes": 220435,
+        "lines": 1981,
+        "files": 1
+      },
+      {
+        "path": "tests/test_generate_unique_id_function.py",
+        "bytes": 76760,
+        "lines": 1699,
+        "files": 1
+      },
+      {
+        "path": "fastapi/dependencies",
+        "bytes": 63525,
+        "lines": 1698,
+        "files": 3
+      },
+      {
+        "path": "fastapi/security",
+        "bytes": 51902,
+        "lines": 1558,
+        "files": 7
+      },
+      {
+        "path": "fastapi/openapi",
+        "bytes": 56300,
+        "lines": 1498,
+        "files": 5
+      },
+      {
+        "path": ".github/workflows",
+        "bytes": 49261,
+        "lines": 1427,
+        "files": 18
+      },
+      {
+        "path": "tests/test_frontend.py",
+        "bytes": 42892,
+        "lines": 1415,
+        "files": 1
+      },
+      {
+        "path": "docs/en/docs/img/sponsors/cryptapi-banner.svg",
+        "bytes": 133690,
+        "lines": 1375,
+        "files": 1
+      },
+      {
+        "path": "tests/test_application.py",
+        "bytes": 58296,
+        "lines": 1285,
+        "files": 1
+      },
+      {
+        "path": "docs/en/docs/img/sponsors/cryptapi.svg",
+        "bytes": 111142,
+        "lines": 1216,
+        "files": 1
+      },
+      {
+        "path": "tests/test_router_include_context.py",
+        "bytes": 35008,
+        "lines": 1162,
+        "files": 1
+      },
+      {
+        "path": ".",
+        "bytes": 40329,
+        "lines": 1152,
+        "files": 7
+      },
+      {
+        "path": "tests/test_response_model_as_return_annotation.py",
+        "bytes": 51969,
+        "lines": 1121,
+        "files": 1
+      },
+      {
+        "path": "docs_src/security",
+        "bytes": 29397,
+        "lines": 1015,
+        "files": 15
+      },
+      {
+        "path": "fastapi/telemetry",
+        "bytes": 37384,
+        "lines": 978,
+        "files": 4
+      },
+      {
+        "path": "fastapi/.agents",
+        "bytes": 23678,
+        "lines": 925,
+        "files": 7
+      },
+      {
+        "path": "tests/test_union_form_normalization.py",
+        "bytes": 30311,
+        "lines": 870,
+        "files": 1
+      },
+      {
+        "path": "tests/test_schema_extra_examples.py",
+        "bytes": 35532,
+        "lines": 857,
+        "files": 1
+      },
+      {
+        "path": "tests/test_path.py",
+        "bytes": 21003,
+        "lines": 780,
+        "files": 1
+      },
+      {
+        "path": "(other)",
+        "bytes": 4179024,
+        "lines": 43953,
+        "files": 839
+      }
+    ]
+  },
+  "languages": {
+    "chart": "pie",
+    "rolledUp": true,
+    "rollUpNote": "3 smaller languages are shown as \"Other\": TOML, HTML, Shell.",
+    "slices": [
+      {
+        "language": "Markdown",
+        "files": 1705,
+        "lines": 249873,
+        "bytes": 12669828
+      },
+      {
+        "language": "Python",
+        "files": 1219,
+        "lines": 131859,
+        "bytes": 4626334
+      },
+      {
+        "language": "YAML",
+        "files": 40,
+        "lines": 7131,
+        "bytes": 257271
+      },
+      {
+        "language": "CSS",
+        "files": 3,
+        "lines": 681,
+        "bytes": 16161
+      },
+      {
+        "language": "JavaScript",
+        "files": 4,
+        "lines": 614,
+        "bytes": 23658
+      },
+      {
+        "language": "Other",
+        "files": 12,
+        "lines": 635,
+        "bytes": 20942
+      }
+    ],
+    "unclassified": {
+      "files": 249,
+      "bytes": 16978607
+    }
+  },
+  "history": {
+    "chart": "event-line",
+    "available": true,
+    "commits": 7930,
+    "firstCommit": "2018-12-05T10:56:50+04:00",
+    "lastCommit": "2026-10-26T10:29:12Z",
+    "tagCount": 347,
+    "rolledUp": true,
+    "rollUpNote": "Only the newest 15 of 347 tags are shown.",
+    "tags": [
+      {
+        "name": "0.156.4",
+        "date": "2026-10-21T00:55:51+02:00",
+        "sha": "b2ce629ace6bdd152d577e5f5e256a079ac1e4fd"
+      },
+      {
+        "name": "0.156.5",
+        "date": "2026-10-21T09:23:15+02:00",
+        "sha": "43f46fb14feeee78f4077a55eb3f95f792b7cd9d"
+      },
+      {
+        "name": "0.156.6",
+        "date": "2026-10-21T09:54:58+02:00",
+        "sha": "3b39c91cd1f221042313634db901c64615bb4fb5"
+      },
+      {
+        "name": "0.156.7",
+        "date": "2026-10-21T10:14:55+02:00",
+        "sha": "7417100c8a543ee926c3d2ee7b9c0fdbbc1fa045"
+      },
+      {
+        "name": "0.156.8",
+        "date": "2026-10-21T10:39:14+02:00",
+        "sha": "de3e9af164bd2bf7a03be440baab4b4ded246cfc"
+      },
+      {
+        "name": "0.157.0",
+        "date": "2026-10-21T15:54:47+02:00",
+        "sha": "386a28af2f87af1a32ac26d88f07b7f58ab2dfb1"
+      },
+      {
+        "name": "0.158.0",
+        "date": "2026-10-21T18:55:28+02:00",
+        "sha": "3c0103a832b5ae46286ccca88678b0e5a455ba92"
+      },
+      {
+        "name": "0.158.1",
+        "date": "2026-10-21T19:45:10+02:00",
+        "sha": "ed39e8b192a24da5b6b609436403da11ad4a93e8"
+      },
+      {
+        "name": "0.158.2",
+        "date": "2026-10-21T21:18:05+02:00",
+        "sha": "e4c5d0293470f107bc0b4886f484a48c1315d091"
+      },
+      {
+        "name": "0.159.0",
+        "date": "2026-10-21T22:03:18+02:00",
+        "sha": "68cc4cbb2e0600841b0d6bdd1cc29038b54a00e6"
+      },
+      {
+        "name": "0.159.1",
+        "date": "2026-10-21T22:49:11+02:00",
+        "sha": "4bdfbe4513084b19e22421ce1f916d8c1ac462a0"
+      },
+      {
+        "name": "0.160.0",
+        "date": "2026-10-22T18:49:26+02:00",
+        "sha": "addd0778e996cf886972b8024113d79f8d0a3580"
+      },
+      {
+        "name": "0.161.0",
+        "date": "2026-10-22T20:27:20+02:00",
+        "sha": "80c8742d141e67beaf747343405c8facf999bc0c"
+      },
+      {
+        "name": "0.161.1",
+        "date": "2026-10-22T21:13:01+02:00",
+        "sha": "69ddc2badf9da1123bba4d360225ae6b085985f6"
+      },
+      {
+        "name": "0.162.0",
+        "date": "2026-10-23T20:45:33+02:00",
+        "sha": "7a0a3f0b286c6c865cf4398ea0e957a87b8bffa4"
+      }
+    ],
+    "largestCommits": [
+      {
+        "sha": "50c1a928fbb7aea45e05baadb879c582052b4cf7",
+        "date": "2023-05-08T23:07:32+02:00",
+        "subject": "✅ Refactor OpenAPI tests, prepare for Pydantic v2 (#9503)",
+        "files": 280,
+        "linesChanged": 68216
+      },
+      {
+        "sha": "0cd844d3877e6ae9e9fce1c99ea68327254e9b6a",
+        "date": "2024-08-05T23:48:30-05:00",
+        "subject": "🔧 Update docs setup with latest configs and plugins (#11953)",
+        "files": 643,
+        "linesChanged": 58887
+      },
+      {
+        "sha": "9f4ecf562cffd79a2d6bff0eb333df5669bd70e1",
+        "date": "2026-02-08T10:18:38Z",
+        "subject": "✅ Add inline snapshot tests for OpenAPI before changes from Pydantic v2 (#14864)",
+        "files": 248,
+        "linesChanged": 56276
+      },
+      {
+        "sha": "6205935323ded4767438ee81623892621b353415",
+        "date": "2020-03-26T20:09:53+01:00",
+        "subject": ":sparkles: Add support for docs translations (#1168)",
+        "files": 764,
+        "linesChanged": 38448
+      },
+      {
+        "sha": "1c711e71472a68fd6d6e00068e803104707ed4cc",
+        "date": "2024-11-18T03:25:44+01:00",
+        "subject": "📝 Update includes format in docs with an automated script (#12950)",
+        "files": 440,
+        "linesChanged": 27116
+      }
+    ]
+  },
+  "edits": {
+    "chart": "scatter",
+    "available": true,
+    "window": {
+      "since": "2025-10-26T10:29:12.000Z",
+      "until": "2026-10-26T10:29:12.000Z"
+    },
+    "editedFiles": 2709,
+    "rolledUp": true,
+    "rollUpNote": "Only the 40 most edited of 2709 edited files are shown.",
+    "files": [
+      {
+        "path": "docs/en/docs/release-notes.md",
+        "edits": 986,
+        "bytes": 728184,
+        "lines": 7802
+      },
+      {
+        "path": "fastapi/__init__.py",
+        "edits": 125,
+        "bytes": 1081,
+        "lines": 25
+      },
+      {
+        "path": "fastapi/dependencies/utils.py",
+        "edits": 71,
+        "bytes": 55433,
+        "lines": 1464
+      },
+      {
+        "path": "pyproject.toml",
+        "edits": 59,
+        "bytes": 12441,
+        "lines": 426
+      },
+      {
+        "path": ".github/workflows/test.yml",
+        "edits": 55,
+        "bytes": 12508,
+        "lines": 332
+      },
+      {
+        "path": "fastapi/routing.py",
+        "edits": 49,
+        "bytes": 260393,
+        "lines": 6552
+      },
+      {
+        "path": "docs/en/mkdocs.yml",
+        "edits": 35,
+        "bytes": 9156,
+        "lines": 333
+      },
+      {
+        "path": "README.md",
+        "edits": 32,
+        "bytes": 22228,
+        "lines": 533
+      },
+      {
+        "path": "fastapi/_compat/v2.py",
+        "edits": 27,
+        "bytes": 17954,
+        "lines": 500
+      },
+      {
+        "path": "scripts/docs.py",
+        "edits": 26,
+        "bytes": 32404,
+        "lines": 919
+      },
+      {
+        "path": ".github/workflows/build-docs.yml",
+        "edits": 25,
+        "bytes": 4298,
+        "lines": 129
+      },
+      {
+        "path": "docs/en/data/sponsors.yml",
+        "edits": 25,
+        "bytes": 3143,
+        "lines": 59
+      },
+      {
+        "path": ".github/workflows/translate.yml",
+        "edits": 24,
+        "bytes": 5295,
+        "lines": 148
+      },
+      {
+        "path": ".pre-commit-config.yaml",
+        "edits": 24,
+        "bytes": 3657,
+        "lines": 114
+      },
+      {
+        "path": "fastapi/openapi/utils.py",
+        "edits": 24,
+        "bytes": 29114,
+        "lines": 671
+      },
+      {
+        "path": "scripts/translate.py",
+        "edits": 21,
+        "bytes": 16996,
+        "lines": 489
+      },
+      {
+        "path": ".github/workflows/pre-commit.yml",
+        "edits": 20,
+        "bytes": 3912,
+        "lines": 108
+      },
+      {
+        "path": "docs/en/docs/index.md",
+        "edits": 19,
+        "bytes": 25185,
+        "lines": 581
+      },
+      {
+        "path": ".github/workflows/deploy-docs.yml",
+        "edits": 18,
+        "bytes": 3223,
+        "lines": 84
+      },
+      {
+        "path": "fastapi/applications.py",
+        "edits": 18,
+        "bytes": 185155,
+        "lines": 4816
+      },
+      {
+        "path": ".github/workflows/smokeshow.yml",
+        "edits": 17,
+        "bytes": 2051,
+        "lines": 59
+      },
+      {
+        "path": ".github/workflows/publish.yml",
+        "edits": 15,
+        "bytes": 944,
+        "lines": 37
+      },
+      {
+        "path": ".github/workflows/sponsors.yml",
+        "edits": 14,
+        "bytes": 2041,
+        "lines": 60
+      },
+      {
+        "path": "docs/en/data/topic_repos.yml",
+        "edits": 14,
+        "bytes": 16294,
+        "lines": 496
+      },
+      {
+        "path": "fastapi/dependencies/models.py",
+        "edits": 14,
+        "bytes": 8092,
+        "lines": 234
+      },
+      {
+        "path": "fastapi/params.py",
+        "edits": 14,
+        "bytes": 28792,
+        "lines": 799
+      },
+      {
+        "path": ".github/workflows/topic-repos.yml",
+        "edits": 13,
+        "bytes": 1440,
+        "lines": 48
+      },
+      {
+        "path": "docs/en/docs/tutorial/first-steps.md",
+        "edits": 13,
+        "bytes": 14155,
+        "lines": 427
+      },
+      {
+        "path": "docs/en/docs/css/custom.css",
+        "edits": 12,
+        "bytes": 13688,
+        "lines": 558
+      },
+      {
+        "path": "docs/de/docs/index.md",
+        "edits": 11,
+        "bytes": 27470,
+        "lines": 581
+      },
+      {
+        "path": "docs/en/docs/tutorial/bigger-applications.md",
+        "edits": 11,
+        "bytes": 20394,
+        "lines": 546
+      },
+      {
+        "path": "docs/en/docs/tutorial/request-form-models.md",
+        "edits": 11,
+        "bytes": 4830,
+        "lines": 132
+      },
+      {
+        "path": "docs/en/overrides/main.html",
+        "edits": 11,
+        "bytes": 3618,
+        "lines": 98
+      },
+      {
+        "path": "docs/pt/docs/index.md",
+        "edits": 11,
+        "bytes": 26581,
+        "lines": 581
+      },
+      {
+        "path": ".github/workflows/test-redistribute.yml",
+        "edits": 10,
+        "bytes": 1866,
+        "lines": 62
+      },
+      {
+        "path": "docs/en/docs/contributing.md",
+        "edits": 10,
+        "bytes": 271,
+        "lines": 7
+      },
+      {
+        "path": "docs/en/docs/tutorial/query-params-str-validations.md",
+        "edits": 10,
+        "bytes": 17098,
+        "lines": 458
+      },
+      {
+        "path": "docs/en/docs/tutorial/response-model.md",
+        "edits": 10,
+        "bytes": 15890,
+        "lines": 348
+      },
+      {
+        "path": "docs/es/docs/index.md",
+        "edits": 10,
+        "bytes": 26464,
+        "lines": 581
+      },
+      {
+        "path": "docs/ru/docs/index.md",
+        "edits": 10,
+        "bytes": 34766,
+        "lines": 581
+      }
+    ]
+  },
+  "imports": {
+    "chart": "arc",
+    "rolledUp": true,
+    "rollUpNote": "1807 file imports rolled up to 157 links between 95 directories, up to 2 levels deep. The 56 least connected are shown as \"(other)\".",
+    "nodes": [
+      "(other)",
+      "docs_src/additional_responses",
+      "docs_src/advanced_middleware",
+      "docs_src/app_testing",
+      "docs_src/behind_a_proxy",
+      "docs_src/body_multiple_params",
+      "docs_src/body_nested_models",
+      "docs_src/custom_request_and_route",
+      "docs_src/custom_response",
+      "docs_src/dependencies",
+      "docs_src/handling_errors",
+      "docs_src/header_param_models",
+      "docs_src/metadata",
+      "docs_src/path_operation_advanced_configuration",
+      "docs_src/path_operation_configuration",
+      "docs_src/path_params",
+      "docs_src/path_params_numeric_validations",
+      "docs_src/python_types",
+      "docs_src/query_param_models",
+      "docs_src/query_params_str_validations",
+      "docs_src/request_files",
+      "docs_src/request_form_models",
+      "docs_src/response_model",
+      "docs_src/schema_extra_example",
+      "docs_src/security",
+      "docs_src/server_sent_events",
+      "docs_src/templates",
+      "docs_src/websockets_",
+      "fastapi",
+      "fastapi/_compat",
+      "fastapi/dependencies",
+      "fastapi/openapi",
+      "fastapi/security",
+      "fastapi/telemetry",
+      "scripts",
+      "scripts/tests",
+      "tests",
+      "tests/test_request_params",
+      "tests/test_telemetry",
+      "tests/test_tutorial"
+    ],
+    "edges": [
+      {
+        "from": "tests",
+        "to": "fastapi",
+        "count": 475
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "fastapi",
+        "count": 256
+      },
+      {
+        "from": "(other)",
+        "to": "fastapi",
+        "count": 153
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "tests",
+        "count": 107
+      },
+      {
+        "from": "tests/test_request_params",
+        "to": "fastapi",
+        "count": 65
+      },
+      {
+        "from": "tests",
+        "to": "fastapi/security",
+        "count": 43
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "(other)",
+        "count": 32
+      },
+      {
+        "from": "docs_src/dependencies",
+        "to": "fastapi",
+        "count": 31
+      },
+      {
+        "from": "docs_src/query_params_str_validations",
+        "to": "fastapi",
+        "count": 30
+      },
+      {
+        "from": "tests/test_telemetry",
+        "to": "fastapi",
+        "count": 30
+      },
+      {
+        "from": "docs_src/custom_response",
+        "to": "fastapi",
+        "count": 29
+      },
+      {
+        "from": "docs_src/response_model",
+        "to": "fastapi",
+        "count": 16
+      },
+      {
+        "from": "docs_src/app_testing",
+        "to": "fastapi",
+        "count": 15
+      },
+      {
+        "from": "docs_src/handling_errors",
+        "to": "fastapi",
+        "count": 14
+      },
+      {
+        "from": "docs_src/request_files",
+        "to": "fastapi",
+        "count": 14
+      },
+      {
+        "from": "docs_src/request_form_models",
+        "to": "fastapi",
+        "count": 14
+      },
+      {
+        "from": "docs_src/security",
+        "to": "fastapi",
+        "count": 14
+      },
+      {
+        "from": "docs_src/security",
+        "to": "fastapi/security",
+        "count": 14
+      },
+      {
+        "from": "docs_src/custom_request_and_route",
+        "to": "fastapi",
+        "count": 12
+      },
+      {
+        "from": "docs_src/path_params_numeric_validations",
+        "to": "fastapi",
+        "count": 12
+      },
+      {
+        "from": "fastapi/openapi",
+        "to": "fastapi",
+        "count": 11
+      },
+      {
+        "from": "docs_src/server_sent_events",
+        "to": "fastapi",
+        "count": 10
+      },
+      {
+        "from": "scripts/tests",
+        "to": "scripts",
+        "count": 10
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/custom_response",
+        "count": 10
+      },
+      {
+        "from": "tests",
+        "to": "fastapi/_compat",
+        "count": 10
+      },
+      {
+        "from": "docs_src/body_multiple_params",
+        "to": "fastapi",
+        "count": 9
+      },
+      {
+        "from": "docs_src/body_nested_models",
+        "to": "fastapi",
+        "count": 9
+      },
+      {
+        "from": "docs_src/additional_responses",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "docs_src/header_param_models",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "docs_src/path_operation_advanced_configuration",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "docs_src/query_param_models",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "docs_src/schema_extra_example",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "docs_src/templates",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "docs_src/websockets_",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "fastapi/dependencies",
+        "to": "fastapi",
+        "count": 8
+      },
+      {
+        "from": "tests/test_telemetry",
+        "to": "fastapi/telemetry",
+        "count": 8
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/python_types",
+        "count": 8
+      },
+      {
+        "from": "docs_src/path_operation_configuration",
+        "to": "fastapi",
+        "count": 7
+      },
+      {
+        "from": "fastapi",
+        "to": "fastapi/_compat",
+        "count": 7
+      },
+      {
+        "from": "docs_src/path_params",
+        "to": "fastapi",
+        "count": 6
+      },
+      {
+        "from": "fastapi/security",
+        "to": "fastapi",
+        "count": 6
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/handling_errors",
+        "count": 6
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/path_params",
+        "count": 6
+      },
+      {
+        "from": "docs_src/behind_a_proxy",
+        "to": "fastapi",
+        "count": 5
+      },
+      {
+        "from": "docs_src/metadata",
+        "to": "fastapi",
+        "count": 5
+      },
+      {
+        "from": "fastapi/security",
+        "to": "fastapi/openapi",
+        "count": 5
+      },
+      {
+        "from": "fastapi",
+        "to": "fastapi/telemetry",
+        "count": 5
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/app_testing",
+        "count": 5
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/behind_a_proxy",
+        "count": 5
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/metadata",
+        "count": 5
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/path_operation_advanced_configuration",
+        "count": 5
+      },
+      {
+        "from": "fastapi/telemetry",
+        "to": "fastapi",
+        "count": 4
+      },
+      {
+        "from": "fastapi",
+        "to": "fastapi/openapi",
+        "count": 4
+      },
+      {
+        "from": "tests",
+        "to": "fastapi/dependencies",
+        "count": 4
+      },
+      {
+        "from": "tests",
+        "to": "fastapi/openapi",
+        "count": 4
+      },
+      {
+        "from": "(other)",
+        "to": "fastapi/openapi",
+        "count": 3
+      },
+      {
+        "from": "docs_src/advanced_middleware",
+        "to": "(other)",
+        "count": 3
+      },
+      {
+        "from": "docs_src/advanced_middleware",
+        "to": "fastapi",
+        "count": 3
+      },
+      {
+        "from": "fastapi/_compat",
+        "to": "fastapi",
+        "count": 3
+      },
+      {
+        "from": "fastapi",
+        "to": "fastapi/dependencies",
+        "count": 3
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/advanced_middleware",
+        "count": 3
+      },
+      {
+        "from": "fastapi/dependencies",
+        "to": "fastapi/_compat",
+        "count": 2
+      },
+      {
+        "from": "fastapi/dependencies",
+        "to": "fastapi/security",
+        "count": 2
+      },
+      {
+        "from": "fastapi/openapi",
+        "to": "fastapi/_compat",
+        "count": 2
+      },
+      {
+        "from": "fastapi/openapi",
+        "to": "fastapi/dependencies",
+        "count": 2
+      },
+      {
+        "from": "tests/test_request_params",
+        "to": "fastapi/_compat",
+        "count": 2
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/additional_responses",
+        "count": 2
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/dependencies",
+        "count": 2
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/path_operation_configuration",
+        "count": 2
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/response_model",
+        "count": 2
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/templates",
+        "count": 2
+      },
+      {
+        "from": "tests",
+        "to": "scripts",
+        "count": 2
+      },
+      {
+        "from": "(other)",
+        "to": "fastapi/security",
+        "count": 1
+      },
+      {
+        "from": "fastapi",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "fastapi/_compat",
+        "to": "fastapi/openapi",
+        "count": 1
+      },
+      {
+        "from": "fastapi",
+        "to": "fastapi/security",
+        "count": 1
+      },
+      {
+        "from": "tests",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "docs_src/websockets_",
+        "count": 1
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "fastapi/_compat",
+        "count": 1
+      },
+      {
+        "from": "tests/test_tutorial",
+        "to": "tests/test_telemetry",
+        "count": 1
+      }
+    ],
+    "external": [
+      {
+        "name": "pytest",
+        "files": 331
+      },
+      {
+        "name": "inline_snapshot",
+        "files": 307
+      },
+      {
+        "name": "pydantic",
+        "files": 272
+      },
+      {
+        "name": "typing",
+        "files": 254
+      },
+      {
+        "name": "importlib",
+        "files": 172
+      },
+      {
+        "name": "collections",
+        "files": 57
+      },
+      {
+        "name": "starlette",
+        "files": 53
+      },
+      {
+        "name": "pathlib",
+        "files": 38
+      },
+      {
+        "name": "dirty_equals",
+        "files": 33
+      },
+      {
+        "name": "os",
+        "files": 23
+      },
+      {
+        "name": "datetime",
+        "files": 20
+      },
+      {
+        "name": "unittest",
+        "files": 20
+      },
+      {
+        "name": "functools",
+        "files": 19
+      },
+      {
+        "name": "subprocess",
+        "files": 19
+      },
+      {
+        "name": "sys",
+        "files": 19
+      },
+      {
+        "name": "types",
+        "files": 19
+      },
+      {
+        "name": "warnings",
+        "files": 19
+      },
+      {
+        "name": "opentelemetry",
+        "files": 18
+      },
+      {
+        "name": "contextlib",
+        "files": 17
+      },
+      {
+        "name": "json",
+        "files": 17
+      }
+    ],
+    "unresolved": 6
+  },
+  "coChange": {
+    "chart": "arc",
+    "available": true,
+    "pairCount": 31162,
+    "bulkCommitsSkipped": 103,
+    "rolledUp": true,
+    "rollUpNote": "Only the 30 most frequent of 31162 file pairs are shown.",
+    "pairs": [
+      {
+        "a": "docs/en/docs/release-notes.md",
+        "b": "fastapi/__init__.py",
+        "count": 259
+      },
+      {
+        "a": "README.md",
+        "b": "docs/en/data/sponsors.yml",
+        "count": 98
+      },
+      {
+        "a": "fastapi/applications.py",
+        "b": "fastapi/routing.py",
+        "count": 60
+      },
+      {
+        "a": "README.md",
+        "b": "docs/en/overrides/main.html",
+        "count": 57
+      },
+      {
+        "a": "docs/en/data/sponsors.yml",
+        "b": "docs/en/overrides/main.html",
+        "count": 57
+      },
+      {
+        "a": "README.md",
+        "b": "docs/en/docs/index.md",
+        "count": 55
+      },
+      {
+        "a": "fastapi/dependencies/utils.py",
+        "b": "fastapi/routing.py",
+        "count": 50
+      },
+      {
+        "a": "fastapi/openapi/utils.py",
+        "b": "fastapi/routing.py",
+        "count": 42
+      },
+      {
+        "a": ".github/workflows/build-docs.yml",
+        "b": ".github/workflows/test.yml",
+        "count": 39
+      },
+      {
+        "a": "fastapi/applications.py",
+        "b": "fastapi/openapi/utils.py",
+        "count": 33
+      },
+      {
+        "a": "fastapi/dependencies/utils.py",
+        "b": "fastapi/openapi/utils.py",
+        "count": 33
+      },
+      {
+        "a": "docs/en/data/sponsors.yml",
+        "b": "docs/en/data/sponsors_badge.yml",
+        "count": 30
+      },
+      {
+        "a": "fastapi/routing.py",
+        "b": "fastapi/utils.py",
+        "count": 30
+      },
+      {
+        "a": ".github/workflows/deploy-docs.yml",
+        "b": ".github/workflows/smokeshow.yml",
+        "count": 28
+      },
+      {
+        "a": "fastapi/routing.py",
+        "b": "pyproject.toml",
+        "count": 28
+      },
+      {
+        "a": ".github/workflows/build-docs.yml",
+        "b": ".github/workflows/publish.yml",
+        "count": 27
+      },
+      {
+        "a": ".github/workflows/publish.yml",
+        "b": ".github/workflows/test.yml",
+        "count": 27
+      },
+      {
+        "a": ".github/workflows/smokeshow.yml",
+        "b": ".github/workflows/test.yml",
+        "count": 27
+      },
+      {
+        "a": "fastapi/openapi/utils.py",
+        "b": "fastapi/utils.py",
+        "count": 27
+      },
+      {
+        "a": "README.md",
+        "b": "docs/en/data/sponsors_badge.yml",
+        "count": 26
+      },
+      {
+        "a": "docs/es/docs/index.md",
+        "b": "docs/pt/docs/index.md",
+        "count": 26
+      },
+      {
+        "a": ".github/workflows/deploy-docs.yml",
+        "b": ".github/workflows/test.yml",
+        "count": 25
+      },
+      {
+        "a": "docs/en/docs/index.md",
+        "b": "docs/es/docs/index.md",
+        "count": 25
+      },
+      {
+        "a": "fastapi/dependencies/models.py",
+        "b": "fastapi/dependencies/utils.py",
+        "count": 25
+      },
+      {
+        "a": "fastapi/dependencies/utils.py",
+        "b": "fastapi/utils.py",
+        "count": 25
+      },
+      {
+        "a": "docs/en/data/github_sponsors.yml",
+        "b": "docs/en/data/people.yml",
+        "count": 24
+      },
+      {
+        "a": "docs/es/docs/index.md",
+        "b": "docs/zh/docs/index.md",
+        "count": 24
+      },
+      {
+        "a": "docs/pt/docs/index.md",
+        "b": "docs/zh/docs/index.md",
+        "count": 24
+      },
+      {
+        "a": ".github/workflows/build-docs.yml",
+        "b": ".github/workflows/deploy-docs.yml",
+        "count": 23
+      },
+      {
+        "a": "docs/en/mkdocs.yml",
+        "b": "scripts/docs.py",
+        "count": 23
+      }
+    ]
+  }
+}

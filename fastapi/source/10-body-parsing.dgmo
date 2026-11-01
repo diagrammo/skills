@@ -1,0 +1,26 @@
+flowchart How the request handler reads the body
+// From: fastapi/routing.py:453-491
+(Request reaches the handler) -> <Route declares a body field?>
+<Route declares a body field?> -no-> (Body stays undefined)
+<Route declares a body field?> -yes-> <Form body?>
+<Form body?> -yes-> [Await request.form and close files at the end]
+[Await request.form and close files at the end] -> (Body is the parsed form)
+<Form body?> -no-> [Read the raw bytes]
+[Read the raw bytes] -> <Any bytes?>
+<Any bytes?> -no-> (Body stays undefined)
+<Any bytes?> -yes-> <Content-Type header present?>
+<Content-Type header present?> -no-> <Strict content type off?>
+<Strict content type off?> -yes-> [Parse the bytes as JSON]
+<Strict content type off?> -no-> (Body stays as raw bytes)
+<Content-Type header present?> -yes-> <Type application with json or +json subtype?>
+<Type application with json or +json subtype?> -yes-> [Parse the bytes as JSON]
+<Type application with json or +json subtype?> -no-> (Body stays as raw bytes)
+[Parse the bytes as JSON] -> <Valid JSON?>
+<Valid JSON?> -yes-> (Body is the parsed JSON)
+<Valid JSON?> -no-> (Raise RequestValidationError json_invalid)
+note "Route declares a body field?" routing.py:453.
+note "Form body?" routing.py:454-456. Files are closed through file_stack.push_async_callback.
+note "Any bytes?" routing.py:458-459.
+note "Strict content type off?" routing.py:463-464. The flag is strict_content_type.
+note "Type application with json or +json subtype?" routing.py:468-471 uses email.message.Message to read the content type.
+note "Valid JSON?" routing.py:476-491. A JSONDecodeError becomes RequestValidationError with type json_invalid and the position as loc.

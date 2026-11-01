@@ -1,0 +1,53 @@
+scatter Hot files: size and edits
+// From: measurements.json edits (most edited 40 files); x = lines, y = edits, bubble = bytes
+x-label Lines in file
+y-label Edits in the last 12 months
+size-label Bytes
+
+[(root)] blue
+  package.json 222 315 8082
+  CHANGELOG.md 3018 126 207979
+  cspell.json 582 60 9790
+  README.md 180 52 7356
+  SKILL.md 593 50 30638
+[src] green
+  src/d3.ts 265 217 10771
+  src/map/layout.ts 3871 166 179845
+  src/sequence/renderer.ts 4546 140 167423
+  src/index.ts 379 120 14415
+  src/advanced.ts 1242 91 36874
+  src/cli.ts 1265 90 44815
+  src/sequence/parser.ts 1755 84 64081
+  src/gantt/renderer.ts 3986 83 131292
+  src/boxes-and-lines/renderer.ts 1603 81 59424
+  src/org/renderer.ts 909 75 31880
+  src/pert/renderer.ts 3778 74 135294
+  src/map/renderer.ts 1512 72 61830
+  src/utils/parsing.ts 1133 69 40964
+  src/infra/renderer.ts 2825 67 97921
+  src/sketch/renderer.ts 1902 62 73505
+  src/c4/parser.ts 1285 60 44558
+  src/org/layout.ts 1456 59 48808
+  src/editor/keywords.ts 89 58 2594
+  src/infra/parser.ts 1475 58 57628
+  src/gantt/parser.ts 1844 57 63634
+  src/dgmo-router.ts 292 56 10893
+  src/chart.ts 875 55 29562
+  src/org/parser.ts 661 53 22724
+  src/event-line/renderer.ts 1292 52 50249
+  src/kanban/renderer.ts 1989 52 65637
+  src/render.ts 474 51 19117
+  src/kanban/parser.ts 562 50 18612
+[docs] orange
+  docs/language-reference.md 4895 214 253820
+  docs/ai-integration.md 554 53 32759
+[api-baseline] purple
+  api-baseline/advanced.d.ts 8011 115 353077
+  api-baseline/index.d.ts 335 58 15808
+[tests] teal
+  tests/map-layout.test.ts 2394 73 103907
+  tests/cli-render.test.ts 552 64 10201
+[cli] red
+  cli/package.json 51 55 1211
+[.github] yellow
+  .github/copilot-instructions.md 593 54 29498

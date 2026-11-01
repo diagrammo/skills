@@ -1,0 +1,35 @@
+flowchart How solve_dependencies resolves one dependant
+// From: fastapi/dependencies/utils.py:643-792
+(Solve a dependant) -> <Another sub-dependant left?>
+<Another sub-dependant left?> -yes-> <Any dependency override registered?>
+<Any dependency override registered?> -yes-> [Rebuild the dependant with get_dependant]
+<Any dependency override registered?> -no-> [Solve the sub-dependant recursively]
+[Rebuild the dependant with get_dependant] -> [Solve the sub-dependant recursively]
+[Solve the sub-dependant recursively] -> <Did it return errors?>
+<Did it return errors?> -yes-> [Collect the errors]
+[Collect the errors] -> <Another sub-dependant left?>
+<Did it return errors?> -no-> <Cached value for this call?>
+<Cached value for this call?> -yes-> [Reuse the cached value]
+<Cached value for this call?> -no-> <Generator function?>
+<Generator function?> -yes-> [Enter it on the request or function exit stack]
+<Generator function?> -no-> <Coroutine function?>
+<Coroutine function?> -yes-> [Await the call]
+<Coroutine function?> -no-> [Run the call in a thread pool]
+[Reuse the cached value] -> [Store the value under the parameter name]
+[Enter it on the request or function exit stack] -> [Store the value under the parameter name]
+[Await the call] -> [Store the value under the parameter name]
+[Run the call in a thread pool] -> [Store the value under the parameter name]
+[Store the value under the parameter name] -> <Another sub-dependant left?>
+<Another sub-dependant left?> -no-> [Validate path query header and cookie params]
+[Validate path query header and cookie params] -> <Body params declared?>
+<Body params declared?> -yes-> [Validate the body with request_body_to_args]
+<Body params declared?> -no-> [Inject Request Response BackgroundTasks and SecurityScopes]
+[Validate the body with request_body_to_args] -> [Inject Request Response BackgroundTasks and SecurityScopes]
+[Inject Request Response BackgroundTasks and SecurityScopes] -> (Return values and errors)
+note "Another sub-dependant left?" The loop is a for statement at dependencies/utils.py:676.
+note "Any dependency override registered?" The rebuild runs whenever the app has any dependency_overrides, not only for this call (utils.py:680-696).
+note "Did it return errors?" utils.py:710. Errors are collected and the loop continues.
+note "Cached value for this call?" utils.py:717, keyed by _get_cache_key.
+note "Generator function?" utils.py:719-729. The exit stack is the function stack when scope is function.
+note "Validate path query header and cookie params" request_params_to_args, utils.py:738-757.
+note "Body params declared?" utils.py:758-768.

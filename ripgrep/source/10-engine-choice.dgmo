@@ -1,0 +1,24 @@
+flowchart Which regex engine builds the matcher
+// From: crates/core/flags/hiargs.rs:368-409,461-559
+direction-tb
+
+(HiArgs::matcher) -> <Engine choice?>
+<Engine choice?> -default-> [matcher_rust]
+<Engine choice?> -pcre2-> [matcher_pcre2]
+<Engine choice?> -auto-> [Try matcher_rust]
+[matcher_rust] -> <Rust regex compiled?>
+<Rust regex compiled?> -yes-> (RustRegex matcher)
+<Rust regex compiled?> -no-> (Error suggesting --pcre2)
+[matcher_pcre2] -> <PCRE2 compiled?>
+<PCRE2 compiled?> -yes-> (PCRE2 matcher)
+<PCRE2 compiled?> -no-> (Error)
+[Try matcher_rust] -> <Rust regex compiled in auto mode?>
+<Rust regex compiled in auto mode?> -yes-> (RustRegex matcher)
+<Rust regex compiled in auto mode?> -no-> [Try matcher_pcre2]
+[Try matcher_pcre2] -> <PCRE2 compiled in auto mode?>
+<PCRE2 compiled in auto mode?> -yes-> (PCRE2 matcher)
+<PCRE2 compiled in auto mode?> -no-> (Error showing both engine errors)
+
+note matcher_rust `build_many` feeds a RegexMatcherBuilder, hiargs.rs:461
+note matcher_pcre2 hiargs.rs:411 is an error unless the pcre2 feature is on
+note "Engine choice?" hiargs.rs:369 EngineChoice Default, PCRE2 or Auto

@@ -1,0 +1,66 @@
+er Data model across Postgres and ClickHouse
+// From: lib/plausible/site.ex:16, lib/plausible/teams/team.ex:48, lib/plausible/auth/user.ex:29, lib/plausible/teams/membership.ex:16,
+// lib/plausible/goal.ex:19, lib/plausible/billing/subscription.ex:24, lib/plausible/imported/site_import.ex:18,
+// lib/plausible/clickhouse_event_v2.ex:10, lib/plausible/clickhouse_session_v2.ex:36
+tag Store as s
+  Postgres blue
+  ClickHouse orange
+
+teams s: Postgres
+  id int pk
+  name string
+  locked boolean
+  accept_traffic_until date
+  1-has-* sites
+  1-has-* team_memberships
+  1-has-1 subscriptions
+users s: Postgres
+  id int pk
+  email string
+  totp_enabled boolean
+  1-has-* team_memberships
+team_memberships s: Postgres
+  id int pk
+  role enum
+  user_id int fk
+  team_id int fk
+subscriptions s: Postgres
+  id int pk
+  status enum
+  paddle_subscription_id string
+  team_id int fk
+sites s: Postgres
+  id int pk
+  domain string
+  timezone string
+  onboarding_status enum
+  team_id int fk
+  1-has-* goals
+  1-has-* site_imports
+  1-records-* events_v2
+  1-sessions-* sessions_v2
+goals s: Postgres
+  id int pk
+  event_name string
+  page_path string
+  site_id int fk
+site_imports s: Postgres
+  id int pk
+  source enum
+  status enum
+  site_id int fk
+events_v2 s: ClickHouse
+  site_id uint64
+  user_id uint64
+  session_id uint64
+  name string
+  pathname string
+  timestamp datetime
+sessions_v2 s: ClickHouse
+  site_id uint64
+  user_id uint64
+  session_id uint64
+  entry_page string
+  exit_page string
+  pageviews int32
+  sign int8

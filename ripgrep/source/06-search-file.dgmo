@@ -1,0 +1,25 @@
+sequence One file through the search pipeline
+// From: crates/core/main.rs:160-232, crates/core/search.rs:245-267,342-352,380-415, crates/searcher/src/searcher/mod.rs:643-720, glue.rs:117-131, core.rs:170-185,385-430,476-520, standard.rs:766-790
+autonumber
+
+main -matcher, searcher, printer, search_worker-> HiArgs
+note right of HiArgs crates/core/flags/hiargs.rs:368,711,561,694
+main -build_parallel and run-> WalkParallel
+WalkParallel -visits each file-> main
+main -SearchWorker::search-> SearchWorker
+note right of SearchWorker picks stdin, preprocessor, decompress or plain path, crates/core/search.rs:245-266
+SearchWorker -search_path-> Searcher
+Searcher -mmap.open succeeds so search_slice-> Searcher
+note right of Searcher crates/searcher/src/searcher/mod.rs:678-720
+Searcher -SliceByLine::run-> Core
+loop until the buffer is used up
+  Core -match_by_line-> Core
+  Core -find_candidate_line-> RegexMatcher
+  note right of RegexMatcher crates/regex/src/matcher.rs:491
+  RegexMatcher -candidate or confirmed line-> Core
+  Core -sink_matched-> StandardSink
+  note right of StandardSink Sink::matched, crates/printer/src/standard.rs:766
+  StandardSink -write the line to the buffer-> StandardSink
+SearchWorker -SearchResult-> main
+main -bufwtr.print-> Stdout
+note right of Stdout one locked write per file, crates/core/main.rs:204

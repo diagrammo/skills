@@ -1,0 +1,36 @@
+{
+  "reports": [
+    {
+      "slug": "plausible",
+      "name": "Plausible Analytics",
+      "repo": "https://github.com/plausible/analytics",
+      "commit": "02cfac1517e1fef8178afe134a9b42f309f1aa77",
+      "date": "2026-11-01",
+      "about": "A web analytics server in Elixir, with a React dashboard."
+    },
+    {
+      "slug": "ripgrep",
+      "name": "ripgrep",
+      "repo": "https://github.com/BurntSushi/ripgrep",
+      "commit": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b",
+      "date": "2026-11-01",
+      "about": "A recursive line-search command line tool in Rust."
+    },
+    {
+      "slug": "fastapi",
+      "name": "FastAPI",
+      "repo": "https://github.com/fastapi/fastapi",
+      "commit": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+      "date": "2026-11-01",
+      "about": "A Python web framework for building APIs."
+    },
+    {
+      "slug": "dgmo",
+      "name": "Diagrammo (dgmo)",
+      "repo": "https://github.com/diagrammo/dgmo",
+      "commit": "3c25eb52c563757f5d29751c89ff94fd32d23e34",
+      "date": "2026-11-01",
+      "about": "The Diagrammo diagram language: a TypeScript parser and renderer, with its command line tool."
+    }
+  ]
+}

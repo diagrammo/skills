@@ -1,0 +1,54 @@
+scatter Hot files: size vs edits in the last 12 months
+// From: measurements.json edits (Only the 40 most edited of 59 edited files are shown.)
+x-label Lines
+y-label Edits (commits)
+size-label Bytes
+no-name
+
+[crates/core] blue
+  crates/core/flags/complete/rg.zsh 705 9 28842
+  crates/core/flags/defs.rs 7779 5 235436
+  crates/core/main.rs 483 5 18479
+  crates/core/flags/hiargs.rs 1480 4 57402
+  crates/core/flags/lowargs.rs 723 4 25938
+  crates/core/flags/doc/template.rg.1 424 3 13861
+  crates/core/flags/mod.rs 302 3 11801
+  crates/core/flags/doc/help.rs 259 2 9112
+  crates/core/flags/doc/man.rs 110 2 3713
+  crates/core/flags/doc/template.long.help 61 2 1514
+  crates/core/flags/doc/template.short.help 38 2 756
+[crates/ignore] green
+  crates/ignore/Cargo.toml 44 13 1159
+  crates/ignore/src/dir.rs 1700 11 61862
+  crates/ignore/src/walk.rs 2775 7 94548
+  crates/ignore/src/default_types.rs 378 6 13521
+  crates/ignore/src/pathutil.rs 218 4 6373
+  crates/ignore/src/gitignore.rs 888 3 32420
+  crates/ignore/src/incremental.rs 1363 3 51424
+  crates/ignore/src/lib.rs 549 2 18628
+[other crates] orange
+  crates/matcher/Cargo.toml 25 3 618
+  crates/pcre2/Cargo.toml 19 3 559
+  crates/searcher/Cargo.toml 32 3 963
+  crates/cli/Cargo.toml 26 2 747
+  crates/grep/Cargo.toml 33 2 1020
+  crates/printer/Cargo.toml 43 2 1402
+  crates/regex/Cargo.toml 21 2 631
+  crates/searcher/src/searcher/mod.rs 1088 2 41168
+[(repo root)] purple
+  Cargo.toml 120 11 3223
+  CHANGELOG.md 1870 6 90034
+  .gitignore 22 2 266
+  AI_POLICY.md 38 2 1878
+  CONTRIBUTING.md 8 2 213
+  GUIDE.md 1025 2 40895
+  README.md 541 2 21599
+[crates/globset] teal
+  crates/globset/Cargo.toml 49 6 1406
+  crates/globset/src/lib.rs 1424 5 45658
+  crates/globset/src/glob.rs 1720 2 62216
+[.github] red
+  .github/workflows/ci.yml 291 7 9815
+  .github/workflows/release.yml 386 2 12931
+[tests] gray
+  tests/util.rs 528 3 17976

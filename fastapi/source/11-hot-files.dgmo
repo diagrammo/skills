@@ -1,0 +1,51 @@
+scatter Hot files: size against edits
+// From: measurements.json edits (Only the 40 most edited of 2709 edited files are shown.)
+x-label Lines in file
+y-label Commits in last 12 months
+size-label Bytes
+
+[docs] blue
+  docs/en/docs/release-notes.md 7802 986 728184
+  docs/en/mkdocs.yml 333 35 9156
+  docs/en/data/sponsors.yml 59 25 3143
+  docs/en/docs/index.md 581 19 25185
+  docs/en/data/topic_repos.yml 496 14 16294
+  docs/en/docs/tutorial/first-steps.md 427 13 14155
+  docs/en/docs/css/custom.css 558 12 13688
+  docs/de/docs/index.md 581 11 27470
+  docs/en/docs/tutorial/bigger-applications.md 546 11 20394
+  docs/en/docs/tutorial/request-form-models.md 132 11 4830
+  docs/en/overrides/main.html 98 11 3618
+  docs/pt/docs/index.md 581 11 26581
+  docs/en/docs/contributing.md 7 10 271
+  docs/en/docs/tutorial/query-params-str-validations.md 458 10 17098
+  docs/en/docs/tutorial/response-model.md 348 10 15890
+  docs/es/docs/index.md 581 10 26464
+  docs/ru/docs/index.md 581 10 34766
+[fastapi] green
+  fastapi/__init__.py 25 125 1081
+  fastapi/dependencies/utils.py 1464 71 55433
+  fastapi/routing.py 6552 49 260393
+  fastapi/_compat/v2.py 500 27 17954
+  fastapi/openapi/utils.py 671 24 29114
+  fastapi/applications.py 4816 18 185155
+  fastapi/dependencies/models.py 234 14 8092
+  fastapi/params.py 799 14 28792
+[(root)] orange
+  pyproject.toml 426 59 12441
+  README.md 533 32 22228
+  .pre-commit-config.yaml 114 24 3657
+[.github] purple
+  .github/workflows/test.yml 332 55 12508
+  .github/workflows/build-docs.yml 129 25 4298
+  .github/workflows/translate.yml 148 24 5295
+  .github/workflows/pre-commit.yml 108 20 3912
+  .github/workflows/deploy-docs.yml 84 18 3223
+  .github/workflows/smokeshow.yml 59 17 2051
+  .github/workflows/publish.yml 37 15 944
+  .github/workflows/sponsors.yml 60 14 2041
+  .github/workflows/topic-repos.yml 48 13 1440
+  .github/workflows/test-redistribute.yml 62 10 1866
+[scripts] teal
+  scripts/docs.py 919 26 32404
+  scripts/translate.py 489 21 16996

@@ -1,0 +1,39 @@
+arc Files that change together
+// From: measurements.json coChange (Only the 30 most frequent of 31162 file pairs are shown. 103 bulk commits skipped.)
+
+[docs] blue
+  docs/en/docs/release-notes.md -> fastapi/__init__.py 259
+  docs/en/data/sponsors.yml -> docs/en/overrides/main.html 57
+  docs/en/data/sponsors.yml -> docs/en/data/sponsors_badge.yml 30
+  docs/es/docs/index.md -> docs/pt/docs/index.md 26
+  docs/en/docs/index.md -> docs/es/docs/index.md 25
+  docs/en/data/github_sponsors.yml -> docs/en/data/people.yml 24
+  docs/es/docs/index.md -> docs/zh/docs/index.md 24
+  docs/pt/docs/index.md -> docs/zh/docs/index.md 24
+  docs/en/mkdocs.yml -> scripts/docs.py 23
+[(root)] green
+  README.md -> docs/en/data/sponsors.yml 98
+  README.md -> docs/en/overrides/main.html 57
+  README.md -> docs/en/docs/index.md 55
+  README.md -> docs/en/data/sponsors_badge.yml 26
+[fastapi] orange
+  fastapi/applications.py -> fastapi/routing.py 60
+  fastapi/dependencies/utils.py -> fastapi/routing.py 50
+  fastapi/openapi/utils.py -> fastapi/routing.py 42
+  fastapi/applications.py -> fastapi/openapi/utils.py 33
+  fastapi/dependencies/utils.py -> fastapi/openapi/utils.py 33
+  fastapi/routing.py -> fastapi/utils.py 30
+  fastapi/routing.py -> pyproject.toml 28
+  fastapi/openapi/utils.py -> fastapi/utils.py 27
+  fastapi/dependencies/models.py -> fastapi/dependencies/utils.py 25
+  fastapi/dependencies/utils.py -> fastapi/utils.py 25
+[.github] purple
+  .github/workflows/build-docs.yml -> .github/workflows/test.yml 39
+  .github/workflows/deploy-docs.yml -> .github/workflows/smokeshow.yml 28
+  .github/workflows/build-docs.yml -> .github/workflows/publish.yml 27
+  .github/workflows/publish.yml -> .github/workflows/test.yml 27
+  .github/workflows/smokeshow.yml -> .github/workflows/test.yml 27
+  .github/workflows/deploy-docs.yml -> .github/workflows/test.yml 25
+  .github/workflows/build-docs.yml -> .github/workflows/deploy-docs.yml 23
+
+order group

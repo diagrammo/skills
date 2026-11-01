@@ -1,0 +1,38 @@
+sequence Loading a dashboard report
+// From: assets/js/dashboard/api.ts:168, lib/plausible_web/router.ex:71-77,305, lib/plausible_web/controllers/api/stats_controller.ex:19,
+// lib/plausible/stats/dashboard/query_parser.ex:1, lib/plausible/stats/query_builder.ex:30, lib/plausible/stats.ex:13, lib/plausible/stats/query_runner.ex:37-48,146
+tag Role as r
+  Client blue
+  Service green
+  Datastore purple
+
+Browser r: Client
+AuthorizeSiteAccess r: Service
+StatsController r: Service
+Dashboard.QueryParser r: Service
+Stats.QueryBuilder r: Service
+Stats.QueryRunner r: Service
+QueryOptimizer r: Service
+Stats.SQL.QueryBuilder r: Service
+ClickhouseRepo r: Datastore
+
+Browser -POST /api/stats/:domain/query-> AuthorizeSiteAccess
+AuthorizeSiteAccess -site and role ok-> StatsController
+StatsController -parse(params)-> Dashboard.QueryParser
+Dashboard.QueryParser -> StatsController
+StatsController -build(site, params)-> Stats.QueryBuilder
+note right of Stats.QueryBuilder
+  Resolves segments, then runs a chain of
+  validations: sort order, custom props,
+  revenue metrics, goals, include.
+
+Stats.QueryBuilder -Query struct-> StatsController
+StatsController -Stats.query(site, query)-> Stats.QueryRunner
+Stats.QueryRunner -optimize-> QueryOptimizer
+QueryOptimizer -> Stats.QueryRunner
+Stats.QueryRunner -build(query, site)-> Stats.SQL.QueryBuilder
+Stats.SQL.QueryBuilder -> Stats.QueryRunner
+Stats.QueryRunner -all(query)-> ClickhouseRepo
+ClickhouseRepo -rows-> Stats.QueryRunner
+Stats.QueryRunner -QueryResult-> StatsController
+StatsController -JSON-> Browser

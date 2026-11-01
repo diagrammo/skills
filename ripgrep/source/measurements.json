@@ -1,0 +1,937 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-31T03:14:00.443Z",
+  "repo": {
+    "name": "ripgrep",
+    "git": true,
+    "shallow": false,
+    "commit": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b"
+  },
+  "limits": {
+    "sizes": {
+      "maxFiles": 40,
+      "maxGroups": 40,
+      "rule": "Past maxFiles files, sizes roll up to the top two directory levels, except that a directory holding more than maxFiles files of its own shows them as files; past maxGroups groups, the smallest join \"(other)\"."
+    },
+    "languages": {
+      "maxSlices": 6,
+      "rule": "Past maxSlices languages, the smallest join \"Other\"."
+    },
+    "history": {
+      "maxTags": 15,
+      "largestCommits": 5,
+      "rule": "History is the tags plus the largestCommits biggest commits by lines changed; past maxTags tags, only the newest maxTags are kept."
+    },
+    "edits": {
+      "months": 12,
+      "maxFiles": 40,
+      "rule": "Edits count commits in the months up to the newest commit; past maxFiles files, only the most edited maxFiles are kept."
+    },
+    "imports": {
+      "maxNodes": 40,
+      "maxExternal": 20,
+      "rule": "Past maxNodes files, the graph rolls up to directories, at least two levels deep: the depth that shows the most directories within maxNodes. If none fits, the shallowest depth that has links is used (files, when every import stays inside one directory) and its least connected nodes join \"(other)\". Only the maxExternal most used outside packages are listed."
+    },
+    "coChange": {
+      "maxPairs": 30,
+      "bulkCommitFiles": 50,
+      "rule": "Commits touching more than bulkCommitFiles files are skipped; past maxPairs pairs, only the most frequent maxPairs are kept."
+    }
+  },
+  "sizes": {
+    "chart": "treemap",
+    "total": {
+      "files": 223,
+      "bytes": 3219220,
+      "lines": 75500
+    },
+    "rolledUp": true,
+    "rollUpNote": "223 files rolled up to 25 directories, two levels deep.",
+    "entries": [
+      {
+        "path": "crates/core",
+        "bytes": 477697,
+        "lines": 14431,
+        "files": 27
+      },
+      {
+        "path": "crates/ignore",
+        "bytes": 355687,
+        "lines": 10195,
+        "files": 21
+      },
+      {
+        "path": "crates/printer",
+        "bytes": 323719,
+        "lines": 9436,
+        "files": 17
+      },
+      {
+        "path": "benchsuite/runs",
+        "bytes": 854990,
+        "lines": 7794,
+        "files": 29
+      },
+      {
+        "path": "crates/searcher",
+        "bytes": 230270,
+        "lines": 6637,
+        "files": 15
+      },
+      {
+        "path": "tests",
+        "bytes": 187203,
+        "lines": 5774,
+        "files": 10
+      },
+      {
+        "path": ".",
+        "bytes": 209221,
+        "lines": 4897,
+        "files": 16
+      },
+      {
+        "path": "crates/globset",
+        "bytes": 126643,
+        "lines": 3772,
+        "files": 11
+      },
+      {
+        "path": "crates/regex",
+        "bytes": 106036,
+        "lines": 2876,
+        "files": 13
+      },
+      {
+        "path": "crates/matcher",
+        "bytes": 67971,
+        "lines": 2140,
+        "files": 9
+      },
+      {
+        "path": "tests/data",
+        "bytes": 92553,
+        "lines": 2135,
+        "files": 9
+      },
+      {
+        "path": "crates/cli",
+        "bytes": 69065,
+        "lines": 1968,
+        "files": 12
+      },
+      {
+        "path": "benchsuite",
+        "bytes": 46690,
+        "lines": 1313,
+        "files": 1
+      },
+      {
+        "path": ".github/workflows",
+        "bytes": 22746,
+        "lines": 677,
+        "files": 2
+      },
+      {
+        "path": "crates/pcre2",
+        "bytes": 23386,
+        "lines": 665,
+        "files": 7
+      },
+      {
+        "path": "ci",
+        "bytes": 5981,
+        "lines": 234,
+        "files": 4
+      },
+      {
+        "path": "crates/grep",
+        "bytes": 6944,
+        "lines": 205,
+        "files": 7
+      },
+      {
+        "path": ".github/ISSUE_TEMPLATE",
+        "bytes": 4928,
+        "lines": 127,
+        "files": 3
+      },
+      {
+        "path": "fuzz",
+        "bytes": 2048,
+        "lines": 81,
+        "files": 3
+      },
+      {
+        "path": "pkg/windows",
+        "bytes": 2133,
+        "lines": 43,
+        "files": 2
+      },
+      {
+        "path": "scripts",
+        "bytes": 1114,
+        "lines": 33,
+        "files": 1
+      },
+      {
+        "path": "pkg/brew",
+        "bytes": 804,
+        "lines": 23,
+        "files": 1
+      },
+      {
+        "path": "fuzz/fuzz_targets",
+        "bytes": 509,
+        "lines": 22,
+        "files": 1
+      },
+      {
+        "path": ".cargo",
+        "bytes": 861,
+        "lines": 21,
+        "files": 1
+      },
+      {
+        "path": ".github",
+        "bytes": 21,
+        "lines": 1,
+        "files": 1
+      }
+    ]
+  },
+  "languages": {
+    "chart": "pie",
+    "rolledUp": false,
+    "rollUpNote": null,
+    "slices": [
+      {
+        "language": "Rust",
+        "files": 102,
+        "lines": 55477,
+        "bytes": 1879988
+      },
+      {
+        "language": "Markdown",
+        "files": 23,
+        "lines": 5285,
+        "bytes": 223998
+      },
+      {
+        "language": "YAML",
+        "files": 5,
+        "lines": 785,
+        "bytes": 27106
+      },
+      {
+        "language": "TOML",
+        "files": 13,
+        "lines": 461,
+        "bytes": 13062
+      },
+      {
+        "language": "Shell",
+        "files": 2,
+        "lines": 136,
+        "bytes": 3415
+      },
+      {
+        "language": "Ruby",
+        "files": 1,
+        "lines": 23,
+        "bytes": 804
+      }
+    ],
+    "unclassified": {
+      "files": 77,
+      "bytes": 1070847
+    }
+  },
+  "history": {
+    "chart": "event-line",
+    "available": true,
+    "commits": 2239,
+    "firstCommit": "2016-02-27T11:07:26-05:00",
+    "lastCommit": "2026-10-27T14:31:24-04:00",
+    "tagCount": 274,
+    "rolledUp": true,
+    "rollUpNote": "Only the newest 15 of 274 tags are shown.",
+    "tags": [
+      {
+        "name": "ignore-0.4.27",
+        "date": "2026-07-01T08:07:37-04:00",
+        "sha": "48b0c795f4feb37343b2832d991c5c6a3900c08a"
+      },
+      {
+        "name": "ignore-0.4.28",
+        "date": "2026-07-09T13:50:09-04:00",
+        "sha": "324f7efe5ce92da0c938291fb69a8027cc2b12a8"
+      },
+      {
+        "name": "globset-0.4.19",
+        "date": "2026-07-15T11:56:16-04:00",
+        "sha": "28c687d630f1491ccdea078a9be56b4cdc124519"
+      },
+      {
+        "name": "ignore-0.4.29",
+        "date": "2026-07-15T11:56:30-04:00",
+        "sha": "40ffc6e0bd990ba6e56702ed1ec519b7ad96a1e7"
+      },
+      {
+        "name": "grep-matcher-0.1.9",
+        "date": "2026-07-15T11:57:23-04:00",
+        "sha": "41e0ae702bcbd47b093a33ee73f1497aa4ed20d6"
+      },
+      {
+        "name": "grep-pcre2-0.1.10",
+        "date": "2026-07-15T11:58:00-04:00",
+        "sha": "432976d69cdff36d5a0d6845b093cf3f67262b43"
+      },
+      {
+        "name": "grep-searcher-0.1.17",
+        "date": "2026-07-15T11:58:20-04:00",
+        "sha": "576005b322c41174bb21d76122b1411e5d983402"
+      },
+      {
+        "name": "15.2.0",
+        "date": "2026-07-15T12:00:11-04:00",
+        "sha": "e89fff89ac9af12e8d4ce9d5fd07beb408ca730f"
+      },
+      {
+        "name": "ignore-0.4.30",
+        "date": "2026-07-17T09:14:36-04:00",
+        "sha": "227381db0ee83dfa4341f1e27ff9617c0f5ad992"
+      },
+      {
+        "name": "ignore-0.4.31",
+        "date": "2026-07-20T14:15:08-04:00",
+        "sha": "59e318f5ace48db54f37bb67c152535bc17fa153"
+      },
+      {
+        "name": "ignore-0.4.32",
+        "date": "2026-08-03T07:15:23-04:00",
+        "sha": "5ed408e17eccfc59bcec48f584feece902873e54"
+      },
+      {
+        "name": "globset-0.4.20",
+        "date": "2026-08-04T09:59:57-04:00",
+        "sha": "5055264ae021b5d0e01e55f723622d638ea877f0"
+      },
+      {
+        "name": "ignore-0.4.33",
+        "date": "2026-08-04T10:00:08-04:00",
+        "sha": "3fce3b5bb0236da2df6d99672afb8a719642eca7"
+      },
+      {
+        "name": "globset-0.4.21",
+        "date": "2026-10-27T14:31:14-04:00",
+        "sha": "55f2f69ab9f07eeca80b483668e9d7d4beca8e10"
+      },
+      {
+        "name": "ignore-0.4.34",
+        "date": "2026-10-27T14:31:25-04:00",
+        "sha": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b"
+      }
+    ],
+    "largestCommits": [
+      {
+        "sha": "fdd8510fdda6109c562e479c718d42c8ecc26263",
+        "date": "2020-02-17T19:24:53-05:00",
+        "subject": "repo: move all source code in crates directory",
+        "files": 226,
+        "linesChanged": 72924
+      },
+      {
+        "sha": "082245dadb3854238e62b91aa95a46018cf16ef1",
+        "date": "2023-11-20T23:51:53-05:00",
+        "subject": "cli: replace clap with lexopt and supporting code",
+        "files": 50,
+        "linesChanged": 20699
+      },
+      {
+        "sha": "d9ca5293569efb255608d3c601107bcfe7060f15",
+        "date": "2018-08-20T07:10:19-04:00",
+        "subject": "libripgrep: initial commit introducing libripgrep",
+        "files": 67,
+        "linesChanged": 17808
+      },
+      {
+        "sha": "a3f609222ce3c0057aca79d25b69dad482a816f7",
+        "date": "2016-06-22T21:19:02-04:00",
+        "subject": "progress",
+        "files": 3,
+        "linesChanged": 13336
+      },
+      {
+        "sha": "94be3bd4bb32850f682eae6f490156064f90b7ee",
+        "date": "2018-08-15T19:52:50-04:00",
+        "subject": "grep: remove senseless test",
+        "files": 2,
+        "linesChanged": 13091
+      }
+    ]
+  },
+  "edits": {
+    "chart": "scatter",
+    "available": true,
+    "window": {
+      "since": "2025-10-27T18:31:24.000Z",
+      "until": "2026-10-27T18:31:24.000Z"
+    },
+    "editedFiles": 59,
+    "rolledUp": true,
+    "rollUpNote": "Only the 40 most edited of 59 edited files are shown.",
+    "files": [
+      {
+        "path": "crates/ignore/Cargo.toml",
+        "edits": 13,
+        "bytes": 1159,
+        "lines": 44
+      },
+      {
+        "path": "Cargo.toml",
+        "edits": 11,
+        "bytes": 3223,
+        "lines": 120
+      },
+      {
+        "path": "crates/ignore/src/dir.rs",
+        "edits": 11,
+        "bytes": 61862,
+        "lines": 1700
+      },
+      {
+        "path": "crates/core/flags/complete/rg.zsh",
+        "edits": 9,
+        "bytes": 28842,
+        "lines": 705
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "edits": 7,
+        "bytes": 9815,
+        "lines": 291
+      },
+      {
+        "path": "crates/ignore/src/walk.rs",
+        "edits": 7,
+        "bytes": 94548,
+        "lines": 2775
+      },
+      {
+        "path": "CHANGELOG.md",
+        "edits": 6,
+        "bytes": 90034,
+        "lines": 1870
+      },
+      {
+        "path": "crates/globset/Cargo.toml",
+        "edits": 6,
+        "bytes": 1406,
+        "lines": 49
+      },
+      {
+        "path": "crates/ignore/src/default_types.rs",
+        "edits": 6,
+        "bytes": 13521,
+        "lines": 378
+      },
+      {
+        "path": "crates/core/flags/defs.rs",
+        "edits": 5,
+        "bytes": 235436,
+        "lines": 7779
+      },
+      {
+        "path": "crates/core/main.rs",
+        "edits": 5,
+        "bytes": 18479,
+        "lines": 483
+      },
+      {
+        "path": "crates/globset/src/lib.rs",
+        "edits": 5,
+        "bytes": 45658,
+        "lines": 1424
+      },
+      {
+        "path": "crates/core/flags/hiargs.rs",
+        "edits": 4,
+        "bytes": 57402,
+        "lines": 1480
+      },
+      {
+        "path": "crates/core/flags/lowargs.rs",
+        "edits": 4,
+        "bytes": 25938,
+        "lines": 723
+      },
+      {
+        "path": "crates/ignore/src/pathutil.rs",
+        "edits": 4,
+        "bytes": 6373,
+        "lines": 218
+      },
+      {
+        "path": "crates/core/flags/doc/template.rg.1",
+        "edits": 3,
+        "bytes": 13861,
+        "lines": 424
+      },
+      {
+        "path": "crates/core/flags/mod.rs",
+        "edits": 3,
+        "bytes": 11801,
+        "lines": 302
+      },
+      {
+        "path": "crates/ignore/src/gitignore.rs",
+        "edits": 3,
+        "bytes": 32420,
+        "lines": 888
+      },
+      {
+        "path": "crates/ignore/src/incremental.rs",
+        "edits": 3,
+        "bytes": 51424,
+        "lines": 1363
+      },
+      {
+        "path": "crates/matcher/Cargo.toml",
+        "edits": 3,
+        "bytes": 618,
+        "lines": 25
+      },
+      {
+        "path": "crates/pcre2/Cargo.toml",
+        "edits": 3,
+        "bytes": 559,
+        "lines": 19
+      },
+      {
+        "path": "crates/searcher/Cargo.toml",
+        "edits": 3,
+        "bytes": 963,
+        "lines": 32
+      },
+      {
+        "path": "tests/util.rs",
+        "edits": 3,
+        "bytes": 17976,
+        "lines": 528
+      },
+      {
+        "path": ".github/workflows/release.yml",
+        "edits": 2,
+        "bytes": 12931,
+        "lines": 386
+      },
+      {
+        "path": ".gitignore",
+        "edits": 2,
+        "bytes": 266,
+        "lines": 22
+      },
+      {
+        "path": "AI_POLICY.md",
+        "edits": 2,
+        "bytes": 1878,
+        "lines": 38
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "edits": 2,
+        "bytes": 213,
+        "lines": 8
+      },
+      {
+        "path": "GUIDE.md",
+        "edits": 2,
+        "bytes": 40895,
+        "lines": 1025
+      },
+      {
+        "path": "README.md",
+        "edits": 2,
+        "bytes": 21599,
+        "lines": 541
+      },
+      {
+        "path": "crates/cli/Cargo.toml",
+        "edits": 2,
+        "bytes": 747,
+        "lines": 26
+      },
+      {
+        "path": "crates/core/flags/doc/help.rs",
+        "edits": 2,
+        "bytes": 9112,
+        "lines": 259
+      },
+      {
+        "path": "crates/core/flags/doc/man.rs",
+        "edits": 2,
+        "bytes": 3713,
+        "lines": 110
+      },
+      {
+        "path": "crates/core/flags/doc/template.long.help",
+        "edits": 2,
+        "bytes": 1514,
+        "lines": 61
+      },
+      {
+        "path": "crates/core/flags/doc/template.short.help",
+        "edits": 2,
+        "bytes": 756,
+        "lines": 38
+      },
+      {
+        "path": "crates/globset/src/glob.rs",
+        "edits": 2,
+        "bytes": 62216,
+        "lines": 1720
+      },
+      {
+        "path": "crates/grep/Cargo.toml",
+        "edits": 2,
+        "bytes": 1020,
+        "lines": 33
+      },
+      {
+        "path": "crates/ignore/src/lib.rs",
+        "edits": 2,
+        "bytes": 18628,
+        "lines": 549
+      },
+      {
+        "path": "crates/printer/Cargo.toml",
+        "edits": 2,
+        "bytes": 1402,
+        "lines": 43
+      },
+      {
+        "path": "crates/regex/Cargo.toml",
+        "edits": 2,
+        "bytes": 631,
+        "lines": 21
+      },
+      {
+        "path": "crates/searcher/src/searcher/mod.rs",
+        "edits": 2,
+        "bytes": 41168,
+        "lines": 1088
+      }
+    ]
+  },
+  "imports": {
+    "chart": "arc",
+    "rolledUp": true,
+    "rollUpNote": "169 file imports rolled up to 10 links between 8 directories, up to 4 levels deep.",
+    "nodes": [
+      "crates/core",
+      "crates/core/flags",
+      "crates/core/flags/complete",
+      "crates/core/flags/doc",
+      "crates/printer/src",
+      "crates/printer/src/hyperlink",
+      "crates/searcher/src",
+      "crates/searcher/src/searcher"
+    ],
+    "edges": [
+      {
+        "from": "crates/searcher/src/searcher",
+        "to": "crates/searcher/src",
+        "count": 10
+      },
+      {
+        "from": "crates/core/flags",
+        "to": "crates/core/flags/complete",
+        "count": 5
+      },
+      {
+        "from": "crates/printer/src",
+        "to": "crates/printer/src/hyperlink",
+        "count": 5
+      },
+      {
+        "from": "crates/core/flags/complete",
+        "to": "crates/core/flags",
+        "count": 4
+      },
+      {
+        "from": "crates/core/flags/doc",
+        "to": "crates/core/flags",
+        "count": 4
+      },
+      {
+        "from": "crates/core/flags",
+        "to": "crates/core/flags/doc",
+        "count": 4
+      },
+      {
+        "from": "crates/searcher/src",
+        "to": "crates/searcher/src/searcher",
+        "count": 3
+      },
+      {
+        "from": "crates/core/flags",
+        "to": "crates/core",
+        "count": 2
+      },
+      {
+        "from": "crates/core",
+        "to": "crates/core/flags",
+        "count": 1
+      },
+      {
+        "from": "crates/printer/src/hyperlink",
+        "to": "crates/printer/src",
+        "count": 1
+      }
+    ],
+    "external": [
+      {
+        "name": "bstr",
+        "files": 18
+      },
+      {
+        "name": "grep_matcher",
+        "files": 18
+      },
+      {
+        "name": "termcolor",
+        "files": 9
+      },
+      {
+        "name": "grep_regex",
+        "files": 7
+      },
+      {
+        "name": "grep_searcher",
+        "files": 7
+      },
+      {
+        "name": "ignore",
+        "files": 7
+      },
+      {
+        "name": "regex_automata",
+        "files": 7
+      },
+      {
+        "name": "globset",
+        "files": 6
+      },
+      {
+        "name": "regex_syntax",
+        "files": 6
+      },
+      {
+        "name": "grep",
+        "files": 5
+      },
+      {
+        "name": "serde",
+        "files": 4
+      },
+      {
+        "name": "regex",
+        "files": 3
+      },
+      {
+        "name": "walkdir",
+        "files": 3
+      },
+      {
+        "name": "winapi_util",
+        "files": 3
+      },
+      {
+        "name": "anyhow",
+        "files": 2
+      },
+      {
+        "name": "memchr",
+        "files": 2
+      },
+      {
+        "name": "pcre2",
+        "files": 2
+      },
+      {
+        "name": "serde_json",
+        "files": 2
+      },
+      {
+        "name": "A",
+        "files": 1
+      },
+      {
+        "name": "B",
+        "files": 1
+      }
+    ],
+    "unresolved": 11
+  },
+  "coChange": {
+    "chart": "arc",
+    "available": true,
+    "pairCount": 3301,
+    "bulkCommitsSkipped": 1,
+    "rolledUp": true,
+    "rollUpNote": "Only the 30 most frequent of 3301 file pairs are shown.",
+    "pairs": [
+      {
+        "a": "CHANGELOG.md",
+        "b": "tests/regression.rs",
+        "count": 48
+      },
+      {
+        "a": "crates/grep/Cargo.toml",
+        "b": "crates/printer/Cargo.toml",
+        "count": 26
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "tests/feature.rs",
+        "count": 19
+      },
+      {
+        "a": "crates/printer/Cargo.toml",
+        "b": "crates/searcher/Cargo.toml",
+        "count": 19
+      },
+      {
+        "a": "crates/grep/Cargo.toml",
+        "b": "crates/searcher/Cargo.toml",
+        "count": 18
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "README.md",
+        "count": 17
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "crates/core/flags/defs.rs",
+        "count": 17
+      },
+      {
+        "a": "Cargo.toml",
+        "b": "README.md",
+        "count": 17
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "crates/ignore/src/default_types.rs",
+        "count": 16
+      },
+      {
+        "a": ".github/workflows/ci.yml",
+        "b": ".github/workflows/release.yml",
+        "count": 15
+      },
+      {
+        "a": "crates/cli/Cargo.toml",
+        "b": "crates/ignore/Cargo.toml",
+        "count": 15
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "crates/printer/src/standard.rs",
+        "count": 14
+      },
+      {
+        "a": "Cargo.toml",
+        "b": "tests/tests.rs",
+        "count": 14
+      },
+      {
+        "a": "crates/printer/Cargo.toml",
+        "b": "crates/regex/Cargo.toml",
+        "count": 14
+      },
+      {
+        "a": "crates/regex/Cargo.toml",
+        "b": "crates/searcher/Cargo.toml",
+        "count": 14
+      },
+      {
+        "a": "crates/pcre2/Cargo.toml",
+        "b": "crates/regex/Cargo.toml",
+        "count": 13
+      },
+      {
+        "a": "crates/printer/src/standard.rs",
+        "b": "crates/printer/src/util.rs",
+        "count": 13
+      },
+      {
+        "a": "crates/globset/src/glob.rs",
+        "b": "crates/globset/src/lib.rs",
+        "count": 12
+      },
+      {
+        "a": "crates/grep/Cargo.toml",
+        "b": "crates/pcre2/Cargo.toml",
+        "count": 12
+      },
+      {
+        "a": "crates/grep/Cargo.toml",
+        "b": "crates/regex/Cargo.toml",
+        "count": 12
+      },
+      {
+        "a": "crates/pcre2/Cargo.toml",
+        "b": "crates/printer/Cargo.toml",
+        "count": 12
+      },
+      {
+        "a": "crates/pcre2/Cargo.toml",
+        "b": "crates/searcher/Cargo.toml",
+        "count": 12
+      },
+      {
+        "a": "crates/printer/src/standard.rs",
+        "b": "crates/printer/src/summary.rs",
+        "count": 12
+      },
+      {
+        "a": "crates/globset/Cargo.toml",
+        "b": "crates/ignore/Cargo.toml",
+        "count": 11
+      },
+      {
+        "a": "crates/globset/Cargo.toml",
+        "b": "crates/regex/Cargo.toml",
+        "count": 11
+      },
+      {
+        "a": "crates/printer/src/standard.rs",
+        "b": "tests/regression.rs",
+        "count": 11
+      },
+      {
+        "a": "crates/regex/src/config.rs",
+        "b": "crates/regex/src/matcher.rs",
+        "count": 11
+      },
+      {
+        "a": "CHANGELOG.md",
+        "b": "Cargo.toml",
+        "count": 10
+      },
+      {
+        "a": "Cargo.toml",
+        "b": "crates/globset/Cargo.toml",
+        "count": 10
+      },
+      {
+        "a": "Cargo.toml",
+        "b": "crates/regex/Cargo.toml",
+        "count": 10
+      }
+    ]
+  }
+}

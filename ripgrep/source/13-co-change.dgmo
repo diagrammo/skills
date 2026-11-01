@@ -1,0 +1,34 @@
+arc Files that change together
+// From: measurements.json coChange (Only the 30 most frequent of 3301 file pairs are shown.)
+order degree
+
+CHANGELOG.md -> tests/regression.rs 48
+crates/grep/Cargo.toml -> crates/printer/Cargo.toml 26
+CHANGELOG.md -> tests/feature.rs 19
+crates/printer/Cargo.toml -> crates/searcher/Cargo.toml 19
+crates/grep/Cargo.toml -> crates/searcher/Cargo.toml 18
+CHANGELOG.md -> README.md 17
+CHANGELOG.md -> crates/core/flags/defs.rs 17
+Cargo.toml -> README.md 17
+CHANGELOG.md -> crates/ignore/src/default_types.rs 16
+.github/workflows/ci.yml -> .github/workflows/release.yml 15
+crates/cli/Cargo.toml -> crates/ignore/Cargo.toml 15
+CHANGELOG.md -> crates/printer/src/standard.rs 14
+Cargo.toml -> tests/tests.rs 14
+crates/printer/Cargo.toml -> crates/regex/Cargo.toml 14
+crates/regex/Cargo.toml -> crates/searcher/Cargo.toml 14
+crates/pcre2/Cargo.toml -> crates/regex/Cargo.toml 13
+crates/printer/src/standard.rs -> crates/printer/src/util.rs 13
+crates/globset/src/glob.rs -> crates/globset/src/lib.rs 12
+crates/grep/Cargo.toml -> crates/pcre2/Cargo.toml 12
+crates/grep/Cargo.toml -> crates/regex/Cargo.toml 12
+crates/pcre2/Cargo.toml -> crates/printer/Cargo.toml 12
+crates/pcre2/Cargo.toml -> crates/searcher/Cargo.toml 12
+crates/printer/src/standard.rs -> crates/printer/src/summary.rs 12
+crates/globset/Cargo.toml -> crates/ignore/Cargo.toml 11
+crates/globset/Cargo.toml -> crates/regex/Cargo.toml 11
+crates/printer/src/standard.rs -> tests/regression.rs 11
+crates/regex/src/config.rs -> crates/regex/src/matcher.rs 11
+CHANGELOG.md -> Cargo.toml 10
+Cargo.toml -> crates/globset/Cargo.toml 10
+Cargo.toml -> crates/regex/Cargo.toml 10

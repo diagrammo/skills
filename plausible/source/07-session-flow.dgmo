@@ -1,0 +1,18 @@
+flowchart How an event joins a session
+// From: lib/plausible/session/cache_store.ex:16-70 (on_event, handle_event), :74-97 (find_session, 30 minute window), :121-149 (update_session), :151 (new_session_from_event)
+direction-tb
+
+(Event arrives) -> [Look up session by user_id, then by previous salt user_id]
+[Look up session by user_id, then by previous salt user_id] -> <Engagement event?>
+<Engagement event?> -yes-> <Session found for engagement?>
+<Engagement event?> -no-> <Session found for event?>
+<Session found for engagement?> -yes-> [Refresh session cache timestamp]
+<Session found for engagement?> -no-> (Dropped, no session for engagement)
+<Session found for event?> -yes-> [Update session: pageviews, exit page, duration, bounce]
+<Session found for event?> -no-> [Create new session from event]
+[Refresh session cache timestamp] -> (Session returned)
+[Update session: pageviews, exit page, duration, bounce] -> [Write old row with sign -1 and new row with sign 1]
+[Write old row with sign -1 and new row with sign 1] -> [Put session in cache]
+[Create new session from event] -> [Write new row with sign 1]
+[Write new row with sign 1] -> [Put session in cache]
+[Put session in cache] -> (Session returned)

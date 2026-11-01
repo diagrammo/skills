@@ -1,0 +1,66 @@
+{
+  "title": "Diagrammo (dgmo) — codebase report",
+  "summary": "dgmo is the TypeScript library behind the Diagrammo diagram language: it parses text in the DGMO markup into SVG for dozens of chart types. The same repository also builds the dgmo command line tool (cli/) and a set of browser drop-in scripts (standalone/), and all three packages are at version 0.95.0 at this commit. The measured source is 1,400 files and 346,187 lines, with the history running from 2026-02-07 to 2026-10-30 across 2,614 non-merge commits. A newcomer starts at src/index.ts (the public API), then src/render.ts (the render pipeline), then one chart folder such as src/sequence/. This report draws no data-model chart, no sitemap, no state chart and no journey map: the repo has no schema or database, no site, no status lifecycle and no user-facing app flow.",
+  "diagrams": [
+    {
+      "file": "01-stack.dgmo",
+      "title": "The stack",
+      "text": "The repo publishes three packages: the library, the dgmo command line tool that inlines the library, and standalone browser scripts. Inside the library, one render entry parses the text, looks up the chart type, and hands the work to either the data-chart engine or a per-chart export handler. A newcomer should read src/render.ts first, because every path from a host app or the CLI goes through it. The outside services are the online editor (share links), the Diagrammo Cloud API (dgmo put/get/ls) and the MCP server (dgmo mcp)."
+    },
+    {
+      "file": "02-sizes.dgmo",
+      "title": "Size by directory",
+      "text": "Each box is a directory, sized by its lines of code, with 346,187 lines in total. 1400 files rolled up to 823 boxes, two directory levels deep; gallery/fixtures, gallery/snapshots, src/utils, tests, tests/fixtures/conformance, tests/fixtures/highlight-conformance hold more than 40 files of their own, shown as files. The smallest 784 are shown as \"(other)\". The \"(other)\" box holds 154,454 lines (45% of the total) in 988 files, so the roll-up hid where most of the code sits: the directories the note above lists as holding more than the file limit (tests, gallery fixtures and snapshots, src/utils) are split into single files, and nearly all of those files fell into \"(other)\". Of what is named, src/ with one folder per chart type is the largest part; src/map is the biggest chart, and api-baseline is a checked-in snapshot of the built type files, not hand-written code."
+    },
+    {
+      "file": "03-languages.dgmo",
+      "title": "Languages",
+      "text": "TypeScript is 309,036 lines in 914 files, which is 92% of the lines in the language slices; that count includes the tests and the api-baseline folder (a checked-in snapshot of the built type files). Markdown, JavaScript (build scripts), DGMO example files and JSON follow. 3 smaller languages are shown as \"Other\": YAML, Shell, HTML. 145 files of unknown type (SVG gallery snapshots, fonts and similar) are not counted as code."
+    },
+    {
+      "file": "04-history.dgmo",
+      "title": "History",
+      "text": "The repo has 2,614 non-merge commits since 2026-02-07. Only the newest 15 of 166 tags are shown. Library tags are v0.x and CLI tags are cli-v0.x; they are tagged separately, and most versions have both. The five largest commits by lines changed are shown beside the tags: three remove old content (docs text, an install folder, a deprecated import path) and two add or refresh the checked-in API baseline."
+    },
+    {
+      "file": "05-cli-render.dgmo",
+      "title": "Render a file with the CLI",
+      "text": "When you run dgmo diagram.dgmo, the CLI reads the file, checks it with the parser, calls the library render function, and turns the SVG into a PNG with resvg. If the parser reports an error, the CLI replaces the SVG with an error card instead of a half drawn chart. The CLI itself holds only the file, flag and PNG handling; all drawing lives in the library."
+    },
+    {
+      "file": "06-library-render.dgmo",
+      "title": "Render from the library",
+      "text": "This is the call a host app makes. render() picks the palette, parses the text, asks the parse router (dgmo-router.ts) for the chart category, and installs a temporary jsdom window because the renderers draw with D3. Data charts go to one engine; every other chart type goes through renderForExport and its table of per-chart handlers. If any diagnostic has error severity, the public wrapper in index.ts returns an error card by default."
+    },
+    {
+      "file": "07-share-link.dgmo",
+      "title": "Make a share link",
+      "text": "dgmo share compresses the diagram text with lz-string and puts it in an online editor URL, so no server stores it. A diagram whose compressed text is over 8192 bytes is refused, and the command exits with an error. The result is printed and copied to the clipboard unless --no-copy is given."
+    },
+    {
+      "file": "08-detect-type.dgmo",
+      "title": "How dgmo finds the chart type",
+      "text": "A diagram names its type in the first word of the first line. When it does not, parseDgmoChartType checks for a live link, then tries a fixed list of ten looks-like tests in order, and the order matters: sequence is tested before flowchart because both use arrows. Only those ten types have a looks-like test; every other type must be named on the first line."
+    },
+    {
+      "file": "09-release.dgmo",
+      "title": "Library release",
+      "text": "release.sh builds and checks locally, tags the version and starts the GitHub Actions release workflow. The workflow checks the tag against package.json, runs typecheck, lint, test and build, then publishes the library and the standalone package to npm with provenance. The script ends by asking npm which version it serves. The CLI has its own workflow (release-cli.yml) and tag."
+    },
+    {
+      "file": "10-hot-files.dgmo",
+      "title": "Hot files",
+      "text": "Each bubble is one of the 40 most edited files in the 12 months to the last commit, placed by lines (across) and edits (up), with bubble size from bytes. The repo is younger than 12 months, so this covers its whole history, and only the 40 most edited of 1400 edited files are shown. The most edited file is package.json with 315 edits, then src/d3.ts and docs/language-reference.md. Large renderers such as src/map/layout.ts and the checked-in api-baseline types also sit high."
+    },
+    {
+      "file": "11-imports.dgmo",
+      "title": "Module dependencies",
+      "text": "Each arc is a link from one directory to another; a thicker arc means more imports. 3894 file imports rolled up to 319 links between 61 directories, up to 2 levels deep, and the 22 least connected are shown as \"(other)\". The heaviest link is tests to src with 216 imports. Almost every chart folder imports src/utils and src/palettes, the shared base, and test directories import nearly every folder, which is why they dominate the left side."
+    },
+    {
+      "file": "12-cochange.dgmo",
+      "title": "Files that change together",
+      "text": "Each arc joins two files that were changed in the same commit, with a thicker arc for more commits. Only the 30 most frequent of 32945 file pairs are shown, and 24 bulk commits touching more than 50 files were skipped. The top pair is src/map/layout.ts and tests/map-layout.test.ts (65 commits). The AI editor rules files (.cursorrules, .windsurfrules, the Copilot instructions, SKILL.md) share a block generated from docs/language-reference.md by scripts/gen-ai-core.mjs, so they often change in the same commit."
+    }
+  ]
+}

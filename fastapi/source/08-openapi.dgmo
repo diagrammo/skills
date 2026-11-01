@@ -1,0 +1,23 @@
+sequence Building the OpenAPI schema and docs pages
+// From: fastapi/applications.py:1085-1119,1120-1172, fastapi/openapi/utils.py:577-660, fastapi/openapi/docs.py:79
+Browser -GET /docs-> FastAPI
+FastAPI -swagger_ui_html-> get_swagger_ui_html
+note right of get_swagger_ui_html
+  Handler registered in setup() at applications.py:1120-1155. It returns an HTML page that loads the Swagger UI bundle from a CDN (openapi/docs.py:79).
+get_swagger_ui_html -HTML page-> Browser
+Browser -GET /openapi.json-> FastAPI
+FastAPI -openapi handler calls self.openapi()-> FastAPI
+note right of FastAPI
+  applications.py:1085. Cached in openapi_schema until the router's routes version changes (applications.py:1099-1117).
+FastAPI -get_openapi(routes, webhooks, ...)-> get_openapi
+get_openapi -get_fields_from_routes-> get_openapi
+get_openapi -get_flat_models_from_fields and get_model_name_map-> ModelField
+note right of ModelField
+  openapi/utils.py:612-615. Collects every request and response model so components can be shared.
+get_openapi -get_definitions-> ModelField
+loop each route from iter_route_contexts
+  get_openapi -get_openapi_path-> get_openapi_path
+  note right of get_openapi_path
+    openapi/utils.py:303 and call at 620-626. Returns the path item, security schemes and definitions.
+get_openapi -paths, components, definitions-> FastAPI
+FastAPI -JSONResponse of the schema-> Browser

@@ -1,0 +1,66 @@
+event-line Releases and the largest commits
+// From: measurements.json history (tags: newest 15 of all; largestCommits)
+tag Kind as g
+  Release blue
+  Big commit orange
+
+2026-03-31 Remove initiative-status from docs, AI files, and...  g: Big commit
+  300 files, 45302 lines changed
+
+2026-04-26 Remove redundant _bmad/ install — canonical install...  g: Big commit
+  230 files, 36840 lines changed
+
+2026-05-21 add public API surface diff tool (api-baseline)  g: Big commit
+  18 files, 23419 lines changed
+
+2026-06-10 prep dgmo 0.28.0 — changelog, api-baseline, cspell,...  g: Big commit
+  11 files, 15890 lines changed
+
+2026-06-15 remove the deprecated /internal subpath alias (1.0...  g: Big commit
+  15 files, 14920 lines changed
+
+2026-10-08 cli-v0.89.0  g: Release
+  Commit 6ecfb89
+
+2026-10-10 v0.90.0  g: Release
+  Commit 17d4fe5
+
+2026-10-10 cli-v0.90.0  g: Release
+  Commit 0b6733b
+
+2026-10-14 v0.91.0  g: Release
+  Commit 5cb87bf
+
+2026-10-14 cli-v0.91.0  g: Release
+  Commit 9f74aa7
+
+2026-10-14 v0.91.1  g: Release
+  Commit 5fefa03
+
+2026-10-20 v0.92.0  g: Release
+  Commit 4cbb705
+
+2026-10-20 v0.92.1  g: Release
+  Commit 7bd2aa2
+
+2026-10-20 cli-v0.92.1  g: Release
+  Commit 25c14ae
+
+2026-10-26 v0.93.0  g: Release
+  Commit c0883d1
+
+2026-10-26 cli-v0.93.0  g: Release
+  Commit c0434bb
+
+2026-10-28 v0.94.0  g: Release
+  Commit c3470fc
+
+2026-10-28 cli-v0.94.0  g: Release
+  Commit 64ac0a2
+
+2026-10-29 v0.95.0  g: Release
+  Commit 968c652
+
+2026-10-29 cli-v0.95.0  g: Release
+  Commit 80abbdd
+

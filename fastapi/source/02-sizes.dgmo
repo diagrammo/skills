@@ -1,0 +1,50 @@
+treemap Lines of text by directory (lines)
+// From: measurements.json sizes (rolled up: 3232 files rolled up to 443 boxes, two directory levels deep; docs/en/docs/img/sponsors, tests hold more than 40 files of their own, shown as files. The smallest 404 are shown as (other).)
+
+"docs"
+  "en" 39658
+  "de" 18504
+  "fr" 18345
+  "uk" 18297
+  "es" 18279
+  "ru" 18265
+  "pt" 18265
+  "tr" 18255
+  "ko" 18246
+  "ja" 18236
+  "zh-hant" 18236
+  "hi" 18235
+  "zh" 18214
+  "en/docs/img/sponsors/jina.svg" 1981
+  "en/docs/img/sponsors/cryptapi-banner.svg" 1375
+  "en/docs/img/sponsors/cryptapi.svg" 1216
+"tests"
+  "test_tutorial" 29871
+  "test_request_params" 13643
+  "test_include_router_defaults_overrides.py" 7304
+  "test_telemetry" 4040
+  "test_generate_unique_id_function.py" 1699
+  "test_frontend.py" 1415
+  "test_application.py" 1285
+  "test_router_include_context.py" 1162
+  "test_response_model_as_return_annotation.py" 1121
+  "test_union_form_normalization.py" 870
+  "test_schema_extra_examples.py" 857
+  "test_path.py" 780
+"fastapi"
+  "(own files)" 16224
+  "dependencies" 1698
+  "security" 1558
+  "openapi" 1498
+  "telemetry" 978
+  ".agents" 925
+"scripts"
+  "(own files)" 3580
+  "tests" 2027
+".github"
+  "workflows" 1427
+"(repo root)"
+  "(own files)" 1152
+"docs_src"
+  "security" 1015
+"(other)" 43953

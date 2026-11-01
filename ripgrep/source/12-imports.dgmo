@@ -1,0 +1,17 @@
+arc Module imports (directory level)
+// From: measurements.json imports (169 file imports rolled up to 10 links between 8 directories, up to 4 levels deep.)
+order group
+
+[searcher] blue
+  crates/searcher/src/searcher -> crates/searcher/src 10
+  crates/searcher/src -> crates/searcher/src/searcher 3
+[core] green
+  crates/core/flags -> crates/core/flags/complete 5
+  crates/core/flags/complete -> crates/core/flags 4
+  crates/core/flags/doc -> crates/core/flags 4
+  crates/core/flags -> crates/core/flags/doc 4
+  crates/core/flags -> crates/core 2
+  crates/core -> crates/core/flags 1
+[printer] orange
+  crates/printer/src -> crates/printer/src/hyperlink 5
+  crates/printer/src/hyperlink -> crates/printer/src 1

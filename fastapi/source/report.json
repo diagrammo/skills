@@ -1,0 +1,71 @@
+{
+  "title": "FastAPI — codebase report",
+  "summary": "FastAPI is a Python web framework for building HTTP and WebSocket APIs from type-annotated functions. The package in fastapi/ builds on Starlette (ASGI routing and middleware) and Pydantic (validation and serialization), and it generates an OpenAPI schema and the Swagger UI and ReDoc pages from your route declarations. The repo also holds a large docs tree in many languages, a test suite bigger than the package, and scripts that build and translate the docs. A newcomer starts with fastapi/applications.py (the FastAPI class), then fastapi/routing.py (APIRouter, APIRoute and the request handler) and fastapi/dependencies/utils.py (dependency resolution). This report has 13 diagrams. It has no data model, sitemap, state, journey or swimlane chart, because the code has no database schema, page tree, status field or multi-role process to draw. History, hot files, module imports and co-change charts are rolled up, as each section says.",
+  "diagrams": [
+    {
+      "file": "01-stack.dgmo",
+      "title": "The stack",
+      "text": "The chart shows the main parts of the fastapi package, the libraries it builds on, and the repo tooling. A path operation function that you write is registered on an APIRouter, which makes one APIRoute per path. Each APIRoute builds a request handler that calls solve_dependencies and uses ModelField (a wrapper around a Pydantic TypeAdapter) to validate and serialize. Start with these boxes, then read the sequence and flowchart diagrams for the detail."
+    },
+    {
+      "file": "02-sizes.dgmo",
+      "title": "Size by directory",
+      "text": "The treemap shows lines of text by directory. The measurement rolled up 3232 files to 443 boxes, two directory levels deep; docs/en/docs/img/sponsors and tests hold more than 40 files of their own, so they show as files. The smallest 404 boxes are shown as \"(other)\" (43953 lines). The docs tree dominates: docs/en has 39658 lines and each of 12 translations has about 18200 to 18500. The fastapi package itself has 16224 lines in its own files, and tests/test_tutorial alone has 29871."
+    },
+    {
+      "file": "03-languages.dgmo",
+      "title": "Lines by language",
+      "text": "The pie shows lines by language. Markdown has 249873 lines and Python has 131859, so most of the text in the repo is documentation. YAML has 7131 lines, CSS 681 and JavaScript 614. The 3 smallest languages (TOML, HTML and Shell) are grouped as \"Other\" with 635 lines."
+    },
+    {
+      "file": "04-history.dgmo",
+      "title": "Releases and largest commits",
+      "text": "The chart shows the 5 largest commits by lines changed and the newest 15 release tags. The repo has 7930 commits from 2018-12-05 to 2026-10-26 and 347 tags, but only the newest 15 tags are shown. Events are evenly spaced, not to scale, because the 15 tags fall in three days (2026-10-21 to 2026-10-23) while the 5 largest commits span 2020 to 2026. The largest commit changed 68216 lines in 280 files (the OpenAPI test refactor of 2023-05-08)."
+    },
+    {
+      "file": "05-register-route.dgmo",
+      "title": "Registering a path operation",
+      "text": "The chart traces what happens when you write @app.get on a function. FastAPI.get hands the call to APIRouter, which merges prefix, tags and dependencies and then builds an APIRoute. APIRoute builds the dependant (the object that describes the function's parameters), the response field and the request handler. The router then appends the route and bumps a version counter, so app.openapi() sees the new route."
+    },
+    {
+      "file": "06-handle-request.dgmo",
+      "title": "Handling one HTTP request",
+      "text": "The chart traces one HTTP request from the ASGI server to the response. On the first call FastAPI builds its middleware stack, and the request passes through it to the router, which finds the matching APIRoute. The request handler reads the body, calls solve_dependencies, and then either runs your function and serializes the result or raises RequestValidationError. This path is the core of the framework; read it before the dependency and body flowcharts."
+    },
+    {
+      "file": "07-protected-route.dgmo",
+      "title": "A protected route rejects a request",
+      "text": "The chart shows a request without an Authorization header reaching a route that depends on OAuth2PasswordBearer. solve_dependencies awaits the security object, and the object raises an HTTPException with status 401 and a WWW-Authenticate: Bearer header. ExceptionMiddleware turns that exception into a JSON response. If the header is a valid bearer token, the token is passed to your function instead."
+    },
+    {
+      "file": "08-openapi.dgmo",
+      "title": "Building the OpenAPI schema and docs pages",
+      "text": "The chart shows how FastAPI serves /docs and /openapi.json. The /docs page is plain HTML that loads the Swagger UI bundle from a CDN. The /openapi.json handler calls get_openapi, which collects the request and response models from all routes and builds one path item per route. The app caches the result and rebuilds it only when the router's routes version changes."
+    },
+    {
+      "file": "09-solve-dependencies.dgmo",
+      "title": "How solve_dependencies resolves one dependant",
+      "text": "The flowchart shows the loop inside solve_dependencies. For each sub-dependant it solves the sub-dependant first (recursively), then reuses a cached value, enters a generator on an exit stack, awaits a coroutine, or runs a plain function in a thread pool. After the loop it validates path, query, header, cookie and body parameters, and injects Request, Response, BackgroundTasks and SecurityScopes. The function returns the values and any errors; the caller decides what to do with the errors."
+    },
+    {
+      "file": "10-body-parsing.dgmo",
+      "title": "How the request handler reads the body",
+      "text": "The flowchart shows how the request handler decides what the request body is. A form body is read with request.form. Other bodies are read as bytes and parsed as JSON only when the Content-Type is application/json or a +json type, or when it is missing and strict content type is off. Invalid JSON becomes a RequestValidationError of type json_invalid; any other bytes stay raw."
+    },
+    {
+      "file": "11-hot-files.dgmo",
+      "title": "Hot files: size against edits",
+      "text": "The bubble chart shows the 40 most edited files of the 2709 files edited in the last 12 months (to 2026-10-26). Each bubble sits at lines in the file and number of commits, and its size is the file's bytes. docs/en/docs/release-notes.md is far ahead with 986 edits and 7802 lines. In the code, fastapi/__init__.py has 125 edits, fastapi/dependencies/utils.py has 71, and fastapi/routing.py has 49 edits and 6552 lines."
+    },
+    {
+      "file": "12-module-imports.dgmo",
+      "title": "Imports between directories",
+      "text": "The arc chart shows imports between directories. The measurement rolled up 1807 file imports to 157 links between 95 directories, up to 2 levels deep; the 56 least connected directories are shown as \"(other)\". The strongest link is tests to fastapi with 475 imports, then tests/test_tutorial to fastapi with 256. Inside the package, fastapi/openapi imports the top-level fastapi modules 11 times, and fastapi/security imports fastapi/openapi 5 times."
+    },
+    {
+      "file": "13-co-change.dgmo",
+      "title": "Files that change together",
+      "text": "The arc chart shows the 30 most frequent of 31162 file pairs that change in the same commit; 103 bulk commits were skipped. docs/en/docs/release-notes.md and fastapi/__init__.py change together 259 times, which is the release step. README.md and docs/en/data/sponsors.yml change together 98 times. In the code, fastapi/applications.py and fastapi/routing.py change together 60 times, and fastapi/dependencies/utils.py and fastapi/routing.py 50 times."
+    }
+  ]
+}

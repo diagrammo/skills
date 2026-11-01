@@ -1,0 +1,42 @@
+flowchart How dgmo finds the chart type
+// From: src/chart-type-detect.ts:87-128; src/utils/parsing.ts:241-259
+direction-tb
+
+(Start) -> [Take first non-empty non-comment line]
+[Take first non-empty non-comment line] -> <First word is a known chart type?>
+<First word is a known chart type?> -yes-> [Use that type]
+<First word is a known chart type?> -no-> <Line is a live link?>
+<Line is a live link?> -yes-> [Use live-link]
+<Line is a live link?> -no-> <Looks like sequence?>
+<Looks like sequence?> -yes-> [Use sequence]
+<Looks like sequence?> -no-> <Looks like flowchart?>
+<Looks like flowchart?> -yes-> [Use flowchart]
+<Looks like flowchart?> -no-> <Looks like class?>
+<Looks like class?> -yes-> [Use class]
+<Looks like class?> -no-> <Looks like er?>
+<Looks like er?> -yes-> [Use er]
+<Looks like er?> -no-> <Looks like state?>
+<Looks like state?> -yes-> [Use state]
+<Looks like state?> -no-> <Looks like sitemap?>
+<Looks like sitemap?> -yes-> [Use sitemap]
+<Looks like sitemap?> -no-> <Looks like org?>
+<Looks like org?> -yes-> [Use org]
+<Looks like org?> -no-> <Looks like c4?>
+<Looks like c4?> -yes-> [Use c4]
+<Looks like c4?> -no-> <Looks like gantt?>
+<Looks like gantt?> -yes-> [Use gantt]
+<Looks like gantt?> -no-> <Looks like pert?>
+<Looks like pert?> -yes-> [Use pert]
+<Looks like pert?> -no-> (No type found)
+[Use that type] -> (Return the type)
+[Use live-link] -> (Return the type)
+[Use sequence] -> (Return the type)
+[Use flowchart] -> (Return the type)
+[Use class] -> (Return the type)
+[Use er] -> (Return the type)
+[Use state] -> (Return the type)
+[Use sitemap] -> (Return the type)
+[Use org] -> (Return the type)
+[Use c4] -> (Return the type)
+[Use gantt] -> (Return the type)
+[Use pert] -> (Return the type)
