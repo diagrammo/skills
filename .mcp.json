@@ -2,7 +2,7 @@
   "mcpServers": {
     "dgmo": {
       "command": "npx",
-      "args": ["-y", "@diagrammo/dgmo-mcp@0.29.11"],
+      "args": ["-y", "@diagrammo/dgmo-mcp@0.29.14"],
       "env": {
         "DGMO_API_KEY": "${user_config.dgmo_api_key}"
       }

@@ -1,7 +1,7 @@
 {
   "name": "diagrammo",
   "displayName": "Diagrammo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Diagrams of your codebase, written in DGMO: the dgmo MCP server to check, render and share them, the skills that write them, and /diagrammo:diagram-this-repo.",
   "author": {
     "name": "Diagrammo LLC",
