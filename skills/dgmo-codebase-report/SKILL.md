@@ -126,8 +126,8 @@ user installs nothing. git is optional. `<skill>` below is this skill's director
 Puts each diagram in a new Cloud space named after the repo, where the user can edit and share it.
 The API is `https://api.diagrammo.app`; send JSON with `content-type: application/json`.
 
-1. **Sign in.** Reuse `~/.config/diagrammo/session.json` if it exists and its `expiresAt` (epoch
-   seconds) is in the future. Otherwise:
+1. **Sign in.** Every publish signs in afresh. Keep the token in memory for this run only; never
+   write it to a file and never read one from the user's machine. Do:
    - `POST /auth/desktop/start` with `{"client":"cli","label":"Codebase report on <hostname>"}`. Cut
      the label to 80 characters; a longer one is refused. It answers `deviceCode`, `userCode` and
      `expiresIn` (seconds).
@@ -136,16 +136,15 @@ The API is `https://api.diagrammo.app`; send JSON with `content-type: applicatio
    - `POST /auth/desktop/poll` with `{"deviceCode":"<deviceCode>"}` every 3 seconds. `status:
      "pending"` means wait. `status: "approved"` carries `session.token`, `session.expiresAt`,
      `label` and `manageUrl`. A 404 means the code expired: start again.
-   - Save `{"token","expiresAt","label"}` to `~/.config/diagrammo/session.json` with mode 0600.
-     Tell the user: "Signed in as `<label>`. Revoke it any time at `<manageUrl>` (Your sessions)."
-     Also say that deleting the file does not revoke the session.
+   - Tell the user: "Signed in as `<label>`. Revoke it any time at `<manageUrl>` (Your sessions)."
+     Also say that the sign-in is not saved, so a later publish signs in again.
 2. **Make the space.** `POST /spaces` with `{"name":"<repo name>"}`, the header
    `authorization: Bearer <token>`, and an `idempotency-key` header holding a new UUID. The reply's
    `id` is the space.
 3. **Add each diagram**, in report order: `POST /spaces/<space id>/diagrams` with
    `{"title":"<its report title>","source":"<the .dgmo file's text>","chartType":"<its type>"}`,
    the same `authorization` header, and a new UUID `idempotency-key` per diagram.
-4. A 401 at any step: delete the session file, sign in again, and retry that step with the same
+4. A 401 at any step: sign in again, and retry that step with the same
    `idempotency-key`. Any other error: stop, show the user the API's error message, and say which
    diagrams are already in the space. Done when every diagram is in the space. Tell the user the space's name, and
    that it is in the spaces menu at `https://online.diagrammo.app`.
