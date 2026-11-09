@@ -1,6 +1,6 @@
 # skills
 
-Agent skills from Diagrammo — portable SKILL.md files plus a Claude Code plugin marketplace.
+Agent skills from Diagrammo — portable SKILL.md files plus a Claude Code and Codex plugin marketplace.
 
 ## Install
 
@@ -14,6 +14,15 @@ In Claude Code:
 The plugin brings the skills below, the dgmo MCP server (started with `npx -y @diagrammo/dgmo-mcp@<version>`, pinned in `.mcp.json`,
 so Node 20 or later is the only prerequisite), and the `/diagrammo:diagram-this-repo` command, which
 runs `dgmo-repo-diagrams` on the repo you are in.
+
+In Codex (`dgmo install codex` runs the same two commands):
+
+```
+codex plugin marketplace add diagrammo/skills
+codex plugin add diagrammo@diagrammo
+```
+
+Update it with `codex plugin marketplace upgrade diagrammo`, then start a new Codex session. The Codex plugin has no API key setting: the cloud space tools need `DGMO_API_KEY` in the server's environment.
 
 Any other agent that reads `SKILL.md` folders: copy the folder you want from `skills/` into that
 agent's skills directory.
@@ -30,7 +39,7 @@ Reports the codebase report skill made from public repositories: <https://diagra
 
 ## What it runs and sends
 
-- **Install:** `npx` downloads `@diagrammo/dgmo-mcp` at the version pinned in `.mcp.json` from the npm registry.
+- **Install:** `npx` downloads `@diagrammo/dgmo-mcp` at the version pinned in `.mcp.json` (Codex: `mcp.json`) from the npm registry.
 - **The MCP server** runs on your machine and checks and renders diagrams locally.
 - **Cloud space tools:** only if you set the plugin's optional **Diagrammo space API key** setting, which Claude Code keeps in your system's secure credential store. The server then sends that key, and the diagrams you ask it to read or write, to `api.diagrammo.app`. With the setting empty, the server makes no network requests.
 - **Share links:** the share tool compresses the diagram's source into a link to `online.diagrammo.app`. Nothing is uploaded when the link is made. Whoever opens the link sends the diagram, in the URL, to that site, which draws it in their browser and does not store it. The [privacy policy](https://diagrammo.app/privacy) covers that site.
@@ -46,6 +55,9 @@ skills/<name>/SKILL.md          one folder per skill, agent-agnostic; scripts it
 .claude-plugin/marketplace.json the Claude Code marketplace; its one plugin is this repo's root
 .claude-plugin/plugin.json      that plugin's manifest; raise `version` with every release
 .mcp.json                       the plugin's MCP server: dgmo-mcp from npm
+.codex-plugin/plugin.json       the Codex manifest; same name and version as the Claude one
+mcp.json                        the Codex MCP file (Agent Plugins format); same pin as .mcp.json
+.agents/plugins/marketplace.json the Codex marketplace
 commands/<name>.md              the plugin's slash commands, run as /diagrammo:<name>
 docs/                           the GitHub Pages showcase; docs/showcase.json lists its reports, scripts/build-showcase.mjs writes its index
 tests/                          vitest suite; tests/fixtures/repos/ holds small repos to run skills against

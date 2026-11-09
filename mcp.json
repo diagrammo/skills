@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "dgmo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@diagrammo/dgmo-mcp@0.29.15"]
+    }
+  }
+}
