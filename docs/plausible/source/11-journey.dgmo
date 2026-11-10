@@ -1,6 +1,6 @@
 journey-map Adding a first site
-// From: lib/plausible_web/router.ex:443-500 (/register, /activate, /login), :603-690 (/sites, /sites/new, /:domain/installation, /:domain), lib/plausible/site.ex:13 (onboarding statuses),
-// tracker/ARCHITECTURE.md (installation support), lib/plausible_web/router.ex:758-767 (/:domain, settings/goals)
+// From: lib/plausible_web/router.ex:443-500 (/register, /activate, /login), :609-696 (/sites, /sites/new, /:domain/installation, /:domain), lib/plausible/site.ex:13 (onboarding statuses),
+// tracker/ARCHITECTURE.md (installation support), lib/plausible_web/router.ex:764-773 (/:domain, settings/goals)
 persona Ines blue
   Site owner who wants stats for her blog
 

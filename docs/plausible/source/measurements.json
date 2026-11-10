@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "generatedAt": "2026-10-31T03:25:17.541Z",
+  "generatedAt": "2026-11-10T16:46:31.366Z",
   "repo": {
-    "name": "analytics",
+    "name": "showcase-scratch-plausible",
     "git": true,
     "shallow": false,
-    "commit": "02cfac1517e1fef8178afe134a9b42f309f1aa77"
+    "commit": "0c3903a9411dd20349b929cd6b9db812dc797690"
   },
   "limits": {
     "sizes": {
@@ -41,12 +41,12 @@
   "sizes": {
     "chart": "treemap",
     "total": {
-      "files": 2129,
-      "bytes": 20075429,
-      "lines": 709883
+      "files": 2141,
+      "bytes": 20271757,
+      "lines": 715880
     },
     "rolledUp": true,
-    "rollUpNote": "2129 files rolled up to 444 boxes, two directory levels deep; lib/plausible, lib/plausible_web/templates/email, priv/ingest_repo/migrations, priv/repo/migrations hold more than 40 files of their own, shown as files. The smallest 405 are shown as \"(other)\".",
+    "rollUpNote": "2141 files rolled up to 444 boxes, two directory levels deep; lib/plausible, lib/plausible_web/templates/email, priv/ingest_repo/migrations, priv/repo/migrations hold more than 40 files of their own, shown as files. The smallest 405 are shown as \"(other)\".",
     "entries": [
       {
         "path": "fixture",
@@ -56,9 +56,9 @@
       },
       {
         "path": "test/plausible_web",
-        "bytes": 2693104,
-        "lines": 83604,
-        "files": 230
+        "bytes": 2726387,
+        "lines": 84582,
+        "files": 232
       },
       {
         "path": "priv/ua_inspector",
@@ -68,27 +68,27 @@
       },
       {
         "path": "test/plausible",
-        "bytes": 1589781,
-        "lines": 46812,
-        "files": 172
-      },
-      {
-        "path": "assets/js",
-        "bytes": 996859,
-        "lines": 34167,
-        "files": 221
+        "bytes": 1647598,
+        "lines": 48547,
+        "files": 175
       },
       {
         "path": "lib/plausible_web",
-        "bytes": 1076762,
-        "lines": 33971,
-        "files": 268
+        "bytes": 1093083,
+        "lines": 34402,
+        "files": 270
+      },
+      {
+        "path": "assets/js",
+        "bytes": 996911,
+        "lines": 34171,
+        "files": 221
       },
       {
         "path": "lib/plausible",
-        "bytes": 995189,
-        "lines": 32896,
-        "files": 239
+        "bytes": 1022775,
+        "lines": 33782,
+        "files": 242
       },
       {
         "path": "tracker/test",
@@ -98,8 +98,8 @@
       },
       {
         "path": "extra/lib",
-        "bytes": 444642,
-        "lines": 14832,
+        "bytes": 444884,
+        "lines": 14840,
         "files": 109
       },
       {
@@ -116,9 +116,15 @@
       },
       {
         "path": "test/workers",
-        "bytes": 173705,
-        "lines": 5340,
+        "bytes": 176718,
+        "lines": 5433,
         "files": 26
+      },
+      {
+        "path": "priv",
+        "bytes": 170749,
+        "lines": 5289,
+        "files": 25
       },
       {
         "path": "priv/ref_inspector",
@@ -127,46 +133,40 @@
         "files": 2
       },
       {
-        "path": "priv",
-        "bytes": 120398,
-        "lines": 3667,
-        "files": 24
-      },
-      {
         "path": "test/support",
-        "bytes": 97139,
-        "lines": 3457,
+        "bytes": 97221,
+        "lines": 3461,
         "files": 27
       },
       {
         "path": "priv/repo",
-        "bytes": 91455,
-        "lines": 3178,
+        "bytes": 91414,
+        "lines": 3177,
         "files": 2
       },
       {
         "path": ".",
-        "bytes": 134856,
-        "lines": 2650,
+        "bytes": 135802,
+        "lines": 2657,
         "files": 18
       },
       {
         "path": "lib/workers",
-        "bytes": 61537,
-        "lines": 2176,
+        "bytes": 62609,
+        "lines": 2223,
         "files": 27
       },
       {
         "path": "config",
-        "bytes": 50093,
-        "lines": 1593,
+        "bytes": 50914,
+        "lines": 1612,
         "files": 16
       },
       {
         "path": ".github/workflows",
-        "bytes": 40492,
-        "lines": 1146,
-        "files": 14
+        "bytes": 42835,
+        "lines": 1242,
+        "files": 15
       },
       {
         "path": "assets/data",
@@ -200,8 +200,8 @@
       },
       {
         "path": "lib",
-        "bytes": 18228,
-        "lines": 687,
+        "bytes": 17366,
+        "lines": 657,
         "files": 5
       },
       {
@@ -212,8 +212,8 @@
       },
       {
         "path": "tracker",
-        "bytes": 19388,
-        "lines": 580,
+        "bytes": 19413,
+        "lines": 582,
         "files": 12
       },
       {
@@ -241,15 +241,15 @@
         "files": 1
       },
       {
-        "path": "lib/plausible/application.ex",
-        "bytes": 14108,
-        "lines": 435,
+        "path": "lib/plausible/oauth.ex",
+        "bytes": 17565,
+        "lines": 495,
         "files": 1
       },
       {
-        "path": "lib/plausible/oauth.ex",
-        "bytes": 15217,
-        "lines": 421,
+        "path": "lib/plausible/application.ex",
+        "bytes": 14448,
+        "lines": 442,
         "files": 1
       },
       {
@@ -260,8 +260,8 @@
       },
       {
         "path": "tracker/npm_package",
-        "bytes": 16553,
-        "lines": 378,
+        "bytes": 16578,
+        "lines": 380,
         "files": 5
       },
       {
@@ -284,8 +284,8 @@
       },
       {
         "path": "(other)",
-        "bytes": 991582,
-        "lines": 11956,
+        "bytes": 992146,
+        "lines": 11969,
         "files": 494
       }
     ]
@@ -297,21 +297,21 @@
     "slices": [
       {
         "language": "JSON",
-        "files": 50,
-        "lines": 323370,
-        "bytes": 6519590
+        "files": 51,
+        "lines": 324992,
+        "bytes": 6569941
       },
       {
         "language": "Elixir",
-        "files": 1315,
-        "lines": 235913,
-        "bytes": 7484569
+        "files": 1323,
+        "lines": 240084,
+        "bytes": 7623462
       },
       {
         "language": "YAML",
-        "files": 50,
-        "lines": 73215,
-        "bytes": 1941692
+        "files": 51,
+        "lines": 73311,
+        "bytes": 1944035
       },
       {
         "language": "TypeScript",
@@ -328,21 +328,21 @@
       {
         "language": "Other",
         "files": 103,
-        "lines": 12076,
-        "bytes": 427250
+        "lines": 12091,
+        "bytes": 428298
       }
     ],
     "unclassified": {
-      "files": 351,
-      "bytes": 1856276
+      "files": 353,
+      "bytes": 1859969
     }
   },
   "history": {
     "chart": "event-line",
     "available": true,
-    "commits": 4446,
+    "commits": 4476,
     "firstCommit": "2019-09-02T12:29:19+01:00",
-    "lastCommit": "2026-10-29T22:20:45Z",
+    "lastCommit": "2026-11-10T12:21:54Z",
     "tagCount": 671,
     "rolledUp": true,
     "rollUpNote": "Only the newest 15 of 671 tags are shown.",
@@ -465,24 +465,24 @@
     "chart": "scatter",
     "available": true,
     "window": {
-      "since": "2025-10-29T22:20:45.000Z",
-      "until": "2026-10-29T22:20:45.000Z"
+      "since": "2025-11-10T12:21:54.000Z",
+      "until": "2026-11-10T12:21:54.000Z"
     },
-    "editedFiles": 1249,
+    "editedFiles": 1270,
     "rolledUp": true,
-    "rollUpNote": "Only the 40 most edited of 1249 edited files are shown.",
+    "rollUpNote": "Only the 40 most edited of 1270 edited files are shown.",
     "files": [
       {
         "path": "CHANGELOG.md",
-        "edits": 63,
-        "bytes": 44947,
-        "lines": 712
+        "edits": 64,
+        "bytes": 45893,
+        "lines": 719
       },
       {
         "path": "lib/plausible_web/router.ex",
-        "edits": 54,
-        "bytes": 27064,
-        "lines": 770
+        "edits": 53,
+        "bytes": 27336,
+        "lines": 776
       },
       {
         "path": "lib/plausible_web/controllers/api/stats_controller.ex",
@@ -491,22 +491,22 @@
         "lines": 431
       },
       {
-        "path": "lib/plausible_web/components/generic.ex",
+        "path": ".github/workflows/elixir.yml",
         "edits": 33,
-        "bytes": 36726,
-        "lines": 1286
+        "bytes": 11357,
+        "lines": 310
       },
       {
         "path": "mix.exs",
-        "edits": 33,
+        "edits": 32,
         "bytes": 8727,
         "lines": 253
       },
       {
-        "path": ".github/workflows/elixir.yml",
-        "edits": 32,
-        "bytes": 11036,
-        "lines": 296
+        "path": "lib/plausible_web/components/generic.ex",
+        "edits": 30,
+        "bytes": 36726,
+        "lines": 1286
       },
       {
         "path": "test/plausible/stats/exploration_test.exs",
@@ -516,15 +516,15 @@
       },
       {
         "path": "lib/plausible_web/live/sites.ex",
-        "edits": 26,
+        "edits": 25,
         "bytes": 39489,
         "lines": 1153
       },
       {
         "path": "config/runtime.exs",
-        "edits": 21,
-        "bytes": 36202,
-        "lines": 1138
+        "edits": 23,
+        "bytes": 36820,
+        "lines": 1152
       },
       {
         "path": "lib/plausible/stats/query_builder.ex",
@@ -535,8 +535,8 @@
       {
         "path": "test/plausible_web/controllers/site_controller_test.exs",
         "edits": 21,
-        "bytes": 65261,
-        "lines": 1983
+        "bytes": 67597,
+        "lines": 2048
       },
       {
         "path": "extra/lib/plausible/stats/exploration.ex",
@@ -553,8 +553,14 @@
       {
         "path": "test/plausible_web/live/sites_test.exs",
         "edits": 18,
-        "bytes": 36116,
-        "lines": 1091
+        "bytes": 37166,
+        "lines": 1123
+      },
+      {
+        "path": "test/plausible_web/controllers/settings_controller_test.exs",
+        "edits": 17,
+        "bytes": 73239,
+        "lines": 2366
       },
       {
         "path": "e2e/tests/fixtures.ts",
@@ -563,22 +569,16 @@
         "lines": 595
       },
       {
-        "path": "test/plausible/goals_test.exs",
-        "edits": 16,
-        "bytes": 28494,
-        "lines": 893
-      },
-      {
-        "path": "test/plausible_web/controllers/settings_controller_test.exs",
-        "edits": 16,
-        "bytes": 70000,
-        "lines": 2275
-      },
-      {
         "path": "test/plausible_web/controllers/stats_controller_test.exs",
         "edits": 16,
         "bytes": 41836,
         "lines": 1144
+      },
+      {
+        "path": ".github/workflows/tracker.yml",
+        "edits": 15,
+        "bytes": 2446,
+        "lines": 75
       },
       {
         "path": "assets/css/app.css",
@@ -599,10 +599,10 @@
         "lines": 451
       },
       {
-        "path": "test/plausible_web/live/customer_support/teams_test.exs",
+        "path": "test/plausible/goals_test.exs",
         "edits": 15,
-        "bytes": 47001,
-        "lines": 1405
+        "bytes": 28494,
+        "lines": 893
       },
       {
         "path": ".github/workflows/build-private-images-ghcr.yml",
@@ -611,16 +611,10 @@
         "lines": 98
       },
       {
-        "path": ".github/workflows/tracker.yml",
+        "path": "lib/plausible_web/live/team_setup.ex",
         "edits": 14,
-        "bytes": 2313,
-        "lines": 68
-      },
-      {
-        "path": "assets/js/liveview/live_socket.js",
-        "edits": 14,
-        "bytes": 3034,
-        "lines": 99
+        "bytes": 15552,
+        "lines": 479
       },
       {
         "path": "lib/plausible_web/templates/stats/stats.html.heex",
@@ -629,34 +623,40 @@
         "lines": 94
       },
       {
-        "path": "lib/plausible/sites.ex",
-        "edits": 13,
-        "bytes": 16016,
-        "lines": 558
+        "path": "test/plausible_web/live/customer_support/teams_test.exs",
+        "edits": 14,
+        "bytes": 47001,
+        "lines": 1405
       },
       {
-        "path": "lib/plausible_web/controllers/auth_controller.ex",
+        "path": ".github/workflows/build-public-images-ghcr.yml",
         "edits": 13,
-        "bytes": 23541,
-        "lines": 749
+        "bytes": 4193,
+        "lines": 129
+      },
+      {
+        "path": "assets/js/liveview/live_socket.js",
+        "edits": 13,
+        "bytes": 3034,
+        "lines": 99
+      },
+      {
+        "path": "config/config.exs",
+        "edits": 13,
+        "bytes": 2986,
+        "lines": 97
+      },
+      {
+        "path": "lib/plausible/application.ex",
+        "edits": 13,
+        "bytes": 14448,
+        "lines": 442
       },
       {
         "path": "test/plausible_web/controllers/api/stats_controller/exploration_test.exs",
         "edits": 13,
         "bytes": 16621,
         "lines": 508
-      },
-      {
-        "path": "test/plausible_web/controllers/auth_controller_test.exs",
-        "edits": 13,
-        "bytes": 70855,
-        "lines": 2193
-      },
-      {
-        "path": ".github/workflows/build-public-images-ghcr.yml",
-        "edits": 12,
-        "bytes": 4144,
-        "lines": 125
       },
       {
         "path": ".github/workflows/tracker-script-npm-release.yml",
@@ -671,12 +671,6 @@
         "lines": 594
       },
       {
-        "path": "config/config.exs",
-        "edits": 12,
-        "bytes": 2927,
-        "lines": 96
-      },
-      {
         "path": "e2e/tests/dashboard/behaviours.spec.ts",
         "edits": 12,
         "bytes": 31675,
@@ -689,10 +683,16 @@
         "lines": 1951
       },
       {
-        "path": "lib/plausible/goals/goals.ex",
+        "path": "extra/lib/plausible_web/live/funnel_settings/form.ex",
         "edits": 12,
-        "bytes": 13943,
-        "lines": 490
+        "bytes": 19089,
+        "lines": 673
+      },
+      {
+        "path": "lib/plausible/sites.ex",
+        "edits": 12,
+        "bytes": 16016,
+        "lines": 558
       },
       {
         "path": "lib/plausible/stats/api_query_parser.ex",
@@ -701,16 +701,16 @@
         "lines": 391
       },
       {
-        "path": "lib/plausible/stats/legacy/legacy_query_builder.ex",
-        "edits": 12,
-        "bytes": 10786,
-        "lines": 351
-      },
-      {
         "path": "lib/plausible/stats/sql/expression.ex",
         "edits": 12,
         "bytes": 16127,
         "lines": 512
+      },
+      {
+        "path": "lib/plausible/stats/sql/query_builder.ex",
+        "edits": 12,
+        "bytes": 8402,
+        "lines": 282
       }
     ]
   },
@@ -1804,15 +1804,15 @@
   "coChange": {
     "chart": "arc",
     "available": true,
-    "pairCount": 55475,
+    "pairCount": 55807,
     "bulkCommitsSkipped": 23,
     "rolledUp": true,
-    "rollUpNote": "Only the 30 most frequent of 55475 file pairs are shown.",
+    "rollUpNote": "Only the 30 most frequent of 55807 file pairs are shown.",
     "pairs": [
       {
         "a": "lib/plausible_web/controllers/site_controller.ex",
         "b": "test/plausible_web/controllers/site_controller_test.exs",
-        "count": 84
+        "count": 86
       },
       {
         "a": "lib/plausible_web/controllers/api/stats_controller.ex",
@@ -1862,7 +1862,7 @@
       {
         "a": "CHANGELOG.md",
         "b": "lib/plausible_web/router.ex",
-        "count": 51
+        "count": 52
       },
       {
         "a": "lib/plausible_web/router.ex",
@@ -1907,7 +1907,7 @@
       {
         "a": "CHANGELOG.md",
         "b": "config/runtime.exs",
-        "count": 38
+        "count": 39
       },
       {
         "a": "config/runtime.exs",

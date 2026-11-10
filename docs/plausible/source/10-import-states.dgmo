@@ -1,6 +1,7 @@
 state Site import lifecycle
 // From: lib/plausible/imported/site_import.ex:14 (statuses), :43 (create_changeset), :53 (start_changeset), :59 (complete_changeset), :69 (fail_changeset),
-// lib/plausible/imported/importer.ex:180-190,254 (run_import, mark_complete), lib/workers/import_analytics.ex:25-47,74-90
+// lib/plausible/imported/importer.ex:180-190,254 (run_import, mark_complete), lib/workers/import_analytics.ex:21-50 (perform), :58-100 (job exception handler), :115-145 (import_fail_transient, import_fail),
+// lib/plausible/imported/google_analytics4.ex:24-37,101-127 (recoverable errors resume the same import)
 tag Outcome as o
   In progress orange
   Succeeded green
@@ -11,6 +12,6 @@ Pending o: In progress
 Pending -worker starts-> Importing
 Importing o: In progress
 Importing -all rows imported-> Completed
-Importing -import error-> Failed
+Importing -error or job discarded-> Failed
 Completed o: Succeeded
 Failed o: Failed

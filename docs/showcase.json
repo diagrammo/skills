@@ -4,8 +4,8 @@
       "slug": "plausible",
       "name": "Plausible Analytics",
       "repo": "https://github.com/plausible/analytics",
-      "commit": "02cfac1517e1fef8178afe134a9b42f309f1aa77",
-      "date": "2026-11-01",
+      "commit": "0c3903a9411dd20349b929cd6b9db812dc797690",
+      "date": "2026-11-10",
       "about": "A web analytics server in Elixir, with a React dashboard."
     },
     {

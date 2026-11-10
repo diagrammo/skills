@@ -1,5 +1,5 @@
 sitemap Plausible routes
-// From: lib/plausible_web/router.ex:443-500 (auth), :514-528 (shared links), :529-585 (/settings), :600-780 (sites, billing, stats), :289-440 (APIs)
+// From: lib/plausible_web/router.ex:443-500 (auth), :514-528 (shared links), :529-591 (/settings), :606-786 (sites, billing, stats), :289-440 (APIs)
 tag Access as a
   Public green
   Member blue
@@ -34,7 +34,7 @@ Landing a: Public
   Site settings a: Member
     description: "/:domain/settings/*" general, goals, funnels, shields, imports-exports
   User settings a: Member
-    description: "/settings/*" preferences, security, api-keys, team
+    description: "/settings/*" preferences, security, guest-sites, api-keys, connected-apps, team
   Billing a: Member
     description: "/billing/choose-plan" and "/settings/billing/subscription"
 

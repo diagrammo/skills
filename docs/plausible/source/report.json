@@ -1,6 +1,6 @@
 {
   "title": "analytics — codebase report",
-  "summary": "Plausible Analytics is a web analytics service. Its server is an Elixir and Phoenix app. A small JavaScript tracker script sends page views to it, and a React dashboard reads the reports. The repo holds 2,129 files and 709,883 lines, with 4,446 commits since 2019-09-02. Postgres stores accounts and sites, and ClickHouse stores events and sessions. A newcomer should start with lib/plausible_web/router.ex, then follow one pageview through the ingestion code and one report through the stats code. All 15 charts are present. The module import chart covers only JavaScript and TypeScript, because the measurement skips Elixir imports.",
+  "summary": "Plausible Analytics is a web analytics service. Its server is an Elixir and Phoenix app. A small JavaScript tracker script sends page views to it, and a React dashboard reads the reports. The repo holds 2,141 files and 715,880 lines, with 4,476 commits since 2019-09-02. Postgres stores accounts and sites, and ClickHouse stores events and sessions. A newcomer should start with lib/plausible_web/router.ex, then follow one pageview through the ingestion code and one report through the stats code. All 15 charts are present. The module import chart covers only JavaScript and TypeScript, because the measurement skips Elixir imports.",
   "diagrams": [
     {
       "file": "01-stack.dgmo",
@@ -10,22 +10,22 @@
     {
       "file": "02-sizes.dgmo",
       "title": "Lines of code by directory",
-      "text": "The repo holds 709,883 lines in 2,129 files. The fixture directory alone has 308,671 lines (43%), mostly JSON used by tests. Next come test/plausible_web with 83,604 lines and priv/ua_inspector with 67,720 lines. The 2,129 files are rolled up to 40 boxes, and the smaller directories are in \"(other)\", 11,956 lines. Real application code is mainly lib/plausible_web (33,971 lines) and lib/plausible (32,896 lines)."
+      "text": "The repo holds 715,880 lines in 2,141 files. The fixture directory alone has 308,671 lines (43%), mostly JSON used by tests. Next come test/plausible_web with 84,582 lines and priv/ua_inspector with 67,720 lines. The 2,141 files are rolled up to 40 boxes, and the smaller directories are in \"(other)\", 11,969 lines. Real application code is mainly lib/plausible_web (34,402 lines) and lib/plausible (33,782 lines)."
     },
     {
       "file": "03-languages.dgmo",
       "title": "Languages by lines",
-      "text": "JSON is the largest language by lines, with 323,370 lines. Elixir follows with 235,913 lines in 1,315 files. YAML has 73,215 lines and TypeScript has 47,982. The seven smallest languages (JavaScript, SQL, Markdown, CSS, Shell, TOML, PHP) are shown as \"Other\", 12,076 lines. The fixture directory holds 308,671 of those JSON lines, so Elixir is the main language of the application code."
+      "text": "JSON is the largest language by lines, with 324,992 lines. Elixir follows with 240,084 lines in 1,323 files. YAML has 73,311 lines and TypeScript has 47,982. The seven smallest languages (JavaScript, SQL, Markdown, CSS, Shell, TOML, PHP) are shown as \"Other\", 12,091 lines. The fixture directory alone holds 308,671 lines, most of them JSON test data, so Elixir is the main language of the application code."
     },
     {
       "file": "04-history.dgmo",
       "title": "Largest commits and newest releases",
-      "text": "The repo has 4,446 commits and 671 tags. The chart shows the five commits that changed the most lines and the 15 newest tags, from v3.0.0-rc.0 on 2025-04-08 to v3.2.1 on 2026-05-15. The largest commit removed the Universal Analytics import logic and changed 865,919 lines on 2024-07-05. The Erlang and Elixir upgrade on 2023-10-24 changed 843,728 lines."
+      "text": "The repo has 4,476 commits and 671 tags. The chart shows the five commits that changed the most lines and the 15 newest tags, from v3.0.0-rc.0 on 2025-04-08 to v3.2.1 on 2026-05-15. The largest commit removed the Universal Analytics import logic and changed 865,919 lines on 2024-07-05. The Erlang and Elixir upgrade on 2023-10-24 changed 843,728 lines."
     },
     {
       "file": "05-ingest-sequence.dgmo",
       "title": "Recording a pageview",
-      "text": "The tracker script posts to /api/event, which ExternalController handles. The ingestion code builds a request, asks GateKeeper if the site may send events, and runs the event through a list of steps. Any step can drop the event. A kept event goes to the session cache, then to the event write buffer, which flushes to ClickHouse. The controller answers 202 once the event is buffered."
+      "text": "The tracker script posts to /api/event, which ExternalController handles. The ingestion code builds a request, asks GateKeeper if the site may send events, and runs the event through a list of steps. Any step can drop the event. A kept event goes to the session cache, then to the event write buffer, which flushes to ClickHouse. The controller answers 202 once the event is buffered, and also when a step dropped it; an invalid event gets 400."
     },
     {
       "file": "06-query-sequence.dgmo",
@@ -45,12 +45,12 @@
     {
       "file": "09-routes.dgmo",
       "title": "Plausible routes",
-      "text": "The router has public pages, signed-in pages and HTTP APIs. Public pages are register, login and shared dashboards. Signed-in pages cover the site list, new site, installation, the site dashboard, settings and billing. The APIs include the events API, the internal stats API, the public stats API v1 and v2, and the plugins API. The sites API under /api/v1/sites is compiled only in the enterprise build."
+      "text": "The router has public pages, signed-in pages and HTTP APIs. Public pages are register, login and shared dashboards. Signed-in pages cover the site list, new site, installation, the site dashboard, settings and billing. User settings include guest sites, API keys and connected apps. The APIs include the events API, the internal stats API, the public stats API v1 and v2, and the plugins API. The sites API under /api/v1/sites is compiled only in the enterprise build."
     },
     {
       "file": "10-import-states.dgmo",
       "title": "Site import lifecycle",
-      "text": "A site import has four statuses: pending, importing, completed and failed. A new import starts as pending. The worker moves it to importing when the job starts. It ends as completed if all rows are imported, or failed if the import returns an error."
+      "text": "A site import has four statuses: pending, importing, completed and failed. A new import starts as pending, and the worker moves it to importing when the job starts. It ends as completed if all rows are imported, or failed on an error or when Oban discards the job. A rate limit, socket or server error from GA4 keeps it importing and resumes it 65 minutes later, and a crashed job with retries left purges its rows and runs again."
     },
     {
       "file": "11-journey.dgmo",
@@ -60,12 +60,12 @@
     {
       "file": "12-import-swimlane.dgmo",
       "title": "Importing Google Analytics 4 data",
-      "text": "The user picks a property and dates. The controller clamps the dates, creates a pending import and rejects the request if another import runs. The Oban worker fetches the GA4 reports and writes rows to ClickHouse through a buffer. On success it marks the import completed. On error it purges the imported rows and marks it failed. Either way it sends an email to the user."
+      "text": "The user picks a property and dates. The controller clamps the dates, creates a pending import and rejects the request if another import runs. The Oban worker fetches the GA4 reports and writes rows to ClickHouse through a buffer. On success it marks the import completed and emails the user; on error it purges the imported rows, marks it failed and emails the user. A rate limit, socket or server error from GA4 is not drawn: it keeps the rows, sends no email and resumes the same import 65 minutes later."
     },
     {
       "file": "13-hot-files.dgmo",
       "title": "Hot files: size against edits",
-      "text": "Each bubble is one of the 40 most edited files out of 1,249 files edited between 2025-10-29 and 2026-10-29. The x axis is lines, the y axis is commits, and the bubble size is bytes. CHANGELOG.md has the most edits, 63. The router has 54 edits and 770 lines. The large test files are big but change less."
+      "text": "Each bubble is one of the 40 most edited files out of 1,270 files edited between 2025-11-10 and 2026-11-10. The x axis is lines, the y axis is commits, and the bubble size is bytes. CHANGELOG.md has the most edits, 64. The router has 53 edits and 776 lines. The large test files are big but change less."
     },
     {
       "file": "14-imports.dgmo",
@@ -75,7 +75,7 @@
     {
       "file": "15-co-change.dgmo",
       "title": "Files that change together",
-      "text": "The chart shows the 30 most frequent of 55,475 file pairs that changed in the same commit. Commits that touch more than 50 files are skipped, which removed 23 commits. The top pair is site_controller.ex and its test, with 84 commits. CHANGELOG.md pairs with several controllers, and several controllers pair with their own test files."
+      "text": "The chart shows the 30 most frequent of 55,807 file pairs that changed in the same commit. Commits that touch more than 50 files are skipped, which removed 23 commits. The top pair is site_controller.ex and its test, with 86 commits. CHANGELOG.md pairs with several controllers, and several controllers pair with their own test files."
     }
   ]
 }
