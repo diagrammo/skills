@@ -1,6 +1,6 @@
 boxes-and-lines Plausible stack
 // From: lib/plausible/application.ex:43-47 (five repos), lib/plausible_web/router.ex:305,414,433, tracker/src/config.js:15, assets/js/dashboard/api.ts:168,
-// lib/plausible/ingestion/event.ex:137, lib/plausible/session/cache_store.ex:16, lib/plausible/stats/query_runner.ex:37, config/runtime.exs:918-933
+// lib/plausible/ingestion/event.ex:137, lib/plausible/session/cache_store.ex:16, lib/plausible/stats/query_runner.ex:37, config/runtime.exs:932-947
 tag Layer as l
   Client blue
   Phoenix web teal

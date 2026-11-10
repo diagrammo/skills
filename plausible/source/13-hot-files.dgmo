@@ -5,50 +5,50 @@ y-label Commits touching the file (last 12 months)
 size-label Bytes
 
 [(root)] yellow
-  CHANGELOG.md 712 63 44947
-  mix.exs 253 33 8727
+  CHANGELOG.md 719 64 45893
+  mix.exs 253 32 8727
 [lib] blue
-  router.ex 770 54 27064
+  router.ex 776 53 27336
   api/stats_controller.ex 431 36 12898
-  generic.ex 1286 33 36726
-  live/sites.ex 1153 26 39489
-  query_builder.ex 550 21 16808
+  generic.ex 1286 30 36726
+  live/sites.ex 1153 25 39489
+  stats/query_builder.ex 550 21 16808
   controllers/stats_controller.ex 480 19 17239
   query.ex 232 15 6389
   billing.ex 451 15 15112
+  team_setup.ex 479 14 15552
   stats.html.heex 94 14 4590
-  plausible/sites.ex 558 13 16016
-  auth_controller.ex 749 13 23541
-  goals.ex 490 12 13943
+  application.ex 442 13 14448
+  plausible/sites.ex 558 12 16016
   api_query_parser.ex 391 12 12661
-  legacy_query_builder.ex 351 12 10786
   expression.ex 512 12 16127
+  sql/query_builder.ex 282 12 8402
 [.github] gray
-  elixir.yml 296 32 11036
+  elixir.yml 310 33 11357
+  tracker.yml 75 15 2446
   build-private-images-ghcr.yml 98 14 3652
-  tracker.yml 68 14 2313
-  build-public-images-ghcr.yml 125 12 4144
+  build-public-images-ghcr.yml 129 13 4193
   tracker-script-npm-release.yml 82 12 3426
 [test] green
   stats/exploration_test.exs 1606 27 53345
-  site_controller_test.exs 1983 21 65261
-  sites_test.exs 1091 18 36116
-  goals_test.exs 893 16 28494
-  settings_controller_test.exs 2275 16 70000
+  site_controller_test.exs 2048 21 67597
+  sites_test.exs 1123 18 37166
+  settings_controller_test.exs 2366 17 73239
   stats_controller_test.exs 1144 16 41836
-  teams_test.exs 1405 15 47001
+  goals_test.exs 893 15 28494
+  teams_test.exs 1405 14 47001
   stats_controller/exploration_test.exs 508 13 16621
-  auth_controller_test.exs 2193 13 70855
 [config] orange
-  runtime.exs 1138 21 36202
-  config.exs 96 12 2927
+  runtime.exs 1152 23 36820
+  config.exs 97 13 2986
 [extra] purple
   exploration.ex 613 20 18789
+  form.ex 673 12 19089
 [e2e] teal
   fixtures.ts 595 16 14219
   behaviours.spec.ts 1182 12 31675
   breakdowns.spec.ts 1951 12 51721
 [assets] red
   app.css 452 15 12908
-  live_socket.js 99 14 3034
+  live_socket.js 99 13 3034
   index-breakdown.tsx 594 12 16911

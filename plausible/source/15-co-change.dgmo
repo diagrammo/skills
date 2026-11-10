@@ -2,7 +2,7 @@ arc Files that change together
 // From: measurements.json coChange
 order appearance
 
-site_controller.ex -> site_controller_test.exs 84
+site_controller.ex -> site_controller_test.exs 86
 api/stats_controller.ex -> controllers/stats_controller.ex 65
 CHANGELOG.md -> api/stats_controller.ex 64
 site_controller.ex -> router.ex 63
@@ -12,7 +12,7 @@ runtime.exs -> mix.exs 58
 query.ex -> api/stats_controller.ex 58
 billing.ex -> billing_test.exs 55
 auth_controller.ex -> auth_controller_test.exs 55
-CHANGELOG.md -> router.ex 51
+CHANGELOG.md -> router.ex 52
 router.ex -> site_controller_test.exs 50
 api/stats_controller.ex -> main_graph_test.exs 44
 clickhouse.ex -> api/stats_controller.ex 41
@@ -21,7 +21,7 @@ api/stats_controller.ex -> pages_test.exs 41
 auth_controller.ex -> site_controller.ex 41
 application.ex -> mix.exs 40
 sites.ex -> site_controller.ex 40
-CHANGELOG.md -> runtime.exs 38
+CHANGELOG.md -> runtime.exs 39
 runtime.exs -> application.ex 38
 sites.ex -> site_controller_test.exs 38
 controllers/stats_controller.ex -> router.ex 38
