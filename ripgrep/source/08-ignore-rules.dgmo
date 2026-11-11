@@ -1,5 +1,5 @@
 flowchart How a path is ignored
-// From: crates/ignore/src/walk.rs:2085-2096, crates/ignore/src/dir.rs:515-576
+// From: crates/ignore/src/walk.rs:2087-2098, crates/ignore/src/dir.rs:515-576
 direction-tb
 
 (Walker asks about an entry) -> [should_skip_entry]
@@ -23,7 +23,7 @@ direction-tb
 <Name starts with a dot?> -yes-> (Skip the entry)
 <Name starts with a dot?> -no-> (Keep the entry)
 
-note should_skip_entry walk.rs:2085 logs and returns true for an ignore match
+note should_skip_entry walk.rs:2087 logs and returns true for an ignore match
 note matched_dir_entry dir.rs:515 adds the hidden check after matched
 note matched_ignore dir.rs:578 tries custom ignore, .ignore, .gitignore and git exclude in turn
 note "Overrides given?" dir.rs:545 checks the --glob overrides first

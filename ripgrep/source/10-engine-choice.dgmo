@@ -1,5 +1,5 @@
 flowchart Which regex engine builds the matcher
-// From: crates/core/flags/hiargs.rs:368-409,461-559
+// From: crates/core/flags/hiargs.rs:368-409,461-514
 direction-tb
 
 (HiArgs::matcher) -> <Engine choice?>

@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "generatedAt": "2026-10-31T03:14:00.443Z",
+  "generatedAt": "2026-11-11T18:39:17.012Z",
   "repo": {
-    "name": "ripgrep",
+    "name": "showcase-scratch-ripgrep",
     "git": true,
     "shallow": false,
-    "commit": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b"
+    "commit": "178cc027e283fd965cb72d0a7395b219eada170c"
   },
   "limits": {
     "sizes": {
@@ -42,8 +42,8 @@
     "chart": "treemap",
     "total": {
       "files": 223,
-      "bytes": 3219220,
-      "lines": 75500
+      "bytes": 3220357,
+      "lines": 75535
     },
     "rolledUp": true,
     "rollUpNote": "223 files rolled up to 25 directories, two levels deep.",
@@ -56,8 +56,8 @@
       },
       {
         "path": "crates/ignore",
-        "bytes": 355687,
-        "lines": 10195,
+        "bytes": 356824,
+        "lines": 10230,
         "files": 21
       },
       {
@@ -208,8 +208,8 @@
       {
         "language": "Rust",
         "files": 102,
-        "lines": 55477,
-        "bytes": 1879988
+        "lines": 55512,
+        "bytes": 1881125
       },
       {
         "language": "Markdown",
@@ -250,9 +250,9 @@
   "history": {
     "chart": "event-line",
     "available": true,
-    "commits": 2239,
+    "commits": 2240,
     "firstCommit": "2016-02-27T11:07:26-05:00",
-    "lastCommit": "2026-10-27T14:31:24-04:00",
+    "lastCommit": "2026-11-09T15:53:12-05:00",
     "tagCount": 274,
     "rolledUp": true,
     "rollUpNote": "Only the newest 15 of 274 tags are shown.",
@@ -375,8 +375,8 @@
     "chart": "scatter",
     "available": true,
     "window": {
-      "since": "2025-10-27T18:31:24.000Z",
-      "until": "2026-10-27T18:31:24.000Z"
+      "since": "2025-11-09T20:53:12.000Z",
+      "until": "2026-11-09T20:53:12.000Z"
     },
     "editedFiles": 59,
     "rolledUp": true,
@@ -384,7 +384,7 @@
     "files": [
       {
         "path": "crates/ignore/Cargo.toml",
-        "edits": 13,
+        "edits": 12,
         "bytes": 1159,
         "lines": 44
       },
@@ -396,7 +396,7 @@
       },
       {
         "path": "crates/ignore/src/dir.rs",
-        "edits": 11,
+        "edits": 10,
         "bytes": 61862,
         "lines": 1700
       },
@@ -407,22 +407,16 @@
         "lines": 705
       },
       {
+        "path": "crates/ignore/src/walk.rs",
+        "edits": 8,
+        "bytes": 95685,
+        "lines": 2810
+      },
+      {
         "path": ".github/workflows/ci.yml",
         "edits": 7,
         "bytes": 9815,
         "lines": 291
-      },
-      {
-        "path": "crates/ignore/src/walk.rs",
-        "edits": 7,
-        "bytes": 94548,
-        "lines": 2775
-      },
-      {
-        "path": "CHANGELOG.md",
-        "edits": 6,
-        "bytes": 90034,
-        "lines": 1870
       },
       {
         "path": "crates/globset/Cargo.toml",
@@ -435,6 +429,12 @@
         "edits": 6,
         "bytes": 13521,
         "lines": 378
+      },
+      {
+        "path": "CHANGELOG.md",
+        "edits": 5,
+        "bytes": 90034,
+        "lines": 1870
       },
       {
         "path": "crates/core/flags/defs.rs",
