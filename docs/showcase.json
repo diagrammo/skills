@@ -12,8 +12,8 @@
       "slug": "ripgrep",
       "name": "ripgrep",
       "repo": "https://github.com/BurntSushi/ripgrep",
-      "commit": "91f5d22ef48bde459d90a8c7dbeab416e97d0f2b",
-      "date": "2026-11-01",
+      "commit": "178cc027e283fd965cb72d0a7395b219eada170c",
+      "date": "2026-11-11",
       "about": "A recursive line-search command line tool in Rust."
     },
     {

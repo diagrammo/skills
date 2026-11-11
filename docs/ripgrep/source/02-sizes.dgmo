@@ -4,7 +4,7 @@ no-percent
 (repo root files) 4897
 crates
   core 14431
-  ignore 10195
+  ignore 10230
   printer 9436
   searcher 6637
   globset 3772

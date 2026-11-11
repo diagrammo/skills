@@ -18,9 +18,9 @@ no-name
   crates/core/flags/doc/template.long.help 61 2 1514
   crates/core/flags/doc/template.short.help 38 2 756
 [crates/ignore] green
-  crates/ignore/Cargo.toml 44 13 1159
-  crates/ignore/src/dir.rs 1700 11 61862
-  crates/ignore/src/walk.rs 2775 7 94548
+  crates/ignore/Cargo.toml 44 12 1159
+  crates/ignore/src/dir.rs 1700 10 61862
+  crates/ignore/src/walk.rs 2810 8 95685
   crates/ignore/src/default_types.rs 378 6 13521
   crates/ignore/src/pathutil.rs 218 4 6373
   crates/ignore/src/gitignore.rs 888 3 32420
@@ -37,7 +37,7 @@ no-name
   crates/searcher/src/searcher/mod.rs 1088 2 41168
 [(repo root)] purple
   Cargo.toml 120 11 3223
-  CHANGELOG.md 1870 6 90034
+  CHANGELOG.md 1870 5 90034
   .gitignore 22 2 266
   AI_POLICY.md 38 2 1878
   CONTRIBUTING.md 8 2 213

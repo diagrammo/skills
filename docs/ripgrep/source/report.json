@@ -1,6 +1,6 @@
 {
   "title": "ripgrep — codebase report",
-  "summary": "ripgrep (rg) is a line-oriented recursive search tool written in Rust: it walks a directory tree, skips what .gitignore, hidden-file and file-type rules exclude, and prints lines that match a regex. The repo is a Cargo workspace of one binary (crates/core, built as rg) and a set of library crates that the binary uses through the grep facade crate (search) and the ignore crate (directory walk); the measured tree holds 223 files and 75500 lines, of which 55477 are Rust. Start at crates/core/main.rs (main, run, search_parallel), then follow one file through the searcher and printer crates, and read the ignore crate when you need to know why a path was or was not searched. History is available (2239 commits since 2016). No ER diagram, sitemap, state, journey or swimlane chart: there is no database, no site, no status lifecycle and no multi-role process in the code. All four core charts are drawn.",
+  "summary": "ripgrep (rg) is a line-oriented recursive search tool written in Rust: it walks a directory tree, skips what .gitignore, hidden-file and file-type rules exclude, and prints lines that match a regex. The repo is a Cargo workspace of one binary (crates/core, built as rg) and a set of library crates that the binary uses through the grep facade crate (search) and the ignore crate (directory walk); the measured tree holds 223 files and 75535 lines, of which 55512 are Rust. Start at crates/core/main.rs (main, run, search_parallel), then follow one file through the searcher and printer crates, and read the ignore crate when you need to know why a path was or was not searched. History is available (2240 commits since 2016). No ER diagram, sitemap, state, journey or swimlane chart: there is no database, no site, no status lifecycle and no multi-role process in the code. All four core charts are drawn.",
   "diagrams": [
     {
       "file": "01-stack.dgmo",
@@ -10,17 +10,17 @@
     {
       "file": "02-sizes.dgmo",
       "title": "Size by directory",
-      "text": "Lines of code by directory, 223 files rolled up to 25 directories, two levels deep. The crates directory dominates, and crates/core (the binary, mostly flag definitions) is the largest single crate at 14431 lines, ahead of crates/ignore at 10195. Two big boxes are not source: benchsuite/runs (7794 lines of recorded benchmark output) and tests/data. Where a directory also holds files of its own, they appear as \"(files directly here)\"."
+      "text": "Lines of code by directory, 223 files rolled up to 25 directories, two levels deep. The crates directory dominates, and crates/core (the binary, mostly flag definitions) is the largest single crate at 14431 lines, ahead of crates/ignore at 10230. Two big boxes are not source: benchsuite/runs (7794 lines of recorded benchmark output) and tests/data. Where a directory also holds files of its own, they appear as \"(files directly here)\"."
     },
     {
       "file": "03-languages.dgmo",
       "title": "Languages",
-      "text": "Rust is 55477 of the measured lines, and Markdown (5285) is a distant second because the guide, FAQ and changelog live in the repo. YAML, TOML, Shell and Ruby are CI, manifests, scripts and the Homebrew formula. The chart does not show 77 files (1070847 bytes) that no language rule classified, mostly the benchmark run data (csv and summary files), compressed test fixtures and the zsh completion file."
+      "text": "Rust is 55512 of the measured lines, and Markdown (5285) is a distant second because the guide, FAQ and changelog live in the repo. YAML, TOML, Shell and Ruby are CI, manifests, scripts and the Homebrew formula. The chart does not show 77 files (1070847 bytes) that no language rule classified, mostly the benchmark run data (csv and summary files), compressed test fixtures and the zsh completion file."
     },
     {
       "file": "04-history.dgmo",
       "title": "History",
-      "text": "The repo has 2239 commits and 274 tags, too many to draw. Only the newest 15 of 274 tags are shown, plus the 5 largest commits by lines changed. The largest commit is the move of all source into the crates directory (226 files, 72924 lines, 2020-02-17); the clap-to-lexopt flag parser change (20699 lines, 2023-11-20) is next. Tags are per crate (ignore, globset, grep-*) as well as for ripgrep itself, so crate releases dominate the recent timeline."
+      "text": "The repo has 2240 commits and 274 tags, too many to draw. Only the newest 15 of 274 tags are shown, plus the 5 largest commits by lines changed. The largest commit is the move of all source into the crates directory (226 files, 72924 lines, 2020-02-17); the clap-to-lexopt flag parser change (20699 lines, 2023-11-20) is next. Tags are per crate (ignore, globset, grep-*) as well as for ripgrep itself, so crate releases dominate the recent timeline."
     },
     {
       "file": "05-startup.dgmo",
@@ -30,7 +30,7 @@
     {
       "file": "06-search-file.dgmo",
       "title": "One file through the search pipeline",
-      "text": "search_parallel asks HiArgs for a matcher, a searcher and a printer, wraps them in a SearchWorker, and runs the directory walk with one closure per thread. For each file the worker picks a path (stdin, preprocessor, decompression or plain), and the searcher, here the memory-mapped slice path, scans line by line, asks the matcher for a candidate line and hands each match to the printer's sink. The sink writes into a per-file buffer that main prints in one locked write, which keeps output from different threads from interleaving."
+      "text": "search_parallel asks HiArgs for a matcher, a searcher and a printer, wraps them in a SearchWorker, and runs the directory walk with one closure per thread. For each file the worker picks a path (stdin, preprocessor, decompression or plain), and the searcher, here the memory-mapped slice path (taken only for at most 10 paths that are all files; a directory search reads line by line), scans line by line, asks the matcher for a candidate line and hands each match to the printer's sink. The sink writes into a per-file buffer that main prints in one locked write, which keeps output from different threads from interleaving."
     },
     {
       "file": "07-parallel-walk.dgmo",
@@ -40,7 +40,7 @@
     {
       "file": "08-ignore-rules.dgmo",
       "title": "How a path is ignored",
-      "text": "Ignore::matched answers in a fixed order: explicit overrides (the --glob flag) win, then the ignore files (.ignore, .gitignore, git exclude), then file-type filters, and only if nothing matched does the hidden-file check apply. A whitelist match from an ignore file or a type is remembered and returned if nothing later ignores the path. The same function serves the single-threaded Walk and the parallel Worker, so both walks skip the same paths."
+      "text": "Ignore::matched answers in a fixed order: explicit overrides (the --glob flag) win, then the ignore files (.ignore, .gitignore, git exclude), then file-type filters; only if nothing matched does matched_dir_entry apply the hidden-file check. A whitelist match from an ignore file or a type is remembered and returned if nothing later ignores the path. The same function serves the single-threaded Walk and the parallel Worker, so both walks skip the same paths."
     },
     {
       "file": "09-search-strategy.dgmo",
@@ -55,7 +55,7 @@
     {
       "file": "11-hot-files.dgmo",
       "title": "Hot files",
-      "text": "Each bubble is a file edited between 2025-10-27 and 2026-10-27: lines on the x axis, commits on the y axis, bytes as bubble size. Only the 40 most edited of 59 edited files are shown. The most edited file is crates/ignore/Cargo.toml (13 commits), but it is a 44-line manifest; the file that stands out by size is crates/core/flags/defs.rs (7779 lines, 5 commits), the table of every flag. Point labels are off because the names overlap; the source file lists each file with its numbers."
+      "text": "Each bubble is a file edited between 2025-11-09 and 2026-11-09: lines on the x axis, commits on the y axis, bytes as bubble size. Only the 40 most edited of 59 edited files are shown. The most edited file is crates/ignore/Cargo.toml (12 commits), but it is a 44-line manifest; the file that stands out by size is crates/core/flags/defs.rs (7779 lines, 5 commits), the table of every flag. Point labels are off because the names overlap; the source file lists each file with its numbers."
     },
     {
       "file": "12-imports.dgmo",

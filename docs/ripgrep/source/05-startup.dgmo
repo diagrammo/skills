@@ -1,5 +1,5 @@
 sequence Startup: argv to a run mode
-// From: crates/core/main.rs:43-105, crates/core/flags/parse.rs:49-110, crates/core/flags/config.rs:16, crates/core/flags/hiargs.rs:113
+// From: crates/core/main.rs:43-105, crates/core/flags/parse.rs:49-110, crates/core/flags/config.rs:17, crates/core/flags/hiargs.rs:113
 autonumber
 
 User -rg PATTERN PATH-> main
@@ -13,7 +13,7 @@ if special mode such as --help or --version
   main -special prints and exits-> User
 else if --no-config is absent
   flags -config::args-> Config
-  note right of Config `RIPGREP_CONFIG_PATH` names the config file, crates/core/flags/config.rs:16
+  note right of Config `RIPGREP_CONFIG_PATH` names the config file, crates/core/flags/config.rs:17
   Config -extra arguments-> flags
   flags -parse config args then CLI args again-> flags
 flags -HiArgs::from_low_args-> HiArgs
