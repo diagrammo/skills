@@ -20,8 +20,8 @@
       "slug": "fastapi",
       "name": "FastAPI",
       "repo": "https://github.com/fastapi/fastapi",
-      "commit": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
-      "date": "2026-11-01",
+      "commit": "5758a9c8347d911444dca97a55b708cc4a8de4f8",
+      "date": "2026-11-13",
       "about": "A Python web framework for building APIs."
     },
     {

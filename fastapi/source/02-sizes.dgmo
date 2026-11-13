@@ -1,20 +1,20 @@
 treemap Lines of text by directory (lines)
-// From: measurements.json sizes (rolled up: 3232 files rolled up to 443 boxes, two directory levels deep; docs/en/docs/img/sponsors, tests hold more than 40 files of their own, shown as files. The smallest 404 are shown as (other).)
+// From: measurements.json sizes (rolled up: 3242 files rolled up to 448 boxes, two directory levels deep; docs/en/docs/img/sponsors, tests hold more than 40 files of their own, shown as files. The smallest 409 are shown as (other).)
 
 "docs"
-  "en" 39658
-  "de" 18504
-  "fr" 18345
-  "uk" 18297
-  "es" 18279
-  "ru" 18265
-  "pt" 18265
-  "tr" 18255
-  "ko" 18246
-  "ja" 18236
-  "zh-hant" 18236
-  "hi" 18235
-  "zh" 18214
+  "en" 39718
+  "de" 18669
+  "fr" 18508
+  "uk" 18460
+  "es" 18443
+  "ru" 18429
+  "pt" 18429
+  "tr" 18419
+  "ko" 18409
+  "ja" 18399
+  "zh-hant" 18399
+  "hi" 18398
+  "zh" 18376
   "en/docs/img/sponsors/jina.svg" 1981
   "en/docs/img/sponsors/cryptapi-banner.svg" 1375
   "en/docs/img/sponsors/cryptapi.svg" 1216
@@ -32,19 +32,19 @@ treemap Lines of text by directory (lines)
   "test_schema_extra_examples.py" 857
   "test_path.py" 780
 "fastapi"
-  "(own files)" 16224
-  "dependencies" 1698
+  "(own files)" 16249
+  "dependencies" 1726
   "security" 1558
   "openapi" 1498
+  ".agents" 1016
   "telemetry" 978
-  ".agents" 925
 "scripts"
-  "(own files)" 3580
-  "tests" 2027
+  "(own files)" 3421
+  "tests" 2133
 ".github"
-  "workflows" 1427
+  "workflows" 1639
 "(repo root)"
-  "(own files)" 1152
+  "(own files)" 1162
 "docs_src"
   "security" 1015
-"(other)" 43953
+"(other)" 44906

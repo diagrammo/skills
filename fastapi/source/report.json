@@ -10,17 +10,17 @@
     {
       "file": "02-sizes.dgmo",
       "title": "Size by directory",
-      "text": "The treemap shows lines of text by directory. The measurement rolled up 3232 files to 443 boxes, two directory levels deep; docs/en/docs/img/sponsors and tests hold more than 40 files of their own, so they show as files. The smallest 404 boxes are shown as \"(other)\" (43953 lines). The docs tree dominates: docs/en has 39658 lines and each of 12 translations has about 18200 to 18500. The fastapi package itself has 16224 lines in its own files, and tests/test_tutorial alone has 29871."
+      "text": "The treemap shows lines of text by directory. The measurement rolled up 3242 files to 448 boxes, two directory levels deep; docs/en/docs/img/sponsors and tests hold more than 40 files of their own, so they show as files. The smallest 409 boxes are shown as \"(other)\" (44906 lines). The docs tree dominates: docs/en has 39718 lines and each of 12 translations has about 18400 to 18700. The fastapi package itself has 16249 lines in its own files, and tests/test_tutorial alone has 29871."
     },
     {
       "file": "03-languages.dgmo",
       "title": "Lines by language",
-      "text": "The pie shows lines by language. Markdown has 249873 lines and Python has 131859, so most of the text in the repo is documentation. YAML has 7131 lines, CSS 681 and JavaScript 614. The 3 smallest languages (TOML, HTML and Shell) are grouped as \"Other\" with 635 lines."
+      "text": "The pie shows lines by language. Markdown has 252126 lines and Python has 132812, so most of the text in the repo is documentation. YAML has 7155 lines, JavaScript 614 and CSS 589. The 3 smallest languages (TOML, HTML and Shell) are grouped as \"Other\" with 583 lines."
     },
     {
       "file": "04-history.dgmo",
       "title": "Releases and largest commits",
-      "text": "The chart shows the 5 largest commits by lines changed and the newest 15 release tags. The repo has 7930 commits from 2018-12-05 to 2026-10-26 and 347 tags, but only the newest 15 tags are shown. Events are evenly spaced, not to scale, because the 15 tags fall in three days (2026-10-21 to 2026-10-23) while the 5 largest commits span 2020 to 2026. The largest commit changed 68216 lines in 280 files (the OpenAPI test refactor of 2023-05-08)."
+      "text": "The chart shows the 5 largest commits by lines changed and the newest 15 release tags. The repo has 8045 commits from 2018-12-05 to 2026-11-13 and 354 tags, but only the newest 15 tags are shown. Events are evenly spaced, not to scale, because the 15 tags fall in 24 days (2026-10-21 to 2026-11-13) while the 5 largest commits span 2020 to 2026. The largest commit changed 68216 lines in 280 files (the OpenAPI test refactor of 2023-05-08)."
     },
     {
       "file": "05-register-route.dgmo",
@@ -55,17 +55,17 @@
     {
       "file": "11-hot-files.dgmo",
       "title": "Hot files: size against edits",
-      "text": "The bubble chart shows the 40 most edited files of the 2709 files edited in the last 12 months (to 2026-10-26). Each bubble sits at lines in the file and number of commits, and its size is the file's bytes. docs/en/docs/release-notes.md is far ahead with 986 edits and 7802 lines. In the code, fastapi/__init__.py has 125 edits, fastapi/dependencies/utils.py has 71, and fastapi/routing.py has 49 edits and 6552 lines."
+      "text": "The bubble chart shows the 40 most edited files of the 2853 files edited in the last 12 months (to 2026-11-13). Each bubble sits at lines in the file and number of commits, and its size is the file's bytes. docs/en/docs/release-notes.md is far ahead with 1010 edits and 7912 lines. In the code, fastapi/__init__.py has 125 edits, fastapi/dependencies/utils.py has 66, and fastapi/routing.py has 48 edits and 6552 lines."
     },
     {
       "file": "12-module-imports.dgmo",
       "title": "Imports between directories",
-      "text": "The arc chart shows imports between directories. The measurement rolled up 1807 file imports to 157 links between 95 directories, up to 2 levels deep; the 56 least connected directories are shown as \"(other)\". The strongest link is tests to fastapi with 475 imports, then tests/test_tutorial to fastapi with 256. Inside the package, fastapi/openapi imports the top-level fastapi modules 11 times, and fastapi/security imports fastapi/openapi 5 times."
+      "text": "The arc chart shows imports between directories. The measurement rolled up 1812 file imports to 157 links between 95 directories, up to 2 levels deep; the 56 least connected directories are shown as \"(other)\". The strongest link is tests to fastapi with 479 imports, then tests/test_tutorial to fastapi with 256. Inside the package, fastapi/openapi imports the top-level fastapi modules 11 times, and fastapi/security imports fastapi/openapi 5 times."
     },
     {
       "file": "13-co-change.dgmo",
       "title": "Files that change together",
-      "text": "The arc chart shows the 30 most frequent of 31162 file pairs that change in the same commit; 103 bulk commits were skipped. docs/en/docs/release-notes.md and fastapi/__init__.py change together 259 times, which is the release step. README.md and docs/en/data/sponsors.yml change together 98 times. In the code, fastapi/applications.py and fastapi/routing.py change together 60 times, and fastapi/dependencies/utils.py and fastapi/routing.py 50 times."
+      "text": "The arc chart shows the 30 most frequent of 32124 file pairs that change in the same commit; 105 bulk commits were skipped. docs/en/docs/release-notes.md and fastapi/__init__.py change together 266 times, which is the release step. README.md and docs/en/data/sponsors.yml change together 101 times. In the code, fastapi/applications.py and fastapi/routing.py change together 60 times, and fastapi/dependencies/utils.py and fastapi/routing.py 50 times."
     }
   ]
 }
