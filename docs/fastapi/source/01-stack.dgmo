@@ -1,5 +1,5 @@
 boxes-and-lines FastAPI stack
-// From: pyproject.toml:44-50, fastapi/applications.py:52, fastapi/routing.py:1179,2327, fastapi/dependencies/utils.py:643, fastapi/openapi/utils.py:577, fastapi/_compat/v2.py:114, fastapi/telemetry/_api.py:35, scripts/docs.py, scripts/translate.py, .github/workflows/test.yml
+// From: pyproject.toml:44-52, fastapi/applications.py:52, fastapi/routing.py:1179,2327, fastapi/dependencies/utils.py:661, fastapi/openapi/utils.py:577, fastapi/_compat/v2.py:114, fastapi/telemetry/_api.py:35, scripts/docs.py, scripts/translate.py, .github/workflows/test.yml
 direction-tb
 
 tag Role as r
@@ -11,14 +11,14 @@ tag Role as r
 active-tag Role
 
 [Your application]
-  Path operation functions r: Your code, description: Endpoint functions you decorate; examples in docs_src/first_steps/tutorial001_py310.py
+  Path operation functions r: Your code, description: Endpoint functions you decorate; examples in docs_src/first_steps/tutorial001.py
 
 [fastapi package]
   FastAPI r: FastAPI core, description: fastapi/applications.py:52; subclass of Starlette
   APIRouter r: FastAPI core, description: fastapi/routing.py:2327; collects APIRoute objects
   APIRoute r: FastAPI core, description: fastapi/routing.py:1179; one route per path operation
   get_request_handler r: FastAPI core, description: fastapi/routing.py:397; builds the per-request coroutine
-  solve_dependencies r: FastAPI core, description: fastapi/dependencies/utils.py:643
+  solve_dependencies r: FastAPI core, description: fastapi/dependencies/utils.py:661
   ModelField r: FastAPI core, description: fastapi/_compat/v2.py:114; wraps a Pydantic TypeAdapter
   get_openapi r: FastAPI core, description: fastapi/openapi/utils.py:577; builds the schema
   Swagger UI and ReDoc pages r: FastAPI core, description: fastapi/openapi/docs.py; loads Swagger UI from a CDN
@@ -27,9 +27,9 @@ active-tag Role
 
 [Runtime dependencies]
   Starlette r: Built on, description: ASGI routing; requests; responses; middleware; pyproject.toml:45
-  Pydantic r: Built on, description: Validation and serialization; pyproject.toml:46
-  OpenTelemetry API r: Built on, description: pyproject.toml:50
-  Uvicorn and fastapi-cli r: Built on, description: Optional standard extra; pyproject.toml:68;80
+  Pydantic r: Built on, description: Validation and serialization; pyproject.toml:47
+  OpenTelemetry API r: Built on, description: pyproject.toml:51
+  Uvicorn and fastapi-cli r: Built on, description: Optional standard extra; pyproject.toml:69;81
 
 [Repo tooling]
   scripts/docs.py r: Repo tooling, description: Builds the docs site in many languages

@@ -1,17 +1,17 @@
 sequence A protected route rejects a request
-// From: fastapi/security/oauth2.py:401-419,536-543, fastapi/dependencies/utils.py:676-737, fastapi/applications.py:1000, fastapi/exception_handlers.py:11-17, docs_src/security/tutorial004_an_py310.py:53
+// From: fastapi/security/oauth2.py:401-421,536-543, fastapi/dependencies/utils.py:694-756, fastapi/applications.py:1000, fastapi/exception_handlers.py:11-17, docs_src/security/tutorial004.py:53
 Client -GET without an Authorization header-> request handler
 request handler -solve_dependencies-> solve_dependencies
 note right of solve_dependencies
-  The route depends on an OAuth2PasswordBearer instance (docs_src/security/tutorial004_an_py310.py:53).
+  The route depends on an OAuth2PasswordBearer instance (docs_src/security/tutorial004.py:53).
 solve_dependencies -await call(request)-> OAuth2PasswordBearer
 note right of OAuth2PasswordBearer
-  Instances are async callables: __call__ at security/oauth2.py:536. solve_dependencies awaits it at dependencies/utils.py:731.
+  Instances are async callables: __call__ at security/oauth2.py:536. solve_dependencies awaits it at dependencies/utils.py:750.
 OAuth2PasswordBearer -reads the Authorization header-> OAuth2PasswordBearer
 if no header or the scheme is not bearer
   OAuth2PasswordBearer -auto_error is true: raise make_not_authenticated_error-> ExceptionMiddleware
   note right of OAuth2PasswordBearer
-    security/oauth2.py:401-419 builds HTTPException with status 401, detail Not authenticated and header WWW-Authenticate: Bearer.
+    security/oauth2.py:401-421 builds HTTPException with status 401, detail Not authenticated and header WWW-Authenticate: Bearer.
   ExceptionMiddleware -http_exception_handler-> Client
   note right of ExceptionMiddleware
     Registered by default at applications.py:1000; exception_handlers.py:11 returns a JSON body with the detail.

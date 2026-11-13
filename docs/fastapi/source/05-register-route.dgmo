@@ -16,7 +16,7 @@ note right of APIRoute
 APIRoute -_build_dependant_with_parameterless_dependencies-> Dependant
 Dependant -get_dependant reads the endpoint signature-> Dependant
 note right of Dependant
-  get_dependant: dependencies/utils.py:300.
+  get_dependant: dependencies/utils.py:302.
   Parameterless dependencies are inserted at routing.py:915-919.
 APIRoute -_get_body_field for body params-> Dependant
 APIRoute -create_model_field for the return type-> ModelField

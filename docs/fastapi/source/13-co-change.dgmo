@@ -1,21 +1,19 @@
 arc Files that change together
-// From: measurements.json coChange (Only the 30 most frequent of 31162 file pairs are shown. 103 bulk commits skipped.)
+// From: measurements.json coChange (Only the 30 most frequent of 32124 file pairs are shown. 105 bulk commits skipped.)
 
 [docs] blue
-  docs/en/docs/release-notes.md -> fastapi/__init__.py 259
+  docs/en/docs/release-notes.md -> fastapi/__init__.py 266
   docs/en/data/sponsors.yml -> docs/en/overrides/main.html 57
-  docs/en/data/sponsors.yml -> docs/en/data/sponsors_badge.yml 30
-  docs/es/docs/index.md -> docs/pt/docs/index.md 26
-  docs/en/docs/index.md -> docs/es/docs/index.md 25
+  docs/en/data/sponsors.yml -> docs/en/data/sponsors_badge.yml 32
   docs/en/data/github_sponsors.yml -> docs/en/data/people.yml 24
-  docs/es/docs/index.md -> docs/zh/docs/index.md 24
-  docs/pt/docs/index.md -> docs/zh/docs/index.md 24
+  docs/es/docs/index.md -> docs/pt/docs/index.md 24
+  docs/en/docs/index.md -> docs/es/docs/index.md 23
   docs/en/mkdocs.yml -> scripts/docs.py 23
 [(root)] green
-  README.md -> docs/en/data/sponsors.yml 98
+  README.md -> docs/en/data/sponsors.yml 101
   README.md -> docs/en/overrides/main.html 57
-  README.md -> docs/en/docs/index.md 55
-  README.md -> docs/en/data/sponsors_badge.yml 26
+  README.md -> docs/en/docs/index.md 53
+  README.md -> docs/en/data/sponsors_badge.yml 28
 [fastapi] orange
   fastapi/applications.py -> fastapi/routing.py 60
   fastapi/dependencies/utils.py -> fastapi/routing.py 50
@@ -26,14 +24,16 @@ arc Files that change together
   fastapi/routing.py -> pyproject.toml 28
   fastapi/openapi/utils.py -> fastapi/utils.py 27
   fastapi/dependencies/models.py -> fastapi/dependencies/utils.py 25
-  fastapi/dependencies/utils.py -> fastapi/utils.py 25
+  fastapi/dependencies/utils.py -> fastapi/utils.py 24
 [.github] purple
-  .github/workflows/build-docs.yml -> .github/workflows/test.yml 39
-  .github/workflows/deploy-docs.yml -> .github/workflows/smokeshow.yml 28
-  .github/workflows/build-docs.yml -> .github/workflows/publish.yml 27
-  .github/workflows/publish.yml -> .github/workflows/test.yml 27
-  .github/workflows/smokeshow.yml -> .github/workflows/test.yml 27
-  .github/workflows/deploy-docs.yml -> .github/workflows/test.yml 25
-  .github/workflows/build-docs.yml -> .github/workflows/deploy-docs.yml 23
+  .github/workflows/build-docs.yml -> .github/workflows/test.yml 41
+  .github/workflows/deploy-docs.yml -> .github/workflows/smokeshow.yml 30
+  .github/workflows/build-docs.yml -> .github/workflows/publish.yml 29
+  .github/workflows/publish.yml -> .github/workflows/test.yml 29
+  .github/workflows/smokeshow.yml -> .github/workflows/test.yml 29
+  .github/workflows/deploy-docs.yml -> .github/workflows/test.yml 27
+  .github/workflows/build-docs.yml -> .github/workflows/deploy-docs.yml 25
+  .github/workflows/test.yml -> pyproject.toml 25
+  .github/workflows/build-docs.yml -> .github/workflows/smokeshow.yml 23
 
 order group

@@ -1,5 +1,5 @@
 arc Imports between directories
-// From: measurements.json imports (1807 file imports rolled up to 157 links between 95 directories, up to 2 levels deep. The 56 least connected are shown as (other).)
+// From: measurements.json imports (1812 file imports rolled up to 157 links between 95 directories, up to 2 levels deep. The 56 least connected are shown as (other).)
 
 [(other)] blue
   (other) -> fastapi 153
@@ -35,7 +35,7 @@ arc Imports between directories
   docs_src/advanced_middleware -> (other) 3
   docs_src/advanced_middleware -> fastapi 3
 [(root)] orange
-  tests -> fastapi 475
+  tests -> fastapi 479
   tests -> fastapi/security 43
   tests -> fastapi/_compat 10
   fastapi -> fastapi/_compat 7
@@ -61,7 +61,7 @@ arc Imports between directories
   fastapi/openapi -> fastapi/dependencies 2
   fastapi/_compat -> fastapi/openapi 1
 [scripts] teal
-  scripts/tests -> scripts 10
+  scripts/tests -> scripts 11
 [tests] red
   tests/test_tutorial -> fastapi 256
   tests/test_tutorial -> tests 107

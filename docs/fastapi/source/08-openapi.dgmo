@@ -18,6 +18,6 @@ get_openapi -get_definitions-> ModelField
 loop each route from iter_route_contexts
   get_openapi -get_openapi_path-> get_openapi_path
   note right of get_openapi_path
-    openapi/utils.py:303 and call at 620-626. Returns the path item, security schemes and definitions.
+    openapi/utils.py:303 and call at 623-629. Returns the path item, security schemes and definitions.
 get_openapi -paths, components, definitions-> FastAPI
 FastAPI -JSONResponse of the schema-> Browser
