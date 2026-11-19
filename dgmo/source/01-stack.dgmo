@@ -1,7 +1,7 @@
 boxes-and-lines Diagrammo (dgmo) Stack
-// From: package.json:2,135-152; cli/package.json:2,24,39-43; standalone/package.json:2; tsup.config.ts:380-387,422,448;
-//   src/index.ts:123; src/render.ts:185; src/dgmo-router.ts:109; src/chart-type-registry.ts:197; src/d3.ts:99,180;
-//   src/charts-d3/index.ts:115; src/sharing.ts:2,6,113; src/cli.ts:986,580; src/cli-cloud.ts; src/cloud-space.ts:12; src/svg-to-png.ts:13
+// From: package.json:2,137-156; cli/package.json:2,24,39-44; standalone/package.json:2; tsup.config.ts:380-389,424,450;
+//   src/index.ts:123; src/render.ts:193; src/dgmo-router.ts:110; src/chart-type-registry.ts:208; src/d3.ts:101,189;
+//   src/charts-d3/index.ts:134; src/sharing.ts:2,6,113; src/cli.ts:13,1135,673; src/cli-cloud.ts; src/cloud-space.ts:12; src/svg-to-png.ts:10
 direction-lr
 tag Kind as k
   Package blue
@@ -39,7 +39,7 @@ active-tag Kind
   MCP server k: Outside service
 
 Library -exports-> Public API
-CLI -inlines-> Public API
+CLI -calls-> Render entry
 Standalone drop-ins -bundles-> Render entry
 Public API -calls-> Render entry
 Render entry -parses with-> Parse router

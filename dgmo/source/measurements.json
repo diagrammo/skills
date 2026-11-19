@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "generatedAt": "2026-10-31T03:14:36.252Z",
+  "generatedAt": "2026-11-19T19:17:46.547Z",
   "repo": {
-    "name": "dgmo",
+    "name": "showcase-scratch-dgmo",
     "git": true,
     "shallow": false,
-    "commit": "3c25eb52c563757f5d29751c89ff94fd32d23e34"
+    "commit": "bfdb3d94e500e015741e992995c3c38701b2e050"
   },
   "limits": {
     "sizes": {
@@ -41,252 +41,252 @@
   "sizes": {
     "chart": "treemap",
     "total": {
-      "files": 1400,
-      "bytes": 23406535,
-      "lines": 346187
+      "files": 1799,
+      "bytes": 25499911,
+      "lines": 409501
     },
     "rolledUp": true,
-    "rollUpNote": "1400 files rolled up to 823 boxes, two directory levels deep; gallery/fixtures, gallery/snapshots, src/utils, tests, tests/fixtures/conformance, tests/fixtures/highlight-conformance hold more than 40 files of their own, shown as files. The smallest 784 are shown as \"(other)\".",
+    "rollUpNote": "1799 files rolled up to 1217 boxes, two directory levels deep; gallery/fixtures, gallery/snapshots, src, src/utils, tests, tests/fixtures/completion-conformance, tests/fixtures/conformance, tests/fixtures/highlight-conformance hold more than 40 files of their own, shown as files. The smallest 1178 are shown as \"(other)\".",
     "entries": [
       {
         "path": "src/map",
-        "bytes": 1340606,
-        "lines": 13358,
-        "files": 43
-      },
-      {
-        "path": "src",
-        "bytes": 471523,
-        "lines": 12816,
-        "files": 36
+        "bytes": 1352305,
+        "lines": 13755,
+        "files": 44
       },
       {
         "path": "scripts",
-        "bytes": 610233,
-        "lines": 12399,
-        "files": 37
+        "bytes": 621270,
+        "lines": 12693,
+        "files": 38
+      },
+      {
+        "path": "src/charts-d3",
+        "bytes": 368603,
+        "lines": 11049,
+        "files": 23
+      },
+      {
+        "path": "src/boxes-and-lines",
+        "bytes": 396999,
+        "lines": 10663,
+        "files": 18
       },
       {
         "path": "api-baseline",
-        "bytes": 419292,
-        "lines": 9496,
+        "bytes": 444477,
+        "lines": 10001,
         "files": 9
       },
       {
         "path": "src/pert",
-        "bytes": 322384,
-        "lines": 9087,
+        "bytes": 326397,
+        "lines": 9199,
         "files": 11
-      },
-      {
-        "path": "src/boxes-and-lines",
-        "bytes": 331393,
-        "lines": 8957,
-        "files": 14
       },
       {
         "path": ".",
-        "bytes": 435267,
-        "lines": 7930,
-        "files": 31
-      },
-      {
-        "path": "src/gantt",
-        "bytes": 243739,
-        "lines": 7261,
-        "files": 6
+        "bytes": 498857,
+        "lines": 8495,
+        "files": 32
       },
       {
         "path": "src/infra",
-        "bytes": 256844,
-        "lines": 7201,
-        "files": 8
-      },
-      {
-        "path": "src/sequence",
-        "bytes": 255341,
-        "lines": 6958,
-        "files": 7
-      },
-      {
-        "path": "src/c4",
-        "bytes": 195186,
-        "lines": 6194,
-        "files": 5
-      },
-      {
-        "path": "docs",
-        "bytes": 298881,
-        "lines": 5719,
-        "files": 4
-      },
-      {
-        "path": "src/sketch",
-        "bytes": 196939,
-        "lines": 5194,
-        "files": 12
-      },
-      {
-        "path": "src/charts-d3",
-        "bytes": 166843,
-        "lines": 4940,
-        "files": 16
-      },
-      {
-        "path": "src/graph",
-        "bytes": 138719,
-        "lines": 4335,
-        "files": 11
-      },
-      {
-        "path": "src/org",
-        "bytes": 136669,
-        "lines": 4065,
-        "files": 6
-      },
-      {
-        "path": "src/countdown",
-        "bytes": 132527,
-        "lines": 3765,
-        "files": 7
-      },
-      {
-        "path": "src/timeline",
-        "bytes": 116373,
-        "lines": 3764,
-        "files": 5
-      },
-      {
-        "path": "src/event-line",
-        "bytes": 134473,
-        "lines": 3550,
-        "files": 6
-      },
-      {
-        "path": "src/body",
-        "bytes": 344649,
-        "lines": 3539,
-        "files": 8
-      },
-      {
-        "path": "src/raci",
-        "bytes": 124606,
-        "lines": 3536,
-        "files": 8
-      },
-      {
-        "path": "src/whiteboard",
-        "bytes": 121336,
-        "lines": 3528,
+        "bytes": 268026,
+        "lines": 7531,
         "files": 9
       },
       {
+        "path": "src/gantt",
+        "bytes": 250994,
+        "lines": 7472,
+        "files": 6
+      },
+      {
+        "path": "src/sequence",
+        "bytes": 270885,
+        "lines": 7281,
+        "files": 8
+      },
+      {
+        "path": "docs",
+        "bytes": 398918,
+        "lines": 6891,
+        "files": 4
+      },
+      {
+        "path": "src/c4",
+        "bytes": 187497,
+        "lines": 5932,
+        "files": 5
+      },
+      {
+        "path": "src/graph",
+        "bytes": 183228,
+        "lines": 5513,
+        "files": 16
+      },
+      {
+        "path": "src/swimlane",
+        "bytes": 164127,
+        "lines": 4627,
+        "files": 7
+      },
+      {
+        "path": "src/org",
+        "bytes": 152658,
+        "lines": 4538,
+        "files": 6
+      },
+      {
+        "path": "src/whiteboard",
+        "bytes": 149356,
+        "lines": 4301,
+        "files": 10
+      },
+      {
+        "path": "src/timeline",
+        "bytes": 122270,
+        "lines": 3932,
+        "files": 5
+      },
+      {
+        "path": "src/countdown",
+        "bytes": 133603,
+        "lines": 3799,
+        "files": 7
+      },
+      {
+        "path": "src/event-line",
+        "bytes": 138057,
+        "lines": 3662,
+        "files": 6
+      },
+      {
+        "path": "src/raci",
+        "bytes": 129344,
+        "lines": 3659,
+        "files": 9
+      },
+      {
+        "path": "src/body",
+        "bytes": 344899,
+        "lines": 3543,
+        "files": 8
+      },
+      {
         "path": "src/tech-radar",
-        "bytes": 103015,
-        "lines": 3292,
+        "bytes": 105237,
+        "lines": 3355,
         "files": 7
       },
       {
         "path": "src/clock",
-        "bytes": 113321,
-        "lines": 3081,
+        "bytes": 114392,
+        "lines": 3110,
         "files": 9
       },
       {
-        "path": "src/wireframe",
-        "bytes": 88105,
-        "lines": 3026,
-        "files": 5
-      },
-      {
         "path": "src/sitemap",
-        "bytes": 94512,
-        "lines": 2950,
+        "bytes": 99236,
+        "lines": 3084,
         "files": 6
       },
       {
-        "path": "src/kanban",
-        "bytes": 93857,
-        "lines": 2820,
+        "path": "src/wireframe",
+        "bytes": 89554,
+        "lines": 3063,
         "files": 5
       },
       {
-        "path": "src/journey-map",
-        "bytes": 91192,
-        "lines": 2805,
+        "path": "src/kanban",
+        "bytes": 99450,
+        "lines": 2977,
         "files": 5
       },
       {
         "path": "src/treemap",
-        "bytes": 97174,
-        "lines": 2772,
+        "bytes": 104727,
+        "lines": 2974,
         "files": 9
       },
       {
+        "path": "src/journey-map",
+        "bytes": 97234,
+        "lines": 2955,
+        "files": 6
+      },
+      {
+        "path": "src/ownership",
+        "bytes": 97345,
+        "lines": 2891,
+        "files": 8
+      },
+      {
+        "path": "src/mindmap",
+        "bytes": 91058,
+        "lines": 2856,
+        "files": 8
+      },
+      {
         "path": "src/family",
-        "bytes": 94858,
-        "lines": 2612,
+        "bytes": 102858,
+        "lines": 2815,
         "files": 8
       },
       {
         "path": "src/er",
-        "bytes": 84238,
-        "lines": 2576,
+        "bytes": 84213,
+        "lines": 2566,
         "files": 6
       },
       {
-        "path": "src/swimlane",
-        "bytes": 89923,
-        "lines": 2498,
-        "files": 6
-      },
-      {
-        "path": "tests/map-layout.test.ts",
-        "bytes": 103907,
-        "lines": 2394,
-        "files": 1
-      },
-      {
-        "path": "tests/__snapshots__",
-        "bytes": 1556589,
-        "lines": 2321,
-        "files": 14
-      },
-      {
-        "path": "src/bracket",
-        "bytes": 74895,
-        "lines": 2275,
-        "files": 5
-      },
-      {
-        "path": "src/mindmap",
-        "bytes": 71494,
-        "lines": 2267,
-        "files": 7
-      },
-      {
-        "path": "src/cycle",
-        "bytes": 74248,
-        "lines": 2229,
-        "files": 5
-      },
-      {
-        "path": "tests/infra-compute.test.ts",
-        "bytes": 44113,
-        "lines": 2120,
-        "files": 1
+        "path": "tests/stress",
+        "bytes": 63054,
+        "lines": 2558,
+        "files": 8
       },
       {
         "path": "src/palettes",
-        "bytes": 75356,
-        "lines": 2103,
-        "files": 14
+        "bytes": 87860,
+        "lines": 2433,
+        "files": 16
+      },
+      {
+        "path": "tests/map-layout.test.ts",
+        "bytes": 105209,
+        "lines": 2429,
+        "files": 1
+      },
+      {
+        "path": "src/chart.ts",
+        "bytes": 84290,
+        "lines": 2412,
+        "files": 1
+      },
+      {
+        "path": "src/goal",
+        "bytes": 79852,
+        "lines": 2409,
+        "files": 4
+      },
+      {
+        "path": "src/cycle",
+        "bytes": 80142,
+        "lines": 2388,
+        "files": 5
+      },
+      {
+        "path": "src/bracket",
+        "bytes": 79516,
+        "lines": 2388,
+        "files": 5
       },
       {
         "path": "(other)",
-        "bytes": 13661915,
-        "lines": 154454,
-        "files": 988
+        "bytes": 16931914,
+        "lines": 211302,
+        "files": 1401
       }
     ]
   },
@@ -297,116 +297,56 @@
     "slices": [
       {
         "language": "TypeScript",
-        "files": 914,
-        "lines": 309036,
-        "bytes": 11134492
+        "files": 1124,
+        "lines": 365961,
+        "bytes": 13083611
       },
       {
         "language": "Markdown",
         "files": 35,
-        "lines": 12694,
-        "bytes": 724285
+        "lines": 14372,
+        "bytes": 876068
       },
       {
         "language": "JavaScript",
-        "files": 38,
-        "lines": 8302,
-        "bytes": 305441
+        "files": 39,
+        "lines": 8594,
+        "bytes": 316436
       },
       {
         "language": "DGMO",
-        "files": 224,
-        "lines": 4325,
-        "bytes": 90650
+        "files": 338,
+        "lines": 6952,
+        "bytes": 156039
       },
       {
         "language": "JSON",
-        "files": 26,
-        "lines": 1152,
-        "bytes": 798462
+        "files": 29,
+        "lines": 2797,
+        "bytes": 829413
       },
       {
         "language": "Other",
-        "files": 18,
-        "lines": 1821,
-        "bytes": 77972
+        "files": 19,
+        "lines": 1856,
+        "bytes": 80669
       }
     ],
     "unclassified": {
-      "files": 145,
-      "bytes": 10275233
+      "files": 215,
+      "bytes": 10157675
     }
   },
   "history": {
     "chart": "event-line",
     "available": true,
-    "commits": 2614,
+    "commits": 2956,
     "firstCommit": "2026-02-07T10:30:55-07:00",
-    "lastCommit": "2026-10-30T20:30:58-06:00",
-    "tagCount": 166,
+    "lastCommit": "2026-11-19T11:49:14-07:00",
+    "tagCount": 178,
     "rolledUp": true,
-    "rollUpNote": "Only the newest 15 of 166 tags are shown.",
+    "rollUpNote": "Only the newest 15 of 178 tags are shown.",
     "tags": [
-      {
-        "name": "cli-v0.89.0",
-        "date": "2026-10-08T08:45:13-06:00",
-        "sha": "6ecfb89c4d95d137f64282d350014bd629c69e75"
-      },
-      {
-        "name": "v0.90.0",
-        "date": "2026-10-10T13:59:13-06:00",
-        "sha": "17d4fe5558019e486b95d5f28af0a202890b7e4c"
-      },
-      {
-        "name": "cli-v0.90.0",
-        "date": "2026-10-10T14:12:15-06:00",
-        "sha": "0b6733bc0afc183d7701aa72bf1a8e7daec181c9"
-      },
-      {
-        "name": "v0.91.0",
-        "date": "2026-10-14T07:55:11-06:00",
-        "sha": "5cb87bfbf637791b2586f8258db3b013934bc1ba"
-      },
-      {
-        "name": "cli-v0.91.0",
-        "date": "2026-10-14T08:10:26-06:00",
-        "sha": "9f74aa7707616bc78afc1ab60f030403519f2de4"
-      },
-      {
-        "name": "v0.91.1",
-        "date": "2026-10-14T18:16:36-06:00",
-        "sha": "5fefa031bdee0586cc1a943d11361247d01bcf1f"
-      },
-      {
-        "name": "v0.92.0",
-        "date": "2026-10-20T05:32:52-06:00",
-        "sha": "4cbb7057c4d1294a731378f44cba3b00a9bc8cd1"
-      },
-      {
-        "name": "v0.92.1",
-        "date": "2026-10-20T07:17:59-06:00",
-        "sha": "7bd2aa20ef3cb8b4549aa3c05979ae079e52ae05"
-      },
-      {
-        "name": "cli-v0.92.1",
-        "date": "2026-10-20T08:29:10-06:00",
-        "sha": "25c14ae911c395f8d963c75cae9c21ac01c65d4d"
-      },
-      {
-        "name": "v0.93.0",
-        "date": "2026-10-26T07:16:43-06:00",
-        "sha": "c0883d149652450467646e2ce01d2ccae9875b0e"
-      },
-      {
-        "name": "cli-v0.93.0",
-        "date": "2026-10-26T07:33:18-06:00",
-        "sha": "c0434bb4d9ae966b1c9e27b328f4e166842cc536"
-      },
-      {
-        "name": "v0.94.0",
-        "date": "2026-10-28T06:46:18-06:00",
-        "sha": "c3470fc776d21eeece761e88fa515748ae63d017"
-      },
       {
         "name": "cli-v0.94.0",
         "date": "2026-10-28T07:00:58-06:00",
@@ -421,6 +361,66 @@
         "name": "cli-v0.95.0",
         "date": "2026-10-29T08:35:45-06:00",
         "sha": "80abbdd8819ec8cce45a8fb47a8609a302aaee4d"
+      },
+      {
+        "name": "cli-v0.96.0",
+        "date": "2026-10-31T06:43:42-06:00",
+        "sha": "5544f4cf6eb6897c2549825bd062ece188cf6602"
+      },
+      {
+        "name": "v0.96.0",
+        "date": "2026-11-02T05:42:33-07:00",
+        "sha": "11166413c1c0728981122763676586fcd319652e"
+      },
+      {
+        "name": "cli-v0.97.0",
+        "date": "2026-11-02T05:54:48-07:00",
+        "sha": "d934cf9024f54a8c22bedf75e46c9fdab4acc43c"
+      },
+      {
+        "name": "v0.97.0",
+        "date": "2026-11-08T08:10:08-07:00",
+        "sha": "392695f5846f454c1ac6623fee9592a08b130caa"
+      },
+      {
+        "name": "cli-v0.98.0",
+        "date": "2026-11-08T08:22:50-07:00",
+        "sha": "2383b0fe05b00e73ea84f71650fc7f8440fefef5"
+      },
+      {
+        "name": "v0.98.0",
+        "date": "2026-11-08T16:35:01-07:00",
+        "sha": "5aa7b2c9dd18027632cf5abd362023a40dd68b3c"
+      },
+      {
+        "name": "cli-v0.99.0",
+        "date": "2026-11-08T16:45:27-07:00",
+        "sha": "3ca8717f81b0a2358db2f71160565d73a52d3f63"
+      },
+      {
+        "name": "cli-v0.100.0",
+        "date": "2026-11-09T11:01:31-07:00",
+        "sha": "c4b658352ba35a64d1a7d1214558ab6eff6f5bba"
+      },
+      {
+        "name": "v0.99.0",
+        "date": "2026-11-17T08:07:55-07:00",
+        "sha": "c47f33d8dc5bfeb456b524a25a891e28e617bac9"
+      },
+      {
+        "name": "cli-v0.101.0",
+        "date": "2026-11-17T08:39:44-07:00",
+        "sha": "861e91f48f2fefcc9cccb14b89e61d07cc1bc013"
+      },
+      {
+        "name": "v0.100.0",
+        "date": "2026-11-19T08:55:51-07:00",
+        "sha": "667ae1991ca812584e618649f99188c4f01693c9"
+      },
+      {
+        "name": "cli-v0.102.0",
+        "date": "2026-11-19T09:37:27-07:00",
+        "sha": "27d4d3bbd48f04a9fc5ae7fffeebff8dc53f0d4e"
       }
     ],
     "largestCommits": [
@@ -465,267 +465,268 @@
     "chart": "scatter",
     "available": true,
     "window": {
-      "since": "2025-10-31T02:30:58.000Z",
-      "until": "2026-10-31T02:30:58.000Z"
+      "since": "2025-11-19T18:49:14.000Z",
+      "until": "2026-11-19T18:49:14.000Z"
     },
-    "editedFiles": 1400,
+    "editedFiles": 1799,
     "rolledUp": true,
-    "rollUpNote": "Only the 40 most edited of 1400 edited files are shown.",
+    "rollUpNote": "Only the 40 most edited of 1799 edited files are shown.",
     "files": [
       {
         "path": "package.json",
-        "edits": 315,
-        "bytes": 8082,
-        "lines": 222
-      },
-      {
-        "path": "src/d3.ts",
-        "edits": 217,
-        "bytes": 10771,
-        "lines": 265
+        "edits": 323,
+        "bytes": 8286,
+        "lines": 226
       },
       {
         "path": "docs/language-reference.md",
-        "edits": 214,
-        "bytes": 253820,
-        "lines": 4895
+        "edits": 298,
+        "bytes": 343674,
+        "lines": 6055
       },
       {
-        "path": "src/map/layout.ts",
-        "edits": 166,
-        "bytes": 179845,
-        "lines": 3871
-      },
-      {
-        "path": "src/sequence/renderer.ts",
-        "edits": 140,
-        "bytes": 167423,
-        "lines": 4546
+        "path": "src/d3.ts",
+        "edits": 223,
+        "bytes": 11212,
+        "lines": 274
       },
       {
         "path": "CHANGELOG.md",
-        "edits": 126,
-        "bytes": 207979,
-        "lines": 3018
-      },
-      {
-        "path": "src/index.ts",
-        "edits": 120,
-        "bytes": 14415,
-        "lines": 379
+        "edits": 185,
+        "bytes": 239180,
+        "lines": 3495
       },
       {
         "path": "api-baseline/advanced.d.ts",
-        "edits": 115,
-        "bytes": 353077,
-        "lines": 8011
+        "edits": 176,
+        "bytes": 372160,
+        "lines": 8391
+      },
+      {
+        "path": "src/map/layout.ts",
+        "edits": 169,
+        "bytes": 185074,
+        "lines": 4013
+      },
+      {
+        "path": "src/sequence/renderer.ts",
+        "edits": 150,
+        "bytes": 169116,
+        "lines": 4471
+      },
+      {
+        "path": "src/index.ts",
+        "edits": 125,
+        "bytes": 15649,
+        "lines": 403
       },
       {
         "path": "src/advanced.ts",
-        "edits": 91,
-        "bytes": 36874,
-        "lines": 1242
+        "edits": 113,
+        "bytes": 37593,
+        "lines": 1261
       },
       {
         "path": "src/cli.ts",
-        "edits": 90,
-        "bytes": 44815,
-        "lines": 1265
-      },
-      {
-        "path": "src/sequence/parser.ts",
-        "edits": 84,
-        "bytes": 64081,
-        "lines": 1755
+        "edits": 105,
+        "bytes": 52779,
+        "lines": 1461
       },
       {
         "path": "src/gantt/renderer.ts",
-        "edits": 83,
-        "bytes": 131292,
-        "lines": 3986
+        "edits": 94,
+        "bytes": 137102,
+        "lines": 4160
+      },
+      {
+        "path": "src/sequence/parser.ts",
+        "edits": 91,
+        "bytes": 70872,
+        "lines": 1933
       },
       {
         "path": "src/boxes-and-lines/renderer.ts",
-        "edits": 81,
-        "bytes": 59424,
-        "lines": 1603
-      },
-      {
-        "path": "src/org/renderer.ts",
-        "edits": 75,
-        "bytes": 31880,
-        "lines": 909
-      },
-      {
-        "path": "src/pert/renderer.ts",
-        "edits": 74,
-        "bytes": 135294,
-        "lines": 3778
-      },
-      {
-        "path": "tests/map-layout.test.ts",
-        "edits": 73,
-        "bytes": 103907,
-        "lines": 2394
-      },
-      {
-        "path": "src/map/renderer.ts",
-        "edits": 72,
-        "bytes": 61830,
-        "lines": 1512
-      },
-      {
-        "path": "src/utils/parsing.ts",
-        "edits": 69,
-        "bytes": 40964,
-        "lines": 1133
-      },
-      {
-        "path": "src/infra/renderer.ts",
-        "edits": 67,
-        "bytes": 97921,
-        "lines": 2825
-      },
-      {
-        "path": "tests/cli-render.test.ts",
-        "edits": 64,
-        "bytes": 10201,
-        "lines": 552
-      },
-      {
-        "path": "src/sketch/renderer.ts",
-        "edits": 62,
-        "bytes": 73505,
-        "lines": 1902
-      },
-      {
-        "path": "cspell.json",
-        "edits": 60,
-        "bytes": 9790,
-        "lines": 582
-      },
-      {
-        "path": "src/c4/parser.ts",
-        "edits": 60,
-        "bytes": 44558,
-        "lines": 1285
-      },
-      {
-        "path": "src/org/layout.ts",
-        "edits": 59,
-        "bytes": 48808,
-        "lines": 1456
-      },
-      {
-        "path": "api-baseline/index.d.ts",
-        "edits": 58,
-        "bytes": 15808,
-        "lines": 335
-      },
-      {
-        "path": "src/editor/keywords.ts",
-        "edits": 58,
-        "bytes": 2594,
-        "lines": 89
-      },
-      {
-        "path": "src/infra/parser.ts",
-        "edits": 58,
-        "bytes": 57628,
-        "lines": 1475
-      },
-      {
-        "path": "src/gantt/parser.ts",
-        "edits": 57,
-        "bytes": 63634,
-        "lines": 1844
-      },
-      {
-        "path": "src/dgmo-router.ts",
-        "edits": 56,
-        "bytes": 10893,
-        "lines": 292
-      },
-      {
-        "path": "cli/package.json",
-        "edits": 55,
-        "bytes": 1211,
-        "lines": 51
+        "edits": 89,
+        "bytes": 62087,
+        "lines": 1674
       },
       {
         "path": "src/chart.ts",
-        "edits": 55,
-        "bytes": 29562,
-        "lines": 875
+        "edits": 83,
+        "bytes": 84290,
+        "lines": 2412
+      },
+      {
+        "path": "src/org/renderer.ts",
+        "edits": 82,
+        "bytes": 32118,
+        "lines": 915
+      },
+      {
+        "path": "src/pert/renderer.ts",
+        "edits": 80,
+        "bytes": 137312,
+        "lines": 3839
+      },
+      {
+        "path": "api-baseline/index.d.ts",
+        "edits": 78,
+        "bytes": 19149,
+        "lines": 385
+      },
+      {
+        "path": "src/map/renderer.ts",
+        "edits": 76,
+        "bytes": 47398,
+        "lines": 1187
+      },
+      {
+        "path": "src/infra/renderer.ts",
+        "edits": 74,
+        "bytes": 102452,
+        "lines": 2967
+      },
+      {
+        "path": "tests/map-layout.test.ts",
+        "edits": 74,
+        "bytes": 105209,
+        "lines": 2429
+      },
+      {
+        "path": "src/utils/parsing.ts",
+        "edits": 72,
+        "bytes": 44139,
+        "lines": 1224
+      },
+      {
+        "path": "tests/cli-render.test.ts",
+        "edits": 72,
+        "bytes": 10478,
+        "lines": 571
+      },
+      {
+        "path": "src/completion-registry.ts",
+        "edits": 70,
+        "bytes": 73597,
+        "lines": 2053
       },
       {
         "path": ".github/copilot-instructions.md",
-        "edits": 54,
-        "bytes": 29498,
-        "lines": 593
+        "edits": 69,
+        "bytes": 39468,
+        "lines": 605
       },
       {
         "path": "docs/ai-integration.md",
-        "edits": 53,
-        "bytes": 32759,
-        "lines": 554
+        "edits": 69,
+        "bytes": 42942,
+        "lines": 566
       },
       {
-        "path": "src/org/parser.ts",
-        "edits": 53,
-        "bytes": 22724,
-        "lines": 661
-      },
-      {
-        "path": "README.md",
-        "edits": 52,
-        "bytes": 7356,
-        "lines": 180
-      },
-      {
-        "path": "src/event-line/renderer.ts",
-        "edits": 52,
-        "bytes": 50249,
-        "lines": 1292
-      },
-      {
-        "path": "src/kanban/renderer.ts",
-        "edits": 52,
-        "bytes": 65637,
-        "lines": 1989
-      },
-      {
-        "path": "src/render.ts",
-        "edits": 51,
-        "bytes": 19117,
-        "lines": 474
+        "path": "cli/package.json",
+        "edits": 67,
+        "bytes": 1241,
+        "lines": 52
       },
       {
         "path": "SKILL.md",
-        "edits": 50,
-        "bytes": 30638,
-        "lines": 593
+        "edits": 66,
+        "bytes": 40618,
+        "lines": 605
       },
       {
-        "path": "src/kanban/parser.ts",
-        "edits": 50,
-        "bytes": 18612,
-        "lines": 562
+        "path": ".cursorrules",
+        "edits": 64,
+        "bytes": 39468,
+        "lines": 605
+      },
+      {
+        "path": ".windsurfrules",
+        "edits": 64,
+        "bytes": 39468,
+        "lines": 605
+      },
+      {
+        "path": "cspell.json",
+        "edits": 64,
+        "bytes": 9862,
+        "lines": 587
+      },
+      {
+        "path": "src/c4/parser.ts",
+        "edits": 64,
+        "bytes": 45202,
+        "lines": 1302
+      },
+      {
+        "path": "src/infra/parser.ts",
+        "edits": 63,
+        "bytes": 59047,
+        "lines": 1521
+      },
+      {
+        "path": "src/editor/keywords.ts",
+        "edits": 62,
+        "bytes": 2618,
+        "lines": 91
+      },
+      {
+        "path": "src/org/layout.ts",
+        "edits": 62,
+        "bytes": 60510,
+        "lines": 1802
+      },
+      {
+        "path": "src/gantt/parser.ts",
+        "edits": 61,
+        "bytes": 64609,
+        "lines": 1872
+      },
+      {
+        "path": "src/org/parser.ts",
+        "edits": 60,
+        "bytes": 26700,
+        "lines": 779
+      },
+      {
+        "path": "src/render.ts",
+        "edits": 60,
+        "bytes": 25148,
+        "lines": 611
+      },
+      {
+        "path": "src/directives-registry.ts",
+        "edits": 59,
+        "bytes": 48722,
+        "lines": 1394
+      },
+      {
+        "path": "src/kanban/renderer.ts",
+        "edits": 59,
+        "bytes": 70374,
+        "lines": 2126
+      },
+      {
+        "path": "src/dgmo-router.ts",
+        "edits": 58,
+        "bytes": 11301,
+        "lines": 300
       }
     ]
   },
   "imports": {
     "chart": "arc",
     "rolledUp": true,
-    "rollUpNote": "3894 file imports rolled up to 319 links between 61 directories, up to 2 levels deep. The 22 least connected are shown as \"(other)\".",
+    "rollUpNote": "5060 file imports rolled up to 376 links between 69 directories, up to 2 levels deep. The 30 least connected are shown as \"(other)\".",
     "nodes": [
       "(other)",
       "src",
+      "src/annotations",
       "src/block",
-      "src/body",
       "src/boxes-and-lines",
       "src/bracket",
       "src/c4",
+      "src/calendar-heatmap",
       "src/charts-d3",
       "src/class",
       "src/clock",
@@ -742,21 +743,20 @@
       "src/map",
       "src/mindmap",
       "src/org",
+      "src/ownership",
       "src/palettes",
       "src/pert",
-      "src/pyramid",
       "src/raci",
       "src/sequence",
       "src/sitemap",
-      "src/sketch",
       "src/swimlane",
+      "src/swot",
       "src/tech-radar",
       "src/timeline",
       "src/treemap",
       "src/utils",
       "src/visualizations",
       "src/whiteboard",
-      "src/wireframe",
       "tests",
       "tests/fixtures"
     ],
@@ -764,210 +764,255 @@
       {
         "from": "tests",
         "to": "src",
-        "count": 216
+        "count": 332
       },
       {
         "from": "tests",
         "to": "src/palettes",
-        "count": 188
+        "count": 249
       },
       {
         "from": "tests",
         "to": "src/utils",
-        "count": 128
-      },
-      {
-        "from": "tests",
-        "to": "src/boxes-and-lines",
-        "count": 87
+        "count": 195
       },
       {
         "from": "(other)",
         "to": "src/utils",
-        "count": 69
+        "count": 141
       },
       {
         "from": "tests",
-        "to": "src/map",
-        "count": 69
-      },
-      {
-        "from": "tests",
-        "to": "src/infra",
-        "count": 58
-      },
-      {
-        "from": "tests",
-        "to": "src/sequence",
-        "count": 51
+        "to": "src/boxes-and-lines",
+        "count": 118
       },
       {
         "from": "tests",
         "to": "(other)",
-        "count": 48
+        "count": 112
+      },
+      {
+        "from": "tests",
+        "to": "src/map",
+        "count": 89
       },
       {
         "from": "tests",
         "to": "src/graph",
-        "count": 46
+        "count": 72
       },
       {
-        "from": "src/graph",
+        "from": "tests",
+        "to": "src/charts-d3",
+        "count": 67
+      },
+      {
+        "from": "src",
+        "to": "(other)",
+        "count": 64
+      },
+      {
+        "from": "src/charts-d3",
         "to": "src/utils",
-        "count": 43
+        "count": 61
       },
       {
         "from": "src",
         "to": "src/utils",
-        "count": 40
+        "count": 61
+      },
+      {
+        "from": "tests",
+        "to": "src/infra",
+        "count": 61
+      },
+      {
+        "from": "(other)",
+        "to": "src",
+        "count": 60
+      },
+      {
+        "from": "src/graph",
+        "to": "src/utils",
+        "count": 60
+      },
+      {
+        "from": "tests",
+        "to": "src/sequence",
+        "count": 60
+      },
+      {
+        "from": "(other)",
+        "to": "src/palettes",
+        "count": 48
+      },
+      {
+        "from": "src/charts-d3",
+        "to": "src",
+        "count": 43
+      },
+      {
+        "from": "tests",
+        "to": "src/whiteboard",
+        "count": 43
       },
       {
         "from": "tests",
         "to": "tests/fixtures",
-        "count": 40
-      },
-      {
-        "from": "(other)",
-        "to": "src",
-        "count": 38
-      },
-      {
-        "from": "src",
-        "to": "(other)",
-        "count": 38
+        "count": 43
       },
       {
         "from": "tests",
         "to": "src/org",
-        "count": 38
-      },
-      {
-        "from": "src/sitemap",
-        "to": "src/utils",
-        "count": 34
-      },
-      {
-        "from": "(other)",
-        "to": "src/palettes",
-        "count": 31
+        "count": 42
       },
       {
         "from": "src/boxes-and-lines",
         "to": "src/utils",
-        "count": 31
-      },
-      {
-        "from": "src/charts-d3",
-        "to": "src",
-        "count": 31
-      },
-      {
-        "from": "tests",
-        "to": "src/kanban",
-        "count": 31
-      },
-      {
-        "from": "src/map",
-        "to": "src/utils",
-        "count": 30
-      },
-      {
-        "from": "src/mindmap",
-        "to": "src/utils",
-        "count": 30
-      },
-      {
-        "from": "src/org",
-        "to": "src/utils",
-        "count": 30
-      },
-      {
-        "from": "tests",
-        "to": "src/c4",
-        "count": 30
-      },
-      {
-        "from": "tests",
-        "to": "src/er",
-        "count": 30
-      },
-      {
-        "from": "src/c4",
-        "to": "src/utils",
-        "count": 29
-      },
-      {
-        "from": "src/gantt",
-        "to": "src/utils",
-        "count": 29
-      },
-      {
-        "from": "tests",
-        "to": "src/pert",
-        "count": 29
-      },
-      {
-        "from": "tests",
-        "to": "src/whiteboard",
-        "count": 29
-      },
-      {
-        "from": "src/er",
-        "to": "src/utils",
-        "count": 28
+        "count": 41
       },
       {
         "from": "src/infra",
         "to": "src/utils",
-        "count": 27
+        "count": 38
       },
       {
-        "from": "src/charts-d3",
-        "to": "src/palettes",
-        "count": 26
+        "from": "src/mindmap",
+        "to": "src/utils",
+        "count": 37
       },
       {
-        "from": "tests",
-        "to": "src/sitemap",
-        "count": 26
+        "from": "src/sitemap",
+        "to": "src/utils",
+        "count": 37
+      },
+      {
+        "from": "src/c4",
+        "to": "src/utils",
+        "count": 35
       },
       {
         "from": "src/treemap",
         "to": "src/utils",
-        "count": 25
+        "count": 35
+      },
+      {
+        "from": "src/map",
+        "to": "src/utils",
+        "count": 34
+      },
+      {
+        "from": "src/org",
+        "to": "src/utils",
+        "count": 34
       },
       {
         "from": "tests",
         "to": "src/mindmap",
-        "count": 25
+        "count": 34
       },
       {
-        "from": "src/class",
-        "to": "src/utils",
-        "count": 24
+        "from": "src/charts-d3",
+        "to": "src/palettes",
+        "count": 33
       },
       {
-        "from": "src/event-line",
-        "to": "src/utils",
-        "count": 24
+        "from": "tests",
+        "to": "src/kanban",
+        "count": 33
       },
       {
-        "from": "src/sketch",
+        "from": "src/er",
         "to": "src/utils",
-        "count": 24
+        "count": 32
+      },
+      {
+        "from": "src/gantt",
+        "to": "src/utils",
+        "count": 32
       },
       {
         "from": "src/utils",
         "to": "src",
-        "count": 24
+        "count": 32
       },
       {
         "from": "tests",
-        "to": "src/charts-d3",
-        "count": 24
+        "to": "src/c4",
+        "count": 31
+      },
+      {
+        "from": "tests",
+        "to": "src/er",
+        "count": 31
+      },
+      {
+        "from": "tests",
+        "to": "src/pert",
+        "count": 31
+      },
+      {
+        "from": "tests",
+        "to": "src/sitemap",
+        "count": 31
+      },
+      {
+        "from": "src/class",
+        "to": "src/utils",
+        "count": 28
+      },
+      {
+        "from": "src/event-line",
+        "to": "src/utils",
+        "count": 28
+      },
+      {
+        "from": "src/ownership",
+        "to": "src/utils",
+        "count": 28
       },
       {
         "from": "src/sequence",
+        "to": "src/utils",
+        "count": 28
+      },
+      {
+        "from": "src/journey-map",
+        "to": "src/utils",
+        "count": 27
+      },
+      {
+        "from": "src/kanban",
+        "to": "src/utils",
+        "count": 26
+      },
+      {
+        "from": "src/pert",
+        "to": "src/utils",
+        "count": 26
+      },
+      {
+        "from": "src/family",
+        "to": "src/utils",
+        "count": 25
+      },
+      {
+        "from": "tests",
+        "to": "src/gantt",
+        "count": 25
+      },
+      {
+        "from": "src/bracket",
+        "to": "src/utils",
+        "count": 24
+      },
+      {
+        "from": "src",
+        "to": "src/palettes",
+        "count": 24
+      },
+      {
+        "from": "src/tech-radar",
         "to": "src/utils",
         "count": 23
       },
@@ -977,62 +1022,27 @@
         "count": 23
       },
       {
-        "from": "tests",
-        "to": "src/gantt",
-        "count": 23
-      },
-      {
-        "from": "src/family",
-        "to": "src/utils",
-        "count": 22
-      },
-      {
-        "from": "src/kanban",
-        "to": "src/utils",
-        "count": 22
-      },
-      {
-        "from": "src/pert",
-        "to": "src/utils",
-        "count": 22
-      },
-      {
-        "from": "src/bracket",
-        "to": "src/utils",
-        "count": 21
-      },
-      {
-        "from": "tests",
-        "to": "src/sketch",
-        "count": 21
-      },
-      {
-        "from": "src/journey-map",
-        "to": "src/utils",
-        "count": 20
-      },
-      {
-        "from": "src/tech-radar",
-        "to": "src/utils",
-        "count": 20
-      },
-      {
         "from": "src/cycle",
         "to": "src/utils",
-        "count": 19
-      },
-      {
-        "from": "src/charts-d3",
-        "to": "src/utils",
-        "count": 18
-      },
-      {
-        "from": "src",
-        "to": "src/palettes",
-        "count": 18
+        "count": 22
       },
       {
         "from": "src/block",
+        "to": "src/utils",
+        "count": 21
+      },
+      {
+        "from": "src/swot",
+        "to": "src/utils",
+        "count": 21
+      },
+      {
+        "from": "src/timeline",
+        "to": "src/utils",
+        "count": 20
+      },
+      {
+        "from": "src/countdown",
         "to": "src/utils",
         "count": 17
       },
@@ -1042,9 +1052,39 @@
         "count": 17
       },
       {
-        "from": "src/timeline",
+        "from": "src/raci",
         "to": "src/utils",
         "count": 17
+      },
+      {
+        "from": "tests",
+        "to": "src/raci",
+        "count": 17
+      },
+      {
+        "from": "src/calendar-heatmap",
+        "to": "src/utils",
+        "count": 16
+      },
+      {
+        "from": "src/swimlane",
+        "to": "src/utils",
+        "count": 16
+      },
+      {
+        "from": "src/whiteboard",
+        "to": "src/utils",
+        "count": 16
+      },
+      {
+        "from": "tests",
+        "to": "src/class",
+        "count": 16
+      },
+      {
+        "from": "tests",
+        "to": "src/journey-map",
+        "count": 16
       },
       {
         "from": "(other)",
@@ -1052,14 +1092,19 @@
         "count": 15
       },
       {
-        "from": "tests",
-        "to": "src/class",
+        "from": "src/utils",
+        "to": "src/palettes",
         "count": 15
       },
       {
-        "from": "src/countdown",
+        "from": "src/visualizations",
         "to": "src/utils",
-        "count": 14
+        "count": 15
+      },
+      {
+        "from": "src",
+        "to": "src/pert",
+        "count": 15
       },
       {
         "from": "src/map",
@@ -1072,58 +1117,28 @@
         "count": 14
       },
       {
-        "from": "src",
-        "to": "src/pert",
-        "count": 14
-      },
-      {
-        "from": "tests",
-        "to": "src/raci",
-        "count": 14
-      },
-      {
-        "from": "src/raci",
-        "to": "src/utils",
-        "count": 13
-      },
-      {
-        "from": "src/whiteboard",
-        "to": "src/utils",
-        "count": 13
-      },
-      {
-        "from": "src/body",
-        "to": "src/utils",
-        "count": 12
-      },
-      {
-        "from": "src/pyramid",
-        "to": "src/utils",
-        "count": 12
-      },
-      {
-        "from": "src/swimlane",
-        "to": "src/utils",
-        "count": 12
-      },
-      {
-        "from": "src",
-        "to": "src/sketch",
-        "count": 12
-      },
-      {
-        "from": "tests",
-        "to": "src/journey-map",
-        "count": 12
-      },
-      {
         "from": "src/utils",
-        "to": "src/palettes",
-        "count": 11
+        "to": "(other)",
+        "count": 13
       },
       {
-        "from": "src/wireframe",
+        "from": "tests",
+        "to": "src/family",
+        "count": 13
+      },
+      {
+        "from": "src/clock",
         "to": "src/utils",
+        "count": 12
+      },
+      {
+        "from": "tests",
+        "to": "src/treemap",
+        "count": 12
+      },
+      {
+        "from": "src/charts-d3",
+        "to": "(other)",
         "count": 11
       },
       {
@@ -1134,21 +1149,26 @@
       {
         "from": "src",
         "to": "src/whiteboard",
+        "count": 11
+      },
+      {
+        "from": "src/charts-d3",
+        "to": "src/annotations",
         "count": 10
       },
       {
-        "from": "tests",
-        "to": "src/family",
+        "from": "src",
+        "to": "src/boxes-and-lines",
         "count": 10
       },
       {
-        "from": "src/clock",
-        "to": "src/utils",
+        "from": "src/graph",
+        "to": "src",
         "count": 9
       },
       {
-        "from": "src/utils",
-        "to": "(other)",
+        "from": "src",
+        "to": "src/charts-d3",
         "count": 9
       },
       {
@@ -1167,13 +1187,13 @@
         "count": 9
       },
       {
-        "from": "tests",
-        "to": "src/treemap",
-        "count": 9
+        "from": "src/annotations",
+        "to": "src",
+        "count": 8
       },
       {
-        "from": "src/graph",
-        "to": "src",
+        "from": "src/annotations",
+        "to": "src/utils",
         "count": 8
       },
       {
@@ -1182,8 +1202,8 @@
         "count": 8
       },
       {
-        "from": "src",
-        "to": "src/boxes-and-lines",
+        "from": "src/treemap",
+        "to": "src/palettes",
         "count": 8
       },
       {
@@ -1202,13 +1222,28 @@
         "count": 8
       },
       {
-        "from": "src/treemap",
+        "from": "tests",
+        "to": "src/event-line",
+        "count": 8
+      },
+      {
+        "from": "tests",
+        "to": "src/swimlane",
+        "count": 8
+      },
+      {
+        "from": "tests",
+        "to": "src/visualizations",
+        "count": 8
+      },
+      {
+        "from": "src/clock",
         "to": "src/palettes",
         "count": 7
       },
       {
-        "from": "src/visualizations",
-        "to": "src/utils",
+        "from": "src/graph",
+        "to": "src/palettes",
         "count": 7
       },
       {
@@ -1238,6 +1273,11 @@
       },
       {
         "from": "src",
+        "to": "src/journey-map",
+        "count": 7
+      },
+      {
+        "from": "src",
         "to": "src/mindmap",
         "count": 7
       },
@@ -1252,23 +1292,28 @@
         "count": 7
       },
       {
-        "from": "src",
-        "to": "src/wireframe",
+        "from": "tests",
+        "to": "src/calendar-heatmap",
         "count": 7
       },
       {
         "from": "tests",
-        "to": "src/event-line",
+        "to": "src/cycle",
         "count": 7
       },
       {
         "from": "tests",
-        "to": "src/swimlane",
+        "to": "src/ownership",
         "count": 7
       },
       {
-        "from": "src/clock",
-        "to": "src/palettes",
+        "from": "tests",
+        "to": "src/tech-radar",
+        "count": 7
+      },
+      {
+        "from": "src/boxes-and-lines",
+        "to": "src",
         "count": 6
       },
       {
@@ -1277,13 +1322,13 @@
         "count": 6
       },
       {
-        "from": "src/family",
-        "to": "src",
+        "from": "src/event-line",
+        "to": "src/palettes",
         "count": 6
       },
       {
-        "from": "src/graph",
-        "to": "src/palettes",
+        "from": "src/family",
+        "to": "src",
         "count": 6
       },
       {
@@ -1312,8 +1357,18 @@
         "count": 6
       },
       {
+        "from": "src/tech-radar",
+        "to": "src/palettes",
+        "count": 6
+      },
+      {
         "from": "src/treemap",
         "to": "src",
+        "count": 6
+      },
+      {
+        "from": "src/whiteboard",
+        "to": "(other)",
         "count": 6
       },
       {
@@ -1323,12 +1378,12 @@
       },
       {
         "from": "src",
-        "to": "src/block",
+        "to": "src/annotations",
         "count": 6
       },
       {
         "from": "src",
-        "to": "src/body",
+        "to": "src/block",
         "count": 6
       },
       {
@@ -1343,6 +1398,11 @@
       },
       {
         "from": "src",
+        "to": "src/calendar-heatmap",
+        "count": 6
+      },
+      {
+        "from": "src",
         "to": "src/cycle",
         "count": 6
       },
@@ -1353,12 +1413,12 @@
       },
       {
         "from": "src",
-        "to": "src/journey-map",
+        "to": "src/kanban",
         "count": 6
       },
       {
         "from": "src",
-        "to": "src/kanban",
+        "to": "src/ownership",
         "count": 6
       },
       {
@@ -1367,24 +1427,19 @@
         "count": 6
       },
       {
-        "from": "tests",
-        "to": "src/cycle",
+        "from": "src",
+        "to": "src/swot",
         "count": 6
       },
       {
         "from": "tests",
-        "to": "src/pyramid",
+        "to": "src/block",
         "count": 6
       },
       {
         "from": "tests",
-        "to": "src/wireframe",
+        "to": "src/countdown",
         "count": 6
-      },
-      {
-        "from": "src/body",
-        "to": "src",
-        "count": 5
       },
       {
         "from": "src/bracket",
@@ -1393,6 +1448,11 @@
       },
       {
         "from": "src/c4",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "src/calendar-heatmap",
         "to": "src",
         "count": 5
       },
@@ -1407,6 +1467,11 @@
         "count": 5
       },
       {
+        "from": "src/countdown",
+        "to": "src/palettes",
+        "count": 5
+      },
+      {
         "from": "src/cycle",
         "to": "src",
         "count": 5
@@ -1417,7 +1482,7 @@
         "count": 5
       },
       {
-        "from": "src/event-line",
+        "from": "src/er",
         "to": "src/palettes",
         "count": 5
       },
@@ -1427,68 +1492,73 @@
         "count": 5
       },
       {
-        "from": "src/sketch",
-        "to": "src",
-        "count": 5
-      },
-      {
         "from": "src/swimlane",
         "to": "src",
         "count": 5
       },
       {
-        "from": "src/tech-radar",
+        "from": "src/swot",
+        "to": "src",
+        "count": 5
+      },
+      {
+        "from": "(other)",
+        "to": "src/annotations",
+        "count": 4
+      },
+      {
+        "from": "(other)",
+        "to": "src/boxes-and-lines",
+        "count": 4
+      },
+      {
+        "from": "src/annotations",
         "to": "src/palettes",
-        "count": 5
+        "count": 4
       },
       {
-        "from": "src",
-        "to": "src/charts-d3",
-        "count": 5
-      },
-      {
-        "from": "src",
-        "to": "src/pyramid",
-        "count": 5
-      },
-      {
-        "from": "tests",
-        "to": "src/block",
-        "count": 5
-      },
-      {
-        "from": "tests",
-        "to": "src/countdown",
-        "count": 5
-      },
-      {
-        "from": "tests",
-        "to": "src/tech-radar",
-        "count": 5
+        "from": "src/block",
+        "to": "src/palettes",
+        "count": 4
       },
       {
         "from": "src/boxes-and-lines",
-        "to": "src",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/bracket",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/c4",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/class",
+        "to": "src/palettes",
         "count": 4
       },
       {
         "from": "src/countdown",
         "to": "src",
-        "count": 4
-      },
-      {
-        "from": "src/countdown",
-        "to": "src/palettes",
-        "count": 4
-      },
-      {
-        "from": "src/er",
-        "to": "src/palettes",
         "count": 4
       },
       {
         "from": "src/event-line",
         "to": "src/timeline",
+        "count": 4
+      },
+      {
+        "from": "src/gantt",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/infra",
+        "to": "src/palettes",
         "count": 4
       },
       {
@@ -1512,8 +1582,18 @@
         "count": 4
       },
       {
-        "from": "src/pyramid",
+        "from": "src/org",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/ownership",
         "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/ownership",
+        "to": "src/palettes",
         "count": 4
       },
       {
@@ -1523,17 +1603,47 @@
       },
       {
         "from": "src/sequence",
+        "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/sequence",
         "to": "src/palettes",
         "count": 4
       },
       {
-        "from": "src/sketch",
+        "from": "src/sitemap",
         "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/swimlane",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/swot",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/timeline",
+        "to": "src/palettes",
+        "count": 4
+      },
+      {
+        "from": "src/utils",
+        "to": "src/boxes-and-lines",
         "count": 4
       },
       {
         "from": "src/visualizations",
         "to": "src",
+        "count": 4
+      },
+      {
+        "from": "src/visualizations",
+        "to": "src/annotations",
         "count": 4
       },
       {
@@ -1548,12 +1658,22 @@
       },
       {
         "from": "tests",
-        "to": "src/body",
+        "to": "src/timeline",
         "count": 4
       },
       {
         "from": "(other)",
+        "to": "src/charts-d3",
+        "count": 3
+      },
+      {
+        "from": "(other)",
         "to": "src/countdown",
+        "count": 3
+      },
+      {
+        "from": "(other)",
+        "to": "src/map",
         "count": 3
       },
       {
@@ -1562,32 +1682,7 @@
         "count": 3
       },
       {
-        "from": "src/block",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/body",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/boxes-and-lines",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/bracket",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/c4",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/class",
+        "from": "src/calendar-heatmap",
         "to": "src/palettes",
         "count": 3
       },
@@ -1602,18 +1697,8 @@
         "count": 3
       },
       {
-        "from": "src/gantt",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
         "from": "src/infra",
         "to": "src/boxes-and-lines",
-        "count": 3
-      },
-      {
-        "from": "src/infra",
-        "to": "src/palettes",
         "count": 3
       },
       {
@@ -1632,53 +1717,18 @@
         "count": 3
       },
       {
-        "from": "src/org",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
         "from": "src/pert",
         "to": "src/palettes",
         "count": 3
       },
       {
-        "from": "src/pyramid",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/sequence",
-        "to": "src",
-        "count": 3
-      },
-      {
         "from": "src/sitemap",
         "to": "src",
-        "count": 3
-      },
-      {
-        "from": "src/sitemap",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/swimlane",
-        "to": "src/palettes",
-        "count": 3
-      },
-      {
-        "from": "src/timeline",
-        "to": "src/palettes",
         "count": 3
       },
       {
         "from": "src/timeline",
         "to": "src/visualizations",
-        "count": 3
-      },
-      {
-        "from": "src/utils",
-        "to": "src/boxes-and-lines",
         "count": 3
       },
       {
@@ -1692,8 +1742,13 @@
         "count": 3
       },
       {
-        "from": "src/wireframe",
-        "to": "src",
+        "from": "src/utils",
+        "to": "src/mindmap",
+        "count": 3
+      },
+      {
+        "from": "src/utils",
+        "to": "src/sitemap",
         "count": 3
       },
       {
@@ -1703,12 +1758,17 @@
       },
       {
         "from": "tests",
+        "to": "src/annotations",
+        "count": 3
+      },
+      {
+        "from": "tests",
         "to": "src/bracket",
         "count": 3
       },
       {
         "from": "tests",
-        "to": "src/visualizations",
+        "to": "src/swot",
         "count": 3
       },
       {
@@ -1722,8 +1782,18 @@
         "count": 2
       },
       {
-        "from": "(other)",
-        "to": "src/map",
+        "from": "src/annotations",
+        "to": "src/charts-d3",
+        "count": 2
+      },
+      {
+        "from": "src/boxes-and-lines",
+        "to": "src/whiteboard",
+        "count": 2
+      },
+      {
+        "from": "src/graph",
+        "to": "src/boxes-and-lines",
         "count": 2
       },
       {
@@ -1758,6 +1828,11 @@
       },
       {
         "from": "src/utils",
+        "to": "src/calendar-heatmap",
+        "count": 2
+      },
+      {
+        "from": "src/utils",
         "to": "src/countdown",
         "count": 2
       },
@@ -1768,12 +1843,12 @@
       },
       {
         "from": "src/utils",
-        "to": "src/mindmap",
+        "to": "src/org",
         "count": 2
       },
       {
         "from": "src/utils",
-        "to": "src/sitemap",
+        "to": "src/ownership",
         "count": 2
       },
       {
@@ -1792,21 +1867,6 @@
         "count": 2
       },
       {
-        "from": "src/wireframe",
-        "to": "src/palettes",
-        "count": 2
-      },
-      {
-        "from": "tests",
-        "to": "src/timeline",
-        "count": 2
-      },
-      {
-        "from": "(other)",
-        "to": "src/body",
-        "count": 1
-      },
-      {
         "from": "(other)",
         "to": "src/treemap",
         "count": 1
@@ -1817,8 +1877,38 @@
         "count": 1
       },
       {
+        "from": "(other)",
+        "to": "tests",
+        "count": 1
+      },
+      {
+        "from": "src/c4",
+        "to": "(other)",
+        "count": 1
+      },
+      {
         "from": "src/c4",
         "to": "src/sequence",
+        "count": 1
+      },
+      {
+        "from": "src/calendar-heatmap",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "src/class",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "src/gantt",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "src/graph",
+        "to": "(other)",
         "count": 1
       },
       {
@@ -1827,8 +1917,23 @@
         "count": 1
       },
       {
+        "from": "src/ownership",
+        "to": "(other)",
+        "count": 1
+      },
+      {
+        "from": "src/palettes",
+        "to": "src/utils",
+        "count": 1
+      },
+      {
         "from": "src/sequence",
         "to": "src/visualizations",
+        "count": 1
+      },
+      {
+        "from": "src/swimlane",
+        "to": "(other)",
         "count": 1
       },
       {
@@ -1839,11 +1944,6 @@
       {
         "from": "src/timeline",
         "to": "(other)",
-        "count": 1
-      },
-      {
-        "from": "src/utils",
-        "to": "src/body",
         "count": 1
       },
       {
@@ -1893,17 +1993,7 @@
       },
       {
         "from": "src/utils",
-        "to": "src/org",
-        "count": 1
-      },
-      {
-        "from": "src/utils",
         "to": "src/pert",
-        "count": 1
-      },
-      {
-        "from": "src/utils",
-        "to": "src/pyramid",
         "count": 1
       },
       {
@@ -1918,12 +2008,12 @@
       },
       {
         "from": "src/utils",
-        "to": "src/sketch",
+        "to": "src/swimlane",
         "count": 1
       },
       {
         "from": "src/utils",
-        "to": "src/swimlane",
+        "to": "src/swot",
         "count": 1
       },
       {
@@ -1937,33 +2027,23 @@
         "count": 1
       },
       {
-        "from": "src/utils",
-        "to": "src/wireframe",
-        "count": 1
-      },
-      {
         "from": "src/visualizations",
         "to": "src/palettes",
-        "count": 1
-      },
-      {
-        "from": "src/whiteboard",
-        "to": "src/c4",
         "count": 1
       }
     ],
     "external": [
       {
         "name": "vitest",
-        "files": 378
+        "files": 507
       },
       {
         "name": "jsdom",
-        "files": 73
+        "files": 93
       },
       {
         "name": "d3-selection",
-        "files": 59
+        "files": 67
       },
       {
         "name": "d3-shape",
@@ -1971,14 +2051,18 @@
       },
       {
         "name": "d3-scale",
-        "files": 14
+        "files": 17
       },
       {
         "name": "@dagrejs/dagre",
-        "files": 10
+        "files": 11
       },
       {
         "name": "@diagrammo/dgmo",
+        "files": 10
+      },
+      {
+        "name": "@resvg/resvg-js",
         "files": 10
       },
       {
@@ -1986,11 +2070,19 @@
         "files": 9
       },
       {
-        "name": "@resvg/resvg-js",
-        "files": 8
+        "name": "esbuild",
+        "files": 9
+      },
+      {
+        "name": "@lezer/common",
+        "files": 4
       },
       {
         "name": "@codemirror/language",
+        "files": 3
+      },
+      {
+        "name": "@lezer/lr",
         "files": 3
       },
       {
@@ -2002,15 +2094,11 @@
         "files": 3
       },
       {
-        "name": "@lezer/common",
-        "files": 2
+        "name": "topojson-client",
+        "files": 3
       },
       {
         "name": "@lezer/highlight",
-        "files": 2
-      },
-      {
-        "name": "@lezer/lr",
         "files": 2
       },
       {
@@ -2022,32 +2110,69 @@
         "files": 2
       },
       {
-        "name": "topojson-client",
+        "name": "subset-font",
         "files": 2
-      },
-      {
-        "name": "@eslint/js",
-        "files": 1
-      },
-      {
-        "name": "d3-cloud",
-        "files": 1
       }
     ],
-    "unresolved": 29
+    "unresolved": 33
   },
   "coChange": {
     "chart": "arc",
     "available": true,
-    "pairCount": 32945,
-    "bulkCommitsSkipped": 24,
+    "pairCount": 42171,
+    "bulkCommitsSkipped": 34,
     "rolledUp": true,
-    "rollUpNote": "Only the 30 most frequent of 32945 file pairs are shown.",
+    "rollUpNote": "Only the 30 most frequent of 42171 file pairs are shown.",
     "pairs": [
       {
         "a": "src/map/layout.ts",
         "b": "tests/map-layout.test.ts",
+        "count": 66
+      },
+      {
+        "a": "api-baseline/advanced.d.ts",
+        "b": "api-baseline/index.d.ts",
         "count": 65
+      },
+      {
+        "a": ".cursorrules",
+        "b": ".windsurfrules",
+        "count": 62
+      },
+      {
+        "a": ".cursorrules",
+        "b": ".github/copilot-instructions.md",
+        "count": 61
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": ".windsurfrules",
+        "count": 61
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": "docs/ai-integration.md",
+        "count": 59
+      },
+      {
+        "a": "docs/language-reference.md",
+        "b": "src/completion-registry.ts",
+        "count": 58
+      },
+      {
+        "a": ".cursorrules",
+        "b": "docs/ai-integration.md",
+        "count": 57
+      },
+      {
+        "a": ".windsurfrules",
+        "b": "docs/ai-integration.md",
+        "count": 57
+      },
+      {
+        "a": ".github/copilot-instructions.md",
+        "b": "SKILL.md",
+        "count": 55
       },
       {
         "a": "CHANGELOG.md",
@@ -2055,14 +2180,29 @@
         "count": 54
       },
       {
-        "a": "api-baseline/advanced.d.ts",
-        "b": "api-baseline/index.d.ts",
-        "count": 52
+        "a": "SKILL.md",
+        "b": "docs/ai-integration.md",
+        "count": 54
       },
       {
         "a": ".cursorrules",
-        "b": ".windsurfrules",
-        "count": 48
+        "b": "SKILL.md",
+        "count": 53
+      },
+      {
+        "a": ".windsurfrules",
+        "b": "SKILL.md",
+        "count": 53
+      },
+      {
+        "a": "SKILL.md",
+        "b": "docs/language-reference.md",
+        "count": 49
+      },
+      {
+        "a": "src/map/layout.ts",
+        "b": "src/map/renderer.ts",
+        "count": 49
       },
       {
         "a": "src/d3.ts",
@@ -2070,129 +2210,69 @@
         "count": 48
       },
       {
-        "a": "src/map/layout.ts",
-        "b": "src/map/renderer.ts",
-        "count": 48
-      },
-      {
-        "a": ".cursorrules",
-        "b": ".github/copilot-instructions.md",
-        "count": 47
-      },
-      {
         "a": ".github/copilot-instructions.md",
-        "b": ".windsurfrules",
-        "count": 47
-      },
-      {
-        "a": ".github/copilot-instructions.md",
-        "b": "docs/ai-integration.md",
-        "count": 45
-      },
-      {
-        "a": ".cursorrules",
-        "b": "docs/ai-integration.md",
-        "count": 43
-      },
-      {
-        "a": ".windsurfrules",
-        "b": "docs/ai-integration.md",
-        "count": 43
+        "b": "docs/language-reference.md",
+        "count": 46
       },
       {
         "a": "src/d3.ts",
         "b": "tests/cli-render.test.ts",
-        "count": 42
-      },
-      {
-        "a": ".github/copilot-instructions.md",
-        "b": "SKILL.md",
-        "count": 41
-      },
-      {
-        "a": "SKILL.md",
-        "b": "docs/ai-integration.md",
-        "count": 40
-      },
-      {
-        "a": ".cursorrules",
-        "b": "SKILL.md",
-        "count": 39
-      },
-      {
-        "a": ".windsurfrules",
-        "b": "SKILL.md",
-        "count": 39
-      },
-      {
-        "a": "package.json",
-        "b": "standalone/package.json",
-        "count": 37
-      },
-      {
-        "a": "SKILL.md",
-        "b": "docs/language-reference.md",
-        "count": 36
-      },
-      {
-        "a": "tests/cli-render.test.ts",
-        "b": "tests/flowchart-integration.test.ts",
-        "count": 35
-      },
-      {
-        "a": ".github/copilot-instructions.md",
-        "b": "docs/language-reference.md",
-        "count": 34
+        "count": 46
       },
       {
         "a": ".cursorrules",
         "b": "docs/language-reference.md",
-        "count": 33
+        "count": 45
       },
       {
         "a": ".windsurfrules",
         "b": "docs/language-reference.md",
-        "count": 33
-      },
-      {
-        "a": "src/d3.ts",
-        "b": "src/utils/parsing.ts",
-        "count": 33
-      },
-      {
-        "a": "api-baseline/advanced.d.ts",
-        "b": "api-baseline/block.d.ts",
-        "count": 32
-      },
-      {
-        "a": "api-baseline/block.d.ts",
-        "b": "api-baseline/index.d.ts",
-        "count": 32
+        "count": 45
       },
       {
         "a": "docs/ai-integration.md",
         "b": "docs/language-reference.md",
-        "count": 32
+        "count": 44
+      },
+      {
+        "a": "api-baseline/advanced.d.ts",
+        "b": "docs/language-reference.md",
+        "count": 42
       },
       {
         "a": "package.json",
-        "b": "tsup.config.ts",
-        "count": 32
+        "b": "standalone/package.json",
+        "count": 42
       },
       {
-        "a": "src/d3.ts",
-        "b": "src/dgmo-router.ts",
-        "count": 32
+        "a": "api-baseline/advanced.d.ts",
+        "b": "src/advanced.ts",
+        "count": 41
       },
       {
-        "a": "src/map/layout.ts",
-        "b": "tests/map-renderer.test.ts",
-        "count": 31
+        "a": "tests/cli-render.test.ts",
+        "b": "tests/flowchart-integration.test.ts",
+        "count": 41
       },
       {
-        "a": "src/org/layout.ts",
-        "b": "src/org/renderer.ts",
-        "count": 31
+        "a": "src/directives-registry.ts",
+        "b": "tests/highlight-coverage.test.ts",
+        "count": 37
+      },
+      {
+        "a": "api-baseline/advanced.d.ts",
+        "b": "api-baseline/block.d.ts",
+        "count": 36
+      },
+      {
+        "a": "api-baseline/block.d.ts",
+        "b": "api-baseline/index.d.ts",
+        "count": 35
+      },
+      {
+        "a": "docs/language-reference.md",
+        "b": "src/directives-registry.ts",
+        "count": 35
       }
     ]
   }

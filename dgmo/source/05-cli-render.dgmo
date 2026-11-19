@@ -1,5 +1,5 @@
 sequence Render a file with the CLI
-// From: src/cli.ts:986,1025,1046,1128,1150,1171,1225; src/render.ts:185,259,275,415; src/svg-to-png.ts:25
+// From: src/cli.ts:1135,1174,1195,1282,1304,1326,1450; src/render.ts:193,283,319,537; src/svg-to-png.ts:41
 autonumber
 
 User -dgmo diagram.dgmo-> main

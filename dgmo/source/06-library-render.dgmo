@@ -1,5 +1,5 @@
 sequence Render from the library
-// From: src/index.ts:118-190; src/render.ts:185-455 (getRenderCategory is from src/dgmo-router.ts:46); src/d3.ts:180-256; src/utils/export-fit.ts (fitSvgToContent)
+// From: src/index.ts:118-190; src/render.ts:193-611 (getRenderCategory is from src/dgmo-router.ts:47); src/d3.ts:189-265; src/utils/export-fit.ts (fitSvgToContent)
 autonumber
 
 Host app -render text-> index

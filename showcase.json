@@ -28,8 +28,8 @@
       "slug": "dgmo",
       "name": "Diagrammo (dgmo)",
       "repo": "https://github.com/diagrammo/dgmo",
-      "commit": "3c25eb52c563757f5d29751c89ff94fd32d23e34",
-      "date": "2026-11-01",
+      "commit": "bfdb3d94e500e015741e992995c3c38701b2e050",
+      "date": "2026-11-19",
       "about": "The Diagrammo diagram language: a TypeScript parser and renderer, with its command line tool."
     }
   ]
