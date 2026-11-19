@@ -1,5 +1,5 @@
 sequence Make a share link
-// From: src/cli.ts:477-574; src/sharing.ts:6-7,113-170; src/chart-type-detect.ts:87
+// From: src/cli.ts:570-638; src/sharing.ts:6-7,113-170; src/chart-type-detect.ts:87
 autonumber
 
 User -dgmo share diagram.dgmo-> runShareCommand

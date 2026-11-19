@@ -2,47 +2,47 @@ treemap Lines of code by directory
 // From: measurements.json sizes (rolled up; (other) kept as measured)
 
 src
-  "map" 13358
-  "(files here)" 12816
-  "pert" 9087
-  "boxes-and-lines" 8957
-  "gantt" 7261
-  "infra" 7201
-  "sequence" 6958
-  "c4" 6194
-  "sketch" 5194
-  "charts-d3" 4940
-  "graph" 4335
-  "org" 4065
-  "countdown" 3765
-  "timeline" 3764
-  "event-line" 3550
-  "body" 3539
-  "raci" 3536
-  "whiteboard" 3528
-  "tech-radar" 3292
-  "clock" 3081
-  "wireframe" 3026
-  "sitemap" 2950
-  "kanban" 2820
-  "journey-map" 2805
-  "treemap" 2772
-  "family" 2612
-  "er" 2576
-  "swimlane" 2498
-  "bracket" 2275
-  "mindmap" 2267
-  "cycle" 2229
-  "palettes" 2103
+  "map" 13755
+  "charts-d3" 11049
+  "boxes-and-lines" 10663
+  "pert" 9199
+  "infra" 7531
+  "gantt" 7472
+  "sequence" 7281
+  "c4" 5932
+  "graph" 5513
+  "swimlane" 4627
+  "org" 4538
+  "whiteboard" 4301
+  "timeline" 3932
+  "countdown" 3799
+  "event-line" 3662
+  "raci" 3659
+  "body" 3543
+  "tech-radar" 3355
+  "clock" 3110
+  "sitemap" 3084
+  "wireframe" 3063
+  "kanban" 2977
+  "treemap" 2974
+  "journey-map" 2955
+  "ownership" 2891
+  "mindmap" 2856
+  "family" 2815
+  "er" 2566
+  "palettes" 2433
+  "chart.ts" 2412
+  "goal" 2409
+  "cycle" 2388
+  "bracket" 2388
 scripts
-  "(files here)" 12399
+  "(files here)" 12693
 api-baseline
-  "(files here)" 9496
-"(repo root files)" 7930
+  "(files here)" 10001
+"(repo root files)" 8495
 docs
-  "(files here)" 5719
+  "(files here)" 6891
 tests
-  "map-layout.test.ts" 2394
-  "__snapshots__" 2321
-  "infra-compute.test.ts" 2120
-"(other)" 154454
+  "stress" 2558
+  "map-layout.test.ts" 2429
+"(other)" 211302

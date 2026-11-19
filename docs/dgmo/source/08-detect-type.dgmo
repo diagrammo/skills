@@ -1,5 +1,5 @@
 flowchart How dgmo finds the chart type
-// From: src/chart-type-detect.ts:87-128; src/utils/parsing.ts:241-259
+// From: src/chart-type-detect.ts:87-128; src/utils/parsing.ts:243-261
 direction-tb
 
 (Start) -> [Take first non-empty non-comment line]

@@ -19,42 +19,6 @@ tag Kind as g
 2026-06-15 remove the deprecated /internal subpath alias (1.0...  g: Big commit
   15 files, 14920 lines changed
 
-2026-10-08 cli-v0.89.0  g: Release
-  Commit 6ecfb89
-
-2026-10-10 v0.90.0  g: Release
-  Commit 17d4fe5
-
-2026-10-10 cli-v0.90.0  g: Release
-  Commit 0b6733b
-
-2026-10-14 v0.91.0  g: Release
-  Commit 5cb87bf
-
-2026-10-14 cli-v0.91.0  g: Release
-  Commit 9f74aa7
-
-2026-10-14 v0.91.1  g: Release
-  Commit 5fefa03
-
-2026-10-20 v0.92.0  g: Release
-  Commit 4cbb705
-
-2026-10-20 v0.92.1  g: Release
-  Commit 7bd2aa2
-
-2026-10-20 cli-v0.92.1  g: Release
-  Commit 25c14ae
-
-2026-10-26 v0.93.0  g: Release
-  Commit c0883d1
-
-2026-10-26 cli-v0.93.0  g: Release
-  Commit c0434bb
-
-2026-10-28 v0.94.0  g: Release
-  Commit c3470fc
-
 2026-10-28 cli-v0.94.0  g: Release
   Commit 64ac0a2
 
@@ -63,4 +27,40 @@ tag Kind as g
 
 2026-10-29 cli-v0.95.0  g: Release
   Commit 80abbdd
+
+2026-10-31 cli-v0.96.0  g: Release
+  Commit 5544f4c
+
+2026-11-02 v0.96.0  g: Release
+  Commit 1116641
+
+2026-11-02 cli-v0.97.0  g: Release
+  Commit d934cf9
+
+2026-11-08 v0.97.0  g: Release
+  Commit 392695f
+
+2026-11-08 cli-v0.98.0  g: Release
+  Commit 2383b0f
+
+2026-11-08 v0.98.0  g: Release
+  Commit 5aa7b2c
+
+2026-11-08 cli-v0.99.0  g: Release
+  Commit 3ca8717
+
+2026-11-09 cli-v0.100.0  g: Release
+  Commit c4b6583
+
+2026-11-17 v0.99.0  g: Release
+  Commit c47f33d
+
+2026-11-17 cli-v0.101.0  g: Release
+  Commit 861e91f
+
+2026-11-19 v0.100.0  g: Release
+  Commit 667ae19
+
+2026-11-19 cli-v0.102.0  g: Release
+  Commit 27d4d3b
 
