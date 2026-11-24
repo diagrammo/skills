@@ -4,11 +4,14 @@ import { describe, expect, it } from 'vitest';
 import { readManifest } from '../skills/dgmo-codebase-report/scripts/build-report.mjs';
 
 // The showcase (#1109): dgmo-codebase-report run on four public repos, served
-// by GitHub Pages from this repo's docs/ folder. Each report keeps its source
+// by GitHub Pages from this repo's gh-pages branch. Each report keeps its source
 // (.dgmo files + report.json) beside the built page, so a refresh rebuilds it.
+// The site is off main because the plugin directory refuses files over 256 KiB
+// (diagrammo/diagrammo#1404). Run against a gh-pages worktree:
+//   SHOWCASE_DIR=site pnpm vitest run tests/showcase.test.ts
 
 const ROOT = resolve(import.meta.dirname, '..');
-const DOCS = join(ROOT, 'docs');
+const DOCS = process.env['SHOWCASE_DIR'] ? resolve(process.env['SHOWCASE_DIR']) : '';
 
 interface Entry {
   slug: string;
@@ -20,13 +23,14 @@ interface Entry {
 }
 
 function entries(): Entry[] {
+  if (!DOCS) return [];
   const raw = JSON.parse(readFileSync(join(DOCS, 'showcase.json'), 'utf8')) as { reports: Entry[] };
   return raw.reports;
 }
 
 const INSTALL = ['/plugin marketplace add diagrammo/skills', '/plugin install diagrammo@diagrammo'];
 
-describe('showcase site', () => {
+describe.skipIf(!DOCS)('showcase site (SHOWCASE_DIR)', () => {
   it('lists the four repos the showcase row names', () => {
     expect(entries().map((e) => e.repo).sort()).toEqual([
       'https://github.com/BurntSushi/ripgrep',

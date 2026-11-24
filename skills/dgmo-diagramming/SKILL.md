@@ -11,7 +11,7 @@ Use dgmo tools to create, render, and share diagrams. dgmo is a text-based diagr
 <!-- DGMO-AI-CORE:START -->
 ## DGMO AI Core
 
-_Generated from `language-reference.md` — the anti-patterns and 51-type index below are identical across every DGMO AI surface._
+_Generated from `language-reference.md` — the anti-patterns and 55-type index below are identical across every DGMO AI surface._
 
 ### Disambiguation — where DGMO diverges from LLM priors
 
@@ -58,69 +58,74 @@ Valid markup is the floor, not the goal. A good diagram reads at a glance. Apply
 <!-- TITLE start -->
 
 - **Always title it.** Every diagram gets a short title on the type-declaration line (`flowchart Checkout Flow`, `sequence Checkout`, `boxes-and-lines Service Map`) so it is self-describing — never leave the bare type keyword alone. Infer a fitting title from the request when the user gives none.
+- **On a chart of numbers, the title states the finding.** Write what the reader should take away, not what is plotted — `bar Nassau landed twice the gold of any other port`, not `bar Gold by Port`. Put what is measured (the quantity, units, period) in `subtitle` and where the numbers came from in `source` (§1.12). Fall back to a label title only when the user names one or the data shows no single finding (§26.8).
   <!-- TITLE end -->
   <!-- CATEGORIZE start -->
-- **Categorize and color — by default, not only when obvious.** Before drawing, find the axis that sorts the items into kinds and color by it: layer (frontend / backend / data), role (client / service / datastore), trust zone (internal / external / third-party), status (done / active / blocked), owner/team, or read-path vs write-path. Almost every diagram has such an axis — actively look for one rather than leaving everything monochrome. Express it with a **tag group**, never ad-hoc per-node colors: declare `tag <Axis> as t` (the name is a single word — `tag TrustZone as tz` — or quote a multi-word name: `tag "Trust Zone" as tz`), indent the category values (a trailing color is optional — bare values auto-pick a palette color), set `active-tag <Axis>` in the header — after the tag group and before the first element, because a type such as c4 refuses it after content — then assign each item `Node t: <Category>` (see the tag-group syntax in the per-type section below). **Bracket, block, body, event-line and whiteboard** take the tag group but no `active-tag` line — declare the group and stop there; on event-line the line would be drawn as an element. **Class, flowchart, wireframe, raci, cycle, pyramid, ring, sankey, tech-radar, venn, version-control, wordcloud, arc, bar, clock, countdown, funnel, function, goal, heatmap, line, pie, polar-area, quadrant, radar, scatter and slope** take no tag group at all — skip this rule for them. Most report the lines; cycle, pyramid, ring, sankey, venn, version-control and wordcloud read them as content, and flowchart and tech-radar drop them without a word. Only the 11 named palette colors exist, and they re-resolve per palette/theme. Color the grouping so the categories — and the boundaries between them — read at a glance. **Buckets, not name tags — never 1:1.** A tag group must have _fewer_ values than it has members: each color should bucket two or more items so the palette compresses the diagram into a few meaningful kinds (aim for ~2–4 categories, and keep distinct colors well under half the item count). If you find yourself giving nearly every item its own value, you've enumerated, not categorized — merge the singletons up a level until each color groups at least two (a `cache` and a `database` are both `datastore`; a caller and a gateway are both `client`; two microservices are both `service`). One color per item is the same visual noise as random colors — the grouping only earns its place when a color means "these belong together." Leave items uncolored only when they genuinely form a single undifferentiated kind, or the user asked for no color.
+- **Categorize and color — by default, not only when obvious.** Before drawing, find the axis that sorts the items into kinds and color by it: layer (frontend / backend / data), role (client / service / datastore), trust zone (internal / external / third-party), status (done / active / blocked), owner/team, or read-path vs write-path. Almost every diagram has such an axis — actively look for one rather than leaving everything monochrome. Express it with a **tag group**, never ad-hoc per-node colors: declare `tag <Axis> as t` (the name is a single word — `tag TrustZone as tz` — or quote a multi-word name: `tag "Trust Zone" as tz`), indent the category values (a trailing color is optional — bare values auto-pick a palette color), set `active-tag <Axis>` in the header — after the tag group and before the first element, because a type such as c4 refuses it after content — then assign each item `Node t: <Category>` (see the tag-group syntax in the per-type section below). **Bracket, block, body, calendar-heatmap, event-line and whiteboard** take the tag group but no `active-tag` line — declare the group and stop there; on event-line the line would be drawn as an element. **Class, flowchart, wireframe, raci, cycle, pyramid, ring, sankey, tech-radar, venn, version-control, wordcloud, arc, bar, clock, countdown, funnel, function, goal, heatmap, line, pie, polar-area, quadrant, radar, scatter, slope, boxplot and histogram** take no tag group at all — skip this rule for them. Most report the lines; cycle, pyramid, ring, sankey, venn, version-control and wordcloud read them as content, and flowchart and tech-radar drop them without a word. Only the 11 named palette colors exist, and they re-resolve per palette/theme. Color the grouping so the categories — and the boundaries between them — read at a glance. **Buckets, not name tags — never 1:1.** A tag group must have _fewer_ values than it has members: each color should bucket two or more items so the palette compresses the diagram into a few meaningful kinds (aim for ~2–4 categories, and keep distinct colors well under half the item count). If you find yourself giving nearly every item its own value, you've enumerated, not categorized — merge the singletons up a level until each color groups at least two (a `cache` and a `database` are both `datastore`; a caller and a gateway are both `client`; two microservices are both `service`). One color per item is the same visual noise as random colors — the grouping only earns its place when a color means "these belong together." Leave items uncolored only when they genuinely form a single undifferentiated kind, or the user asked for no color.
 <!-- CATEGORIZE end -->
 - **Keep labels short.** A few words per node. Move detail into notes or metadata, never a full sentence inside a label.
 - **Let the defaults show.** Don't add `no-*` opt-outs unless the user asked to hide or disable something — they strip helpful labels, values, and color.
 - **Pick a fitting direction.** Top-to-bottom for hierarchies and processes; left-to-right for pipelines and flows (where the type supports a direction).
 
-### Chart-type index (45) — pick the type, then fetch its section
+### Chart-type index (47) — pick the type, then fetch its section
 
-| id                | when to use                                                                                                                                                   |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sequence`        | message / interaction flows over time                                                                                                                         |
-| `flowchart`       | decision trees and process flows                                                                                                                              |
-| `state`           | state-machine / lifecycle transitions                                                                                                                         |
-| `class`           | UML class hierarchies                                                                                                                                         |
-| `er`              | database schemas and relationships                                                                                                                            |
-| `c4`              | system architecture (context / container / component / deployment)                                                                                            |
-| `infra`           | infrastructure traffic flow with RPS computation                                                                                                              |
-| `boxes-and-lines` | general-purpose node-edge diagrams with groups and tags                                                                                                       |
-| `sitemap`         | site / app navigation structure                                                                                                                               |
-| `mindmap`         | radial hierarchy of ideas from a central topic                                                                                                                |
-| `org`             | reporting hierarchy                                                                                                                                           |
-| `family`          | family tree / genealogy: unions (couples), children, remarriage, adoption, GEDCOM-style metadata                                                              |
-| `bracket`         | single-elimination tournament bracket: winners auto-advance; seed the field for a day-0 skeleton or list results casually; two sides mirror to a championship |
-| `kanban`          | task-board columns                                                                                                                                            |
-| `swot`            | SWOT analysis: strengths, weaknesses, opportunities, threats in four fixed panels on helpful/harmful and internal/external axes                               |
-| `gantt`           | project scheduling with task dependencies and milestones                                                                                                      |
-| `pert`            | project network with three-point estimates and critical path                                                                                                  |
-| `swimlane`        | cross-functional process flow with lanes, phases and gateways (BPMN-style)                                                                                    |
-| `version-control` | git / version-control branch-and-merge graph: commits, branches, merges, rebase, HEAD and remote-tracking (gitGraph-style)                                    |
-| `timeline`        | events, eras, and date ranges                                                                                                                                 |
-| `event-line`      | annotated narrative timeline — events on a line with descriptions, optionally not to scale (NOT the date-scaled `timeline`)                                   |
-| `body`            | human anatomy figure annotated by muscle name — for medical, exercise, and educational diagrams                                                               |
-| `journey-map`     | UX flow with emotion scores, phases, annotations                                                                                                              |
-| `cycle`           | cyclical process (PDCA, OODA, DevOps loops)                                                                                                                   |
-| `raci`            | tasks × roles responsibility matrix; variant (RACI / RASCI / DACI) is inferred from the markers used                                                          |
-| `tech-radar`      | technology adoption quadrants (adopt / trial / assess / hold)                                                                                                 |
-| `quadrant`        | 2×2 positioning matrix                                                                                                                                        |
-| `pyramid`         | stacked hierarchy of layers (Maslow, DIKW)                                                                                                                    |
-| `ring`            | concentric rings of nested categories                                                                                                                         |
-| `treemap`         | nested rectangles sized by value (budgets, disk usage, portfolios)                                                                                            |
-| `block`           | author-controlled grid of nested, collapsible blocks (system / architecture layouts)                                                                          |
-| `whiteboard`      | free-form infinite canvas: shapes, sticky notes, free arrows, text, images and freehand ink at pixel positions (canvas-drawn; AI writes all but ink)          |
-| `goal`            | single progress-toward-a-target value (`now` vs `target`) as a progress bar, thermometer, or gauge — KPIs, fundraising, quotas                                |
-| `countdown`       | live "N days until X" that ticks every second and is accurate on every load — trip dates, launches, deadlines; the only dynamic chart type                    |
-| `clock`           | live world-clock board: current time for people/places across time zones, ticking every second, with optional working-hours status and sundown line           |
-| `map`             | geographic concept map: regions, points, routes                                                                                                               |
-| `wireframe`       | low-fidelity UI layout with panels and controls                                                                                                               |
-| `bar`             | categorical comparisons (multi-series via `stack` / `group`)                                                                                                  |
-| `line`            | trends over time (multiple series via a `series` block; filled via `fill`; dual y-axes via `y-label` / `y-right-label`)                                       |
-| `pie`             | part-to-whole proportions (ring/doughnut via `hole`)                                                                                                          |
-| `radar`           | multi-dimensional metrics                                                                                                                                     |
-| `polar-area`      | radial bar chart                                                                                                                                              |
-| `scatter`         | 2D points or bubble chart                                                                                                                                     |
-| `heatmap`         | matrix intensity                                                                                                                                              |
-| `funnel`          | conversion pipeline                                                                                                                                           |
-| `sankey`          | flow / allocation                                                                                                                                             |
-| `arc`             | network relationships (linear, or circular via `layout chord`)                                                                                                |
-| `slope`           | change between two periods                                                                                                                                    |
-| `venn`            | set overlaps                                                                                                                                                  |
-| `wordcloud`       | term-frequency                                                                                                                                                |
-| `function`        | mathematical expressions (colon required: `f(x): x^2`)                                                                                                        |
+| id                 | when to use                                                                                                                                                                                                                                                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sequence`         | message / interaction flows over time                                                                                                                                                                                                                                                                               |
+| `flowchart`        | decision trees and process flows                                                                                                                                                                                                                                                                                    |
+| `state`            | state-machine / lifecycle transitions                                                                                                                                                                                                                                                                               |
+| `class`            | UML class hierarchies                                                                                                                                                                                                                                                                                               |
+| `er`               | database schemas and relationships                                                                                                                                                                                                                                                                                  |
+| `c4`               | system architecture (context / container / component / deployment)                                                                                                                                                                                                                                                  |
+| `infra`            | infrastructure traffic flow with RPS computation                                                                                                                                                                                                                                                                    |
+| `boxes-and-lines`  | general-purpose node-edge diagrams with groups and tags                                                                                                                                                                                                                                                             |
+| `sitemap`          | site / app navigation structure                                                                                                                                                                                                                                                                                     |
+| `mindmap`          | radial hierarchy of ideas from a central topic                                                                                                                                                                                                                                                                      |
+| `org`              | reporting hierarchy                                                                                                                                                                                                                                                                                                 |
+| `family`           | family tree / genealogy: unions (couples), children, remarriage, adoption, GEDCOM-style metadata                                                                                                                                                                                                                    |
+| `ownership`        | corporate entity structure: parent, subsidiaries and outside owners, a % stake on every line and a jurisdiction on every box (legal, tax, M&A)                                                                                                                                                                      |
+| `bracket`          | single-elimination tournament bracket: winners auto-advance; seed the field for a day-0 skeleton or list results casually; two sides mirror to a championship                                                                                                                                                       |
+| `kanban`           | task-board columns                                                                                                                                                                                                                                                                                                  |
+| `swot`             | SWOT analysis: strengths, weaknesses, opportunities, threats in four fixed panels on helpful/harmful and internal/external axes                                                                                                                                                                                     |
+| `gantt`            | project scheduling with task dependencies and milestones                                                                                                                                                                                                                                                            |
+| `pert`             | project network with three-point estimates and critical path                                                                                                                                                                                                                                                        |
+| `swimlane`         | cross-functional process flow with lanes, phases and gateways (BPMN-style)                                                                                                                                                                                                                                          |
+| `version-control`  | git / version-control branch-and-merge graph: commits, branches, merges, rebase, HEAD and remote-tracking (gitGraph-style)                                                                                                                                                                                          |
+| `timeline`         | events, eras, and date ranges                                                                                                                                                                                                                                                                                       |
+| `event-line`       | annotated narrative timeline — events on a line with descriptions, optionally not to scale (NOT the date-scaled `timeline`)                                                                                                                                                                                         |
+| `body`             | human anatomy figure annotated by muscle name — for medical, exercise, and educational diagrams                                                                                                                                                                                                                     |
+| `journey-map`      | UX flow with emotion scores, phases, annotations                                                                                                                                                                                                                                                                    |
+| `cycle`            | cyclical process (PDCA, OODA, DevOps loops)                                                                                                                                                                                                                                                                         |
+| `raci`             | tasks × roles responsibility matrix; variant (RACI / RASCI / DACI) is inferred from the markers used                                                                                                                                                                                                                |
+| `tech-radar`       | technology adoption quadrants (adopt / trial / assess / hold)                                                                                                                                                                                                                                                       |
+| `quadrant`         | 2×2 positioning matrix                                                                                                                                                                                                                                                                                              |
+| `pyramid`          | stacked hierarchy of layers (Maslow, DIKW)                                                                                                                                                                                                                                                                          |
+| `ring`             | concentric rings of nested categories                                                                                                                                                                                                                                                                               |
+| `treemap`          | nested rectangles sized by value (budgets, disk usage, portfolios)                                                                                                                                                                                                                                                  |
+| `block`            | author-controlled grid of nested, collapsible blocks (system / architecture layouts)                                                                                                                                                                                                                                |
+| `whiteboard`       | free-form infinite canvas: shapes, sticky notes, free arrows, text, images and freehand ink at pixel positions (canvas-drawn; AI writes all but ink)                                                                                                                                                                |
+| `goal`             | progress-toward-a-target value (`actual` vs `target`) as a progress bar, thermometer, or gauge, with optional named `bands`; several `[Measure]` rows make a bullet chart — KPIs, dashboards, fundraising, quotas                                                                                                   |
+| `countdown`        | live "N days until X" that ticks every second and is accurate on every load — trip dates, launches, deadlines; the only dynamic chart type                                                                                                                                                                          |
+| `clock`            | live world-clock board: current time for people/places across time zones, ticking every second, with optional working-hours status and sundown line                                                                                                                                                                 |
+| `map`              | geographic concept map: regions, points, routes                                                                                                                                                                                                                                                                     |
+| `wireframe`        | low-fidelity UI layout with panels and controls                                                                                                                                                                                                                                                                     |
+| `bar`              | categorical comparisons (multi-series via `stack` / `group`; a line or step line over the bars via `mark: line` / `mark: step`, on its own axis under `y-right-axis`; bare `mean`, `median`, `target N`, `trend`, `pareto` overlays)                                                                                |
+| `line`             | trends over time (multiple series via a `series` block; filled via `fill`; stacked areas via `stack`; dual y-axes via `y-axis` / `y-right-axis` series headers; bars or a step line per series via `mark: bar` / `mark: step`; bare `mean`, `median`, `target N`, `trend`, `moving-average N`, `extremes` overlays) |
+| `pie`              | part-to-whole proportions (ring/doughnut via `hole`; 10×10 grid via `waffle`)                                                                                                                                                                                                                                       |
+| `radar`            | multi-dimensional metrics                                                                                                                                                                                                                                                                                           |
+| `polar-area`       | radial bar chart                                                                                                                                                                                                                                                                                                    |
+| `scatter`          | 2D points or bubble chart (`trend` draws a fit line per category)                                                                                                                                                                                                                                                   |
+| `heatmap`          | matrix intensity                                                                                                                                                                                                                                                                                                    |
+| `histogram`        | distribution of raw numbers counted into bins (response times, ages, scores); pre-counted `10-20 31` rows too                                                                                                                                                                                                       |
+| `calendar-heatmap` | daily values across a year as a grid of squares, weeks across and weekdays down (activity, habits, runs) — one `date value` per line                                                                                                                                                                                |
+| `boxplot`          | spread and outliers of raw numbers per group (cycle times, scores) — free numbers under `[Group]` headers                                                                                                                                                                                                           |
+| `funnel`           | conversion pipeline                                                                                                                                                                                                                                                                                                 |
+| `sankey`           | flow / allocation                                                                                                                                                                                                                                                                                                   |
+| `arc`              | network relationships (linear, or circular via `layout chord`)                                                                                                                                                                                                                                                      |
+| `slope`            | change between two periods                                                                                                                                                                                                                                                                                          |
+| `venn`             | set overlaps                                                                                                                                                                                                                                                                                                        |
+| `wordcloud`        | term-frequency                                                                                                                                                                                                                                                                                                      |
+| `function`         | mathematical expressions (colon required: `f(x): x^2`)                                                                                                                                                                                                                                                              |
 
 **Need more than the index gives you?** Fetch the per-type section: MCP `get_language_reference(type)` / `get_examples(type)`, or read that type's section below. The `suggest_chart_type` tool returns the chosen type's section automatically.
 
@@ -128,7 +133,7 @@ Valid markup is the floor, not the goal. A good diagram reads at a glance. Apply
 
 ### Common examples (curated, parse-clean)
 
-_The most common types, inline so you can generate them without a fetch. For the other 43, get the per-type section (see below)._
+_The most common types, inline so you can generate them without a fetch. For the other 47, get the per-type section (see below)._
 
 #### journey-map
 
@@ -356,7 +361,7 @@ Edge
 
 SignalFlags f: Blackbeard
   description: Flag semaphore relay — ship-to-ship messaging
-  latency-ms: 30000
+  latency-ms: 3000
   -> Flagship
   -> ScoutShip
 
@@ -364,7 +369,7 @@ Flagship f: Blackbeard
   description: Command vessel — decrypts and routes all intelligence
   instances: 1
   max-rps: 50
-  latency-ms: 5000
+  latency-ms: 500
   -> CarrierPigeons
   -> RumRunner
 
@@ -372,7 +377,7 @@ ScoutShip f: Bonny
   description: Fast sloop for reconnaissance
   instances: 2
   max-rps: 30
-  latency-ms: 8000
+  latency-ms: 800
   -> Flagship
 
 CarrierPigeons f: Rackham
@@ -388,49 +393,56 @@ CarrierPigeons f: Rackham
   TavernNetwork f: Rackham
     description: Dockside tavern informants across the Caribbean
     max-rps: 20
-    latency-ms: 86400000
+    latency-ms: 9000
 
 RumRunner f: Bonny
   description: Smuggler supply line — moves coded messages in rum barrels
   concurrency: 4
-  duration-ms: 172800000
+  duration-ms: 12000
   -> TavernNetwork
 ```
 #### gantt
 
 ```dgmo
 gantt Blackbeard's Blockade — 1718
-
 start-date 1718-05-01
 today-marker 1718-05-15
+critical-path
 
 tag Role as r
   Command red
   Crew blue
   Captives orange
 
+era 1718-05-07 -> 1718-05-16 Blockade Active blue
 marker 1718-05-14 Ransom Deadline red
-era 1718-05-08 -> 1718-05-17 Blockade Active blue
 
-[Preparation] r: Command
-  Provision Ship 3d r: Crew, progress: 100
-    -> Anchor Fleet 2d r: Crew, progress: 100
-  Scout Harbor 3d r: Crew, progress: 100
-    -> Position Cannons 3d r: Crew, progress: 100
-  Recruit Hands 5d r: Crew, progress: 100
+[Preparation] r: Crew
+  Provision Ship 3d progress: 100
+    -> Anchor Fleet 2d progress: 100
+      -> [Blockade].Seize Merchants
+  Scout Harbor 3d progress: 100
+    -> Position Cannons 3d progress: 100
+      -> [Blockade].Seize Merchants
+  Recruit Hands 5d progress: 100
+    -> [Blockade].Patrol Perimeter
 
-+7d [Blockade] r: Crew
-  Seize Merchants 4d progress: 100
-    -> Hold Hostages 5d r: Captives, progress: 60
-  Patrol Perimeter 9d progress: 75
-  Demand Medicine 4d r: Command, progress: 100
-    -> Threaten Executions 3d? r: Command, progress: 90
+[Blockade] r: Crew
+  Seize Merchants 3d progress: 100
+    -> Demand Medicine 2d r: Command, progress: 100
+      -> Threaten Executions 2d r: Command, progress: 100
+        -> [Resolution].Receive Ransom
+    -> Hold Hostages 6d r: Captives, progress: 80
+      -> [Resolution].Release Prisoners
+  Patrol Perimeter 8d progress: 100
+    -> [Resolution].Set Sail
 
-+17d [Resolution] r: Command
-  Receive Ransom 2d r: Captives
+[Resolution] r: Command
+  Receive Ransom 1d r: Captives, progress: 50
     -> Release Prisoners 1d r: Captives
       -> Set Sail 0d
-  Burn Evidence 2d r: Crew
+    -> Burn Evidence 1d r: Crew
+      -> Set Sail
 ```
 
 **Fetch more:** call `get_language_reference(type)` for a type's full syntax and `get_examples(type)` for starter templates. `suggest_chart_type` returns the chosen type's reference automatically.

@@ -1,17 +1,26 @@
 #!/usr/bin/env node
-// Writes the showcase's index page from docs/showcase.json, so a refresh edits
+// Writes the showcase's index page from <site>/showcase.json, so a refresh edits
 // the list and never the HTML. Each report's own page comes from the skill's
 // build script, run in a clone of that repo at the pinned commit; it and its
-// source are then copied to docs/<slug>/index.html and docs/<slug>/source/.
+// source are then copied to <site>/<slug>/index.html and <site>/<slug>/source/.
 //
-// Run: node scripts/build-showcase.mjs
+// The site lives on the gh-pages branch, never on main: the claude.ai plugin
+// directory refuses a plugin repo holding files over 256 KiB, and the built
+// reports are 0.9-2.5 MB (diagrammo/diagrammo#1404, 2026-11-24).
+//
+// Run: git worktree add site gh-pages   (once; site/ is gitignored)
+//      node scripts/build-showcase.mjs site
+//      SHOWCASE_DIR=site pnpm vitest run tests/showcase.test.ts
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, resolve } from 'node:path';
 import { escapeHtml, readManifest } from '../skills/dgmo-codebase-report/scripts/build-report.mjs';
 
-const DOCS = join(resolve(dirname(fileURLToPath(import.meta.url)), '..'), 'docs');
+if (!process.argv[2]) {
+  console.error('usage: node scripts/build-showcase.mjs <site-dir>  (a worktree of the gh-pages branch)');
+  process.exit(2);
+}
+const DOCS = resolve(process.argv[2]);
 
 /** @typedef {{ slug: string, name: string, repo: string, commit: string, date: string, about: string }} Entry */
 

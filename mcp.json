@@ -4,7 +4,7 @@
     "dgmo": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@diagrammo/dgmo-mcp@0.29.15"]
+      "args": ["-y", "@diagrammo/dgmo-mcp@0.29.18"]
     }
   }
 }

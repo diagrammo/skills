@@ -59,7 +59,7 @@ skills/<name>/SKILL.md          one folder per skill, agent-agnostic; scripts it
 mcp.json                        the Codex MCP file (Agent Plugins format); same pin as .mcp.json
 .agents/plugins/marketplace.json the Codex marketplace
 commands/<name>.md              the plugin's slash commands, run as /diagrammo:<name>
-docs/                           the GitHub Pages showcase; docs/showcase.json lists its reports, scripts/build-showcase.mjs writes its index
+scripts/build-showcase.mjs      writes the showcase index; the showcase itself lives on the gh-pages branch, which GitHub Pages serves
 tests/                          vitest suite; tests/fixtures/repos/ holds small repos to run skills against
 ```
 
