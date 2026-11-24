@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@diagrammo/dgmo-mcp':
-        specifier: 0.29.18
-        version: 0.29.18
+        specifier: 0.29.19
+        version: 0.29.19
       '@types/node':
         specifier: ^24.0.0
         version: 24.19.1
@@ -78,8 +78,8 @@ packages:
     resolution: {integrity: sha512-OoKoR0f76dCY666JlcbhmVTs2drYj1GUXZTYTcbUgJjh9Nv41aFfZ21bPQTERm5+L5cBDo466NltB2lplS5GBw==}
     engines: {node: '>=20.19.0'}
 
-  '@diagrammo/dgmo-mcp@0.29.18':
-    resolution: {integrity: sha512-/5iqtMS0LVZIXzQgUM9ZsrwzpwK3ixfIZzaFFdrhUEZlApCvLNd/UyJyOOLsCb6jU2UvIz8vU/V6i6uJUxuVJg==}
+  '@diagrammo/dgmo-mcp@0.29.19':
+    resolution: {integrity: sha512-3+DygElmN6d5UdzbJLxoocjPJRRImmJWUyeqi+SSfog4JaWPKVJCDHLNYsHzzOSHW1c2K6uRVEe3HEaUwaA9Lw==}
     engines: {node: '>=20.6'}
     hasBin: true
 
@@ -1114,7 +1114,7 @@ snapshots:
 
   '@csstools/css-tokenizer@4.0.2': {}
 
-  '@diagrammo/dgmo-mcp@0.29.18':
+  '@diagrammo/dgmo-mcp@0.29.19':
     dependencies:
       '@lezer/lr': 1.4.12
       '@modelcontextprotocol/sdk': 1.32.2(zod@3.25.76)

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "diagrammo",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Diagrams of your codebase, written in DGMO: the dgmo MCP server to check, render and share them, and the skills that write them.",
   "author": {
     "name": "Diagrammo LLC",
